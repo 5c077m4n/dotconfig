@@ -11,7 +11,7 @@ gsync() {
 	git fetch --all --prune
 	git pull --all --rebase
 }
-alias gprom='git pull --rebase --autostash origin "$(git_main_branch)"'
+alias gprom='git pull --rebase --autostash origin master'
 alias gupa='git pull --rebase --autostash origin "$(git branch --show-current)"'
-alias grbim='git rebase --interactive "$(git_main_branch)"'
+alias grbim='git rebase --interactive master'
 alias ggpf='git push --force origin "$(git branch --show-current)"'
