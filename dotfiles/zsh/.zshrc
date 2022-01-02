@@ -128,17 +128,19 @@ export EDITOR="nvim"
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
-# Gcloud init
-export GOOGLE_APPLICATION_CREDENTIALS="${HOME}/.config/gcloud/application_default_credentials.json"
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+if [[ -d "$(brew --prefix)/Caskroom/google-cloud-sdk" ]]; then
+	# Gcloud init
+	export GOOGLE_APPLICATION_CREDENTIALS="${HOME}/.config/gcloud/application_default_credentials.json"
+	source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+	source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+fi
 
 # Kubectl zsh completion
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 
-source "${HOME}/.cargo/env"
-source "${HOME}/.iterm2_shell_integration.zsh"
 source "${ZDOTDIR}/aliases"
+source "${HOME}/.cargo/env"
+[[ -f "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Leatherman
 [[ -f "${XDG_DATA_HOME-$HOME/.local/share}/leatherman/source-me.sh" ]] && source "${XDG_DATA_HOME-$HOME/.local/share}/leatherman/source-me.sh"
