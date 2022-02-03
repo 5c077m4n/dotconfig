@@ -22,5 +22,5 @@ update-hosts() {
 	echo "${current_hosts} \n${anti_malware_hosts} \n${fakenews_gambling_hosts}" | sed 's/^\s+\|\s+$//g' | sed '/^\s*#\|^$/d' | sort --unique | sudo tee /etc/hosts
 }
 
-alias kx='kubectx'
-alias kc='kubectx --current'
+alias kc='kubectx'
+alias kcc='kubectx --current'
