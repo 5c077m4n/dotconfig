@@ -6,3 +6,6 @@ dotfiles/zsh/**
 !dotfiles/zsh/.zshenv
 !dotfiles/zsh/aliases
 !dotfiles/zsh/fzf-functions
+
+dotfiles/karabiner/**
+!dotfiles/karabiner/karabiner.json
