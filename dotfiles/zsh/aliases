@@ -5,15 +5,6 @@ alias vim='nvim'
 
 alias tree='exa --tree'
 
-gsync() {
-	git fetch --all --prune
-	git pull --all --rebase --autostash
-}
-alias gupa='git pull --rebase --autostash origin "$(git branch --show-current)"'
-alias ggpf='git push --force origin "$(git branch --show-current)"'
-alias gprom='git pull --rebase --autostash origin master'
-alias grbim='git rebase --interactive master'
-
 update-hosts() {
 	local current_hosts="$(cat /etc/hosts)"
 	local anti_malware_hosts="$(curl https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts)"
@@ -22,5 +13,22 @@ update-hosts() {
 	echo "${current_hosts} \n${anti_malware_hosts} \n${fakenews_gambling_hosts}" | sed 's/^\s+\|\s+$//g' | sed '/^\s*#\|^$/d' | sort --unique | sudo tee /etc/hosts
 }
 
+# Kubectl
 alias kc='kubectx'
 alias kcc='kubectx --current'
+
+# Git
+alias gsync='git fetch --all --prune && git pull origin "$(git branch --show-current) --all --rebase --autostash'
+alias gupa='git pull --rebase --autostash origin "$(git branch --show-current)"'
+alias ggpf='git push --force origin "$(git branch --show-current)"'
+alias gprom='git pull --rebase --autostash origin master'
+alias grbim='git rebase --interactive origin/master'
+## Worktree
+gwta() {
+	cd "$(git rev-parse --show-toplevel)"
+	git worktree add "$1"
+	cd "$1"
+}
+alias gwtr='git worktree remove'
+alias gwtl='git worktree list'
+alias gwtp='git worktree prune'
