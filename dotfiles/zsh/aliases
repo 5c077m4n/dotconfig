@@ -1,9 +1,23 @@
 #!/usr/bin/env zsh
 
+# Python
+alias python='python3'
+
+# Neovim
 alias v='nvim'
 alias vim='nvim'
 
-alias tree='exa --tree'
+# exa -> ls
+if (( $+commands[exa] )); then
+	alias ls='exa' # just replace ls by exa and allow all other exa arguments
+fi
+alias l='ls -lbF' # list, size, type
+alias ll='ls -la' # long, all
+alias llm='ll --sort=modified' # list, long, sort by modification date
+alias la='ls -lbhHigUmuSa' # all list
+alias lx='ls -lbhHigUmuSa@' # all list and extended
+alias tree='exa --tree' # tree view
+alias lS='exa -1' # one column by just names
 
 update-hosts() {
 	local current_hosts="$(cat /etc/hosts)"
@@ -42,7 +56,3 @@ alias cr='cargo run'
 alias log_cr='RUST_LOG=debug cargo run'
 alias cb='cargo build'
 alias cu='cargo update'
-
-# Terraform
-alias t='terraform'
-alias ta='terraform apply'
