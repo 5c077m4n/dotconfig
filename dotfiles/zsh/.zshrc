@@ -1,47 +1,49 @@
-# Homebrew init
-export HOMEBREW_BIN="/opt/homebrew/bin/brew"
-if [[ -x "$HOMEBREW_BIN" ]]; then
-	export HOMEBREW_NO_ANALYTICS=1
-
-	eval "$("$HOMEBREW_BIN" shellenv)"
-
-	# Use gnu tools as default
-	export HOMEBREW_PREFIX="$("$HOMEBREW_BIN" --prefix)"
-	for gnu_bin_dir in ${HOMEBREW_PREFIX}/opt/*/libexec/gnubin; do
-		[[ -d $gnu_bin_dir ]] && export PATH="${gnu_bin_dir}:${PATH}"
-	done
-	unset gnu_bin_dir
-
-	export PATH="/opt/homebrew/bin:${PATH}"
-	export FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
-
-	if [[ -d "$HOMEBREW_PREFIX/Caskroom/google-cloud-sdk" ]]; then
-		# Gcloud init
-		export GOOGLE_APPLICATION_CREDENTIALS="${HOME}/.config/gcloud/application_default_credentials.json"
-		source "$HOMEBREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-		source "$HOMEBREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-	fi
-fi
-
-# Init starship
-eval "$(starship init zsh)"
-
 # Autocompletion
 autoload -Uz compinit
 compinit
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-typeset -U PATH path
-path=(
-	$path
-	"${HOME}/.local/bin"
-	"${HOME}/.yarn/bin"
-)
-export PATH
-
+typeset -UT PATH path
+path=($path "${HOME}/.local/bin" ".")
+# Like `PATH` but for the command completions
+typeset -UT FPATH fpath
 # Like `PATH` but for the `cd` command
-export CDPATH=":$HOME/.local/share:$HOME/repos"
+typeset -UT CDPATH cdpath
+cdpath=("" "${HOME}/.local/share" "${HOME}/repos")
+# Like `PATH` but for the `man` command
+typeset -UT MANPATH manpath
+manpath=("/usr/local/man" $manpath)
+
+# Homebrew init
+export HOMEBREW_BIN="/opt/homebrew/bin/brew"
+if [[ -x "$HOMEBREW_BIN" ]]; then
+	export HOMEBREW_NO_ANALYTICS=1
+
+	eval "$($HOMEBREW_BIN shellenv)"
+
+	# Use GNU tools as default
+	export HOMEBREW_PREFIX="$($HOMEBREW_BIN --prefix)"
+	for gnu_bin_dir in ${HOMEBREW_PREFIX}/opt/*/libexec/gnubin; do
+		[[ -d $gnu_bin_dir ]] && path+=("$gnu_bin_dir")
+	done
+	unset gnu_bin_dir
+
+	path+=("/opt/homebrew/bin")
+	fpath+=("${HOMEBREW_PREFIX}/share/zsh/site-functions")
+
+	if [[ -d "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk" ]]; then
+		# Gcloud init
+		export GOOGLE_APPLICATION_CREDENTIALS="${HOME}/.config/gcloud/application_default_credentials.json"
+		source "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+		source "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+	fi
+fi
+
+export PATH
+export FPATH
+export CDPATH
+export MANPATH
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -138,6 +140,9 @@ export EDITOR="nvim"
 # Example aliases
 #alias zshconfig="mate ~/.zshrc"
 #alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Init starship
+eval "$(starship init zsh)"
 
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
 
