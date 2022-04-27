@@ -6,8 +6,8 @@ dotfiles/zsh/**
 !dotfiles/zsh/.zshrc
 !dotfiles/zsh/.zshenv
 !dotfiles/zsh/.zlogout
-!dotfiles/zsh/aliases
-!dotfiles/zsh/fzf-functions
+!dotfiles/zsh/aliases.zsh
+!dotfiles/zsh/fzf-functions.zsh
 
 dotfiles/karabiner/**
 !dotfiles/karabiner/karabiner.json
