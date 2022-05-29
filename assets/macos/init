@@ -30,6 +30,9 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain KeyRepeat -int 1
 defaults write NSGlobalDomain InitialKeyRepeat -int 10
 
+# Window drag and drop
+defaults write -g NSWindowShouldDragOnGestiure -bool true
+
 ###############################################################################
 # Energy saving                                                               #
 ###############################################################################
@@ -195,7 +198,7 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
 
 ###############################################################################
-# Brew                                                                        #
+# Homebrew                                                                    #
 ###############################################################################
 
 # Install script
@@ -218,5 +221,5 @@ unset allowed_shells_file
 $ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
 
-# Neovim config
-git -C "${HOME}/.config" clone https://github.com/5c077m4n/scottconfig.lua.git nvim
+# Dot files
+git -C "${HOME}" https://github.com/5c077m4n/dotconfig.git .config
