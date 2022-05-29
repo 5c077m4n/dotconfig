@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+() {
+	local rev="${1:-"$(git log --oneline | fzf --reverse --preview 'echo {} | cut -d " " -f 1 | xargs git show --color=always' | cut -d ' ' -f 1)"}"
+	[[ -z "$rev" ]] && return 0
+
+	git commit --fixup "$rev"
+	git rebase --autostash --autosquash --interactive "${rev}^"
+}
