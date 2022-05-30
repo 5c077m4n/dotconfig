@@ -11,9 +11,40 @@
 	lola = "log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
 	aliases = "config --get-regexp ^alias\\."
 [core]
-	autocrlf = input
+	autocrlf = "input"
 [help]
 	autocorrect = 50
-[include]
-	path = "~/.config/git/git-diff.toml"
-	path = "~/.config/git/commit-sign.toml"
+
+# Commit sign
+[commit]
+	gpgsign = true
+[gpg]
+	format = "ssh"
+[gpg "ssh"]
+	defaultKeyCommand = "ssh-add -L"
+
+# Git diff
+[pager]
+	diff = "delta"
+	log = "delta"
+	reflog = "delta"
+	show = "delta"
+[diff]
+	colorMoved = "default"
+[delta]
+	features = "line-numbers decorations"
+	syntax-theme = "Dracula"
+	plus-style = "syntax \"#003800\""
+	minus-style = "syntax \"#3f0001\""
+[delta "decorations"]
+	commit-decoration-style = "bold yellow box ul"
+	file-style = "bold yellow ul"
+	file-decoration-style = "none"
+	hunk-header-decoration-style = "cyan box ul"
+[delta "line-numbers"]
+	line-numbers-left-style = "cyan"
+	line-numbers-right-style = "cyan"
+	line-numbers-minus-style = 124
+	line-numbers-plus-style = 28
+[interactive]
+	diffFilter = "delta --color-only"
