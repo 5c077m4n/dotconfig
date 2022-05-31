@@ -14,3 +14,10 @@ dotfiles/karabiner/**
 
 dotfiles/iterm2/**
 !dotfiles/iterm2/com.googlecode.iterm2.plist
+
+bin/**
+!bin/forever
+!bin/gfix
+!bin/killport
+!bin/restart-ssh
+!bin/update-hosts
