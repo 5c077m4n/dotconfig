@@ -4,7 +4,7 @@ from pathlib import Path
 from urllib.request import urlopen
 
 
-def main():
+def main() -> None:
     key_value_pairs = re.compile(
         r'^\s*user_pref\((?P<key>[a-zA-Z0-9"\'._]+),\s*(?P<value>[a-zA-Z0-9"\'._]+)\)',
         re.MULTILINE,
