@@ -8,7 +8,7 @@ typeset -UT PATH path
 path=($path "${HOME}/.local/bin")
 # Like `PATH` but for the command completions
 typeset -UT FPATH fpath
-# Like `PATH` but for the `cd` command
+# Like `PATH` but for the `cd` command (the first empty string is required)
 typeset -UT CDPATH cdpath
 cdpath=("" "${HOME}/.local/share" "${HOME}/repos")
 # Like `PATH` but for the `man` command
@@ -22,15 +22,15 @@ if [[ -x "$brew_bin" ]]; then
 
 	eval "$($brew_bin shellenv)"
 
+	path+=("/opt/homebrew/bin")
+	fpath+=("${HOMEBREW_PREFIX}/share/zsh/site-functions")
+
 	# Use GNU tools as default
 	export HOMEBREW_PREFIX="$($brew_bin --prefix)"
 	for gnu_bin_dir in ${HOMEBREW_PREFIX}/opt/*/libexec/gnubin; do
 		[[ -d $gnu_bin_dir ]] && path+=("$gnu_bin_dir")
 	done
 	unset gnu_bin_dir
-
-	path+=("/opt/homebrew/bin")
-	fpath+=("${HOMEBREW_PREFIX}/share/zsh/site-functions")
 
 	if [[ -d "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk" ]]; then
 		# Gcloud init
@@ -127,8 +127,10 @@ eval "$(starship init zsh)"
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
 
 # Kubectl zsh completion
-
 [[ -x "/opt/homebrew/bin/kubectl" ]] && source <(kubectl completion zsh)
+# Add krew to path
+[[ -d "${KREW_ROOT:-$HOME/.krew}/bin" ]] && path+=("${KREW_ROOT:-$HOME/.krew}/bin")
+
 [[ -f "${HOME}/.cargo/env" ]] && source "${HOME}/.cargo/env"
 [[ -f "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
 
