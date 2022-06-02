@@ -3,8 +3,9 @@
 () {
 	local port="${1:?Please add a port number}"
 
+	local pid
 	for pid in $(sudo lsof -ti ":$port"); do
-		echo "$pid"
+		ps -p "$pid"
 		kill -9 $pid
 	done
 } "$@"
