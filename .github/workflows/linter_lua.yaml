@@ -20,4 +20,4 @@ jobs:
       - name: Luacheck linter
         uses: lunarmodules/luacheck@v0
         with:
-          args: dotfiles/nvim/ --config="dotfiles/nvim/.luacheckrc"
+          args: dotfiles/nvim/
