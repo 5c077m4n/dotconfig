@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+() {
+	local branch_current="$(gbcurrent)"
+	local branch_default="$(gbdefault)"
+
+	if [[ "$branch_current" == "$branch_default" ]]; then
+		git pull --autostash origin "$branch_default"
+	else
+		git fetch origin "$branch_default":"$branch_default"
+	fi
+}

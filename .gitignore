@@ -17,8 +17,10 @@ dotfiles/iterm2/**
 
 bin/**
 !bin/forever
-!bin/gfix
 !bin/gbdefault
+!bin/gfix
+!bin/gsync
+!bin/gum
 !bin/killport
 !bin/restart-ssh
 !bin/update-hosts
