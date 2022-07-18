@@ -14,6 +14,7 @@ telescope.setup({
 				['<C-t>'] = trouble.open_with_trouble,
 				['<C-k>'] = actions.cycle_history_next,
 				['<C-j>'] = actions.cycle_history_prev,
+				['<C-[>'] = actions.close,
 			},
 		},
 	},
