@@ -6,12 +6,12 @@ alias cdt='cd "$(mktemp -d)"'
 # exa -> ls
 if (( $+commands[exa] )); then
 	alias ls='exa' # just replace ls by exa and allow all other exa arguments
+	alias tree='exa --tree' # tree view
 fi
 alias l='ls -lbF' # list, size, type
 alias ll='ls -la' # long, all
 alias la='ls -lbhHigUmuSa' # all list
 alias lx='ls -lbhHigUmuSa@' # all list and extended
-alias tree='exa --tree' # tree view
 
 # Neovim
 alias v='nvim'
