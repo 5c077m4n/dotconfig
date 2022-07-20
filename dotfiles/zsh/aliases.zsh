@@ -9,11 +9,9 @@ if (( $+commands[exa] )); then
 fi
 alias l='ls -lbF' # list, size, type
 alias ll='ls -la' # long, all
-alias llm='ll --sort=modified' # list, long, sort by modification date
 alias la='ls -lbhHigUmuSa' # all list
 alias lx='ls -lbhHigUmuSa@' # all list and extended
 alias tree='exa --tree' # tree view
-alias lS='exa -1' # one column by just names
 
 # Neovim
 alias v='nvim'
