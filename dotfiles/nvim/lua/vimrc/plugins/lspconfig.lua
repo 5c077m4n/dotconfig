@@ -93,6 +93,7 @@ local function on_attach(client, buffer_num)
 	end, { buffer = buffer_num, desc = 'Format selected page/range' })
 end
 
+---@param options? table
 local function make_config(options)
 	local capabilities = cmp_lsp.default_capabilities()
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -107,9 +108,7 @@ local function make_config(options)
 		flags = { debounce_text_changes = 100 },
 	}
 	if type(options) == 'table' then
-		for key, value in pairs(options) do
-			base_config[key] = value
-		end
+		base_config = vim.tbl_extend('force', base_config, options)
 	end
 	return base_config
 end
