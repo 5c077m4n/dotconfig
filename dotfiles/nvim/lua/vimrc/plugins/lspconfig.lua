@@ -3,6 +3,7 @@ local lsp_installer = require('mason')
 local lsp_installer_config = require('mason-lspconfig')
 local cmp_lsp = require('cmp_nvim_lsp')
 local neodev = require('neodev')
+local navic = require('nvim-navic')
 local telescope_builtin = require('telescope.builtin')
 
 local keymap = require('vimrc.utils.keymapping')
@@ -31,7 +32,7 @@ local SEVERITY = {
 	vim.log.levels.INFO, -- map both hint and info to info
 }
 
-local function on_attach(_client_data, buffer_num)
+local function on_attach(client, buffer_num)
 	local lsp = vim.lsp
 	local diagnostic = vim.diagnostic
 
@@ -42,6 +43,9 @@ local function on_attach(_client_data, buffer_num)
 	lsp.handlers['$/progress'] = lsp_fns.lsp_progress
 	lsp.handlers['window/showMessage'] = function(_err, method, params, _client_id)
 		vim.notify(method.message, SEVERITY[params.type])
+	end
+	if client.server_capabilities.documentSymbolProvider then
+		navic.attach(client, buffer_num)
 	end
 
 	keymap.nnoremap('gd', telescope_builtin.lsp_definitions, { buffer = buffer_num, desc = 'Go to LSP definition' })
@@ -78,8 +82,8 @@ local function on_attach(_client_data, buffer_num)
 	keymap.vnoremap('<leader>ca', lsp.buf.range_code_action, { buffer = buffer_num, desc = 'Code action for range' })
 	keymap.nnoremap('<leader>l', function()
 		vim.lsp.buf.format({
-			filter = function(client)
-				return client.name == 'null-ls'
+			filter = function(formatter)
+				return formatter.name == 'null-ls'
 			end,
 			bufnr = buffer_num,
 			async = true,
