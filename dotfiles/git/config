@@ -1,20 +1,24 @@
 [alias]
 	co = "checkout"
 	wt = "worktree"
-	sh = "!exec "
+	rl = "reflog"
 	root = "rev-parse --show-toplevel"
-	iam = "!echo \"$(git config user.name) <$(git config user.email)>\""
-	whoami = "!git config user.name && git config user.email"
-	fh = "!git log --follow --all --patch -- \"$(git ls-files | fzf)\""
+	aliases = "config --get-regexp ^alias\\."
 	lol = "log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
 	lols = "log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --stat"
 	lola = "log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
-	aliases = "config --get-regexp ^alias\\."
+	# Shell commands
+	sh = "!exec "
+	iam = "!echo \"$(git config user.name) <$(git config user.email)>\""
+	whoami = "!git config user.name && git config user.email"
+	fh = "!git log --follow --all --patch -- \"$(git ls-files | fzf)\""
 	unstage = "!git reset HEAD -- \"$(git ls-files | fzf --multi --preview 'cat {}')\""
 [core]
 	autocrlf = "input"
 [help]
 	autocorrect = 50
+[push]
+	autoSetupRemote = true
 
 # Commit sign
 [commit]
