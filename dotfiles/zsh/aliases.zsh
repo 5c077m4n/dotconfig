@@ -107,3 +107,6 @@ alias tp='terraform plan'
 
 # Python
 alias python='python3'
+
+# SSH
+alias evssh='eval "$(ssh-agent -s)"'
