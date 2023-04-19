@@ -24,6 +24,8 @@
 	<true/>
 	<key>IRMemory</key>
 	<integer>16</integer>
+	<key>LowFiCombiningMarks</key>
+	<true/>
 	<key>NeverWarnAboutShortLivedSessions_B25EB62D-1CCD-434D-BF17-7DEE456FC4D8</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_B25EB62D-1CCD-434D-BF17-7DEE456FC4D8_selection</key>
@@ -1473,12 +1475,16 @@
 	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
 	<true/>
+	<key>ShowMetalFPSmeter</key>
+	<false/>
 	<key>SmartPlacement</key>
 	<true/>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
 	<real>0.40277449324324327</real>
+	<key>UseAdaptiveFrameRate</key>
+	<false/>
 	<key>VisualIndicatorForEsc</key>
 	<false/>
 	<key>findMode_iTerm</key>
