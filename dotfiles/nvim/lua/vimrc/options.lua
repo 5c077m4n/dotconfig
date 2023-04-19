@@ -28,6 +28,7 @@ o.shiftwidth = o.tabstop:get()
 o.autoindent = true
 o.smartindent = true
 o.wrap = false
+o.signcolumn = 'yes'
 if o.wrap:get() then
 	o.showbreak = '+ '
 end
@@ -88,8 +89,8 @@ o.showmatch = true
 -- How many tenths of a second to blink when matching brackets
 o.mat = 2
 
-o.undofile = true
 o.undodir = vim.fn.stdpath('state') .. '/undo_dir/'
+o.undofile = true
 
 o.swapfile = false
 o.title = true
