@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
 while true; do
-	"$@"
-	sleep 10
+	zsh -c "$@"
+	sleep 60
 done
