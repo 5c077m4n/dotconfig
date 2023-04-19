@@ -10,9 +10,9 @@ local eslint_config = {
 null_ls.setup({
 	diagnostics_format = '[#{c}] #{m} (#{s})',
 	sources = {
-		-- snippets support
+		-- Snippet support
 		null_ls.builtins.completion.luasnip,
-		-- lua
+		-- Lua
 		null_ls.builtins.formatting.stylua.with({
 			condition = function(utils)
 				return utils.root_has_file({ 'stylua.toml', '.stylua.toml' })
@@ -24,47 +24,47 @@ null_ls.setup({
 			end,
 		}),
 		--null_ls.builtins.diagnostics.selene,
-		-- python
+		-- Python
 		null_ls.builtins.formatting.isort,
 		null_ls.builtins.formatting.black,
 		null_ls.builtins.diagnostics.mypy,
-		-- typescript
+		-- Typescript
 		null_ls.builtins.code_actions.eslint.with(eslint_config),
 		null_ls.builtins.diagnostics.eslint.with(eslint_config),
 		null_ls.builtins.formatting.eslint.with(eslint_config),
 		null_ls.builtins.formatting.prettier.with({ prefer_local = 'node_modules/.bin' }),
-		-- deno
+		-- Deno
 		null_ls.builtins.formatting.deno_fmt.with({
 			condition = function(utils)
 				return utils.root_has_file({ 'deno.json', 'deno.jsonc', 'deno.lock' })
 			end,
 		}),
-		-- css
+		-- CSS
 		null_ls.builtins.formatting.stylelint,
-		-- shell
+		-- Shell
 		null_ls.builtins.formatting.shellharden,
 		null_ls.builtins.formatting.shfmt,
 		null_ls.builtins.diagnostics.shellcheck,
 		null_ls.builtins.code_actions.shellcheck,
-		-- sql
+		-- SQL
 		null_ls.builtins.formatting.sqlformat,
-		-- rust
+		-- Rust
 		null_ls.builtins.formatting.rustfmt.with({ args = { '+nightly' } }),
-		-- zig
+		-- Zig
 		null_ls.builtins.formatting.zigfmt.with({
 			condition = function(utils)
 				return utils.root_has_file({ 'build.zig' })
 			end,
 		}),
-		-- zsh
+		-- ZSH
 		null_ls.builtins.diagnostics.zsh,
-		-- terraform
+		-- Terraform
 		null_ls.builtins.formatting.terraform_fmt,
-		-- yaml
+		-- YAML
 		null_ls.builtins.diagnostics.yamllint,
-		-- toml
+		-- TOML
 		null_ls.builtins.formatting.taplo,
-		-- misc
+		-- Misc
 		null_ls.builtins.completion.spell,
 		--null_ls.builtins.diagnostics.editorconfig_checker,
 		--null_ls.builtins.code_actions.gitsigns,
