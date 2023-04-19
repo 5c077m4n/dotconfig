@@ -41,36 +41,6 @@ function M.setup()
 				end,
 			})
 			use({
-				'nathom/filetype.nvim',
-				config = function()
-					require('filetype').setup({
-						overrides = {
-							extensions = {
-								tsx = 'typescriptreact',
-								jsx = 'javascriptreact',
-								toml = 'toml',
-							},
-							literal = {
-								['.prettierrc'] = 'json',
-								['.babelrc'] = 'json',
-								['.swcrc'] = 'json',
-								['tmux.conf'] = 'tmux',
-							},
-							function_extensions = {
-								conf = function()
-									local filepath = vim.fn.expand('%')
-									if string.find(filepath, '/kitty/') ~= nil then
-										vim.bo.filetype = 'kitty'
-									else
-										vim.bo.filetype = 'conf'
-									end
-								end,
-							},
-						},
-					})
-				end,
-			})
-			use({
 				'samodostal/image.nvim',
 				requires = { 'nvim-lua/plenary.nvim' },
 				config = function()
