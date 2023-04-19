@@ -37,7 +37,14 @@ alias gsync='git fetch --all --prune && git pull origin "$(git branch --show-cur
 alias gupa='git pull --rebase --autostash origin "$(git branch --show-current)"'
 alias ggpf='git push --force origin "$(git branch --show-current)"'
 alias gprom='git pull --rebase --autostash origin "$(git_main_branch)"'
-alias grbim='git rebase --interactive origin/master'
+alias grbim='git fetch --all --prune && git rebase --interactive master'
+gfix() {
+	local rev="${1:-"$(git log --oneline | fzf --reverse --preview 'echo {} | cut -d " " -f 1 | xargs git show --color=always' | cut -d ' ' -f 1)"}"
+	[[ -z "$rev" ]] && return 0
+
+	git commit --fixup "$rev"
+	git rebase --autostash --autosquash --interactive "${rev}^"
+}
 ## Worktree
 gwta() {
 	cd "$(git rev-parse --show-toplevel)"
