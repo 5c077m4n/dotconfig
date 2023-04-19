@@ -467,6 +467,7 @@ function M.setup()
 
 					persistence.setup({
 						dir = vim.fn.expand(vim.fn.stdpath('state') .. '/sessions/'),
+						---@diagnostic disable-next-line: undefined-field
 						options = vim.opt.sessionoptions:get(),
 						pre_save = function()
 							require('neo-tree').close()
