@@ -9,9 +9,9 @@ alias tree='exa --tree'
 
 gsync() {
 	git fetch --all --prune
-	git pull --all --rebase
+	git pull --all --rebase --autostash
 }
-alias gprom='git pull --rebase --autostash origin master'
 alias gupa='git pull --rebase --autostash origin "$(git branch --show-current)"'
-alias grbim='git rebase --interactive master'
 alias ggpf='git push --force origin "$(git branch --show-current)"'
+alias gprom='git pull --rebase --autostash origin master'
+alias grbim='git rebase --interactive master'
