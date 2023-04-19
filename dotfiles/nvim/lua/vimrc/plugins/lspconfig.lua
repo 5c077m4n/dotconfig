@@ -137,9 +137,12 @@ for _, server in ipairs(SERVER_LIST) do
 			Lua = {
 				completion = { callSnippet = 'Replace' },
 				telemetry = { enable = false },
-				checkThirdParty = false,
+				workspace = {
+					checkThirdParty = false,
+					library = '${3rd}/luv/library',
+				},
 				diagnostics = {
-					globals = { 'vim' },
+					globals = { 'vim', 'string' },
 				},
 			},
 		}
