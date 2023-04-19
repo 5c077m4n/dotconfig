@@ -32,3 +32,11 @@ gwta() {
 alias gwtr='git worktree remove'
 alias gwtl='git worktree list'
 alias gwtp='git worktree prune'
+
+# Rust
+alias c='cargo'
+alias ct='cargo test'
+alias ctw='cargo test --workspace'
+alias cc='cargo clean'
+alias cr='cargo run'
+alias log_cr='RUST_LOG=debug cargo run'
