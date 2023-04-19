@@ -1,16 +1,16 @@
 [alias]
+	co = "checkout"
+	wt = "worktree"
 	sh = "!exec "
+	root = "rev-parse --show-toplevel"
 	iam = "!echo \"$(git config user.name) <$(git config user.email)>\""
 	whoami = "!git config user.name && git config user.email"
 	fh = "!git log --follow --all --patch -- \"$(git ls-files | fzf)\""
-	co = "checkout"
-	unstage = "!git reset HEAD -- \"$(git ls-files | fzf --multi --preview 'cat {}')\""
-	wt = "worktree"
-	root = "rev-parse --show-toplevel"
 	lol = "log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
 	lols = "log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --stat"
 	lola = "log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
 	aliases = "config --get-regexp ^alias\\."
+	unstage = "!git reset HEAD -- \"$(git ls-files | fzf --multi --preview 'cat {}')\""
 [core]
 	autocrlf = "input"
 [help]
@@ -23,6 +23,7 @@
 	format = "ssh"
 [gpg "ssh"]
 	defaultKeyCommand = "ssh-add -L"
+	allowedSignersFile = "~/.ssh/allowed_signers"
 
 # Git diff
 [pager]
