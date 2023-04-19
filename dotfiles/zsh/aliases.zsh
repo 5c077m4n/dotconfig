@@ -28,6 +28,7 @@ update-hosts() {
 }
 
 # Kubectl
+alias kns='kubens'
 alias kc='kubectx'
 alias kcc='kubectx --current'
 
@@ -35,7 +36,7 @@ alias kcc='kubectx --current'
 alias gsync='git fetch --all --prune && git pull origin "$(git branch --show-current) --all --rebase --autostash'
 alias gupa='git pull --rebase --autostash origin "$(git branch --show-current)"'
 alias ggpf='git push --force origin "$(git branch --show-current)"'
-alias gprom='git pull --rebase --autostash origin master'
+alias gprom='git pull --rebase --autostash origin "$(git_main_branch)"'
 alias grbim='git rebase --interactive origin/master'
 ## Worktree
 gwta() {
