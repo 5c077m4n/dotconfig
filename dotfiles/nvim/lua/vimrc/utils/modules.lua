@@ -4,7 +4,6 @@ local M = {}
 
 function M.reload_vimrc()
 	require('plenary.reload').reload_module('vimrc')
-	require('vimrc')
 	require('packer').compile()
 
 	vim.notify('The vimrc has been reloaded successfully', vim.lsp.log_levels.INFO)
