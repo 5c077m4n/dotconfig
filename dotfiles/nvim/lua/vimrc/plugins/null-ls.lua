@@ -35,8 +35,6 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.zsh,
 		-- terraform
 		null_ls.builtins.formatting.terraform_fmt,
-		-- markdown
-		null_ls.builtins.diagnostics.write_good.with(ts_config),
 		-- yaml
 		null_ls.builtins.diagnostics.yamllint,
 		-- toml
