@@ -24,8 +24,8 @@ def main():
             ]
         )
 
-    with home_dir.joinpath(".gitconfig").open("w") as gitconfig_append:
-        gitconfig_append.writelines(
+    with home_dir.joinpath(".gitconfig").open("w") as gitconfig_write:
+        gitconfig_write.writelines(
             ["[include]\n", "\tpath = ~/.config/git/config.toml"]
         )
 
