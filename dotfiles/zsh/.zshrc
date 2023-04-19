@@ -107,7 +107,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kubectl zsh-autosuggestions zsh-syntax-highlighting zsh-aliases-exa)
+plugins=(git kubectl rust zsh-aliases-exa zsh-autosuggestions zsh-syntax-highlighting)
 source "${ZSH}/oh-my-zsh.sh"
 
 # User configuration
