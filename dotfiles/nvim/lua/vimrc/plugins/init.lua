@@ -348,6 +348,23 @@ local function init_packer()
 				end,
 			})
 			use({
+				'windwp/nvim-ts-autotag',
+				config = function()
+					require('nvim-ts-autotag').setup({
+						filetypes = {
+							'html',
+							'javascript',
+							'javascript.tsx',
+							'typescript',
+							'typescript.tsx',
+							'javascriptreact',
+							'typescriptreact',
+							'markdown',
+						},
+					})
+				end,
+			})
+			use({
 				'terrortylor/nvim-comment',
 				config = function()
 					require('nvim_comment').setup({
