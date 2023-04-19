@@ -65,7 +65,7 @@ keymap.vnoremap('P', [["_dP]], { desc = "Paste before without overriding the cur
 keymap.nnoremap('<leader>cd', [[:cd %:p:h<CR>:pwd<CR>]], { desc = 'Switch CWD to the directory of the open buffer' })
 
 -- Undo
-keymap.nnoremap('U', '<C-r>')
+keymap.nnoremap('U', '<C-r>', { desc = 'Redo last change' })
 
 create_command('CopyCursorLocation', function()
 	local cursor_location = vim.fn.expand('%', nil, nil) .. ':' .. vim.fn.line('.') .. ':' .. vim.fn.col('.')
