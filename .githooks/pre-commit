@@ -1,11 +1,22 @@
 #!/usr/bin/env zsh
 
 () {
-	local root_dir="$(git rev-parse --show-toplevel)/dotfiles/nvim/"
-	cd "$root_dir" || exit 1
+	local root_dir="$(git rev-parse --show-toplevel)"
+	local luacheck_config="${root_dir}/dotfiles/nvim/.luacheckrc"
+	local stylua_config="${root_dir}/dotfiles/nvim/.stylua.toml"
 
-	luacheck .
-	stylua .
+	for file in $(git diff --name-only --staged); do
+		local file_ext="${file##*.}"
 
-	git add --update
+		if [[ "$file_ext" == "lua" ]]; then
+			luacheck --config="$luacheck_config" "$file"
+			stylua --config-path="$stylua_config" "$file"
+
+			git add "$file"
+		elif [[ "$file_ext" == "py" ]]; then
+			black "$file"
+
+			git add "$file"
+		fi
+	done
 }
