@@ -42,6 +42,7 @@ local function on_attach(client, buffer_num)
 	lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, { border = 'single' })
 	lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, { border = 'single' })
 	lsp.handlers['$/progress'] = lsp_fns.lsp_progress
+	---@diagnostic disable-next-line: unused-local, duplicate-set-field
 	lsp.handlers['window/showMessage'] = function(_err, method, params, _client_id)
 		vim.notify(method.message, SEVERITY[params.type])
 	end
