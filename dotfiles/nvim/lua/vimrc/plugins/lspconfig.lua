@@ -23,6 +23,12 @@ local SERVER_LIST = {
 	'tflint',
 	'tailwindcss',
 }
+local SEVERITY = {
+	vim.log.levels.ERROR,
+	vim.log.levels.WARN,
+	vim.log.levels.INFO,
+	vim.log.levels.INFO, -- map both hint and info to info
+}
 
 local function on_attach(_client, buffer_num)
 	local lsp = vim.lsp
@@ -34,6 +40,9 @@ local function on_attach(_client, buffer_num)
 	lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, { border = 'single' })
 	lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, { border = 'single' })
 	lsp.handlers['$/progress'] = lsp_fns.lsp_progress
+	lsp.handlers['window/showMessage'] = function(_err, method, params, _client_id)
+		vim.notify(method.message, SEVERITY[params.type])
+	end
 
 	keymap.nnoremap('gd', telescope_builtin.lsp_definitions, { buffer = buffer_num, desc = 'Go to LSP definition' })
 	keymap.nnoremap(
