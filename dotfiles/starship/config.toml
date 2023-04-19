@@ -3,7 +3,6 @@
 [character]
 success_symbol = "[>](bold green)"
 error_symbol = "[x](bold red)"
-vicmd_symbol = "[<](bold green)"
 
 [status]
 disabled = false
@@ -110,7 +109,7 @@ format = '\[[$symbol$context( \($namespace\))]($style)\] '
 
 [username]
 disabled = false
-format = "👨 [$user]($style) "
+format = "🤓 [$user]($style) "
 show_always = true
 
 [cmd_duration]
