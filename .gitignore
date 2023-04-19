@@ -16,6 +16,9 @@ dotfiles/karabiner/**
 dotfiles/iterm2/**
 !dotfiles/iterm2/com.googlecode.iterm2.plist
 
+dotfiles/tmux/**
+!dotfiles/tmux/tmux.conf
+
 bin/**
 !bin/forever
 !bin/gbdefault
