@@ -349,7 +349,7 @@ function M.setup()
 				config = function()
 					local keymap = require('vimrc.utils.keymapping')
 
-					keymap.nnoremap('<leader>rr', vim.cmd.Ranger)
+					keymap.nnoremap('<leader>rr', vim.cmd.Ranger, { desc = 'Open ranger file browser' })
 				end,
 			})
 			use({
