@@ -72,7 +72,10 @@ keymap.nnoremap('<leader>cd', [[:cd %:p:h<CR>:pwd<CR>]], { desc = 'Switch CWD to
 keymap.nnoremap('U', '<C-r>', { desc = 'Redo last change' })
 
 create_command('CopyCursorLocation', function()
-	local cursor_location = vim.fn.expand('%', nil, nil) .. ':' .. vim.fn.line('.') .. ':' .. vim.fn.col('.')
+	local file_path = vim.fn.expand('%')
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+
+	local cursor_location = file_path .. ':' .. line .. ':' .. col
 	if vim.fn.has('clipboard') then
 		vim.fn.setreg('+', cursor_location)
 	else
