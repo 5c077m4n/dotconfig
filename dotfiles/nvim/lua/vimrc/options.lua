@@ -96,6 +96,12 @@ o.title = true
 
 if g.neovide then
 	g.neovide_refresh_rate = 60
-	g.neovide_transparency = 0.8
+	g.neovide_refresh_rate_idle = 10
+	g.neovide_transparency = 1
 	g.neovide_cursor_vfx_mode = 'railgun'
+	g.neovide_scroll_animation_length = 0.5
+	g.neovide_hide_mouse_when_typing = true
+	g.neovide_fullscreen = false
+	g.neovide_input_use_logo = true
+	g.neovide_input_macos_alt_is_meta = true
 end
