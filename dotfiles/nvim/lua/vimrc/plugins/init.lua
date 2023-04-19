@@ -181,6 +181,9 @@ local function init_packer()
 			-- Treesitter
 			use({
 				'nvim-treesitter/nvim-treesitter',
+				run = function()
+					vim.cmd.TSUpdate()
+				end,
 				config = function()
 					require('vimrc.plugins.nvim-treesitter')
 				end,
@@ -188,7 +191,6 @@ local function init_packer()
 			-- LSP
 			use({
 				'neovim/nvim-lspconfig',
-				run = vim.cmd.TSUpdate,
 				config = function()
 					require('vimrc.plugins.lspconfig')
 				end,
@@ -207,7 +209,7 @@ local function init_packer()
 			use('folke/neodev.nvim')
 			use({
 				'jose-elias-alvarez/null-ls.nvim',
-				requires = { 'nvim-lua/plenary.nvim' },
+				requires = 'nvim-lua/plenary.nvim',
 				config = function()
 					require('vimrc.plugins.null-ls')
 				end,
@@ -232,7 +234,7 @@ local function init_packer()
 			-- Terminal
 			use({
 				'akinsho/toggleterm.nvim',
-				tag = 'v2.*',
+				tag = '*',
 				config = function()
 					require('toggleterm').setup({
 						size = function(term)
@@ -243,9 +245,10 @@ local function init_packer()
 							end
 						end,
 						open_mapping = [[<F12>]],
-						hide_numbers = false,
+						hide_numbers = true,
 						insert_mappings = true,
 						terminal_mappings = true,
+						shade_terminals = true,
 					})
 				end,
 			})
