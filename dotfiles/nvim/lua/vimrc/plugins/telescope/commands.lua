@@ -14,6 +14,7 @@ keymap.nnoremap('<leader>f#', telescope_builtin.grep_string, { desc = 'Search pr
 keymap.nnoremap('<leader>fb', telescope_builtin.buffers, { desc = 'Search buffers' })
 keymap.nnoremap('<leader>fm', telescope_builtin.marks, { desc = 'Search bookmarks' })
 keymap.nnoremap('<leader>fh', telescope_builtin.help_tags, { desc = 'Search bookmarks' })
+keymap.nnoremap('<leader>fd', telescope_builtin.diagnostics, { desc = 'Search bookmarks' })
 keymap.nnoremap('<leader>fo', function()
 	telescope_builtin.oldfiles({ only_cwd = true })
 end, { desc = 'Search recently opened files' })
