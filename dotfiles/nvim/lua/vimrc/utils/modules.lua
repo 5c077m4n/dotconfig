@@ -11,7 +11,7 @@ function M.reload_vimrc()
 	vim.loader.reset()
 	packer.compile()
 
-	vim.notify('VIMRC has been reloaded successfully', vim.lsp.log_levels.INFO)
+	vim.notify('Reload successful', vim.lsp.log_levels.INFO, { title = 'VIMRC' })
 end
 
 function M.update_vimrc()
@@ -21,9 +21,9 @@ function M.update_vimrc()
 		cwd = vim.fn.stdpath('config'),
 		on_exit = function(j, status_code)
 			if status_code == 0 then
-				vim.notify(j:result(), vim.log.levels.INFO)
+				vim.notify(j:result(), vim.log.levels.INFO, { title = 'VIMRC Update' })
 			else
-				vim.notify(j:result(), vim.log.levels.ERROR)
+				vim.notify(j:result(), vim.log.levels.ERROR, { title = 'VIMRC Update' })
 			end
 		end,
 	}):sync()
