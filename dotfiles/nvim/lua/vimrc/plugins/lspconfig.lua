@@ -1,8 +1,9 @@
 local lspconfig = require('lspconfig')
 local lsp_installer = require('mason')
 local lsp_installer_config = require('mason-lspconfig')
-local telescope_builtin = require('telescope.builtin')
 local cmp_lsp = require('cmp_nvim_lsp')
+local neodev = require('neodev')
+local telescope_builtin = require('telescope.builtin')
 
 local mod_utils = require('vimrc.utils.modules')
 local keymap = require('vimrc.utils.keymapping')
@@ -98,7 +99,7 @@ local function make_config(options)
 	local base_config = {
 		on_attach = on_attach,
 		capabilities = capabilities,
-		flags = { debounce_text_changes = 400 },
+		flags = { debounce_text_changes = 200 },
 	}
 	if type(options) == 'table' then
 		for key, value in pairs(options) do
@@ -109,9 +110,6 @@ local function make_config(options)
 end
 
 local function setup_servers()
-	local is_exec = vim.fn.executable
-	local cmd = vim.cmd
-
 	lsp_installer.setup({
 		ui = {
 			icons = {
@@ -128,28 +126,19 @@ local function setup_servers()
 	})
 
 	for _, server in ipairs(SERVER_LIST) do
-		local opts
+		local opts = make_config()
 		if server == 'sumneko_lua' then
-			opts = require('lua-dev').setup({
-				lspconfig = {
-					on_attach = on_attach,
-					settings = {
-						Lua = {
-							telemetry = { enable = false },
-						},
-					},
+			neodev.setup({})
+			opts['settings'] = {
+				Lua = {
+					completion = { callSnippet = 'Replace' },
+					telemetry = { enable = false },
 				},
-			})
-		else
-			opts = make_config()
+			}
 		end
+
 		lspconfig[server].setup(opts)
-
-		cmd([[do User LspAttachBuffers]])
-	end
-
-	if not (is_exec('prettier') and is_exec('eslint_d') and is_exec('diagnostic-languageserver')) then
-		mod_utils.yarn_global_install({ 'prettier', 'eslint_d', 'diagnostic-languageserver' })
+		vim.cmd([[do User LspAttachBuffers]])
 	end
 end
 
