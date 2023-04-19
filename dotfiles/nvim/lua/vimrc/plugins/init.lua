@@ -239,6 +239,7 @@ local function init_packer()
 					'hrsh7th/vim-vsnip',
 					'hrsh7th/cmp-calc',
 					'f3fora/cmp-spell',
+					'onsails/lspkind-nvim',
 				},
 				config = function()
 					require('vimrc.plugins.cmp')
