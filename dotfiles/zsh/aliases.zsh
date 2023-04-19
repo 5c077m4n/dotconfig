@@ -32,7 +32,7 @@ gbdefault () {
 
 	local ref
 	for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk}; do
-		if [[ $(git show-ref -q --verify "$ref") ]]; then
+		if $(git show-ref --quiet --verify "$ref"); then
 			echo "${ref:t}"
 			return
 		fi
@@ -43,7 +43,7 @@ alias gbcurrent='git branch --show-current'
 alias gsync='git fetch --all --prune && git pull origin "$(gbcurrent)" --all --rebase --autostash'
 alias gupa='git pull --rebase --autostash origin "$(gbcurrent)"'
 alias ggpf='git push --force origin "$(gbcurrent)"'
-alias gprom='git pull --rebase --autostash origin "$(gbdefault)"'
+alias gprom='git pull --rebase --autostash --stat origin "$(gbdefault)"'
 alias grbim='git rebase --interactive --autostash --autosquash "$(gbdefault)"'
 
 # Rust
