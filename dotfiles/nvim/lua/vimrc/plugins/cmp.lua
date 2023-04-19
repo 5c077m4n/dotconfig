@@ -11,17 +11,6 @@ cmp.setup({
 	formatting = {
 		format = lspkind.cmp_format(),
 	},
-	sorting = {
-		comparators = {
-			cmp.config.compare.offset,
-			cmp.config.compare.exact,
-			cmp.config.compare.score,
-			cmp.config.compare.kind,
-			cmp.config.compare.length,
-			cmp.config.compare.order,
-			cmp.config.compare.sort_text,
-		},
-	},
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
@@ -60,14 +49,27 @@ cmp.setup({
 		end, { 'i', 's' }),
 	}),
 	sources = cmp.config.sources({
-		{ name = 'nvim_lsp' },
-		{ name = 'luasnip' },
-		{ name = 'path' },
-		{ name = 'calc' },
-		{ name = 'spell' },
+		{ name = 'nvim_lsp', priority = 10 },
+		{ name = 'luasnip', priority = 9 },
+		{ name = 'path', priority = 8 },
+		{ name = 'calc', priority = 7 },
+		{ name = 'spell', priority = 1 },
 	}, {
 		{ name = 'buffer' },
 	}),
+	sorting = {
+		comparators = {
+			cmp.config.compare.offset,
+			cmp.config.compare.exact,
+			cmp.config.compare.score,
+			cmp.config.compare.recently_used,
+			cmp.config.compare.locality,
+			cmp.config.compare.kind,
+			cmp.config.compare.sort_text,
+			cmp.config.compare.length,
+			cmp.config.compare.order,
+		},
+	},
 })
 
 cmp.setup.filetype('gitcommit', {
