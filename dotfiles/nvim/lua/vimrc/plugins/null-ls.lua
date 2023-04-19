@@ -1,10 +1,5 @@
 local null_ls = require('null-ls')
 
-local deno_config = {
-	condition = function(utils)
-		return utils.root_has_file({ 'deno.json', 'deno.jsonc' })
-	end,
-}
 local ts_config = {
 	prefer_local = 'node_modules/.bin',
 	condition = function(utils)
@@ -16,8 +11,16 @@ null_ls.setup({
 	diagnostics_format = '[#{c}] #{m} (#{s})',
 	sources = {
 		-- lua
-		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.diagnostics.luacheck,
+		null_ls.builtins.formatting.stylua.with({
+			condition = function(utils)
+				return utils.root_has_file({ 'stylua.toml', '.stylua.toml' })
+			end,
+		}),
+		null_ls.builtins.diagnostics.luacheck.with({
+			condition = function(utils)
+				return utils.root_has_file({ '.luacheckrc' })
+			end,
+		}),
 		--null_ls.builtins.diagnostics.selene,
 		-- python
 		null_ls.builtins.formatting.isort,
@@ -29,7 +32,13 @@ null_ls.setup({
 		null_ls.builtins.formatting.eslint.with(ts_config),
 		null_ls.builtins.formatting.prettier.with(ts_config),
 		-- deno
-		null_ls.builtins.formatting.deno_fmt.with(deno_config),
+		null_ls.builtins.formatting.deno_fmt.with({
+			condition = function(utils)
+				return utils.root_has_file({ 'deno.json', 'deno.jsonc' })
+			end,
+			command = 'deno',
+			args = { 'fmt', '.' },
+		}),
 		-- css
 		null_ls.builtins.formatting.stylelint,
 		-- shell
