@@ -17,7 +17,7 @@ require('nvim-treesitter.configs').setup({
 	},
 	ignore_install = {},
 	highlight = {
-		enable = true, -- false will disable the whole extension
+		enable = true,
 		disable = {}, -- list of language that will be disabled
 	},
 })
