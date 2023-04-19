@@ -28,7 +28,8 @@ with open(dest, "w") as userjs_final:
         overrides_iter = key_value_pairs.finditer(content)
 
         userjs_final.write("\n\n/** OVERRIDES */\n")
-        for m in overrides_iter:
-            userjs_final.write(f"user_pref({m.group('key')}, {m.group('value')});\n")
+        for o in overrides_iter:
+            userjs_final.write(f"user_pref({o.group('key')}, {o.group('value')});\n")
 
     print("user.js file write complete 🤗")
+
