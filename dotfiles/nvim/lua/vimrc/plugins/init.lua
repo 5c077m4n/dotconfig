@@ -360,6 +360,13 @@ local function init_packer()
 					})
 				end,
 			})
+			use({
+				'monaqa/dial.nvim',
+				requires = { 'nvim-lua/plenary.nvim' },
+				config = function()
+					require('vimrc.plugins.dial')
+				end,
+			})
 			-- Git
 			use({
 				'tpope/vim-fugitive',
