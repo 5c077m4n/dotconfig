@@ -16,13 +16,14 @@ typeset -UT MANPATH manpath
 manpath=("/usr/local/man" $manpath)
 
 # Homebrew init
-if (( $+commands[brew] )); then
+brew_bin="/opt/homebrew/bin/brew"
+if [[ -x "$brew_bin" ]]; then
 	export HOMEBREW_NO_ANALYTICS=1
 
-	eval "$(brew shellenv)"
+	eval "$($brew_bin shellenv)"
 
 	# Use GNU tools as default
-	export HOMEBREW_PREFIX="$(brew --prefix)"
+	export HOMEBREW_PREFIX="$($brew_bin --prefix)"
 	for gnu_bin_dir in ${HOMEBREW_PREFIX}/opt/*/libexec/gnubin; do
 		[[ -d $gnu_bin_dir ]] && path+=("$gnu_bin_dir")
 	done
@@ -38,23 +39,12 @@ if (( $+commands[brew] )); then
 		source "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
 	fi
 fi
+unset brew_bin
 
 export PATH
 export FPATH
 export CDPATH
 export MANPATH
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-#ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 #CASE_SENSITIVE="true"
@@ -130,15 +120,6 @@ export EDITOR="nvim"
 
 # Compilation flags
 #export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-#alias zshconfig="mate ~/.zshrc"
-#alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Init starship
 eval "$(starship init zsh)"
