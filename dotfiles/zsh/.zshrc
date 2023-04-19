@@ -143,11 +143,11 @@ export EDITOR="nvim"
 
 # Kubectl zsh completion
 [[ -x "/usr/local/bin/kubectl" ]] && source <(kubectl completion zsh)
-
-[[ -f "${ZDOTDIR}/aliases" ]] && source "${ZDOTDIR}/aliases"
-[[ -f "${ZDOTDIR}/fzf-functions" ]] && source "${ZDOTDIR}/fzf-functions"
 [[ -f "${HOME}/.cargo/env" ]] && source "${HOME}/.cargo/env"
 [[ -f "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Leatherman
 [[ -f "$HOME/repos/leatherman/source-me.sh" ]] && source "$HOME/repos/leatherman/source-me.sh"
+
+[[ -f "${ZDOTDIR}/aliases" ]] && source "${ZDOTDIR}/aliases"
+[[ -f "${ZDOTDIR}/fzf-functions" ]] && source "${ZDOTDIR}/fzf-functions"
