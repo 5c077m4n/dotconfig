@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+alias kctx='kubectx'
+
+alias v='nvim'
+alias vim='nvim'
+
+alias tree='exa --tree'
+
+gsync() {
+	git fetch --all --prune
+	git pull --all --rebase
+}
+alias gprom='git pull --rebase --autostash origin "$(git_main_branch)"'
+alias gupa='git pull --rebase --autostash origin "$(git branch --show-current)"'
+alias grbim='git rebase --interactive "$(git_main_branch)"'
+alias ggpf='git push --force origin "$(git branch --show-current)"'
