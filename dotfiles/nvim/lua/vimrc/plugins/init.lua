@@ -351,7 +351,13 @@ local function init_packer()
 			use({
 				'terrortylor/nvim-comment',
 				config = function()
-					require('vimrc.plugins.nvim-comment')
+					require('nvim_comment').setup({
+						marker_padding = true,
+						comment_empty = false,
+						create_mappings = true,
+						line_mapping = '<leader>/',
+						operator_mapping = '<leader>/',
+					})
 				end,
 			})
 			-- Git
