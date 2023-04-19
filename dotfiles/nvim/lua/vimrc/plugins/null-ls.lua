@@ -5,6 +5,21 @@ local ts_config = {
 	condition = function(utils)
 		return utils.root_has_file({ 'package.json' })
 	end,
+	filetypes = {
+		'javascript',
+		'javascriptreact',
+		'typescript',
+		'typescriptreact',
+		'vue',
+		'css',
+		'scss',
+		'html',
+		'json',
+		'jsonc',
+		'yaml',
+		'markdown',
+		'graphql',
+	},
 }
 
 null_ls.setup({

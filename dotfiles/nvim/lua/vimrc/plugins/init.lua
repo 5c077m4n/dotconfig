@@ -456,6 +456,9 @@ local function init_packer()
 					persistence.setup({
 						dir = vim.fn.expand(vim.fn.stdpath('state') .. '/sessions/'),
 						options = vim.opt.sessionoptions:get(),
+						pre_save = function()
+							require('neo-tree').close()
+						end,
 					})
 					keymap.nnoremap('<leader>sl', persistence.load, { desc = 'Load relevant session' })
 					keymap.nnoremap('<leader>ss', persistence.stop, { desc = 'Do not save session on vim exit' })
