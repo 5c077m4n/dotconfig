@@ -6,19 +6,21 @@ telescope.setup({
 	defaults = {
 		mappings = {
 			i = {
-				['<C-t>'] = trouble.open_with_trouble,
 				['<C-k>'] = actions.cycle_history_next,
 				['<C-j>'] = actions.cycle_history_prev,
 				['<C-h>'] = actions.select_horizontal,
 				['<C-v>'] = actions.select_vertical,
+				['<C-t>'] = actions.select_tab,
+				['<C-x>'] = trouble.open_with_trouble,
 			},
 			n = {
-				['<C-t>'] = trouble.open_with_trouble,
 				['<C-k>'] = actions.cycle_history_next,
 				['<C-j>'] = actions.cycle_history_prev,
 				['<C-[>'] = actions.close,
 				['<C-h>'] = actions.select_horizontal,
 				['<C-v>'] = actions.select_vertical,
+				['<C-t>'] = actions.select_tab,
+				['<C-x>'] = trouble.open_with_trouble,
 			},
 		},
 	},
