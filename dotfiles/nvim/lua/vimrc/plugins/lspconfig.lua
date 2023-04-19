@@ -104,6 +104,10 @@ end
 local function make_config(options)
 	local client_capabilities = vim.lsp.protocol.make_client_capabilities()
 	local capabilities = cmp_lsp.update_capabilities(client_capabilities)
+	capabilities.textDocument.foldingRange = {
+		dynamicRegistration = false,
+		lineFoldingOnly = true,
+	}
 
 	local base_config = {
 		on_attach = on_attach,
