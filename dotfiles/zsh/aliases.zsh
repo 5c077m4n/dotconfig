@@ -1,15 +1,5 @@
 #!/usr/bin/env zsh
 
-# A git wrapper
-alias git='hub'
-# Python
-alias python='python3'
-
-# Neovim
-alias v='nvim'
-alias vim='nvim'
-alias 'v.'='nvim .'
-
 # `cd` into a temp dir
 alias cdt='cd "$(mktemp -d)"'
 
@@ -25,20 +15,15 @@ alias lx='ls -lbhHigUmuSa@' # all list and extended
 alias tree='exa --tree' # tree view
 alias lS='exa -1' # one column by just names
 
-# Kubectl
-alias k='kubectl'
-alias kk='kubectl krew'
-alias kpf='kubectl port-forward'
-# Kubectl utils
-alias kns='kubens'
-alias kc='kubectx'
-alias kcc='kubectx --current'
-# Terraform
-alias t='terraform'
-alias ta='terraform apply'
-alias tp='terraform plan'
+# Neovim
+alias v='nvim'
+alias vim='nvim'
+alias 'v.'='nvim .'
 
 # Git
+if (( $+commands[hub] )); then
+	alias git='hub'
+fi
 alias gsh='git show --show-signature'
 alias gst='git status'
 alias gd='git diff'
@@ -97,3 +82,19 @@ alias nisd='npm install --save-dev'
 alias nif='npm install --force'
 alias nr='npm run'
 alias nclean='npm cache clean --force'
+
+# Kubectl
+alias k='kubectl'
+alias kk='kubectl krew'
+alias kpf='kubectl port-forward'
+# Kubectl utils
+alias kns='kubens'
+alias kc='kubectx'
+alias kcc='kubectx --current'
+# Terraform
+alias t='terraform'
+alias ta='terraform apply'
+alias tp='terraform plan'
+
+# Python
+alias python='python3'
