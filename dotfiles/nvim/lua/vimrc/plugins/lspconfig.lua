@@ -1,9 +1,4 @@
-local lspconfig = require('lspconfig')
-local lsp_installer = require('mason')
-local lsp_installer_config = require('mason-lspconfig')
 local cmp_lsp = require('cmp_nvim_lsp')
-local neodev = require('neodev')
-local navic = require('nvim-navic')
 local telescope_builtin = require('telescope.builtin')
 
 local keymap = require('vimrc.utils.keymapping')
@@ -48,7 +43,7 @@ local function on_attach(client, buffer_num)
 		vim.notify(method.message, SEVERITY[params.type])
 	end
 	if client.server_capabilities.documentSymbolProvider then
-		navic.attach(client, buffer_num)
+		require('nvim-navic').attach(client, buffer_num)
 	end
 
 	keymap.nnoremap('gd', telescope_builtin.lsp_definitions, { buffer = buffer_num, desc = 'Go to LSP definition' })
@@ -115,49 +110,43 @@ local function make_config(options)
 	return base_config
 end
 
-lsp_installer.setup({
-	ui = {
-		icons = {
-			package_installed = 'V',
-			package_pending = '>',
-			package_uninstalled = 'X',
-		},
-		border = 'single',
-	},
-})
-lsp_installer_config.setup({
-	ensure_installed = SERVER_LIST,
-	automatic_installation = true,
-})
+return {
+	SERVER_LIST = SERVER_LIST,
+	setup = function()
+		local lspconfig = require('lspconfig')
 
-for _, server in ipairs(SERVER_LIST) do
-	local opts = make_config()
-	if server == 'lua_ls' then
-		neodev.setup({})
-		opts.settings = {
-			Lua = {
-				completion = { callSnippet = 'Replace' },
-				telemetry = { enable = false },
-				workspace = {
-					checkThirdParty = false,
-					library = '${3rd}/luv/library',
-				},
-				diagnostics = {
-					globals = { 'vim', 'string' },
-				},
-			},
-		}
-	elseif server == 'tailwindcss' then
-		opts.filetypes = { 'javascriptreact', 'javascript.jsx', 'typescriptreact', 'typescript.tsx', 'html' }
-		opts.root_dir = lspconfig.util.root_pattern('tailwind.config.js')
-	elseif server == 'denols' then
-		vim.g.markdown_fenced_languages = { 'ts=typescript' }
-		opts.root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc', 'deno.lock')
-	elseif server == 'tsserver' then
-		opts.root_dir = lspconfig.util.root_pattern('package.json', 'package-lock.json', 'tsconfig.json')
-		opts.single_file_support = false
-	end
+		for _, server in ipairs(SERVER_LIST) do
+			local opts = make_config()
 
-	lspconfig[server].setup(opts)
-	vim.cmd([[do User LspAttachBuffers]])
-end
+			if server == 'lua_ls' then
+				require('neodev').setup({})
+
+				opts.settings = {
+					Lua = {
+						completion = { callSnippet = 'Replace' },
+						telemetry = { enable = false },
+						workspace = {
+							checkThirdParty = false,
+							library = '${3rd}/luv/library',
+						},
+						diagnostics = {
+							globals = { 'vim', 'string' },
+						},
+					},
+				}
+			elseif server == 'tailwindcss' then
+				opts.filetypes = { 'javascriptreact', 'javascript.jsx', 'typescriptreact', 'typescript.tsx', 'html' }
+				opts.root_dir = lspconfig.util.root_pattern('tailwind.config.js')
+			elseif server == 'denols' then
+				vim.g.markdown_fenced_languages = { 'ts=typescript' }
+				opts.root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc', 'deno.lock')
+			elseif server == 'tsserver' then
+				opts.root_dir = lspconfig.util.root_pattern('package.json', 'package-lock.json', 'tsconfig.json')
+				opts.single_file_support = false
+			end
+
+			lspconfig[server].setup(opts)
+			vim.cmd([[do User LspAttachBuffers]])
+		end
+	end,
+}
