@@ -1,0 +1,13 @@
+*
+!.gitignore
+
+!denc
+!enc
+!forever
+!gbdefault
+!gfix
+!gsync
+!gum
+!hg
+!killport
+!update-hosts
