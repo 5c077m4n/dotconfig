@@ -56,7 +56,7 @@ lualine.setup({
 				newfile_status = true,
 				path = 1,
 				cond = function()
-					return vim.bo.filetype ~= 'neo-tree'
+					return vim.bo.filetype ~= 'neo-tree' and vim.bo.filetype ~= 'TelescopePrompt'
 				end,
 			},
 		},
