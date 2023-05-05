@@ -23,6 +23,9 @@ vi-cmd-function mode() {
 zle -N vi-cmd-mode
 KEYTIMEOUT=10
 
-bindkey '^xe' edit-and-execute-command
 bindkey '^[f' forward-word
 bindkey '^[b' backward-word
+
+autoload -z edit-command-line; zle -N edit-command-line
+bindkey -r '^X'
+bindkey '^X^E' edit-command-line
