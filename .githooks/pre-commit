@@ -20,6 +20,10 @@
 			mypy --strict "$file"
 
 			git add "$file"
+		elif [[ "$file_ext" == "zsh" ]]; then
+			beautysh --tab --force-function-style=fnpar "$file"
+
+			git add "$file"
 		fi
 	done
 }
