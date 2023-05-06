@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from os import mkdir, remove
 from pathlib import Path
 from shutil import rmtree
