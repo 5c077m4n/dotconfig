@@ -1,5 +1,3 @@
-# Kubectl
-[[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)
 # Kitty search
 [[ -x "$(command -v kitty)" ]] && compdef _rg hg
 
@@ -12,7 +10,7 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 # Reduce `vi-cmd-mode` sensitivity
-vi-cmd-function mode() {
+vi-cmd-mode() {
 	local is_esc=1 REPLY
 	while (( KEYS_QUEUED_COUNT || PENDING )); do
 		is_esc=0
@@ -27,5 +25,4 @@ bindkey '^[f' forward-word
 bindkey '^[b' backward-word
 
 autoload -z edit-command-line; zle -N edit-command-line
-bindkey -r '^X'
 bindkey '^X^E' edit-command-line
