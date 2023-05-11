@@ -18,8 +18,8 @@ export XDG_PUBLICSHARE_DIR="${XDG_PUBLICSHARE_DIR:-$HOME/Public}"
 export XDG_TEMPLATES_DIR="${XDG_TEMPLATES_DIR:-$HOME/Templates}"
 export XDG_VIDEOS_DIR="${XDG_VIDEOS_DIR:-$HOME/Videos}"
 
-export ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump"
-export ZSH_CACHE_DIR="${XDG_CACHE_HOME}/zsh/cache"
+export ZSH_CACHE_DIR="${XDG_CACHE_HOME}/zsh"
 
+export SHELL_SESSIONS_DISABLE=1 # Disables Apple's shell session storage
 export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/config.toml"
 export MAILCHECK=0
