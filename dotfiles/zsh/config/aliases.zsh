@@ -185,3 +185,12 @@ if [[ $(uname) == 'Darwin' ]]; then
 		fi
 	}
 fi
+
+# Ranger - make sure that there's only one instance active
+ranger() {
+	if [[ -z "$RANGER_LEVEL" ]]; then
+		$commands[ranger] "$@"
+	else
+		exit
+	fi
+}
