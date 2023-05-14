@@ -195,6 +195,13 @@ function M.setup()
 			})
 			use('folke/neodev.nvim')
 			use({
+				'ray-x/go.nvim',
+				requires = { 'neovim/nvim-lspconfig', 'nvim-treesitter/nvim-treesitter' },
+				config = function()
+					require('go').setup()
+				end,
+			})
+			use({
 				'jose-elias-alvarez/null-ls.nvim',
 				requires = 'nvim-lua/plenary.nvim',
 				config = function()

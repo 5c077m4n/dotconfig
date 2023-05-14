@@ -8,4 +8,4 @@ vi-cmd-mode() {
 	((is_esc)) && zle .$WIDGET
 }
 zle -N vi-cmd-mode
-KEYTIMEOUT=10
+export KEYTIMEOUT=10

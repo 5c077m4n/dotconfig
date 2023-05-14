@@ -57,6 +57,13 @@ null_ls.setup({
 				return utils.root_has_file({ 'build.zig' })
 			end,
 		}),
+		-- Go
+		null_ls.builtins.diagnostics.golangci_lint,
+		null_ls.builtins.diagnostics.gospel,
+		null_ls.builtins.diagnostics.staticcheck,
+		null_ls.builtins.formatting.gofmt,
+		null_ls.builtins.formatting.goimports,
+		null_ls.builtins.formatting.golines,
 		-- ZSH
 		null_ls.builtins.diagnostics.zsh,
 		-- Terraform
@@ -69,6 +76,7 @@ null_ls.setup({
 		null_ls.builtins.completion.spell,
 		--null_ls.builtins.diagnostics.editorconfig_checker,
 		--null_ls.builtins.code_actions.gitsigns,
+		null_ls.builtins.code_actions.refactoring,
 	},
 	update_in_insert = false,
 	debounce = 200,

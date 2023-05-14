@@ -23,3 +23,7 @@ export ZSH_CACHE_DIR="${XDG_CACHE_HOME}/zsh"
 export SHELL_SESSIONS_DISABLE=1 # Disables Apple's shell session storage
 export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/config.toml"
 export MAILCHECK=0
+
+export GOROOT="${XDG_CONFIG_HOME}/go"
+export GOPATH="${XDG_DATA_HOME}/go"
+export GOBIN="${GOPATH}/bin"
