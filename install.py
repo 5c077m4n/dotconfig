@@ -38,7 +38,10 @@ def main() -> None:
         dest_dir.symlink_to(source_dir, True)
 
     bin_dir = __dirname.joinpath("bin")
-    dest_bin_dir = home_dir.joinpath(".local", "bin")
+    local_dir = home_dir.joinpath(".local")
+    if not local_dir.exists():
+        mkdir(local_dir)
+    dest_bin_dir = local_dir.joinpath("bin")
     wipe(dest_bin_dir)
     dest_bin_dir.symlink_to(bin_dir)
 
