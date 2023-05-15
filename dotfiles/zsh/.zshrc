@@ -14,13 +14,9 @@ for zsh_config_file in "${ZDOTDIR}/config/"*; do
 done
 unset zsh_config_file
 
-plug "${XDG_CONFIG_HOME}/tabtab/zsh/__tabtab.zsh"
 plug "${HOME}/.fzf.zsh"
 plug "${HOME}/.cargo/env"
 plug "${HOME}/.iterm2_shell_integration.zsh"
-
-# Leatherman
-plug "${HOME}/repos/leatherman/source-me.sh"
 
 # Init starship
 eval "$(starship init zsh)"
