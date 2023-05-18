@@ -8,9 +8,7 @@ local has_words_before = function()
 end
 
 cmp.setup({
-	formatting = {
-		format = lspkind.cmp_format(),
-	},
+	formatting = { format = lspkind.cmp_format() },
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
