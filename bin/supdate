@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+
+if (( $+commands[brew] )); then
+	brew update
+	brew upgrade
+	brew upgrade --cask
+elif (( $+commands[pacman] )); then
+	sudo pacman -Syu
+elif (( $+commands[apk] )); then
+	sudo apk update
+	sudo apk upgrade
+elif (( $+commands[apt] )); then
+	sudo apt update
+	sudo apt upgrade
+fi
+
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+[[ -x "$(command -v rustup)" ]] && rustup upgrade
