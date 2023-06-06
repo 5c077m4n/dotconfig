@@ -159,6 +159,22 @@ function M.setup()
 				after = { 'mason.nvim', 'mason-lspconfig.nvim' },
 			})
 			use({
+				'jose-elias-alvarez/typescript.nvim',
+				config = function()
+					require('typescript').setup({
+						go_to_source_definition = { fallback = true },
+						server = {
+							on_attach = require('vimrc.plugins.lspconfig').on_attach,
+							root_dir = require('lspconfig').util.root_pattern(
+								'package.json',
+								'package-lock.json',
+								'tsconfig.json'
+							),
+						},
+					})
+				end,
+			})
+			use({
 				'folke/trouble.nvim',
 				requires = {
 					{ 'nvim-tree/nvim-web-devicons', opt = true },

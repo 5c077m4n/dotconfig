@@ -7,13 +7,11 @@ local SERVER_LIST = {
 	'taplo',
 	'pylsp',
 	'bashls',
-	'tsserver',
 	'rust_analyzer',
 	'html',
 	'lua_ls',
 	'jsonls',
 	'yamlls',
-	'eslint',
 	'cssls',
 	'tailwindcss',
 	'marksman',
@@ -112,6 +110,7 @@ end
 
 return {
 	SERVER_LIST = SERVER_LIST,
+	on_attach = on_attach,
 	setup = function()
 		local lspconfig = require('lspconfig')
 
