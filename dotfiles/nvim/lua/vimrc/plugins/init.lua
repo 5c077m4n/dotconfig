@@ -33,9 +33,6 @@ function M.setup()
 						resize = { enable_default_keybindings = false },
 					})
 				end,
-				cond = function()
-					return vim.env.TMUX ~= nil
-				end,
 			})
 			use({
 				'rcarriga/nvim-notify',
