@@ -7,13 +7,11 @@ local SERVER_LIST = {
 	'taplo',
 	'pylsp',
 	'bashls',
-	'tsserver',
 	'rust_analyzer',
 	'html',
 	'lua_ls',
 	'jsonls',
 	'yamlls',
-	'eslint',
 	'cssls',
 	'tailwindcss',
 	'marksman',
@@ -112,6 +110,7 @@ end
 
 return {
 	SERVER_LIST = SERVER_LIST,
+	on_attach = on_attach,
 	setup = function()
 		local lspconfig = require('lspconfig')
 
@@ -140,10 +139,6 @@ return {
 			elseif server == 'denols' then
 				vim.g.markdown_fenced_languages = { 'ts=typescript' }
 				opts.root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc', 'deno.lock')
-				opts.single_file_support = false
-			elseif server == 'tsserver' then
-				opts.root_dir = lspconfig.util.root_pattern('package.json', 'package-lock.json', 'tsconfig.json')
-				opts.single_file_support = false
 			end
 
 			lspconfig[server].setup(opts)
