@@ -81,5 +81,5 @@ null_ls.setup({
 	diagnostics_format = '[#{c}] #{m} (#{s})',
 	sources = sources,
 	update_in_insert = false,
-	debounce = 200,
+	debounce = 400,
 })

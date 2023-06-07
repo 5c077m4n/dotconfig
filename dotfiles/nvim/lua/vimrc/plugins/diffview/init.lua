@@ -1,15 +1,12 @@
 return {
-	'nvim-neo-tree/neo-tree.nvim',
-	branch = 'v2.x',
+	'sindrets/diffview.nvim',
 	requires = {
 		'nvim-lua/plenary.nvim',
 		{ 'nvim-tree/nvim-web-devicons', opt = true },
-		'MunifTanjim/nui.nvim',
 	},
 	config = function()
 		vim.cmd.packadd('nvim-web-devicons')
-
-		require('vimrc.plugins.neotree.config')
-		require('vimrc.plugins.neotree.commands')
+		require('vimrc.plugins.diffview.config')
 	end,
+	disable = true,
 }
