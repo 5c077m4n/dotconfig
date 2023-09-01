@@ -2,6 +2,8 @@
 
 # `cd` into a temp dir
 alias cdt='cd "$(mktemp -d)"'
+# Make `rm` safe by default
+alias rm='rm -i'
 
 # exa -> ls
 if (( $+commands[exa] )); then
