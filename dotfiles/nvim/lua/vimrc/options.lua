@@ -76,7 +76,10 @@ o.hidden = true
 -- Default split positions
 o.splitbelow = true
 o.splitright = true
+o.winminwidth = 5
 
+o.grepformat = '%f:%l:%c:%m'
+o.grepprg = 'rg --vimgrep'
 o.ignorecase = true
 o.smartcase = true
 o.hlsearch = true
