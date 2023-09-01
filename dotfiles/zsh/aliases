@@ -51,7 +51,9 @@ alias gwtp='git worktree prune'
 alias c='cargo'
 alias ct='cargo test'
 alias ctw='cargo test --workspace'
-alias ctwl='RUST_LOG=debug cargo test --workspace -- --nocapture'
+ctwl() {
+	RUST_LOG=debug cargo test --workspace "$@" -- --nocapture
+}
 alias cc='cargo clean'
 alias cr='cargo run'
 alias crl='RUST_LOG=debug cargo run'
