@@ -18,4 +18,6 @@ if [[ -x /opt/homebrew/bin/brew ]]; then
 
 	# Use GNU tools as default
 	path=("${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin" $path)
+
+	export GOROOT="$(brew --prefix golang)/libexec"
 fi
