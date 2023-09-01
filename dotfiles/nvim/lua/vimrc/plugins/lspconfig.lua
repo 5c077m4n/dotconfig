@@ -2,7 +2,6 @@ local lspconfig = require('lspconfig')
 local lsp_installer = require('mason')
 local lsp_installer_config = require('mason-lspconfig')
 local telescope_builtin = require('telescope.builtin')
-local which_key = require('which-key')
 local cmp_lsp = require('cmp_nvim_lsp')
 
 local mod_utils = require('vimrc.utils.modules')
@@ -77,21 +76,15 @@ local function on_attach(_client, buffer_num)
 	end, { buffer = buffer_num, desc = 'Go to next diagnostic' })
 	keymap.nnoremap('<leader>ca', lsp.buf.code_action, { buffer = buffer_num, desc = 'Code action' })
 	keymap.vnoremap('<leader>ca', lsp.buf.range_code_action, { buffer = buffer_num, desc = 'Code action for range' })
-	-- TODO: remove legacy `if` when 0.8 is out
 	keymap.nnoremap('<leader>l', function()
-		if type(lsp.buf.format) == 'function' then
-			vim.lsp.buf.format({
-				filter = function(client)
-					return client.name == 'null-ls'
-				end,
-				bufnr = buffer_num,
-				async = true,
-			})
-		else
-			lsp.buf.formatting({})
-		end
+		vim.lsp.buf.format({
+			filter = function(client)
+				return client.name == 'null-ls'
+			end,
+			bufnr = buffer_num,
+			async = true,
+		})
 	end, { buffer = buffer_num, desc = 'Format page' })
-	keymap.vnoremap('<leader>l', lsp.buf.range_formatting, { buffer = buffer_num, desc = 'Format page' })
 
 	create_command('Format', function()
 		if type(lsp.buf.format) == 'function' then
@@ -106,23 +99,6 @@ local function on_attach(_client, buffer_num)
 			lsp.buf.formatting({})
 		end
 	end, { desc = 'Format page' })
-
-	which_key.register({
-		gD = 'Declaration',
-		gd = 'Definition',
-		gh = 'LSP Finder',
-		K = 'Show docs',
-		gi = 'Show implementations',
-		gr = 'Show refs',
-		['g]'] = 'Next diagnostics result',
-		['g['] = 'Previous diagnostics result',
-		['g?'] = 'Show diagnostics result in popup',
-		['<leader>rn'] = 'Rename',
-		['<leader>l'] = 'Format',
-	}, {
-		buffer = buffer_num,
-		silent = true,
-	})
 end
 
 local function make_config(options)
