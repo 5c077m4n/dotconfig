@@ -12,7 +12,7 @@ bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
 # Reduce `vi-cmd-mode` sensitivity
-vi-cmd-mode() {
+vi-cmd-function mode() {
 	local is_esc=1 REPLY
 	while (( KEYS_QUEUED_COUNT || PENDING )); do
 		is_esc=0
@@ -23,5 +23,6 @@ vi-cmd-mode() {
 zle -N vi-cmd-mode
 KEYTIMEOUT=10
 
+bindkey '^xe' edit-and-execute-command
 bindkey '^[f' forward-word
 bindkey '^[b' backward-word
