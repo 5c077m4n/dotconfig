@@ -4,12 +4,11 @@
 	fh = "!git log --follow --all --patch -- \"$(git ls-files | fzf)\""
 	unstage = "!git reset HEAD -- \"$(git ls-files | fzf --multi --preview 'cat {}')\""
 	root = rev-parse --show-toplevel
-	aliases = config --get-regexp alias
+	aliases = config --get-regexp ^alias.
 [core]
 	autocrlf = input
 [help]
 	autocorrect = 50
-
 [include]
 	path = ~/.config/git/git-diff.toml
 	path = ~/.config/git/commit-sign.toml
