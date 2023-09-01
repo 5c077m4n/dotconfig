@@ -60,6 +60,7 @@ symbol = ".NET "
 
 [directory]
 read_only = " ro"
+fish_style_pwd_dir_length = 1
 
 [docker_context]
 symbol = "docker "
@@ -141,6 +142,7 @@ symbol = "spack "
 
 [sudo]
 symbol = "sudo "
+disabled = false
 
 [swift]
 symbol = "swift "
