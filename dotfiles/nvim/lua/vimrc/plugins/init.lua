@@ -237,16 +237,27 @@ function M.setup()
 			use({
 				'ray-x/go.nvim',
 				requires = { 'neovim/nvim-lspconfig', 'nvim-treesitter/nvim-treesitter' },
+				after = { 'nvim-lspconfig' },
 				config = function()
-					require('go').setup()
+					local go = require('go')
+					local go_lsp_config = require('go.lsp').config()
+					local lspconfig = require('lspconfig')
 
-					vim.api.nvim_create_autocmd('BufWritePre', {
-						group = vim.api.nvim_create_augroup('GoFormat', { clear = true }),
-						pattern = '*.go',
-						callback = function()
-							require('go.format').goimport()
-						end,
+					go.setup({
+						lsp_cfg = false,
+						max_line_len = 100,
+						lsp_inlay_hints = { enable = false },
+						trouble = true,
 					})
+					vim.tbl_deep_extend('force', go_lsp_config, {
+						settings = {
+							gopls = {
+								analyses = { unusedparams = true },
+								staticcheck = true,
+							},
+						},
+					})
+					lspconfig.gopls.setup(go_lsp_config)
 				end,
 			})
 			use({
