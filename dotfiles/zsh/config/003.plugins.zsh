@@ -4,8 +4,9 @@ plugins=(fzf)
 () {
 	local plugins_custom=(
 		zdharma-continuum/fast-syntax-highlighting
-		zsh-users/zsh-autosuggestions
 		hlissner/zsh-autopair
+		zsh-users/zsh-autosuggestions
+		zsh-users/zsh-completions
 	)
 	local plug_repo
 
