@@ -9,6 +9,10 @@ keymap.nnoremap('<leader>0', module_utils.update_vimrc, { desc = 'Git pull lates
 keymap.nnoremap('<leader>1', packer.sync, { desc = 'Packer sync' })
 keymap.nnoremap('<leader>2', module_utils.reload_vimrc, { desc = 'Reload the vimrc config' })
 
+-- Center screen on page up/down
+keymap.nnoremap('<C-u>', '<C-u>zz')
+keymap.nnoremap('<C-d>', '<C-d>zz')
+
 -- Splits
 keymap.nnoremap('<C-h>', '<C-w>h', { desc = 'Move one split left' })
 keymap.nnoremap('<C-j>', '<C-w>j', { desc = 'Move one split down' })
