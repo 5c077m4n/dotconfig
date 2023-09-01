@@ -34,6 +34,10 @@ alias v='nvim'
 alias vim='nvim'
 alias 'v.'='nvim .'
 
+if (( $+commands[emacs] )); then
+	alias emacs='emacsclient -c -a "emacs"'
+fi
+
 # Filetype aliases
 ## Neovim
 alias -s rs='nvim'
