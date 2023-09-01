@@ -1,6 +1,35 @@
 local lualine = require('lualine')
 local navic = require('nvim-navic')
 
+---@description Fish shell style path (`~/a/.b/c/filename.lua`)
+---@param path string
+---@return string
+local function fish_style_path(path)
+	local sep
+	if vim.fn.has('win32') == 1 or vim.fn.has('win32unix') == 1 then
+		sep = '\\'
+	else
+		sep = '/'
+	end
+	local segments = vim.split(path, sep)
+
+	local fish_path = ''
+	for index, segment in pairs(segments) do
+		if index ~= 1 then
+			fish_path = fish_path .. sep
+		end
+
+		if index == #segments then
+			fish_path = fish_path .. segment
+		elseif segment:sub(1, 1) == '.' then
+			fish_path = fish_path .. segment:sub(1, 2)
+		else
+			fish_path = fish_path .. segment:sub(1, 1)
+		end
+	end
+	return fish_path
+end
+
 lualine.setup({
 	sections = {
 		lualine_c = {
@@ -12,6 +41,9 @@ lualine.setup({
 				path = 1,
 				cond = function()
 					return vim.bo.filetype ~= 'TelescopePrompt'
+				end,
+				fmt = function(filepath)
+					return fish_style_path(filepath)
 				end,
 			},
 		},
