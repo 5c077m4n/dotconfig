@@ -4,13 +4,8 @@ local function create_keymap_fn(mode)
 	mode = mode or 'n'
 
 	return function(lhs, rhs, options)
-		options = options or {}
-		options.noremap = true
-		if options.silent == nil then
-			options.silent = true
-		end
-
-		vim.keymap.set(mode, lhs, rhs, options)
+		local opts = vim.tbl_extend('force', { noremap = true, silent = true }, options or {})
+		vim.keymap.set(mode, lhs, rhs, opts)
 	end
 end
 
