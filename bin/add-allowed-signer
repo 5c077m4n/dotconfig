@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+echo "$(git config --get user.email) namespace=\"git\" $(cat ~/.ssh/keys/personal.pub)" >> ~/.ssh/allowed_signers
