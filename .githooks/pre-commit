@@ -16,6 +16,7 @@
 			git add "$file"
 		elif [[ "$file_ext" == "py" ]]; then
 			black "$file"
+			mypy "$file"
 
 			git add "$file"
 		fi
