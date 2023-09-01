@@ -1,5 +1,6 @@
 .DS_Store
 .zcompdump*
+.mypy_cache/**
 
 dotfiles/zsh/**
 !dotfiles/zsh/.zshrc
