@@ -40,6 +40,7 @@ gbdefault () {
 	echo "master"
 }
 alias gbcurrent='git branch --show-current'
+alias gcom='git checkout "$(gbdefault)"'
 alias gupa='git pull --rebase --autostash origin "$(gbcurrent)"'
 alias ggpf='git push --force origin "$(gbcurrent)"'
 alias gprom='git pull --rebase --autostash --stat origin "$(gbdefault)"'
