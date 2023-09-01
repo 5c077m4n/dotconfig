@@ -84,6 +84,7 @@ local function on_attach(_client, buffer_num)
 					return client.name == 'null-ls'
 				end,
 				bufnr = buffer_num,
+				async = true,
 			})
 		else
 			lsp.buf.formatting({})
@@ -91,8 +92,19 @@ local function on_attach(_client, buffer_num)
 	end, { buffer = buffer_num, desc = 'Format page' })
 	keymap.vnoremap('<leader>l', lsp.buf.range_formatting, { buffer = buffer_num, desc = 'Format page' })
 
-	create_command('Format', lsp.buf.formatting, { desc = 'Format page' })
-	create_command('FormatRange', lsp.buf.range_formatting, { desc = 'Format range' })
+	create_command('Format', function()
+		if type(lsp.buf.format) == 'function' then
+			vim.lsp.buf.format({
+				filter = function(client)
+					return client.name == 'null-ls'
+				end,
+				bufnr = buffer_num,
+				async = true,
+			})
+		else
+			lsp.buf.formatting({})
+		end
+	end, { desc = 'Format page' })
 
 	which_key.register({
 		gD = 'Declaration',
