@@ -2,7 +2,7 @@ plugins=(fzf)
 
 () {
 	local plugins_custom=(
-		zsh-users/zsh-syntax-highlighting
+		zdharma-continuum/fast-syntax-highlighting
 		zsh-users/zsh-autosuggestions
 		hlissner/zsh-autopair
 	)
