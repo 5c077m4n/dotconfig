@@ -16,7 +16,7 @@ local SERVER_LIST = {
 	'tsserver',
 	'rust_analyzer',
 	'html',
-	'sumneko_lua',
+	'lua_ls',
 	'jsonls',
 	'yamlls',
 	'eslint',
@@ -131,13 +131,16 @@ lsp_installer_config.setup({
 
 for _, server in ipairs(SERVER_LIST) do
 	local opts = make_config()
-	if server == 'sumneko_lua' then
+	if server == 'lua_ls' then
 		neodev.setup({})
 		opts.settings = {
 			Lua = {
 				completion = { callSnippet = 'Replace' },
 				telemetry = { enable = false },
 				checkThirdParty = false,
+				diagnostics = {
+					globals = { 'vim' },
+				},
 			},
 		}
 	elseif server == 'tailwindcss' then
