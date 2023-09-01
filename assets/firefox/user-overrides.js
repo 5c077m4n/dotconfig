@@ -41,3 +41,6 @@ user_pref("keyword.enabled", true); // 0801
 
 /* override recipe: set startup page ***/
 //user_pref("browser.startup.page", 1); // 0102
+
+/* This is to disable quarantining of extensions from selected URLs */
+user_pref("extensions.quarantinedDomains.enabled", false);
