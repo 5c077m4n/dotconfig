@@ -99,7 +99,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(fzf rust zsh-autosuggestions zsh-syntax-highlighting)
 
-[[ -f "${ZDOTDIR}/oh-my-zsh-upsert.zsh" ]] && source "${ZDOTDIR}/oh-my-zsh-upsert.zsh"
+[[ -f "${ZDOTDIR}/upsert-pkgs.zsh" ]] && source "${ZDOTDIR}/upsert-pkgs.zsh"
 source "${ZSH}/oh-my-zsh.sh"
 
 # User configuration

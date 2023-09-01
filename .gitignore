@@ -7,7 +7,7 @@ dotfiles/zsh/**
 !dotfiles/zsh/.zshenv
 !dotfiles/zsh/.zlogout
 !dotfiles/zsh/aliases.zsh
-!dotfiles/zsh/oh-my-zsh-upsert.zsh
+!dotfiles/zsh/upsert-pkgs.zsh
 !dotfiles/zsh/fzf-functions.zsh
 
 dotfiles/karabiner/**
