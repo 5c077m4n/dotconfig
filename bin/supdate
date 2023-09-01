@@ -15,4 +15,4 @@ elif (( $+commands[apt] )); then
 fi
 
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-if [[ -x "$(command -v rustup)" ]]; then rustup upgrade; fi
+if (( $+commands[rustup] )); then rustup upgrade; fi
