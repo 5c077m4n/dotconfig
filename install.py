@@ -40,6 +40,11 @@ def main():
         wipe(dest_dir)
         dest_dir.symlink_to(source_dir, True)
 
+    bin_dir = __dirname.joinpath("bin")
+    dest_bin_dir = home_dir.joinpath(".local", "bin")
+    wipe(dest_bin_dir)
+    dest_bin_dir.symlink_to(bin_dir)
+
 
 if __name__ == "__main__":
     main()
