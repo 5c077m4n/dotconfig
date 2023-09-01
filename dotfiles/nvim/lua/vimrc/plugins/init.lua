@@ -1,467 +1,443 @@
 local M = {}
 
---- @return boolean
 local function bootstrap()
-	local fn = vim.fn
-	local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+	local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 
-	if fn.empty(fn.glob(install_path)) > 0 then
-		fn.system({
+	---@diagnostic disable-next-line: undefined-field
+	if not vim.loop.fs_stat(lazypath) then
+		vim.fn.system({
 			'git',
 			'clone',
-			'https://github.com/wbthomason/packer.nvim',
-			install_path,
+			'--filter=blob:none',
+			'https://github.com/folke/lazy.nvim.git',
+			'--branch=stable',
+			lazypath,
 		})
-		return true
-	else
-		return false
 	end
+	---@diagnostic disable-next-line: undefined-field
+	vim.opt.rtp:prepend(lazypath)
 end
 
 function M.setup()
-	local bootstrap_needed = bootstrap()
+	bootstrap()
 
-	require('packer').startup({
-		function(use)
-			-- General
-			use('wbthomason/packer.nvim')
-			use('nvim-lua/plenary.nvim')
-			use({
-				'aserowy/tmux.nvim',
-				config = function()
-					require('tmux').setup({
-						resize = { enable_default_keybindings = false },
-					})
-				end,
-			})
-			use({
-				'rcarriga/nvim-notify',
-				config = function()
-					local notify = require('notify')
+	require('lazy').setup({
+		{ 'nvim-lua/plenary.nvim', lazy = true },
+		{
+			'aserowy/tmux.nvim',
+			config = function()
+				require('tmux').setup({
+					resize = { enable_default_keybindings = false },
+				})
+			end,
+		},
+		{
+			'rcarriga/nvim-notify',
+			config = function()
+				local notify = require('notify')
 
-					notify.setup({ stages = 'slide', render = 'compact', fps = 60 })
-					vim.notify = notify
-				end,
-			})
-			use({
-				'samodostal/image.nvim',
-				requires = { 'nvim-lua/plenary.nvim' },
-				config = function()
-					require('image').setup({
-						render = {
-							min_padding = 5,
-							show_label = true,
-							use_dither = true,
-						},
-						events = { update_on_nvim_resize = true },
-					})
-				end,
-			})
-			-- Theme
-			use({
-				'projekt0n/github-nvim-theme',
-				config = function()
-					require('github-theme').setup({
-						options = { dim_inactive = true },
-					})
-					vim.cmd.colorscheme('github_dark_colorblind')
-				end,
-			})
-			use({
-				'nvim-lualine/lualine.nvim',
-				after = 'github-nvim-theme',
-				requires = {
-					'SmiteshP/nvim-navic',
-					{ 'nvim-tree/nvim-web-devicons', opt = true },
-				},
-				config = function()
-					vim.cmd.packadd('nvim-web-devicons')
-					require('vimrc.plugins.lualine')
-				end,
-			})
-			use({
-				'norcalli/nvim-colorizer.lua',
-				events = { 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' },
-				config = function()
-					require('colorizer').setup()
-				end,
-			})
-			use({
-				'folke/todo-comments.nvim',
-				events = { 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' },
-				config = function()
-					require('todo-comments').setup()
-				end,
-			})
-			use({
-				'onsails/lspkind-nvim',
-				config = function()
-					require('lspkind').init({ mode = 'text' }) -- Icons in autocomplete popup
-				end,
-			})
-			use({ 'fladson/vim-kitty', ft = { 'kitty' } })
-			use({ 'tmux-plugins/vim-tmux', ft = { 'tmux' } })
-			-- File tree
-			use({
-				'nvim-neo-tree/neo-tree.nvim',
-				branch = 'v3.x',
-				requires = {
-					'nvim-lua/plenary.nvim',
-					{ 'nvim-tree/nvim-web-devicons', opt = true },
-					'MunifTanjim/nui.nvim',
-				},
-				config = function()
-					vim.cmd.packadd('nvim-web-devicons')
-					require('vimrc.plugins.neotree')
-				end,
-			})
-			-- Treesitter
-			use({
-				'nvim-treesitter/nvim-treesitter',
-				run = function()
-					vim.cmd.TSUpdate()
-				end,
-				config = function()
-					require('vimrc.plugins.nvim-treesitter')
-				end,
-			})
-			-- LSP
-			use({
-				'williamboman/mason.nvim',
-				run = function()
-					vim.cmd.MasonUpdate()
-				end,
-				config = function()
-					require('mason').setup({
-						ui = { border = 'single' },
-					})
-				end,
-			})
-			use({
-				'williamboman/mason-lspconfig.nvim',
-				requires = { 'neovim/nvim-lspconfig' },
-				after = 'mason.nvim',
-				config = function()
-					require('mason-lspconfig').setup({
-						ensure_installed = require('vimrc.plugins.lspconfig').SERVER_LIST,
-						automatic_installation = true,
-					})
-				end,
-			})
-			use({
-				'neovim/nvim-lspconfig',
-				config = function()
-					require('vimrc.plugins.lspconfig').setup()
-				end,
-				after = { 'mason.nvim', 'mason-lspconfig.nvim' },
-			})
-			use({
-				'jose-elias-alvarez/typescript.nvim',
-				requires = { 'neovim/nvim-lspconfig' },
-				after = { 'nvim-lspconfig' },
-				ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
-				config = function()
-					require('typescript').setup({
-						go_to_source_definition = { fallback = true },
-						server = {
-							root_dir = require('lspconfig').util.root_pattern(
-								'package.json',
-								'package-lock.json',
-								'tsconfig.json'
-							),
-							single_file_support = false,
-						},
-					})
-				end,
-			})
-			use({
-				'simrat39/rust-tools.nvim',
-				requires = { 'neovim/nvim-lspconfig' },
-				after = { 'nvim-lspconfig' },
-				ft = { 'rust' },
-				config = function()
-					local rust_tools = require('rust-tools')
-
-					rust_tools.setup({
-						tools = {
-							inlay_hints = {
-								auto = true,
-								only_current_line = true,
-							},
-						},
-						server = {
-							on_attach = function(_client, buffer_n)
-								local keymap = require('vimrc.utils.keymapping')
-
-								keymap.nnoremap(
-									'<leader>cA',
-									rust_tools.code_action_group.code_action_group,
-									{ buffer = buffer_n, desc = 'Open rust tools code actions pane' }
-								)
-							end,
-						},
-					})
-				end,
-			})
-			use({
-				'folke/trouble.nvim',
-				requires = {
-					{ 'nvim-tree/nvim-web-devicons', opt = true },
-				},
-				config = function()
-					vim.cmd.packadd('nvim-web-devicons')
-
-					require('trouble').setup({
-						fold_open = 'v',
-						fold_closed = '>',
-						indent_lines = true,
-						signs = { error = 'E', warning = 'W', hint = 'H', information = 'I' },
-					})
-
-					local keymap = require('vimrc.utils.keymapping')
-
-					keymap.nnoremap('<leader>xx', vim.cmd.TroubleToggle, { desc = 'Toggle trouble panel' })
-					keymap.nnoremap('<leader>xw', function()
-						vim.cmd.TroubleToggle('workspace_diagnostics')
-					end, { desc = 'Toggle trouble workspace diagnostics' })
-					keymap.nnoremap('<leader>xd', function()
-						vim.cmd.TroubleToggle('document_diagnostics')
-					end, { desc = 'Toggle trouble document diagnostics' })
-					keymap.nnoremap('<leader>xq', function()
-						vim.cmd.TroubleToggle('quickfix')
-					end, { desc = 'Toggle trouble quick fix panel' })
-					keymap.nnoremap('<leader>xl', function()
-						vim.cmd.TroubleToggle('loclist')
-					end, { desc = 'Toggle trouble loclist panel' })
-				end,
-			})
-			use('folke/neodev.nvim')
-			use({
-				'ray-x/go.nvim',
-				requires = { 'neovim/nvim-lspconfig', 'nvim-treesitter/nvim-treesitter' },
-				after = { 'nvim-lspconfig' },
-				ft = { 'go', 'gomod', 'godoc', 'gotexttmpl', 'gohtmltmpl' },
-				config = function()
-					local go = require('go')
-					local go_lsp_config = require('go.lsp').config()
-					local lspconfig = require('lspconfig')
-
-					go.setup({
-						lsp_cfg = false,
-						max_line_len = 100,
-						lsp_inlay_hints = { enable = false },
-						trouble = true,
-					})
-					vim.tbl_deep_extend('force', go_lsp_config, {
-						settings = {
-							gopls = {
-								analyses = { unusedparams = true },
-								staticcheck = true,
-							},
-						},
-					})
-					lspconfig.gopls.setup(go_lsp_config)
-				end,
-			})
-			use({
-				'jose-elias-alvarez/null-ls.nvim',
-				requires = 'nvim-lua/plenary.nvim',
-				config = function()
-					require('vimrc.plugins.null-ls')
-				end,
-			})
-			-- Code snippets
-			use({
-				'hrsh7th/nvim-cmp',
-				requires = {
-					'hrsh7th/cmp-nvim-lsp',
-					'hrsh7th/cmp-buffer',
-					'hrsh7th/cmp-path',
-					'hrsh7th/cmp-cmdline',
-					{
-						'L3MON4D3/LuaSnip',
-						tag = 'v1.*',
-						run = 'make install_jsregexp',
-						requires = { 'saadparwaiz1/cmp_luasnip' },
+				notify.setup({ stages = 'slide', render = 'compact', fps = 60 })
+				vim.notify = notify
+			end,
+		},
+		{
+			'samodostal/image.nvim',
+			event = 'VeryLazy',
+			dependencies = { 'nvim-lua/plenary.nvim' },
+			config = function()
+				require('image').setup({
+					render = {
+						min_padding = 5,
+						show_label = true,
+						_dither = true,
 					},
-					'hrsh7th/cmp-calc',
-					'f3fora/cmp-spell',
-					'onsails/lspkind-nvim',
-				},
-				config = function()
-					require('vimrc.plugins.cmp')
-				end,
-			})
-			-- Code workflow
-			use({
-				'phaazon/hop.nvim',
-				event = { 'FocusGained', 'BufEnter' },
-				config = function()
-					local hop = require('hop')
-					local directions = require('hop.hint').HintDirection
+					events = { update_on_nvim_resize = true },
+				})
+			end,
+		},
+		{
+			'projekt0n/github-nvim-theme',
+			config = function()
+				require('github-theme').setup({
+					options = { dim_inactive = true },
+				})
+				vim.cmd.colorscheme('github_dark_colorblind')
+			end,
+			priority = 1000,
+		},
+		{
+			'nvim-lualine/lualine.nvim',
+			dependencies = {
+				'projekt0n/github-nvim-theme',
+				'SmiteshP/nvim-navic',
+				{ 'nvim-tree/nvim-web-devicons', lazy = true },
+			},
+			config = function()
+				require('vimrc.plugins.lualine')
+			end,
+		},
+		{
+			'norcalli/nvim-colorizer.lua',
+			events = 'VeryLazy',
+			config = function()
+				require('colorizer').setup()
+			end,
+		},
+		{
+			'folke/todo-comments.nvim',
+			events = 'VeryLazy',
+			config = function()
+				require('todo-comments').setup()
+			end,
+		},
+		{
+			'onsails/lspkind-nvim',
+			config = function()
+				require('lspkind').init({ mode = 'text' }) -- Icons in autocomplete popup
+			end,
+		},
+		{ 'fladson/vim-kitty', ft = { 'kitty' } },
+		{ 'tmux-plugins/vim-tmux', ft = { 'tmux' } },
+		{
+			'nvim-neo-tree/neo-tree.nvim',
+			branch = 'v3.x',
+			dependencies = {
+				'nvim-lua/plenary.nvim',
+				{ 'nvim-tree/nvim-web-devicons', lazy = true },
+				'MunifTanjim/nui.nvim',
+			},
+			config = function()
+				require('vimrc.plugins.neotree')
+			end,
+		},
+		{
+			'nvim-treesitter/nvim-treesitter',
+			build = vim.cmd.TSUpdate,
+			config = function()
+				require('vimrc.plugins.nvim-treesitter')
+			end,
+		},
+		{
+			'williamboman/mason.nvim',
+			build = vim.cmd.MasonUpdate,
+			config = function()
+				require('mason').setup({
+					ui = { border = 'single' },
+				})
+			end,
+		},
+		{
+			'williamboman/mason-lspconfig.nvim',
+			dependencies = { 'williamboman/mason.nvim' },
+			config = function()
+				require('mason-lspconfig').setup({
+					ensure_installed = require('vimrc.plugins.lspconfig').SERVER_LIST,
+					automatic_installation = true,
+				})
+			end,
+		},
+		{
+			'neovim/nvim-lspconfig',
+			dependencies = { 'williamboman/mason.nvim', 'williamboman/mason-lspconfig.nvim' },
+			config = function()
+				require('vimrc.plugins.lspconfig').setup()
+			end,
+		},
+		{
+			'jose-elias-alvarez/typescript.nvim',
+			dependencies = { 'neovim/nvim-lspconfig' },
+			ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
+			config = function()
+				require('typescript').setup({
+					go_to_source_definition = { fallback = true },
+					server = {
+						root_dir = require('lspconfig').util.root_pattern(
+							'package.json',
+							'package-lock.json',
+							'tsconfig.json'
+						),
+						single_file_support = false,
+					},
+				})
+			end,
+		},
+		{
+			'simrat39/rust-tools.nvim',
+			dependencies = { 'neovim/nvim-lspconfig' },
+			after = { 'nvim-lspconfig' },
+			ft = { 'rust' },
+			config = function()
+				local rust_tools = require('rust-tools')
 
-					local keymap = require('vimrc.utils.keymapping')
-
-					hop.setup({ keys = 'etovxqpdygfblzhckisuran' })
-					keymap.nvnoremap('<C-f>', hop.hint_words)
-					keymap.nvnoremap('f', function()
-						hop.hint_char1({
-							direction = directions.AFTER_CURSOR,
-							current_line_only = true,
-						})
-					end)
-					keymap.nvnoremap('F', function()
-						hop.hint_char1({
-							direction = directions.BEFORE_CURSOR,
-							current_line_only = true,
-						})
-					end)
-					keymap.nvnoremap('t', function()
-						hop.hint_char1({
-							direction = directions.AFTER_CURSOR,
-							current_line_only = true,
-							hint_offset = -1,
-						})
-					end)
-					keymap.nvnoremap('T', function()
-						hop.hint_char1({
-							direction = directions.BEFORE_CURSOR,
-							current_line_only = true,
-							hint_offset = 1,
-						})
-					end)
-				end,
-			})
-			use({
-				'francoiscabrol/ranger.vim',
-				event = { 'CursorHold', 'CursorHoldI' },
-				requires = 'rbgrouleff/bclose.vim',
-				config = function()
-					local keymap = require('vimrc.utils.keymapping')
-
-					keymap.nnoremap('<leader>rr', vim.cmd.Ranger, { desc = 'Open ranger file browser' })
-				end,
-			})
-			use({
-				'folke/which-key.nvim',
-				config = function()
-					require('which-key').setup({
-						plugins = {
-							marks = true,
-							registers = true,
-							spelling = { enabled = false, suggestions = 20 },
+				rust_tools.setup({
+					tools = {
+						inlay_hints = {
+							auto = true,
+							only_current_line = true,
 						},
-					})
-				end,
-			})
-			use({
-				'kylechui/nvim-surround',
-				event = 'InsertEnter',
-				tag = '*',
-				config = function()
-					require('nvim-surround').setup({})
-				end,
-			})
-			use({
-				'windwp/nvim-autopairs',
-				event = 'InsertEnter',
-				config = function()
-					require('nvim-autopairs').setup({ check_ts = true })
+					},
+					server = {
+						on_attach = function(_client, buffer_n)
+							local keymap = require('vimrc.utils.keymapping')
 
-					local ok, cmp = pcall(require, 'cmp')
-					if ok then
-						local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-						cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
-					end
-				end,
-			})
-			use({
-				'windwp/nvim-ts-autotag',
-				event = 'InsertEnter',
-				config = function()
-					require('nvim-ts-autotag').setup({
-						filetypes = {
-							'html',
-							'javascript',
-							'javascript.tsx',
-							'typescript',
-							'typescript.tsx',
-							'javascriptreact',
-							'typescriptreact',
-							'markdown',
+							keymap.nnoremap(
+								'<leader>cA',
+								rust_tools.code_action_group.code_action_group,
+								{ buffer = buffer_n, desc = 'Open rust tools code actions pane' }
+							)
+						end,
+					},
+				})
+			end,
+		},
+		{
+			'folke/trouble.nvim',
+			event = 'VeryLazy',
+			dependencies = {
+				{ 'nvim-tree/nvim-web-devicons', lazy = true },
+			},
+			config = function()
+				require('trouble').setup({
+					fold_open = 'v',
+					fold_closed = '>',
+					indent_lines = true,
+					signs = { error = 'E', warning = 'W', hint = 'H', information = 'I' },
+				})
+
+				local keymap = require('vimrc.utils.keymapping')
+
+				keymap.nnoremap('<leader>xx', vim.cmd.TroubleToggle, { desc = 'Toggle trouble panel' })
+				keymap.nnoremap('<leader>xw', function()
+					vim.cmd.TroubleToggle('workspace_diagnostics')
+				end, { desc = 'Toggle trouble workspace diagnostics' })
+				keymap.nnoremap('<leader>xd', function()
+					vim.cmd.TroubleToggle('document_diagnostics')
+				end, { desc = 'Toggle trouble document diagnostics' })
+				keymap.nnoremap('<leader>xq', function()
+					vim.cmd.TroubleToggle('quickfix')
+				end, { desc = 'Toggle trouble quick fix panel' })
+				keymap.nnoremap('<leader>xl', function()
+					vim.cmd.TroubleToggle('loclist')
+				end, { desc = 'Toggle trouble loclist panel' })
+			end,
+		},
+		{ 'folke/neodev.nvim', ft = 'lua' },
+		{
+			'ray-x/go.nvim',
+			dependencies = { 'neovim/nvim-lspconfig', 'nvim-treesitter/nvim-treesitter' },
+			after = { 'nvim-lspconfig' },
+			ft = { 'go', 'gomod', 'godoc', 'gotexttmpl', 'gohtmltmpl' },
+			config = function()
+				local go = require('go')
+				local go_lsp_config = require('go.lsp').config()
+				local lspconfig = require('lspconfig')
+
+				go.setup({
+					lsp_cfg = false,
+					max_line_len = 100,
+					lsp_inlay_hints = { enable = false },
+					trouble = true,
+				})
+				vim.tbl_deep_extend('force', go_lsp_config, {
+					settings = {
+						gopls = {
+							analyses = { undparams = true },
+							staticcheck = true,
 						},
-					})
-				end,
-			})
-			use({
-				'terrortylor/nvim-comment',
-				event = { 'VimEnter', 'WinEnter', 'BufWinEnter' },
-				config = function()
-					require('nvim_comment').setup({
-						marker_padding = true,
-						comment_empty = false,
-						create_mappings = true,
-						line_mapping = '<leader>/',
-						operator_mapping = '<leader>/',
-					})
-				end,
-			})
-			-- Git
-			use({
-				'tpope/vim-fugitive',
-				event = { 'VimEnter', 'WinEnter', 'BufWinEnter' },
-				config = function()
-					require('vimrc.plugins.git-fugitive')
-				end,
-			})
-			use({
-				'sindrets/diffview.nvim',
-				requires = {
-					'nvim-lua/plenary.nvim',
-					{ 'nvim-tree/nvim-web-devicons', opt = true },
+					},
+				})
+				lspconfig.gopls.setup(go_lsp_config)
+			end,
+		},
+		{
+			'jose-elias-alvarez/null-ls.nvim',
+			dependencies = 'nvim-lua/plenary.nvim',
+			config = function()
+				require('vimrc.plugins.null-ls')
+			end,
+		},
+		{
+			'hrsh7th/nvim-cmp',
+			dependencies = {
+				'hrsh7th/cmp-nvim-lsp',
+				'hrsh7th/cmp-buffer',
+				'hrsh7th/cmp-path',
+				'hrsh7th/cmp-cmdline',
+				{
+					'L3MON4D3/LuaSnip',
+					version = 'v1.*',
+					build = 'make install_jsregexp',
+					dependencies = { 'saadparwaiz1/cmp_luasnip' },
 				},
-				config = function()
-					vim.cmd.packadd('nvim-web-devicons')
-					require('vimrc.plugins.diffview')
-				end,
-				disable = true,
-			})
-			use({
-				'lewis6991/gitsigns.nvim',
-				requires = 'nvim-lua/plenary.nvim',
-				config = function()
-					require('vimrc.plugins.gitsigns')
-				end,
-			})
-			-- Telescope
-			use({
-				'nvim-telescope/telescope.nvim',
-				requires = {
-					'nvim-lua/popup.nvim',
-					'nvim-lua/plenary.nvim',
-					'sharkdp/fd',
-					'BurntSushi/ripgrep',
-				},
-				config = function()
-					require('vimrc.plugins.telescope')
-				end,
-			})
-			use({
-				'nvim-telescope/telescope-fzf-native.nvim',
-				after = 'telescope.nvim',
-				requires = 'nvim-telescope/telescope.nvim',
-				run = 'make',
-				config = function()
-					require('telescope').load_extension('fzf')
-				end,
-			})
+				'hrsh7th/cmp-calc',
+				'f3fora/cmp-spell',
+				'onsails/lspkind-nvim',
+			},
+			config = function()
+				require('vimrc.plugins.cmp')
+			end,
+		},
+		{
+			'phaazon/hop.nvim',
+			event = { 'FocusGained', 'BufEnter' },
+			config = function()
+				local hop = require('hop')
+				local directions = require('hop.hint').HintDirection
 
-			-- Sync packer if needed (must be after all config has been set)
-			if bootstrap_needed then
-				require('packer').sync()
-			end
-		end,
-		config = { display = { open_fn = require('packer.util').float } },
+				local keymap = require('vimrc.utils.keymapping')
+
+				hop.setup({ keys = 'etovxqpdygfblzhckisuran' })
+				keymap.nvnoremap('<C-f>', hop.hint_words)
+				keymap.nvnoremap('f', function()
+					hop.hint_char1({
+						direction = directions.AFTER_CURSOR,
+						current_line_only = true,
+					})
+				end)
+				keymap.nvnoremap('F', function()
+					hop.hint_char1({
+						direction = directions.BEFORE_CURSOR,
+						current_line_only = true,
+					})
+				end)
+				keymap.nvnoremap('t', function()
+					hop.hint_char1({
+						direction = directions.AFTER_CURSOR,
+						current_line_only = true,
+						hint_offset = -1,
+					})
+				end)
+				keymap.nvnoremap('T', function()
+					hop.hint_char1({
+						direction = directions.BEFORE_CURSOR,
+						current_line_only = true,
+						hint_offset = 1,
+					})
+				end)
+			end,
+		},
+		{
+			'francoiscabrol/ranger.vim',
+			events = 'VeryLazy',
+			dependencies = 'rbgrouleff/bclose.vim',
+			config = function()
+				local keymap = require('vimrc.utils.keymapping')
+
+				keymap.nnoremap('<leader>rr', vim.cmd.Ranger, { desc = 'Open ranger file browser' })
+			end,
+		},
+		{
+			'folke/which-key.nvim',
+			config = function()
+				require('which-key').setup({
+					plugins = {
+						marks = true,
+						registers = true,
+						spelling = { enabled = false, suggestions = 20 },
+					},
+				})
+			end,
+		},
+		{
+			'kylechui/nvim-surround',
+			event = 'InsertEnter',
+			version = '*',
+			config = function()
+				require('nvim-surround').setup({})
+			end,
+		},
+		{
+			'windwp/nvim-autopairs',
+			event = 'InsertEnter',
+			config = function()
+				require('nvim-autopairs').setup({ check_ts = true })
+
+				local ok, cmp = pcall(require, 'cmp')
+				if ok then
+					local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+					cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+				end
+			end,
+		},
+		{
+			'windwp/nvim-ts-autotag',
+			event = 'InsertEnter',
+			config = function()
+				require('nvim-ts-autotag').setup({
+					filetypes = {
+						'html',
+						'javascript',
+						'javascript.tsx',
+						'typescript',
+						'typescript.tsx',
+						'javascriptreact',
+						'typescriptreact',
+						'markdown',
+					},
+				})
+			end,
+		},
+		{
+			'terrortylor/nvim-comment',
+			event = 'VeryLazy',
+			config = function()
+				require('nvim_comment').setup({
+					marker_padding = true,
+					comment_empty = false,
+					create_mappings = true,
+					line_mapping = '<leader>/',
+					operator_mapping = '<leader>/',
+				})
+			end,
+		},
+		{
+			'tpope/vim-fugitive',
+			event = 'VeryLazy',
+			config = function()
+				require('vimrc.plugins.git-fugitive')
+			end,
+		},
+		{
+			'sindrets/diffview.nvim',
+			event = 'VeryLazy',
+			dependencies = {
+				'nvim-lua/plenary.nvim',
+				{ 'nvim-tree/nvim-web-devicons', lazy = true },
+			},
+			config = function()
+				vim.cmd.packadd('nvim-web-devicons')
+				require('vimrc.plugins.diffview')
+			end,
+			enabled = false,
+		},
+		{
+			'lewis6991/gitsigns.nvim',
+			dependencies = 'nvim-lua/plenary.nvim',
+			config = function()
+				require('vimrc.plugins.gitsigns')
+			end,
+		},
+		{
+			'nvim-telescope/telescope.nvim',
+			event = 'VeryLazy',
+			dependencies = {
+				'nvim-lua/popup.nvim',
+				'nvim-lua/plenary.nvim',
+				'sharkdp/fd',
+				'BurntSushi/ripgrep',
+			},
+			config = function()
+				require('vimrc.plugins.telescope')
+			end,
+		},
+		{
+			'nvim-telescope/telescope-fzf-native.nvim',
+			dependencies = 'nvim-telescope/telescope.nvim',
+			build = 'make',
+			config = function()
+				require('telescope').load_extension('fzf')
+			end,
+		},
 	})
 end
 

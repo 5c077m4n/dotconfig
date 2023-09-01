@@ -49,19 +49,6 @@ create_autocmd({ 'WinLeave' }, {
 	desc = 'Remove highlight cursor line when exiting buffer',
 })
 
-local packer_compile_on_config_change_id = create_augroup('packer_compile_on_config_change', { clear = true })
-create_autocmd({ 'BufWritePost' }, {
-	group = packer_compile_on_config_change_id,
-	pattern = '*/vimrc/plugins/*.lua',
-	callback = function(event)
-		vim.notify('"' .. event.file .. '" has changed, so recompiling...', vim.log.levels.INFO, { title = 'VIMRC' })
-
-		require('packer').compile()
-		vim.loader.reset()
-	end,
-	desc = 'Packer compile on plugin config change',
-})
-
 local lsp_attach_id = create_augroup('lsp_attach', { clear = true })
 create_autocmd({ 'LspAttach' }, {
 	group = lsp_attach_id,

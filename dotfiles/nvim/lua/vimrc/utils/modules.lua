@@ -1,6 +1,4 @@
-local reload = require('plenary.reload')
 local Job = require('plenary.job')
-local packer = require('packer')
 
 local M = {}
 
@@ -15,14 +13,11 @@ local function unload_background_buffers()
 end
 
 function M.reload_vimrc()
-	unload_background_buffers()
-
-	reload.reload_module('vimrc')
 	vim.cmd.source(vim.env.MYVIMRC)
-
-	packer.compile()
 	vim.loader.reset()
 	vim.cmd.LspRestart()
+
+	unload_background_buffers()
 
 	vim.notify('Reload successful', vim.lsp.log_levels.INFO, { title = 'VIMRC' })
 end

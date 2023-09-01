@@ -1,5 +1,3 @@
-local packer = require('packer')
-
 local keymap = require('vimrc.utils.keymapping')
 local module_utils = require('vimrc.utils.modules')
 local signals = require('vimrc.utils.signals')
@@ -7,7 +5,9 @@ local signals = require('vimrc.utils.signals')
 local create_command = vim.api.nvim_create_user_command
 
 keymap.nnoremap('<leader>0', module_utils.update_vimrc, { desc = 'Git pull latest vimrc' })
-keymap.nnoremap('<leader>1', packer.sync, { desc = 'Packer sync' })
+keymap.nnoremap('<leader>1', function()
+	require('lazy').sync()
+end, { desc = 'Reload the vimrc config' })
 keymap.nnoremap('<leader>2', module_utils.reload_vimrc, { desc = 'Reload the vimrc config' })
 keymap.nnoremap('<leader>3', signals.send_usr1_to_all_nvim, { desc = 'Reload all NVIM instances' })
 
