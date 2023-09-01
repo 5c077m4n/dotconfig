@@ -1,5 +1,6 @@
 local M = {}
 
+--- @return boolean
 local function bootstrap()
 	local fn = vim.fn
 	local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -55,9 +56,7 @@ function M.setup()
 							show_label = true,
 							use_dither = true,
 						},
-						events = {
-							update_on_nvim_resize = true,
-						},
+						events = { update_on_nvim_resize = true },
 					})
 				end,
 			})
@@ -132,14 +131,31 @@ function M.setup()
 			})
 			-- LSP
 			use({
-				'neovim/nvim-lspconfig',
+				'williamboman/mason.nvim',
+				run = function()
+					vim.cmd.MasonUpdate()
+				end,
 				config = function()
-					require('vimrc.plugins.lspconfig')
+					require('mason').setup({ border = 'single' })
 				end,
 			})
 			use({
 				'williamboman/mason-lspconfig.nvim',
-				requires = 'williamboman/mason.nvim',
+				config = function()
+					require('mason-lspconfig').setup({
+						ensure_installed = require('vimrc.plugins.lspconfig').SERVER_LIST,
+						automatic_installation = true,
+					})
+				end,
+				requires = 'neovim/nvim-lspconfig',
+				after = 'mason.nvim',
+			})
+			use({
+				'neovim/nvim-lspconfig',
+				config = function()
+					require('vimrc.plugins.lspconfig').setup()
+				end,
+				after = { 'mason.nvim', 'mason-lspconfig.nvim' },
 			})
 			use({
 				'folke/trouble.nvim',
@@ -372,7 +388,11 @@ function M.setup()
 					require('vimrc.plugins.telescope')
 				end,
 			})
-			use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
+			use({
+				'nvim-telescope/telescope-fzf-native.nvim',
+				requires = 'nvim-telescope/telescope.nvim',
+				run = 'make',
+			})
 			-- Session
 			use({
 				'folke/persistence.nvim',
@@ -395,8 +415,16 @@ function M.setup()
 				end,
 			})
 			-- Debugging
-			use({ 'nvim-telescope/telescope-dap.nvim', disable = true })
-			use({ 'mfussenegger/nvim-dap', ft = { 'javascript', 'lua', 'rust' }, disable = true })
+			use({
+				'nvim-telescope/telescope-dap.nvim',
+				requires = 'nvim-telescope/telescope.nvim',
+				disable = true,
+			})
+			use({
+				'mfussenegger/nvim-dap',
+				ft = { 'javascript', 'lua', 'rust' },
+				disable = true,
+			})
 			use({
 				'Pocco81/DAPInstall.nvim',
 				requires = 'mfussenegger/nvim-dap',
