@@ -3,6 +3,14 @@ local utils = require('vimrc.utils')
 local create_augroup = vim.api.nvim_create_augroup
 local create_autocmd = vim.api.nvim_create_autocmd
 
+local autoread_on_buffer_change_id = create_augroup('autoread_on_buffer_change', { clear = true })
+create_autocmd({ 'FocusGained', 'BufEnter' }, {
+	group = autoread_on_buffer_change_id,
+	pattern = { '*' },
+	command = 'checktime',
+	desc = 'Re-read file when re-entering it',
+})
+
 local last_read_point_on_file_open_id = create_augroup('last_read_point_on_file_open', { clear = true })
 create_autocmd({ 'BufReadPost' }, {
 	group = last_read_point_on_file_open_id,
