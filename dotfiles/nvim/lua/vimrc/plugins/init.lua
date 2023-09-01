@@ -144,7 +144,7 @@ function M.setup()
 			end,
 		},
 		{
-			'jose-elias-alvarez/typescript.nvim',
+			'5c077m4n/typescript.nvim',
 			dependencies = { 'neovim/nvim-lspconfig' },
 			ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
 			config = function()
@@ -250,7 +250,7 @@ function M.setup()
 			end,
 		},
 		{
-			'jose-elias-alvarez/null-ls.nvim',
+			'5c077m4n/null-ls.nvim',
 			dependencies = 'nvim-lua/plenary.nvim',
 			config = function()
 				require('vimrc.plugins.null-ls')
