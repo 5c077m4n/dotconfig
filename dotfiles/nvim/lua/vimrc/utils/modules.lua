@@ -4,7 +4,19 @@ local packer = require('packer')
 
 local M = {}
 
+local function unload_background_buffers()
+	local buffer_list = vim.fn.getbufinfo()
+
+	for _, buffer in ipairs(buffer_list) do
+		if buffer.hidden == 1 and buffer.loaded == 1 and buffer.changed == 0 then
+			vim.cmd.bunload(buffer.bufnr)
+		end
+	end
+end
+
 function M.reload_vimrc()
+	unload_background_buffers()
+
 	reload.reload_module('vimrc')
 	vim.cmd.source(vim.env.MYVIMRC)
 
