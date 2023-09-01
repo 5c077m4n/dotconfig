@@ -134,10 +134,11 @@ local function setup_servers()
 		local opts = make_config()
 		if server == 'sumneko_lua' then
 			neodev.setup({})
-			opts['settings'] = {
+			opts.settings = {
 				Lua = {
 					completion = { callSnippet = 'Replace' },
 					telemetry = { enable = false },
+					checkThirdParty = false,
 				},
 			}
 		elseif server == 'tailwindcss' then
