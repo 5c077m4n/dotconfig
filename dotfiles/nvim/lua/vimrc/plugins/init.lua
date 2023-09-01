@@ -316,8 +316,6 @@ local function init_packer()
 				config = function()
 					local keymap = require('vimrc.utils.keymapping')
 
-					vim.g.ranger_map_keys = 0
-					vim.g.ranger_command_override = [[ranger --cmd "set show_hidden=true"]]
 					keymap.nnoremap('<leader>rr', vim.cmd.Ranger)
 				end,
 			})
