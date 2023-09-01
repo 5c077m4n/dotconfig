@@ -239,6 +239,14 @@ function M.setup()
 				requires = { 'neovim/nvim-lspconfig', 'nvim-treesitter/nvim-treesitter' },
 				config = function()
 					require('go').setup()
+
+					vim.api.nvim_create_autocmd('BufWritePre', {
+						group = vim.api.nvim_create_augroup('GoFormat', { clear = true }),
+						pattern = '*.go',
+						callback = function()
+							require('go.format').goimport()
+						end,
+					})
 				end,
 			})
 			use({
