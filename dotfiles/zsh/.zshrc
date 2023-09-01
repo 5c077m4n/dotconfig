@@ -141,8 +141,9 @@ fi
 # Kubectl zsh completion
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 
-source "${ZDOTDIR}/aliases"
-source "${HOME}/.cargo/env"
+[[ -f "${ZDOTDIR}/aliases" ]] && source "${ZDOTDIR}/aliases"
+[[ -f "${ZDOTDIR}/fzf-functions" ]] && source "${ZDOTDIR}/fzf-functions"
+[[ -f "${HOME}/.cargo/env" ]] && source "${HOME}/.cargo/env"
 [[ -f "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Leatherman
