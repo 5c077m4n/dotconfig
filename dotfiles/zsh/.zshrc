@@ -1,5 +1,5 @@
 if [[ ! -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ]]; then
-	zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh)
+	zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --keep
 fi
 source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
