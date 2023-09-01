@@ -75,10 +75,6 @@ create_autocmd({ 'LspAttach' }, {
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local buffer_num = args.buf
 
-		if vim.bo.filetype ~= 'lua' then
-			vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
-		end
-
 		lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, { border = 'single' })
 		lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, { border = 'single' })
 		---@diagnostic disable-next-line: unused-local, duplicate-set-field
