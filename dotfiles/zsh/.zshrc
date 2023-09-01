@@ -39,7 +39,7 @@ path=(
 export PATH
 
 # Like `PATH` but for the `cd` command
-export CDPATH=":$HOME/.local/share:$HOME/Programming/tl:$HOME/Programming/other"
+export CDPATH=":$HOME/.local/share:$HOME/repos"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
