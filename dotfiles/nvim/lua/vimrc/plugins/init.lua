@@ -80,6 +80,7 @@ function M.setup()
 						{ 'nvim-tree/nvim-web-devicons', opt = true },
 					},
 					config = function()
+						vim.cmd.packadd('nvim-web-devicons')
 						require('vimrc.plugins.lualine')
 					end,
 				}),
@@ -112,10 +113,11 @@ function M.setup()
 				branch = 'v2.x',
 				requires = {
 					'nvim-lua/plenary.nvim',
-					'kyazdani42/nvim-web-devicons',
+					{ 'nvim-tree/nvim-web-devicons', opt = true },
 					'MunifTanjim/nui.nvim',
 				},
 				config = function()
+					vim.cmd.packadd('nvim-web-devicons')
 					require('vimrc.plugins.neotree')
 				end,
 			})
@@ -161,12 +163,21 @@ function M.setup()
 			})
 			use({
 				'folke/trouble.nvim',
-				requires = 'kyazdani42/nvim-web-devicons',
+				requires = {
+					{ 'nvim-tree/nvim-web-devicons', opt = true },
+				},
 				config = function()
-					local trouble = require('trouble')
+					vim.cmd.packadd('nvim-web-devicons')
+
+					require('trouble').setup({
+						fold_open = 'v',
+						fold_closed = '>',
+						indent_lines = true,
+						signs = { error = 'E', warning = 'W', hint = 'H', information = 'I' },
+					})
+
 					local keymap = require('vimrc.utils.keymapping')
 
-					trouble.setup()
 					keymap.nnoremap('<leader>xx', vim.cmd.TroubleToggle, { desc = 'Toggle trouble panel' })
 					keymap.nnoremap('<leader>xw', function()
 						vim.cmd.TroubleToggle('workspace_diagnostics')
@@ -337,9 +348,10 @@ function M.setup()
 				'sindrets/diffview.nvim',
 				requires = {
 					'nvim-lua/plenary.nvim',
-					{ 'kyazdani42/nvim-web-devicons', opt = true },
+					{ 'nvim-tree/nvim-web-devicons', opt = true },
 				},
 				config = function()
+					vim.cmd.packadd('nvim-web-devicons')
 					require('vimrc.plugins.diffview')
 				end,
 				disable = true,
