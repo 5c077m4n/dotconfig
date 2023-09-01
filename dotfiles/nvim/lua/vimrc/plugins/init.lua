@@ -63,25 +63,6 @@ function M.setup()
 			})
 			-- Theme
 			use({
-				'akinsho/bufferline.nvim',
-				tag = 'v3.*',
-				requires = { 'nvim-tree/nvim-web-devicons' },
-				config = function()
-					require('bufferline').setup({
-						options = {
-							mode = 'tabs',
-							diagnostics = 'nvim_lsp',
-							diagnostics_update_in_insert = false,
-							show_buffer_close_icons = false,
-							show_close_icon = false,
-							separator_style = 'thick',
-							hover = { enabled = false },
-							sort_by = 'relative_directory',
-						},
-					})
-				end,
-			})
-			use({
 				'projekt0n/github-nvim-theme',
 				branch = '0.0.x',
 				config = function()
@@ -92,6 +73,17 @@ function M.setup()
 					})
 					vim.cmd.colorscheme('github_dark_default')
 				end,
+				use({
+					'nvim-lualine/lualine.nvim',
+					after = 'github-nvim-theme',
+					requires = {
+						'SmiteshP/nvim-navic',
+						{ 'nvim-tree/nvim-web-devicons', opt = true },
+					},
+					config = function()
+						require('vimrc.plugins.lualine')
+					end,
+				}),
 			})
 			use({
 				'norcalli/nvim-colorizer.lua',
@@ -105,62 +97,6 @@ function M.setup()
 				events = { 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' },
 				config = function()
 					require('todo-comments').setup()
-				end,
-			})
-			use({
-				'feline-nvim/feline.nvim',
-				requires = { 'kyazdani42/nvim-web-devicons' },
-				config = function()
-					local feline = require('feline')
-					feline.setup()
-				end,
-			})
-			use({
-				'SmiteshP/nvim-navic',
-				events = { 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' },
-				requires = { 'neovim/nvim-lspconfig', 'feline-nvim/feline.nvim' },
-				config = function()
-					local navic = require('nvim-navic')
-					local feline = require('feline')
-
-					navic.setup({ safe_output = true })
-
-					local winbar_components = {
-						active = {
-							{
-								{
-									provider = { name = 'file_info', opts = { type = 'unique' } },
-									short_provider = { name = 'file_info', opts = { type = 'unique-short' } },
-								},
-								{
-									provider = ' | ',
-									short_provider = '|',
-									enabled = navic.is_available,
-								},
-								{
-									provider = function()
-										return navic.get_location({ depth_limit = 5 })
-									end,
-									short_provider = function()
-										return navic.get_location({ depth_limit = 2 })
-									end,
-									enabled = navic.is_available,
-								},
-							},
-						},
-						inactive = {
-							{
-								{ provider = { name = 'file_info', opts = { type = 'short-path' } } },
-							},
-						},
-					}
-					feline.winbar.setup({
-						disable = {
-							filetypes = { '^neo-tree$', '^NvimTree$', '^packer$' },
-							buftypes = { '^terminal$', '^nofile$' },
-						},
-						components = winbar_components,
-					})
 				end,
 			})
 			use({
@@ -418,7 +354,6 @@ function M.setup()
 			})
 			use({
 				'lewis6991/gitsigns.nvim',
-				event = { 'VimEnter', 'WinEnter', 'BufWinEnter' },
 				requires = 'nvim-lua/plenary.nvim',
 				config = function()
 					require('vimrc.plugins.gitsigns')
