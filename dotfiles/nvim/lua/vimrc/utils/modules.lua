@@ -3,8 +3,8 @@ local utils = require('vimrc.utils')
 local M = {}
 
 function M.reload_vimrc()
-	require('plenary.reload').reload_module('vimrc')
 	require('packer').compile()
+	vim.loader.reset()
 
 	vim.notify('The vimrc has been reloaded successfully', vim.lsp.log_levels.INFO)
 end
