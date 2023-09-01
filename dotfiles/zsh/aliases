@@ -15,3 +15,9 @@ alias gupa='git pull --rebase --autostash origin "$(git branch --show-current)"'
 alias ggpf='git push --force origin "$(git branch --show-current)"'
 alias gprom='git pull --rebase --autostash origin master'
 alias grbim='git rebase --interactive master'
+
+update-hosts() {
+	local current_hosts="$(cat /etc/hosts)"
+	local anti_malware_hosts="$(curl https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts)"
+	echo "${current_hosts} \n${anti_malware_hosts}" | sed 's/^\s+\|\s+$//g' | sed '/^\s*#\|^$/d' | sort --unique | sudo tee /etc/hosts
+}
