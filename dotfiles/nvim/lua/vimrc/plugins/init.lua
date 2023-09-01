@@ -210,32 +210,6 @@ function M.setup()
 					require('vimrc.plugins.cmp')
 				end,
 			})
-			-- Terminal
-			use({
-				'akinsho/toggleterm.nvim',
-				tag = '*',
-				config = function()
-					require('toggleterm').setup({
-						size = function(term)
-							if term.direction == 'horizontal' then
-								---@diagnostic disable-next-line: undefined-field
-								return vim.o.lines * 0.4
-							elseif term.direction == 'vertical' then
-								---@diagnostic disable-next-line: undefined-field
-								return vim.o.columns * 0.4
-							end
-						end,
-						persist_size = false,
-						open_mapping = [[<F12>]],
-						hide_numbers = true,
-						insert_mappings = true,
-						terminal_mappings = true,
-						shade_terminals = true,
-						truncate_names = true,
-						enforce_regular_tabs = false,
-					})
-				end,
-			})
 			-- Code workflow
 			use({
 				'phaazon/hop.nvim',
