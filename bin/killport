@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+
+() {
+	local port="${1:?Please add a port number}"
+
+	for pid in $(sudo lsof -ti ":$port"); do
+		echo "$pid"
+		kill -9 $pid
+	done
+} "$@"
