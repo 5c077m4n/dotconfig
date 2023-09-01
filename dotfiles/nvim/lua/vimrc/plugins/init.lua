@@ -159,6 +159,7 @@ function M.setup()
 				'jose-elias-alvarez/typescript.nvim',
 				requires = { 'neovim/nvim-lspconfig' },
 				after = { 'nvim-lspconfig' },
+				ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
 				config = function()
 					require('typescript').setup({
 						go_to_source_definition = { fallback = true },
@@ -177,6 +178,7 @@ function M.setup()
 				'simrat39/rust-tools.nvim',
 				requires = { 'neovim/nvim-lspconfig' },
 				after = { 'nvim-lspconfig' },
+				ft = { 'rust' },
 				config = function()
 					local rust_tools = require('rust-tools')
 
@@ -238,6 +240,7 @@ function M.setup()
 				'ray-x/go.nvim',
 				requires = { 'neovim/nvim-lspconfig', 'nvim-treesitter/nvim-treesitter' },
 				after = { 'nvim-lspconfig' },
+				ft = { 'go', 'gomod', 'godoc', 'gotexttmpl', 'gohtmltmpl' },
 				config = function()
 					local go = require('go')
 					local go_lsp_config = require('go.lsp').config()
