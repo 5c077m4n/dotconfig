@@ -77,8 +77,8 @@ keymap.inoremap('<C-l>', function()
 end, { desc = 'Traverse one letter right' })
 
 -- Special paste
-keymap.vnoremap('p', [["_dp]], { desc = "Paste after without overriding the current register's content" })
-keymap.vnoremap('P', [["_dP]], { desc = "Paste before without overriding the current register's content" })
+keymap.vnoremap('p', [["_dP]], { desc = "Paste after without overriding the current register's content" })
+keymap.vnoremap('P', [["_dp]], { desc = "Paste before without overriding the current register's content" })
 
 keymap.nnoremap('<leader>cd', function()
 	local cwd = vim.fn.expand('%:p:h')
