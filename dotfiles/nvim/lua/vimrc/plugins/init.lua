@@ -175,7 +175,6 @@ local function init_packer()
 				config = function()
 					require('lspkind').init({ mode = 'text' }) -- Icons in autocomplete popup
 				end,
-				event = 'BufReadPost',
 			})
 			use('fladson/vim-kitty')
 			-- File tree
@@ -416,6 +415,23 @@ local function init_packer()
 				end,
 			})
 			use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
+			-- Session
+			use({
+				'folke/persistence.nvim',
+				event = { 'BufReadPre', 'FocusGained', 'BufEnter' },
+				module = 'persistence',
+				config = function()
+					local persistence = require('persistence')
+					local keymap = require('vimrc.utils.keymapping')
+
+					persistence.setup({
+						dir = vim.fn.expand(vim.fn.stdpath('state') .. '/sessions/'),
+						options = vim.opt.sessionoptions:get(),
+					})
+					keymap.nnoremap('<leader>sl', persistence.load, { desc = 'Load relevant session' })
+					keymap.nnoremap('<leader>ss', persistence.stop, { desc = 'Do not save session on vim exit' })
+				end,
+			})
 			-- Debugging
 			use({ 'nvim-telescope/telescope-dap.nvim', disable = true })
 			use({ 'mfussenegger/nvim-dap', ft = { 'javascript', 'lua', 'rust' }, disable = true })
