@@ -1,5 +1,3 @@
-local cmp_lsp = require('cmp_nvim_lsp')
-
 local SERVER_LIST = {
 	'taplo',
 	'pylsp',
@@ -11,13 +9,18 @@ local SERVER_LIST = {
 	'cssls',
 	'tailwindcss',
 	'marksman',
+	'tsserver',
 	'denols',
+	'rust_analyzer',
+	'sqlls',
 	'dockerls',
 	'zls',
 }
 
 ---@param options? table
 local function make_config(options)
+	local cmp_lsp = require('cmp_nvim_lsp')
+
 	local capabilities = cmp_lsp.default_capabilities()
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
 	capabilities.textDocument.foldingRange = {
@@ -65,6 +68,8 @@ return {
 			elseif server == 'denols' then
 				vim.g.markdown_fenced_languages = { 'ts=typescript' }
 				opts.root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc', 'deno.lock')
+			elseif server == 'tsserver' or server == 'rust_analyzer' then
+				return
 			end
 
 			lspconfig[server].setup(opts)
