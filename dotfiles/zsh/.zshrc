@@ -24,3 +24,8 @@ plug "${HOME}/repos/leatherman/source-me.sh"
 
 # Init starship
 eval "$(starship init zsh)"
+
+# De-duplicate path environment variables
+typeset -U path
+typeset -U fpath
+typeset -U cdpath
