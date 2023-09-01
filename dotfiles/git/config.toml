@@ -1,0 +1,10 @@
+[alias]
+     whoami = !git config user.name && git config user.email
+[core]
+    autocrlf = input
+[help]
+	autocorrect = true
+
+[include]
+	path = ~/.config/git/git-diff.toml
+	path = ~/.config/git/commit-sign.toml
