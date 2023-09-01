@@ -119,6 +119,7 @@ local function setup_servers()
 				package_pending = '>',
 				package_uninstalled = 'X',
 			},
+			border = 'single',
 		},
 	})
 	lsp_installer_config.setup({
