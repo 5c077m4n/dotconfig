@@ -120,6 +120,9 @@ export EDITOR="nvim"
 # Compilation flags
 #export ARCHFLAGS="-arch x86_64"
 
+# Hide commands staring with a space
+setopt histignorespace
+
 # Init starship
 eval "$(starship init zsh)"
 
