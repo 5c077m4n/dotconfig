@@ -5,6 +5,7 @@
 	local luacheck_config="${root_dir}/dotfiles/nvim/.luacheckrc"
 	local stylua_config="${root_dir}/dotfiles/nvim/.stylua.toml"
 
+	local file
 	for file in $(git diff --name-only --staged); do
 		local file_ext="${file##*.}"
 
