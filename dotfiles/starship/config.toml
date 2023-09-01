@@ -97,6 +97,7 @@ disabled = true
 disabled = true
 
 [sudo]
+symbol = "🦸 "
 disabled = false
 
 [swift]
