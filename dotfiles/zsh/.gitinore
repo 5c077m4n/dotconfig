@@ -1,0 +1,6 @@
+*
+!.gitignore
+
+!.zprofile
+!.zshenv
+!config/**
