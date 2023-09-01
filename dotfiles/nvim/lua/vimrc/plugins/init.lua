@@ -136,7 +136,9 @@ function M.setup()
 					vim.cmd.MasonUpdate()
 				end,
 				config = function()
-					require('mason').setup({ border = 'single' })
+					require('mason').setup({
+						ui = { border = 'single' },
+					})
 				end,
 			})
 			use({
