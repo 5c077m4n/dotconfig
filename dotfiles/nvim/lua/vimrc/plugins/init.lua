@@ -66,18 +66,18 @@ function M.setup()
 					})
 					vim.cmd.colorscheme('github_dark_colorblind')
 				end,
-				use({
-					'nvim-lualine/lualine.nvim',
-					after = 'github-nvim-theme',
-					requires = {
-						'SmiteshP/nvim-navic',
-						{ 'nvim-tree/nvim-web-devicons', opt = true },
-					},
-					config = function()
-						vim.cmd.packadd('nvim-web-devicons')
-						require('vimrc.plugins.lualine')
-					end,
-				}),
+			})
+			use({
+				'nvim-lualine/lualine.nvim',
+				after = 'github-nvim-theme',
+				requires = {
+					'SmiteshP/nvim-navic',
+					{ 'nvim-tree/nvim-web-devicons', opt = true },
+				},
+				config = function()
+					vim.cmd.packadd('nvim-web-devicons')
+					require('vimrc.plugins.lualine')
+				end,
 			})
 			use({
 				'norcalli/nvim-colorizer.lua',
@@ -404,68 +404,6 @@ function M.setup()
 				config = function()
 					require('telescope').load_extension('fzf')
 				end,
-			})
-			-- Session
-			use({
-				'folke/persistence.nvim',
-				event = { 'BufReadPre', 'FocusGained', 'BufEnter' },
-				module = 'persistence',
-				config = function()
-					local persistence = require('persistence')
-					local keymap = require('vimrc.utils.keymapping')
-
-					persistence.setup({
-						dir = vim.fn.expand(vim.fn.stdpath('state') .. '/sessions/'),
-						---@diagnostic disable-next-line: undefined-field
-						options = vim.opt.sessionoptions:get(),
-						pre_save = function()
-							local ok, neo_tree = pcall(require, 'neo-tree')
-							if ok then
-								neo_tree.close()
-							end
-						end,
-					})
-					keymap.nnoremap('<leader>sl', persistence.load, { desc = 'Load relevant session' })
-					keymap.nnoremap('<leader>ss', persistence.stop, { desc = 'Do not save session on vim exit' })
-				end,
-			})
-			-- Debugging
-			use({
-				'nvim-telescope/telescope-dap.nvim',
-				requires = 'nvim-telescope/telescope.nvim',
-				disable = true,
-			})
-			use({
-				'mfussenegger/nvim-dap',
-				ft = { 'javascript', 'lua', 'rust' },
-				disable = true,
-			})
-			use({
-				'Pocco81/DAPInstall.nvim',
-				requires = 'mfussenegger/nvim-dap',
-				ft = { 'javascript', 'lua', 'rust' },
-				config = function()
-					local dap_install = require('dap-install')
-
-					dap_install.setup()
-					dap_install.config('ccppr_lldb_dbg', {})
-				end,
-				disable = true,
-			})
-			use({
-				'rcarriga/nvim-dap-ui',
-				requires = 'mfussenegger/nvim-dap',
-				ft = { 'javascript', 'lua', 'rust' },
-				config = function()
-					require('dapui').setup()
-				end,
-				disable = true,
-			})
-			use({
-				'jbyuki/one-small-step-for-vimkind',
-				requires = 'mfussenegger/nvim-dap',
-				ft = { 'javascript', 'lua', 'rust' },
-				disable = true,
 			})
 
 			-- Sync packer if needed (must be after all config has been set)
