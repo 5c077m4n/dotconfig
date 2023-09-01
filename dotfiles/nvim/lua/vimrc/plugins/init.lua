@@ -260,6 +260,7 @@ local function init_packer()
 								return vim.o.columns * 0.4
 							end
 						end,
+						persist_size = false,
 						open_mapping = [[<F12>]],
 						hide_numbers = true,
 						insert_mappings = true,
