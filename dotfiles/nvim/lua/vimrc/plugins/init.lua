@@ -64,6 +64,7 @@ local function init_packer()
 						},
 					})
 				end,
+				disable = true,
 			})
 			use({
 				'nathom/filetype.nvim',
@@ -124,12 +125,53 @@ local function init_packer()
 				requires = { 'kyazdani42/nvim-web-devicons' },
 				config = function()
 					local feline = require('feline')
+					feline.setup()
+				end,
+			})
+			use({
+				'SmiteshP/nvim-navic',
+				requires = { 'neovim/nvim-lspconfig', 'feline-nvim/feline.nvim' },
+				config = function()
+					local navic = require('nvim-navic')
+					local feline = require('feline')
 
-					feline.setup({ preset = 'noicon' })
+					navic.setup({ safe_output = true })
+
+					local winbar_components = {
+						active = {
+							{
+								{
+									provider = { name = 'file_info', opts = { type = 'unique' } },
+									short_provider = { name = 'file_info', opts = { type = 'unique-short' } },
+								},
+								{
+									provider = ' | ',
+									short_provider = '|',
+									enabled = navic.is_available,
+								},
+								{
+									provider = function()
+										return navic.get_location({ depth_limit = 5 })
+									end,
+									short_provider = function()
+										return navic.get_location({ depth_limit = 2 })
+									end,
+									enabled = navic.is_available,
+								},
+							},
+						},
+						inactive = {
+							{
+								{ provider = { name = 'file_info', opts = { type = 'short-path' } } },
+							},
+						},
+					}
 					feline.winbar.setup({
 						disable = {
-							filetypes = { [[^neo-tree$]] },
+							filetypes = { '^neo-tree$', '^NvimTree$', '^packer$' },
+							buftypes = { '^terminal$', '^nofile$' },
 						},
+						components = winbar_components,
 					})
 				end,
 			})
