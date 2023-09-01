@@ -40,7 +40,6 @@ gbdefault () {
 	echo "master"
 }
 alias gbcurrent='git branch --show-current'
-alias gsync='git fetch --all --prune && git pull origin "$(gbcurrent)" --all --rebase --autostash'
 alias gupa='git pull --rebase --autostash origin "$(gbcurrent)"'
 alias ggpf='git push --force origin "$(gbcurrent)"'
 alias gprom='git pull --rebase --autostash --stat origin "$(gbdefault)"'
