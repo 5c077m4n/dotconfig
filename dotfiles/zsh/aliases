@@ -40,3 +40,9 @@ alias ctw='cargo test --workspace'
 alias cc='cargo clean'
 alias cr='cargo run'
 alias log_cr='RUST_LOG=debug cargo run'
+alias cb='cargo build'
+alias cu='cargo update'
+
+# Terraform
+alias t='terraform'
+alias ta='terraform apply'
