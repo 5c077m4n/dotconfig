@@ -5,5 +5,5 @@ if [[ -x "$(command -v kubectl)" ]]; then
 	source <(kubectl completion zsh)
 fi
 
-path+=("${HOME}/.local/bin")
+path+=("${HOME}/.local/bin" "${GOBIN}")
 cdpath+=("${HOME}/repos")
