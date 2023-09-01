@@ -17,7 +17,7 @@ user_pref("privacy.cpd.cookies", false); // 2812 optional: default false arkenfo
 
 /* override-recipe: desktop: alter new window max sizes **/
 user_pref("privacy.window.maxInnerWidth", 4502); // 4502 [default 1600 in user.js v95]
-user_pref("privacy.window.maxInnerHeight", 4502);  // 4502 [default 900 in user.js v95]
+user_pref("privacy.window.maxInnerHeight", 4502); // 4502 [default 900 in user.js v95]
 
 /* override recipe: enable web conferencing: Google Meet | JitsiMeet | BigBlueButton | Zoom | Discord ***/
 // OPTIONAL
