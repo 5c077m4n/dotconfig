@@ -19,6 +19,10 @@
 	autocorrect = 50
 [push]
 	autoSetupRemote = true
+[pull]
+	rebase = true
+[fetch]
+	prune = true
 
 # Commit sign
 #[commit]
