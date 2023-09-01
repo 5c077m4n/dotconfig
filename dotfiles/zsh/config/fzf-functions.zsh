@@ -88,7 +88,7 @@ _fzf_complete_nr() {
 	)
 }
 # `npm run **<Tab>`
-_fzf_complete_npm () {
+_fzf_complete_npm() {
 	is_in_git_repo && [[ -f package.json ]] || return
 
 	local args="$*"
