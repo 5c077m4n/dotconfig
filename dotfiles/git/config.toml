@@ -1,9 +1,10 @@
 [alias]
 	sh = "!exec "
-	root = "!git rev-parse --show-toplevel"
 	iam = "!git config user.name && git config user.email"
-	wt = "!git worktree "
-	fh = "!git log --follow --all --patch -- \"$(fzf)\""
+	fh = "!git log --follow --all --patch -- \"$(git ls-files | fzf)\""
+	unstage = "!git reset HEAD -- \"$(git ls-files | fzf --multi --preview 'cat {}')\""
+	root = rev-parse --show-toplevel
+	aliases = config --get-regexp alias
 [core]
 	autocrlf = input
 [help]
