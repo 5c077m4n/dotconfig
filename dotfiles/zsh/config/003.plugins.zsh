@@ -1,4 +1,5 @@
 plugins=(fzf)
+[[ -n "${ITERM_SESSION_ID}" ]] && plugins+=(iterm2)
 
 () {
 	local plugins_custom=(
