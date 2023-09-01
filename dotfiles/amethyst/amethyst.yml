@@ -1,0 +1,57 @@
+---
+layouts:
+  - tall
+  - wide
+  - two-pane
+  - fullscreen
+
+mod1:
+  - option
+  - shift
+mod2:
+  - option
+  - shift
+  - control
+
+cycle-layout:
+  mod: mod1
+  key: space
+shrink-main:
+  mod: mod1
+  key: h
+expand-main:
+  mod: mod1
+  key: l
+focus-cw:
+  mod: mod1
+  key: j
+focus-ccw:
+  mod: mod1
+  key: k
+swap-cw:
+  mod: mod2
+  key: j
+swap-ccw:
+  mod: mod2
+  key: k
+focus-main:
+  mod: mod1
+  key: enter
+focus-screen-cw:
+  mod: mod1
+  key: n
+focus-screen-ccw:
+  mod: mod1
+  key: p
+swap-screen-cw:
+  mod: mod2
+  key: n
+swap-screen-ccw:
+  mod: mod2
+  key: p
+
+window-margins: true
+smart-window-margins: true
+window-margin-size: 10
+
+restore-layouts-on-launch: true
