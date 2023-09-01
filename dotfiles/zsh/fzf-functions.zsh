@@ -59,3 +59,14 @@ _fzf_complete_gco() {
 			git branch --all --sort=-committerdate --format='%(refname:short)'
 		)
 }
+# `nr **<Tab>`
+_fzf_complete_nr() {
+	is_in_git_repo && [[ -f package.json ]] || return
+
+	__fzf_down \
+		--preview "cat package.json | jq -r '.scripts.\"{}\"' | bat --force-colorization --style='plain' --language='bash'" \
+		--preview-window 'top:25%' \
+		-- "$@" < <(
+			cat package.json | jq -r ".scripts | keys | .[]"
+		)
+}
