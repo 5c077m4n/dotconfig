@@ -1,141 +1,161 @@
-[aws]
-format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
+"$schema" = 'https://starship.rs/config-schema.json'
 
-[cmake]
-format = '\[[$symbol($version)]($style)\]'
+[character]
+success_symbol = "[>](bold green)"
+error_symbol = "[x](bold red)"
+vicmd_symbol = "[<](bold green)"
 
-[cmd_duration]
-format = '\[[⏱ $duration ]($style)\]'
+[status]
+symbol = "X"
+success_symbol = "V"
+not_executable_symbol = "NOEXEC"
+not_found_symbol = "?"
+sigint_symbol = "SIGINT"
+signal_symbol = "SIG"
+format = "[$status]($style) "
+pipestatus = true
+pipestatus_separator = "| "
+pipestatus_format = "[$pipestatus]($style)"
+disabled = false
 
-[cobol]
-format = '\[[$symbol($version)]($style)\]'
-
-[conda]
-format = '\[[$symbol$environment]($style)\]'
-
-[crystal]
-format = '\[[$symbol($version)]($style)\]'
-
-[dart]
-format = '\[[$symbol($version)]($style)\]'
-
-[deno]
-format = '\[[$symbol($version)]($style)\]'
-
-[docker_context]
-format = '\[[$symbol$context]($style)\]'
-
-[dotnet]
-format = '\[[$symbol($version)(🎯 $tfm)]($style)\]'
-
-[elixir]
-format = '\[[$symbol($version \(OTP $otp_version\))]($style)\]'
-
-[elm]
-format = '\[[$symbol($version)]($style)\]'
-
-[erlang]
-format = '\[[$symbol($version)]($style)\]'
-
-[gcloud]
-format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
-
-[git_branch]
-format = '\[[$symbol$branch]($style)\]'
+[git_commit]
+tag_symbol = " tag "
 
 [git_status]
-format = '([\[$all_status$ahead_behind\]]($style))'
+ahead = ">"
+behind = "<"
+diverged = "<>"
+renamed = "r"
+deleted = "x"
+
+[aws]
+symbol = "aws "
+
+[c]
+symbol = "C "
+
+[cobol]
+symbol = "cobol "
+
+[conda]
+symbol = "conda "
+
+[crystal]
+symbol = "cr "
+
+[cmake]
+symbol = "cmake "
+
+[daml]
+symbol = "daml "
+
+[dart]
+symbol = "dart "
+
+[deno]
+symbol = "deno "
+
+[dotnet]
+symbol = ".NET "
+
+[directory]
+read_only = " ro"
+
+[docker_context]
+symbol = "docker "
+
+[elixir]
+symbol = "exs "
+
+[elm]
+symbol = "elm "
+
+[git_branch]
+symbol = "git "
 
 [golang]
-format = '\[[$symbol($version)]($style)\]'
-
-[helm]
-format = '\[[$symbol($version)]($style)\]'
+symbol = "go "
 
 [hg_branch]
-format = '\[[$symbol$branch]($style)\]'
+symbol = "hg "
 
 [java]
-format = '\[[$symbol($version)]($style)\]'
+symbol = "java "
 
 [julia]
-format = '\[[$symbol($version)]($style)\]'
+symbol = "jl "
 
 [kotlin]
-format = '\[[$symbol($version)]($style)\]'
-
-[kubernetes]
-format = '\[[$symbol$context( \($namespace\))]($style)\]'
+symbol = "kt "
 
 [lua]
-format = '\[[$symbol($version)]($style)\]'
-
-[memory_usage]
-format = '\[$symbol[$ram( | $swap)]($style)\]'
-
-[nim]
-format = '\[[$symbol($version)]($style)\]'
-
-[nix_shell]
-format = '\[[$symbol$state( \($name\))]($style)\]'
+symbol = "lua "
 
 [nodejs]
-format = '\[[$symbol($version)]($style)\]'
+symbol = "nodejs "
+
+[memory_usage]
+symbol = "memory "
+
+[nim]
+symbol = "nim "
+
+[nix_shell]
+symbol = "nix "
 
 [ocaml]
-format = '\[[$symbol($version)(\($switch_indicator$switch_name\))]($style)\]'
-
-[openstack]
-format = '\[[$symbol$cloud(\($project\))]($style)\]'
+symbol = "ml "
 
 [package]
-format = '\[[$symbol$version]($style)\]'
+symbol = "pkg "
 
 [perl]
-format = '\[[$symbol($version)]($style)\]'
+symbol = "pl "
 
 [php]
-format = '\[[$symbol($version)]($style)\]'
+symbol = "php "
 
 [pulumi]
-format = '\[[$symbol$stack]($style)\]'
+symbol = "pulumi "
 
 [purescript]
-format = '\[[$symbol($version)]($style)\]'
+symbol = "purs "
 
 [python]
-format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
+symbol = "py "
 
-[red]
-format = '\[[$symbol($version)]($style)\]'
+[raku]
+symbol = "raku "
 
 [ruby]
-format = '\[[$symbol($version)]($style)\]'
+symbol = "rb "
 
 [rust]
-format = '\[[$symbol($version)]($style)\]'
+symbol = "rs "
 
 [scala]
-format = '\[[$symbol($version)]($style)\]'
+symbol = "scala "
+
+[spack]
+symbol = "spack "
+
+[sudo]
+symbol = "sudo "
 
 [swift]
-format = '\[[$symbol($version)]($style)\]'
+symbol = "swift "
 
-[terraform]
-format = '\[[$symbol$workspace]($style)\]'
+[kubernetes]
+symbol = "kube "
+format = '\[[$symbol$context( \($namespace\))]($style)\] '
+disabled = false
+
+[gcloud]
+symbol = "gcloud "
+
+[username]
+disabled = false
+show_always = true
 
 [time]
 disabled = false
-format = '\[[$time]($style)\]'
-
-[username]
-format = '\[[$user]($style)\]'
-
-[vagrant]
-format = '\[[$symbol($version)]($style)\]'
-
-[vlang]
-format = '\[[$symbol($version)]($style)\]'
-
-[zig]
-format = '\[[$symbol($version)]($style)\]'
