@@ -12,6 +12,17 @@ alias l='ls -lbF' # list, size, type
 alias ll='ls -la' # long, all
 alias la='ls -lbhHigUmuSa' # all list
 alias lx='ls -lbhHigUmuSa@' # all list and extended
+# Package manager update
+if (( $+commands[brew] )); then
+	alias pkgup='brew update && brew upgrade && brew upgrade --cask'
+elif (( $+commands[pacman] )); then
+	alias pkgup='sudo pacman -Syu'
+	alias pkgupy='sudo pacman -Syu --noconfirm'
+	alias pkgclean='sudo pacman -Scc'
+	alias pkgdblock='rm /var/lib/pacman/db.lock'
+elif (( $+commands[apk] )); then
+	alias pkgup='sudo apk update && sudo apk upgrade'
+fi
 
 # Neovim
 alias v='nvim'
