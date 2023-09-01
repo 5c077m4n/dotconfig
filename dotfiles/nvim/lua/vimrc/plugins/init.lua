@@ -26,7 +26,12 @@ function M.setup()
 			use('wbthomason/packer.nvim')
 			use('nvim-lua/plenary.nvim')
 			use({
-				'christoomey/vim-tmux-navigator',
+				'aserowy/tmux.nvim',
+				config = function()
+					require('tmux').setup({
+						resize = { enable_default_keybindings = false },
+					})
+				end,
 				cond = function()
 					return vim.env.TMUX ~= nil
 				end,
