@@ -24,3 +24,6 @@ packer_compiled.lua
 
 # Lua modules
 lua_modules/
+
+# Spelling
+spell/
