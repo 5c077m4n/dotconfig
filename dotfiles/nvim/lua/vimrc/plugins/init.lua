@@ -188,7 +188,7 @@ local function init_packer()
 			-- LSP
 			use({
 				'neovim/nvim-lspconfig',
-				run = ':TSUpdate',
+				run = vim.cmd.TSUpdate,
 				config = function()
 					require('vimrc.plugins.lspconfig')
 				end,
