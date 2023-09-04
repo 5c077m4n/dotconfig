@@ -112,14 +112,18 @@ function M.setup()
 		},
 		{
 			'nvim-treesitter/nvim-treesitter',
-			build = vim.cmd.TSUpdate,
+			build = function()
+				vim.cmd.TSUpdate()
+			end,
 			config = function()
 				require('vimrc.plugins.nvim-treesitter')
 			end,
 		},
 		{
 			'williamboman/mason.nvim',
-			build = vim.cmd.MasonUpdate,
+			build = function()
+				vim.cmd.MasonUpdate()
+			end,
 			config = function()
 				require('mason').setup({
 					ui = { border = 'single' },
