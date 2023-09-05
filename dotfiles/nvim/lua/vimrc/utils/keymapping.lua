@@ -1,5 +1,3 @@
-local M = {}
-
 ---@param mode string|table
 local function create_keymap_fn(mode)
 	mode = mode or 'n'
@@ -13,11 +11,11 @@ local function create_keymap_fn(mode)
 	end
 end
 
-M.nnoremap = create_keymap_fn('n')
-M.nvnoremap = create_keymap_fn({ 'n', 'v' })
-M.vnoremap = create_keymap_fn('v')
-M.inoremap = create_keymap_fn('i')
-M.tnoremap = create_keymap_fn('t')
-M.snoremap = create_keymap_fn('s')
-
-return M
+return {
+	nnoremap = create_keymap_fn('n'),
+	nvnoremap = create_keymap_fn({ 'n', 'v' }),
+	vnoremap = create_keymap_fn('v'),
+	inoremap = create_keymap_fn('i'),
+	tnoremap = create_keymap_fn('t'),
+	snoremap = create_keymap_fn('s'),
+}

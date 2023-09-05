@@ -1,6 +1,6 @@
 local telescope_builtin = require('telescope.builtin')
 
-local keymap = require('vimrc.utils.keymapping')
+local keymap = require('vimrc.utils').keymapping
 
 keymap.nnoremap('<leader>fls', function()
 	local opts = {}

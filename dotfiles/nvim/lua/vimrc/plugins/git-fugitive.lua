@@ -1,4 +1,6 @@
-local keymap = require('vimrc.utils.keymapping')
+local utils = require('vimrc.utils')
+
+local keymap = utils.keymapping
 
 -- Git mergetool
 keymap.nnoremap('<leader>gm', function()
