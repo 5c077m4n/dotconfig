@@ -1,5 +1,3 @@
-local Job = require('plenary.job')
-
 local M = {}
 
 local function unload_background_buffers()
@@ -23,18 +21,20 @@ function M.reload_vimrc()
 end
 
 function M.update_vimrc()
-	Job:new({
-		command = 'git',
-		args = { 'pull', '--force', 'origin', 'master' },
-		cwd = vim.fn.stdpath('config'),
-		on_exit = function(j, status_code)
-			if status_code == 0 then
-				vim.notify(j:result(), vim.log.levels.INFO, { title = 'VIMRC Update' })
-			else
-				vim.notify(j:result(), vim.log.levels.ERROR, { title = 'VIMRC Update' })
-			end
-		end,
-	}):sync()
+	require('plenary.job')
+		:new({
+			command = 'git',
+			args = { 'pull', '--rebase', '--autostash', 'origin', 'master' },
+			cwd = vim.fn.stdpath('config'),
+			on_exit = function(j, status_code)
+				if status_code == 0 then
+					vim.notify(j:result(), vim.log.levels.INFO, { title = 'VIMRC Update' })
+				else
+					vim.notify(j:result(), vim.log.levels.ERROR, { title = 'VIMRC Update' })
+				end
+			end,
+		})
+		:sync()
 end
 
 return M
