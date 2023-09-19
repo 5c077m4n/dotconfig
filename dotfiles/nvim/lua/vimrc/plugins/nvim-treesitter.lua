@@ -15,6 +15,8 @@ require('nvim-treesitter.configs').setup({
 		'lua',
 		'bash',
 		'vimdoc',
+		'git_config',
+		'ssh_config',
 	},
 	ignore_install = {},
 	highlight = {
