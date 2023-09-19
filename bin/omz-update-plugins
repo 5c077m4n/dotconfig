@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+() {
+	if (( $+ZSH_CUSTOM )); then
+		local plug_dir
+		for plug_dir in "${ZSH_CUSTOM}/plugins/"*; do
+			echo "Updating $plug_dir..."
+			git -C "$plug_dir" pull --autostash
+			echo "---"
+		done
+		echo "All done!"
+	fi
+}
