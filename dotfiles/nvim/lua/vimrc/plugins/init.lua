@@ -254,16 +254,22 @@ function M.setup()
 			'ray-x/go.nvim',
 			dependencies = { 'neovim/nvim-lspconfig', 'nvim-treesitter/nvim-treesitter' },
 			ft = { 'go', 'gomod', 'godoc', 'gotexttmpl', 'gohtmltmpl' },
+			event = { 'CmdlineEnter' },
+			build = function()
+				require('go.install').update_all()
+			end,
 			config = function()
 				local go = require('go')
 				local go_lsp_config = require('go.lsp').config()
 				local lspconfig = require('lspconfig')
 
 				go.setup({
+					disable_defaults = true,
 					lsp_cfg = false,
 					max_line_len = 100,
 					lsp_inlay_hints = { enable = false },
 					trouble = true,
+					lsp_keymaps = false,
 				})
 				vim.tbl_deep_extend('force', go_lsp_config, {
 					settings = {
