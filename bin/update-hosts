@@ -1,9 +1,49 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env node
 
-() {
-	local current_hosts="$(cat /etc/hosts)"
-	local anti_malware_hosts="$(curl https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts)"
-	local fakenews_gambling_hosts="$(curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts)"
+const { copyFile, readFile, writeFile } = require("node:fs/promises");
 
-	echo "${current_hosts} \n${anti_malware_hosts} \n${fakenews_gambling_hosts}" | sed 's/^\s+\|\s+$//g' | sed '/^\s*#\|^$/d' | sort --unique | sudo tee /etc/hosts
+const HOSTS_PATH = "/etc/hosts";
+
+function filterComments(/** @type {string} */ lines) {
+	return lines
+		.split("\n")
+		.map((l) => l.trim())
+		.filter((l) => !l.startsWith("#"));
 }
+async function getHosts(/** @type {string} */ url) {
+	const hostsFileResponse = await fetch(url);
+	const text = await hostsFileResponse.text();
+
+	return filterComments(text);
+}
+
+async function main() {
+	const localHostsFile = await readFile(HOSTS_PATH, { encoding: "utf8" });
+	const localHostsLines = filterComments(localHostsFile);
+
+	console.log("fetching anti malware hosts...");
+	const antiMalwareHosts = await getHosts(
+		"https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts",
+	);
+	console.log("fetching anti fake news hosts...");
+	const fakeNewsGamblingHosts = await getHosts(
+		"https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts",
+	);
+
+	const allHosts = new Set([
+		...localHostsLines,
+		...antiMalwareHosts,
+		...fakeNewsGamblingHosts,
+	]);
+	const allHostsText = Array.from(allHosts).join("\n");
+
+	await copyFile(HOSTS_PATH, `${HOSTS_PATH}.${Date.now()}`);
+	await writeFile(HOSTS_PATH, allHostsText);
+
+	console.log("All done!");
+}
+
+main().catch((e) => {
+	console.error(e);
+	process.exit(1);
+});
