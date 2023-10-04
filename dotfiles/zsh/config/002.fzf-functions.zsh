@@ -59,7 +59,7 @@ _fzf_complete_gco() {
 	is_in_git_repo || return
 
 	__fzf_down \
-		--preview 'git diff --stat --color=always origin/master {}' \
+		--preview "git diff --stat --color=always origin/$(gbdefault) {}" \
 		--preview-window 'top:75%' \
 		-- "$@" < <(
 		git fetch --all --prune --quiet
