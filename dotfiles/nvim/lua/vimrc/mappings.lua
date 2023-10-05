@@ -26,7 +26,9 @@ keymap.nnoremap('<leader>wv', vim.cmd.vsplit, { desc = 'New vertical split' })
 keymap.nnoremap('<leader>wh', vim.cmd.split, { desc = 'New horizontal split' })
 
 -- Tabs
-keymap.nnoremap('<leader>tn', vim.cmd.tabnew, { desc = 'New tab' })
+keymap.nnoremap('<leader>tn', function()
+	vim.cmd.tabnew('%')
+end, { desc = 'New tab in cwd' })
 keymap.nnoremap('<leader>tq', vim.cmd.tabclose, { desc = 'Close current tab' })
 keymap.nnoremap('<leader>tQ', vim.cmd.tabonly, { desc = 'Close all other tabs' })
 keymap.nnoremap('<leader>t]', vim.cmd.tabnext, { desc = 'Next tab' })
