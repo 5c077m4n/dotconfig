@@ -116,7 +116,7 @@ function M.setup()
 		},
 		{
 			'nvim-treesitter/nvim-treesitter',
-			events = { 'BufReadPre', 'BufNewFile' },
+			event = { 'BufReadPre', 'BufNewFile' },
 			build = function()
 				vim.cmd.TSUpdate()
 			end,
