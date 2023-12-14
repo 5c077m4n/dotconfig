@@ -49,12 +49,6 @@ keymap.nnoremap('V', 'v$', { desc = 'Select to line end' })
 keymap.nnoremap('S', 'v$hs', { desc = 'Switch to line end' })
 keymap.nnoremap('J', [[J^]], { desc = 'Join the next line and go to the first char' })
 
--- Jump to line start/end
-keymap.nnoremap('[[', '^', { desc = 'Jump to line start' })
-keymap.vnoremap('[[', '^', { desc = 'Jump to line start' })
-keymap.nnoremap(']]', '$', { desc = 'Jump to line end' })
-keymap.vnoremap(']]', '$', { desc = 'Jump to line end' })
-
 -- Move selection up/down
 keymap.vnoremap('<A-k>', [[:m '>-2<CR>gv=gv]], { desc = 'Move selection up' })
 keymap.nnoremap('<A-k>', [[:m .-2<CR>==]], { desc = 'Move selection up' })
