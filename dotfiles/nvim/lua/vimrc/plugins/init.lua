@@ -279,7 +279,7 @@ function M.setup()
 				end, { desc = "Toggle trouble loclist panel" })
 			end,
 		},
-		{ "folke/neodev.nvim", ft = "lua" },
+		{ "folke/neodev.nvim" },
 		{
 			"ray-x/go.nvim",
 			dependencies = { "neovim/nvim-lspconfig", "nvim-treesitter/nvim-treesitter" },
