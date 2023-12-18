@@ -95,11 +95,3 @@ keymap.nnoremap('<leader>dn', function()
 end, { desc = 'Disable diagnostics for current buffer' })
 keymap.nnoremap('<leader>dY', vim.diagnostic.enable, { desc = 'Enable diagnostics for all buffers' })
 keymap.nnoremap('<leader>dN', vim.diagnostic.disable, { desc = 'Disable diagnostics for all buffers' })
-
-if vim.g.vscode then
-	local vscode = require('vscode-neovim')
-
-	keymap.nnoremap('<leader>l', function()
-		vscode.action('editor.action.formatDocument')
-	end, { desc = 'Format page' })
-end
