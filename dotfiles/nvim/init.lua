@@ -1,1 +1,1 @@
-require('vimrc')
+require("vimrc")

@@ -1,12 +1,12 @@
-local vscode = require('vscode-neovim')
+local vscode = require("vscode-neovim")
 
 local g = vim.g
 local o = vim.opt
 
-g.mapleader = ' '
-g.maplocalleader = ' '
+g.mapleader = " "
+g.maplocalleader = " "
 
-o.undodir = vim.fn.stdpath('state') .. '/undo_dir/'
+o.undodir = vim.fn.stdpath("state") .. "/undo_dir/"
 o.undofile = true
 
 o.swapfile = false

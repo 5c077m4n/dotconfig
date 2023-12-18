@@ -1,7 +1,7 @@
-local reload_vimrc = require('vimrc.utils.modules').reload_vimrc
+local reload_vimrc = require("vimrc.utils.modules").reload_vimrc
 
 local uv, split, trim, system = vim.loop, vim.split, vim.trim, vim.fn.system
-local USR1_SIGNAL = 'sigusr1'
+local USR1_SIGNAL = "sigusr1"
 
 local function handle_usr1()
 	---@diagnostic disable-next-line: undefined-field
@@ -14,13 +14,13 @@ local function handle_usr1()
 end
 
 local function send_usr1_to_all_nvim()
-	local nvim_pids = split(trim(system({ 'pgrep', 'nvim' })), '\n')
+	local nvim_pids = split(trim(system({ "pgrep", "nvim" })), "\n")
 
 	for _, pid_str in ipairs(nvim_pids) do
 		local pid = tonumber(pid_str)
 
-		if type(pid) == 'number' then
-			vim.notify('Sending a reload signal to NVIM instance (PID ' .. pid .. ')')
+		if type(pid) == "number" then
+			vim.notify("Sending a reload signal to NVIM instance (PID " .. pid .. ")")
 			---@diagnostic disable-next-line: undefined-field
 			uv.kill(pid, USR1_SIGNAL)
 		end

@@ -1,10 +1,10 @@
-local null_ls = require('null-ls')
+local null_ls = require("null-ls")
 
 local eslint_d_config = {
 	condition = function(utils)
-		return utils.root_has_file({ 'package.json' })
+		return utils.root_has_file({ "package.json" })
 	end,
-	extra_args = { '--cache' },
+	extra_args = { "--cache" },
 }
 
 local sources = {
@@ -13,12 +13,12 @@ local sources = {
 	-- Lua
 	null_ls.builtins.formatting.stylua.with({
 		condition = function(utils)
-			return utils.root_has_file({ 'stylua.toml', '.stylua.toml' })
+			return utils.root_has_file({ "stylua.toml", ".stylua.toml" })
 		end,
 	}),
 	null_ls.builtins.diagnostics.luacheck.with({
 		condition = function(utils)
-			return utils.root_has_file({ '.luacheckrc' })
+			return utils.root_has_file({ ".luacheckrc" })
 		end,
 	}),
 	--null_ls.builtins.diagnostics.selene,
@@ -34,7 +34,7 @@ local sources = {
 	-- Deno
 	null_ls.builtins.formatting.deno_fmt.with({
 		condition = function(utils)
-			return utils.root_has_file({ 'deno.json', 'deno.jsonc', 'deno.lock' })
+			return utils.root_has_file({ "deno.json", "deno.jsonc", "deno.lock" })
 		end,
 	}),
 	-- CSS
@@ -44,15 +44,15 @@ local sources = {
 	null_ls.builtins.code_actions.shellcheck,
 	null_ls.builtins.formatting.shellharden,
 	null_ls.builtins.formatting.shfmt,
-	null_ls.builtins.formatting.beautysh.with({ extra_args = { '--tab' } }),
+	null_ls.builtins.formatting.beautysh.with({ extra_args = { "--tab" } }),
 	-- SQL
 	null_ls.builtins.formatting.sqlformat,
 	-- Rust
-	null_ls.builtins.formatting.rustfmt.with({ args = { '+nightly' } }),
+	null_ls.builtins.formatting.rustfmt.with({ args = { "+nightly" } }),
 	-- Zig
 	null_ls.builtins.formatting.zigfmt.with({
 		condition = function(utils)
-			return utils.root_has_file({ 'build.zig' })
+			return utils.root_has_file({ "build.zig" })
 		end,
 	}),
 	-- Go
@@ -65,8 +65,8 @@ local sources = {
 	null_ls.builtins.formatting.goimports_reviser,
 	null_ls.builtins.formatting.golines.with({
 		extra_args = {
-			'--max-len=100',
-			'--base-formatter=gofumpt',
+			"--max-len=100",
+			"--base-formatter=gofumpt",
 		},
 	}),
 	null_ls.builtins.code_actions.impl,
@@ -86,7 +86,7 @@ local sources = {
 }
 
 null_ls.setup({
-	diagnostics_format = '[#{c}] #{m} (#{s})',
+	diagnostics_format = "[#{c}] #{m} (#{s})",
 	sources = sources,
 	update_in_insert = false,
 	debounce = 200,
