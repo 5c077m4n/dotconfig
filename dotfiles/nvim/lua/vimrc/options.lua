@@ -27,7 +27,7 @@ o.incsearch = true
 o.history = 5000
 o.tabpagemax = 50
 o.tabstop = 4
----@diagnostic disable-next-line: undefined-field
+---@diagnostic disable-next-line: assign-type-mismatch
 o.shiftwidth = o.tabstop:get()
 o.autoindent = true
 o.smartindent = true
@@ -92,6 +92,7 @@ o.showmatch = true
 -- How many tenths of a second to blink when matching brackets
 o.mat = 2
 
+---@diagnostic disable-next-line: assign-type-mismatch
 o.undodir = vim.fn.stdpath("state") .. "/undo_dir/"
 o.undofile = true
 

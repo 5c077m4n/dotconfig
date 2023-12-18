@@ -56,8 +56,10 @@ end
 return {
 	SERVER_LIST = SERVER_LIST,
 	setup = function()
+		local neoconf = require("neoconf")
 		local lspconfig = require("lspconfig")
 
+		neoconf.setup({})
 		for _, server in ipairs(SERVER_LIST) do
 			local opts = make_config()
 
@@ -70,7 +72,7 @@ return {
 						telemetry = { enable = false },
 						workspace = {
 							checkThirdParty = false,
-							library = "${3rd}/luv/library",
+							library = { "${3rd}/luv/library" },
 						},
 						diagnostics = {
 							globals = { "vim", "string" },

@@ -2,17 +2,12 @@
 	"neodev": {
 		"library": {
 			"enabled": true,
-			"plugins": ["neoconf.nvim", "nvim-lspconfig"]
+			"plugins": ["nvim-lspconfig", "lsp"]
 		}
 	},
 	"neoconf": {
 		"plugins": {
-			"lua_ls": {
-				"enabled": true
-			}
+			"lua_ls": { "enabled": true }
 		}
-	},
-	"lspconfig": {
-		"sumneko_lua": {}
 	}
 }
