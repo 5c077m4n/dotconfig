@@ -27,6 +27,7 @@ o.incsearch = true
 o.history = 5000
 o.tabpagemax = 50
 o.tabstop = 4
+---@diagnostic disable-next-line: undefined-field
 o.shiftwidth = o.tabstop:get()
 o.autoindent = true
 o.smartindent = true
