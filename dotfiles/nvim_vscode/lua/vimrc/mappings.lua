@@ -24,8 +24,12 @@ nnoremap("<C-k>", "<C-w>k")
 nnoremap("<C-l>", "<C-w>l")
 --- Creating/removing
 nnoremap("<leader>wq", "<C-w>q", { desc = "Close split" })
-nnoremap("<leader>wv", vim.cmd.vsplit, { desc = "New vertical split" })
-nnoremap("<leader>wh", vim.cmd.split, { desc = "New horizontal split" })
+nnoremap("<leader>wv", function()
+	vscode.action("workbench.action.splitEditorRight")
+end, { desc = "New vertical split" })
+nnoremap("<leader>wh", function()
+	vscode.action("workbench.action.splitEditorDown")
+end, { desc = "New horizontal split" })
 
 -- Searching
 nnoremap("<leader>f#", function()
