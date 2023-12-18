@@ -2,6 +2,14 @@ local utils = require("vimrc.utils")
 
 local create_augroup = vim.api.nvim_create_augroup
 local create_autocmd = vim.api.nvim_create_autocmd
+local vim_log_levels = vim.log.levels
+
+local LOG_LEVELS = {
+	vim_log_levels.ERROR,
+	vim_log_levels.WARN,
+	vim_log_levels.INFO,
+	vim_log_levels.INFO, -- map both hint and info to info
+}
 
 local autoread_on_buffer_change_id = create_augroup("autoread_on_buffer_change", { clear = true })
 create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
@@ -69,15 +77,7 @@ create_autocmd({ "LspAttach" }, {
 			lsp.with(lsp.handlers.signature_help, { border = "single" })
 		---@diagnostic disable-next-line: duplicate-set-field
 		lsp.handlers["window/showMessage"] = function(_err, method, params, _client_id)
-			vim.notify(
-				method.message,
-				({
-					vim.log.levels.ERROR,
-					vim.log.levels.WARN,
-					vim.log.levels.INFO,
-					vim.log.levels.INFO, -- map both hint and info to info
-				})[params.type]
-			)
+			vim.notify(method.message, LOG_LEVELS[params.type])
 		end
 		if client.server_capabilities.documentSymbolProvider then
 			require("nvim-navic").attach(client, buffer_num)
