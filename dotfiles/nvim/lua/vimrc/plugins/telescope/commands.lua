@@ -19,7 +19,8 @@ keymap.nnoremap(
 	{ desc = "Search project for the word under the cursor" }
 )
 keymap.nnoremap("<leader>f:", telescope_builtin.commands, { desc = "Search commands" })
-keymap.nvnoremap("<leader>fr", telescope_builtin.registers, { desc = "Search registers" })
+keymap.nnoremap("<leader>fr", telescope_builtin.registers, { desc = "Search registers" })
+keymap.inoremap("<C-r>", telescope_builtin.registers, { desc = "Search registers" })
 keymap.nnoremap("<leader>fb", telescope_builtin.buffers, { desc = "Search buffers" })
 keymap.nnoremap("<leader>fm", telescope_builtin.marks, { desc = "Search bookmarks" })
 keymap.nnoremap("<leader>fh", telescope_builtin.help_tags, { desc = "Search vim helpdocs" })
