@@ -5,15 +5,15 @@ require("neo-tree").setup({
 	enable_git_status = true,
 	enable_diagnostics = true,
 	window = {
-		position = "left",
+		position = "right",
 		width = 40,
 		mappings = {
 			["<CR>"] = "open",
-			["l"] = "open",
-			["<c-h>"] = "open_split",
-			["<c-v>"] = "open_vsplit",
-			["<c-t>"] = "open_tabnew",
 			["h"] = "close_node",
+			["l"] = "open",
+			["H"] = "open_split",
+			["V"] = "open_vsplit",
+			["T"] = "open_tabnew",
 			["a"] = "add",
 			["A"] = "add_directory",
 			["<del>"] = "delete",
@@ -26,6 +26,11 @@ require("neo-tree").setup({
 			["vd"] = "move", -- takes text input for destination
 			["Q"] = "close_window",
 			["R"] = "refresh",
+			["i"] = "show_file_details",
+			["z"] = "close_all_nodes",
+			["Z"] = "expand_all_nodes",
+			["[h"] = "prev_git_modified",
+			["]h"] = "next_git_modified",
 		},
 	},
 	default_component_configs = {
@@ -46,12 +51,11 @@ require("neo-tree").setup({
 		},
 		follow_current_file = { enabled = true },
 		use_libuv_file_watcher = true,
-		hijack_netrw_behavior = "open_current",
 		window = {
 			mappings = {
 				["<bs>"] = "navigate_up",
 				["."] = "set_root",
-				["H"] = "toggle_hidden",
+				[">"] = "toggle_hidden",
 				["/"] = "fuzzy_finder",
 				["f"] = "filter_on_submit",
 				["<esc>"] = "clear_filter",
