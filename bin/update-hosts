@@ -40,7 +40,7 @@ async function main() {
 	await copyFile(HOSTS_PATH, `${HOSTS_PATH}.${Date.now()}`);
 	await writeFile(HOSTS_PATH, allHostsText);
 
-	console.log("All done!");
+	console.log(`All done! (added ${allHosts.size} hosts)`);
 }
 
 main().catch((e) => {
