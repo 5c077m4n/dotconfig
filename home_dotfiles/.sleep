@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/opt/homebrew/bin/blueutil -p 0
