@@ -216,7 +216,7 @@ brew bundle install --file "$HOME/repos/dotconfig/assets/macos/Brewfile"
 new_bash_path="$(which -a bash | grep brew)"
 allowed_shells_file="/etc/shells"
 if ! grep -q "^${new_bash_path}$" "$allowed_shells_file"; then
-    echo "$new_bash_path" | sudo tee -a "$allowed_shells_file"
+	echo "$new_bash_path" | sudo tee -a "$allowed_shells_file"
 fi
 unset new_bash_path
 unset allowed_shells_file
