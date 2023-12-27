@@ -17,4 +17,4 @@ elif (( $+commands[apt] )); then
 fi
 
 nvim --headless +"Lazy! sync" +qa
-if (( $+commands[rustup] )); then rustup upgrade; fi
+(( $+commands[rustup] )) && rustup upgrade
