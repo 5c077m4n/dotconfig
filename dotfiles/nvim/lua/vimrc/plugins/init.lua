@@ -60,11 +60,20 @@ function M.setup()
 			end,
 		},
 		{
+			"nvim-tree/nvim-web-devicons",
+			event = "VeryLazy",
+			config = function()
+				require("nvim-web-devicons").setup({
+					override_by_extension = {
+						fish = { icon = "󰈺", name = "Fish", color = "#89cff0" },
+					},
+				})
+			end,
+		},
+		{
 			"projekt0n/github-nvim-theme",
 			config = function()
-				require("github-theme").setup({
-					options = { dim_inactive = true },
-				})
+				require("github-theme").setup({ options = { dim_inactive = true } })
 				vim.cmd.colorscheme("github_dark_colorblind")
 			end,
 			priority = 1000,
@@ -75,7 +84,7 @@ function M.setup()
 			dependencies = {
 				"projekt0n/github-nvim-theme",
 				"SmiteshP/nvim-navic",
-				{ "nvim-tree/nvim-web-devicons", event = { "VeryLazy" } },
+				"nvim-tree/nvim-web-devicons",
 			},
 			config = function()
 				require("vimrc.plugins.lualine")
@@ -108,7 +117,7 @@ function M.setup()
 			branch = "v3.x",
 			dependencies = {
 				"nvim-lua/plenary.nvim",
-				{ "nvim-tree/nvim-web-devicons", lazy = true },
+				"nvim-tree/nvim-web-devicons",
 				"MunifTanjim/nui.nvim",
 			},
 			config = function()
@@ -248,9 +257,7 @@ function M.setup()
 		{
 			"folke/trouble.nvim",
 			event = "VeryLazy",
-			dependencies = {
-				{ "nvim-tree/nvim-web-devicons", lazy = true },
-			},
+			dependencies = { "nvim-tree/nvim-web-devicons" },
 			config = function()
 				require("trouble").setup({
 					fold_open = "v",
@@ -441,10 +448,9 @@ function M.setup()
 			event = "VeryLazy",
 			dependencies = {
 				"nvim-lua/plenary.nvim",
-				{ "nvim-tree/nvim-web-devicons", lazy = true },
+				"nvim-tree/nvim-web-devicons",
 			},
 			config = function()
-				vim.cmd.packadd("nvim-web-devicons")
 				require("vimrc.plugins.diffview")
 			end,
 			enabled = false,
