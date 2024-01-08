@@ -181,6 +181,7 @@ function M.setup()
 		},
 		{
 			"williamboman/mason.nvim",
+			event = { "VeryLazy" },
 			build = function()
 				vim.cmd.MasonUpdate()
 			end,
@@ -193,6 +194,7 @@ function M.setup()
 		{
 			"williamboman/mason-lspconfig.nvim",
 			dependencies = { "williamboman/mason.nvim" },
+			event = { "VeryLazy" },
 			config = function()
 				require("mason-lspconfig").setup({
 					ensure_installed = require("vimrc.plugins.lspconfig").SERVER_LIST,
@@ -208,20 +210,12 @@ function M.setup()
 			end,
 		},
 		{
-			"5c077m4n/typescript.nvim",
-			dependencies = { "neovim/nvim-lspconfig" },
-			ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+			"pmizio/typescript-tools.nvim",
+			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+			event = { "BufEnter" },
 			config = function()
-				require("typescript").setup({
-					go_to_source_definition = { fallback = true },
-					server = {
-						root_dir = require("lspconfig").util.root_pattern(
-							"package.json",
-							"package-lock.json",
-							"tsconfig.json"
-						),
-						single_file_support = false,
-					},
+				require("typescript-tools").setup({
+					settings = { jsx_close_tag = { enable = false } },
 				})
 			end,
 		},
