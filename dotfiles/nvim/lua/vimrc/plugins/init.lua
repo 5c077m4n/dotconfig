@@ -214,6 +214,14 @@ function M.setup()
 			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 			event = { "BufEnter" },
 			config = function()
+				if vim.fn.executable("node") ~= 1 then
+					vim.notify(
+						"The `node` executable is not installed",
+						vim.log.levels.ERROR,
+						{ title = "typescript" }
+					)
+				end
+
 				require("typescript-tools").setup({
 					settings = { jsx_close_tag = { enable = false } },
 				})
