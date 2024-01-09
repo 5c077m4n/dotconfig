@@ -12,6 +12,7 @@ keymap.nnoremap("<leader>fls", function()
 		telescope_builtin.find_files(opts)
 	end
 end, { desc = "Find project files" })
+keymap.nnoremap("<C-p>", telescope_builtin.find_files, { desc = "Find project files" })
 keymap.nnoremap("<leader>fs", telescope_builtin.live_grep, { desc = "Search project for a string" })
 keymap.nnoremap(
 	"<leader>f#",
