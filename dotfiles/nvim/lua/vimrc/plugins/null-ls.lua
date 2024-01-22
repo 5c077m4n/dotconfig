@@ -81,6 +81,8 @@ local sources = {
 	null_ls.builtins.diagnostics.yamllint,
 	-- TOML
 	null_ls.builtins.formatting.taplo,
+	-- Dockerfile
+	null_ls.builtins.diagnostics.hadolint,
 	-- Misc
 	null_ls.builtins.completion.spell,
 	--null_ls.builtins.diagnostics.editorconfig_checker,
