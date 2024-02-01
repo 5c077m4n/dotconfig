@@ -4,5 +4,6 @@
 
 [[ -f "${HOME}/.cargo/env" ]] && source "${HOME}/.cargo/env" || true
 
+path+=("${ZDOTDIR}/functions")
 path+=("${HOME}/.local/bin")
 cdpath+=("${HOME}/repos")

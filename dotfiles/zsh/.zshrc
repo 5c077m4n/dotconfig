@@ -1,4 +1,4 @@
-for zsh_config_file in "${ZDOTDIR}/config/"*; do
+for zsh_config_file in "${ZDOTDIR}/conf.d/"*; do
 	source "$zsh_config_file"
 done
 unset zsh_config_file
