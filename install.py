@@ -39,7 +39,7 @@ def main() -> None:
         dest_dir.symlink_to(target=source_dir, target_is_directory=True)
 
     # Link scripts to appear in `$PATH`
-    bin_dir = __dirname.joinpath("bin")
+    bin_dir = __dirname.joinpath("dotlocal").joinpath("bin")
     local_dir = home_dir.joinpath(".local")
     if not local_dir.exists():
         mkdir(local_dir)
