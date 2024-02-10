@@ -25,7 +25,7 @@ local function setup()
 		{ "nvim-lua/plenary.nvim", lazy = true },
 		{
 			"aserowy/tmux.nvim",
-			event = "VeryLazy",
+			event = { "VeryLazy" },
 			lazy = true,
 			config = function()
 				require("tmux").setup({
@@ -35,7 +35,7 @@ local function setup()
 		},
 		{
 			"rcarriga/nvim-notify",
-			event = "VeryLazy",
+			event = { "VeryLazy" },
 			config = function()
 				local notify = require("notify")
 
@@ -45,7 +45,7 @@ local function setup()
 		},
 		{
 			"samodostal/image.nvim",
-			event = "VeryLazy",
+			event = { "VeryLazy" },
 			dependencies = { "nvim-lua/plenary.nvim" },
 			config = function()
 				require("image").setup({
@@ -60,7 +60,7 @@ local function setup()
 		},
 		{
 			"nvim-tree/nvim-web-devicons",
-			event = "VeryLazy",
+			event = { "VeryLazy" },
 			lazy = true,
 			config = function()
 				require("nvim-web-devicons").setup({
@@ -94,7 +94,7 @@ local function setup()
 		},
 		{
 			"norcalli/nvim-colorizer.lua",
-			event = "VeryLazy",
+			event = { "VeryLazy" },
 			lazy = true,
 			config = function()
 				require("colorizer").setup()
@@ -218,6 +218,7 @@ local function setup()
 		{
 			"pmizio/typescript-tools.nvim",
 			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+			ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
 			event = { "BufEnter" },
 			lazy = true,
 			config = function()
@@ -285,7 +286,7 @@ local function setup()
 		},
 		{
 			"folke/trouble.nvim",
-			event = "VeryLazy",
+			event = { "VeryLazy" },
 			lazy = true,
 			dependencies = { "nvim-tree/nvim-web-devicons" },
 			config = function()
@@ -315,7 +316,12 @@ local function setup()
 				end, { desc = "Toggle trouble loclist panel" })
 			end,
 		},
-		{ "folke/neodev.nvim", dependencies = { "folke/neoconf.nvim" }, lazy = true },
+		{
+			"folke/neodev.nvim",
+			dependencies = { "folke/neoconf.nvim" },
+			event = { "VeryLazy" },
+			lazy = true,
+		},
 		{
 			"ray-x/go.nvim",
 			dependencies = { "neovim/nvim-lspconfig", "nvim-treesitter/nvim-treesitter" },
@@ -423,16 +429,22 @@ local function setup()
 		},
 		{
 			"folke/which-key.nvim",
-			event = "VeryLazy",
+			event = { "VeryLazy" },
 			lazy = true,
 			opts = {
 				plugins = { marks = false, registers = false },
 			},
 		},
-		{ "kylechui/nvim-surround", event = { "VeryLazy" }, lazy = true, version = "*", opts = {} },
+		{
+			"kylechui/nvim-surround",
+			event = { "VeryLazy", "InsertEnter" },
+			lazy = true,
+			version = "*",
+			opts = {},
+		},
 		{
 			"windwp/nvim-autopairs",
-			event = "VeryLazy",
+			event = { "VeryLazy", "InsertEnter" },
 			lazy = true,
 			config = function()
 				require("nvim-autopairs").setup({ check_ts = true })
@@ -446,7 +458,7 @@ local function setup()
 		},
 		{
 			"windwp/nvim-ts-autotag",
-			event = { "InsertEnter" },
+			event = { "VeryLazy", "InsertEnter" },
 			lazy = true,
 			config = function()
 				require("nvim-ts-autotag").setup({
@@ -466,7 +478,7 @@ local function setup()
 		{ "numToStr/Comment.nvim", opts = {}, event = { "VeryLazy" }, lazy = false },
 		{
 			"tpope/vim-fugitive",
-			event = "VeryLazy",
+			event = { "VeryLazy" },
 			lazy = true,
 			config = function()
 				require("vimrc.plugins.git-fugitive")
@@ -474,7 +486,7 @@ local function setup()
 		},
 		{
 			"sindrets/diffview.nvim",
-			event = "VeryLazy",
+			event = { "VeryLazy" },
 			lazy = true,
 			dependencies = {
 				"nvim-lua/plenary.nvim",
@@ -495,7 +507,7 @@ local function setup()
 		},
 		{
 			"nvim-telescope/telescope.nvim",
-			event = "VeryLazy",
+			event = { "VeryLazy" },
 			lazy = true,
 			dependencies = {
 				"nvim-lua/popup.nvim",
@@ -510,6 +522,7 @@ local function setup()
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
 			dependencies = { "nvim-telescope/telescope.nvim" },
+			event = { "VeryLazy" },
 			build = "make",
 			config = function()
 				require("telescope").load_extension("fzf")
