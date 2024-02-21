@@ -23,11 +23,19 @@
 	autoSetupRemote = true
 [pull]
 	rebase = true
+[rebase]
+	missingCommitsCheck = "warn"
+	updateRefs = true
 [fetch]
 	prune = true
+[merge]
+	conflictStyle = "zdiff3"
+[rerere]
+	enabled = true
 
 # Commit sign
 [commit]
+	verbose = true
 	gpgsign = true
 [gpg]
 	format = "ssh"
@@ -42,6 +50,7 @@
 	reflog = "delta"
 	show = "delta"
 [diff]
+	algorithm = "histogram"
 	colorMoved = "default"
 [delta]
 	features = "line-numbers decorations"
@@ -60,3 +69,11 @@
 	line-numbers-plus-style = 28
 [interactive]
 	diffFilter = "delta --color-only"
+
+# Avoiding data corruption
+[transfer]
+	fsckobjects = true
+[fetch]
+	fsckobjects = true
+[receive]
+	fsckobjects = true
