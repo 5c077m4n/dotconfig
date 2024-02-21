@@ -16,6 +16,7 @@ local SERVER_LIST = {
 	"gopls",
 	"rust_analyzer",
 	"zls",
+	"jdtls",
 }
 
 ---@param options? table
@@ -50,7 +51,10 @@ return {
 		local lspconfig = require("lspconfig")
 
 		local servers_needing_lsp_setup = vim.tbl_filter(function(server)
-			return server ~= "tsserver" and server ~= "rust_analyzer" and server ~= "gopls"
+			return server ~= "tsserver"
+				and server ~= "rust_analyzer"
+				and server ~= "gopls"
+				and server ~= "jdtls"
 		end, SERVER_LIST)
 
 		for _, server in pairs(servers_needing_lsp_setup) do
