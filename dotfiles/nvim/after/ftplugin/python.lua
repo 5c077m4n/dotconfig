@@ -18,6 +18,7 @@ cmd.inoreabbrev("<buffer> false False")
 
 -- in the same way, we can fix habits regarding comments or None
 cmd.inoreabbrev("<buffer> -- #")
+cmd.inoreabbrev("<buffer> // #")
 cmd.inoreabbrev("<buffer> null None")
 cmd.inoreabbrev("<buffer> none None")
 cmd.inoreabbrev("<buffer> nil None")
