@@ -1,3 +1,5 @@
+--# selene: allow(mixed_table)
+
 local utils = require("vimrc.utils")
 
 local keymap = utils.keymapping

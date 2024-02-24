@@ -1,3 +1,4 @@
+---
 name: Lint neovim lua config
 
 on:
@@ -16,8 +17,11 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - name: Luacheck linter
-        uses: lunarmodules/luacheck@v0
-        with:
-          args: dotfiles/nvim/
+        uses: actions/checkout@v4
+      - name: Install Selene
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs >/tmp/rustup-init.sh
+          sh /tmp/rustup-init.sh -y
+          cargo install selene
+      - name: Run selene
+        run: selene dotfiles/nvim/ dotfiles/nvim_vscode/

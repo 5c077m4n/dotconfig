@@ -1,12 +1,5 @@
 local null_ls = require("null-ls")
 
-local eslint_d_config = {
-	condition = function(utils)
-		return utils.root_has_file({ "package.json" })
-	end,
-	extra_args = { "--cache" },
-}
-
 local sources = {
 	-- Snippet support
 	null_ls.builtins.completion.luasnip,
@@ -16,45 +9,24 @@ local sources = {
 			return utils.root_has_file({ "stylua.toml", ".stylua.toml" })
 		end,
 	}),
-	null_ls.builtins.diagnostics.luacheck.with({
+	null_ls.builtins.diagnostics.selene.with({
 		condition = function(utils)
-			return utils.root_has_file({ ".luacheckrc" })
+			return utils.root_has_file({ "selene.toml" })
 		end,
 	}),
-	--null_ls.builtins.diagnostics.selene,
 	-- Python
 	null_ls.builtins.formatting.isort,
 	null_ls.builtins.formatting.black,
 	null_ls.builtins.diagnostics.mypy,
 	-- Typescript
-	null_ls.builtins.code_actions.eslint_d.with(eslint_d_config),
-	null_ls.builtins.diagnostics.eslint_d.with(eslint_d_config),
-	null_ls.builtins.formatting.eslint_d.with(eslint_d_config),
 	null_ls.builtins.formatting.prettierd,
-	-- Deno
-	null_ls.builtins.formatting.deno_fmt.with({
-		condition = function(utils)
-			return utils.root_has_file({ "deno.json", "deno.jsonc", "deno.lock" })
-		end,
-	}),
 	-- CSS
 	null_ls.builtins.formatting.stylelint,
 	-- Shell
-	null_ls.builtins.diagnostics.shellcheck,
-	null_ls.builtins.code_actions.shellcheck,
 	null_ls.builtins.formatting.shellharden,
 	null_ls.builtins.formatting.shfmt,
-	null_ls.builtins.formatting.beautysh.with({ extra_args = { "--tab" } }),
 	-- SQL
 	null_ls.builtins.formatting.sqlformat,
-	-- Rust
-	null_ls.builtins.formatting.rustfmt.with({ args = { "+nightly" } }),
-	-- Zig
-	null_ls.builtins.formatting.zigfmt.with({
-		condition = function(utils)
-			return utils.root_has_file({ "build.zig" })
-		end,
-	}),
 	-- Go
 	--null_ls.builtins.diagnostics.revive,
 	--null_ls.builtins.diagnostics.gospel,
@@ -79,8 +51,6 @@ local sources = {
 	null_ls.builtins.formatting.terraform_fmt,
 	-- YAML
 	null_ls.builtins.diagnostics.yamllint,
-	-- TOML
-	null_ls.builtins.formatting.taplo,
 	-- Dockerfile
 	null_ls.builtins.diagnostics.hadolint,
 	-- Misc
