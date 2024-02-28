@@ -257,33 +257,27 @@ local function setup()
 			end,
 		},
 		{
-			"simrat39/rust-tools.nvim",
-			dependencies = { "neovim/nvim-lspconfig" },
+			"mrcjkb/rustaceanvim",
+			version = "^4",
 			ft = { "rust" },
-			lazy = true,
+			event = { "VeryLazy" },
 			config = function()
-				local rust_tools = require("rust-tools")
-
-				rust_tools.setup({
-					tools = {
-						inlay_hints = {
-							auto = true,
-							only_current_line = true,
+				vim.g.rustaceanvim = {
+					server = {
+						default_settings = {
+							["rust-analyzer"] = {
+								imports = {
+									granularity = { group = "module" },
+									prefix = "self",
+								},
+								cargo = {
+									buildScripts = { enable = true },
+								},
+								procMacro = { enable = true },
+							},
 						},
 					},
-					server = {
-						on_attach = function(
-							_, --[[ client ]]
-							buffer_n
-						)
-							keymap.nnoremap(
-								"<leader>cA",
-								rust_tools.code_action_group.code_action_group,
-								{ buffer = buffer_n, desc = "Open rust tools code actions pane" }
-							)
-						end,
-					},
-				})
+				}
 			end,
 		},
 		{
