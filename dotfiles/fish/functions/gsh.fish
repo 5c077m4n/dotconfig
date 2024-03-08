@@ -1,3 +1,3 @@
 function gsh
-    git show
+    git show --show-signature $argv
 end
