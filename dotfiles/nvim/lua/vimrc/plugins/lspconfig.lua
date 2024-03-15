@@ -63,10 +63,34 @@ local SERVER_CONFIG_MAP = {
 		})
 	end,
 	jsonls = function()
-		return make_config()
+		local schemastore = require("schemastore")
+
+		return make_config({
+			settings = {
+				json = {
+					schemas = schemastore.json.schemas(),
+					validate = { enable = true },
+				},
+			},
+		})
 	end,
 	yamlls = function()
-		return make_config()
+		local schemastore = require("schemastore")
+
+		return make_config({
+			settings = {
+				yaml = {
+					schemaStore = {
+						-- You must disable built-in schemaStore support if you want to use
+						-- this plugin and its advanced options like `ignore`.
+						enable = false,
+						-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+						url = "",
+					},
+					schemas = schemastore.yaml.schemas(),
+				},
+			},
+		})
 	end,
 	cssls = function()
 		return make_config()
