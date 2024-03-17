@@ -90,7 +90,7 @@ keymap.nnoremap("<leader>rl", function()
 end, { desc = "Toggle window's right-to-left mode" })
 
 -- Undo
-keymap.nnoremap("U", vim.cmd.undo, { desc = "Redo last change" })
+keymap.nnoremap("U", vim.cmd.redo, { desc = "Redo last change" })
 
 create_command("CopyCursorLocation", function()
 	local file_path = vim.fn.expand("%:.")
