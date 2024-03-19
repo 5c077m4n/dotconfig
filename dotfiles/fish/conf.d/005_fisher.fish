@@ -1,4 +1,4 @@
-set --export --global fisher_path "$XDG_DATA_HOME/fisher"
+set --local fisher_path "$XDG_DATA_HOME/fisher"
 
 if ! type --query fisher
     curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
