@@ -37,6 +37,8 @@ keymap.nnoremap(
 	telescope_builtin.git_commits,
 	{ desc = "Search through git commits" }
 )
+keymap.nnoremap("<leader>fgs", telescope_builtin.git_status, { desc = "List git status changes" })
+keymap.nnoremap("<leader>fgb", telescope_builtin.git_branches, { desc = "List git branches" })
 keymap.nnoremap(
 	"<leader>ffc",
 	telescope_builtin.git_bcommits,
