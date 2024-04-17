@@ -282,41 +282,6 @@ local function setup()
 			end,
 		},
 		{
-			"mfussenegger/nvim-jdtls",
-			event = { "VeryLazy" },
-			ft = { "java" },
-			dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
-			config = function()
-				local jdtls = require("jdtls")
-				local mason_registry = require("mason-registry")
-
-				local jdtls_install_dir = mason_registry.get_package("jdtls"):get_install_path()
-
-				local platform_config
-				if vim.fn.has("mac") == 1 then
-					platform_config = jdtls_install_dir .. "/config_mac_arm"
-				elseif vim.fn.has("unix") == 1 then
-					platform_config = jdtls_install_dir .. "/config_linux"
-				elseif vim.fn.has("win32") == 1 then
-					platform_config = jdtls_install_dir .. "/config_win"
-				end
-
-				jdtls.start_or_attach({
-					cmd = {
-						"java",
-						"-jar",
-						vim.fn.glob(
-							jdtls_install_dir .. "/plugins/org.eclipse.equinox.launcher_*.jar"
-						),
-						"-configuration",
-						platform_config,
-					},
-					root_dir = jdtls.setup.find_root({ "gradlew", ".git", "mvnw" }),
-				})
-			end,
-			cond = false,
-		},
-		{
 			"folke/trouble.nvim",
 			event = { "VeryLazy" },
 			lazy = true,
