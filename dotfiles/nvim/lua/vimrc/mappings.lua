@@ -14,8 +14,8 @@ end
 keymap.nnoremap("<leader>0", module_utils.update_vimrc, { desc = "Git pull latest vimrc" })
 keymap.nnoremap("<leader>1", function()
 	require("lazy").sync()
-end, { desc = "Reload the vimrc config" })
-keymap.nnoremap("<leader>2", module_utils.reload_vimrc, { desc = "Reload the vimrc config" })
+end, { desc = "Update all plugins" })
+keymap.nnoremap("<leader>2", module_utils.reload_vimrc, { desc = "Reload vimrc" })
 keymap.nnoremap("<leader>3", signals.send_usr1_to_all_nvim, { desc = "Reload all NVIM instances" })
 
 -- Save only if needed
