@@ -3,13 +3,17 @@
 const { copyFile, readFile, writeFile } = require("node:fs/promises");
 
 const HOSTS_PATH = "/etc/hosts";
+const NUMBER_FORMATTER = new Intl.NumberFormat();
 
+/** @return {string[]} */
 function filterComments(/** @type {string} */ lines) {
 	return lines
 		.split("\n")
 		.map((l) => l.trim())
 		.filter((l) => !l.startsWith("#"));
 }
+
+/** @return {string[]} */
 async function getHosts(/** @type {string} */ url) {
 	const hostsFileResponse = await fetch(url);
 	const text = await hostsFileResponse.text();
@@ -41,9 +45,7 @@ async function main() {
 	await writeFile(HOSTS_PATH, allHostsText);
 
 	console.log(
-		`All done! (added ${new Intl.NumberFormat().format(
-			allHosts.size,
-		)} hosts)`,
+		`All done! (added ${NUMBER_FORMATTER.format(allHosts.size)} hosts)`,
 	);
 }
 
