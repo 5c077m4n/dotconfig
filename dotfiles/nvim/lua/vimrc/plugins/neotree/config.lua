@@ -4,6 +4,7 @@ require("neo-tree").setup({
 	close_if_last_window = true,
 	enable_git_status = true,
 	enable_diagnostics = true,
+	open_files_do_not_replace_types = { "terminal", "trouble", "qf", "gitcommit", "gitrebase" },
 	window = {
 		position = "right",
 		width = 40,
