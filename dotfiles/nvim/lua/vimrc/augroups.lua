@@ -76,11 +76,14 @@ create_autocmd({ "LspAttach" }, {
 		lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single" })
 		lsp.handlers["textDocument/signatureHelp"] =
 			lsp.with(lsp.handlers.signature_help, { border = "single" })
-		---@diagnostic disable-next-line: duplicate-set-field
-		lsp.handlers["window/showMessage"] = function(_err, method, params, _client_id)
-			vim.notify(method.message, LOG_LEVELS[params.type])
+		lsp.handlers["window/showMessage"] = function(err, result)
+			vim.notify(
+				result and result.message or "",
+				LOG_LEVELS[err and err.code or 3],
+				{ title = "LSP Message" }
+			)
 		end
-		if client.server_capabilities.documentSymbolProvider then
+		if client and client.server_capabilities.documentSymbolProvider then
 			require("nvim-navic").attach(client, buffer_num)
 		end
 
@@ -168,7 +171,10 @@ create_autocmd({ "LspAttach" }, {
 		end, { buffer = buffer_num, desc = "Format selected page/range" })
 
 		vim.notify(
-			client.name .. " LSP server connected successfully (buffer #" .. buffer_num .. ")",
+			(client and client.name or "Some")
+				.. " LSP server connected successfully (buffer #"
+				.. buffer_num
+				.. ")",
 			vim.log.levels.INFO,
 			{ timeout = 1000, title = "LSP" }
 		)
