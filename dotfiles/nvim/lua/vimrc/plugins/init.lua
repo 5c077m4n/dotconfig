@@ -87,8 +87,9 @@ local function setup()
 			event = { "VeryLazy" },
 			dependencies = {
 				"projekt0n/github-nvim-theme",
-				"SmiteshP/nvim-navic",
 				"nvim-tree/nvim-web-devicons",
+				"SmiteshP/nvim-navic",
+				"linrongbin16/lsp-progress.nvim",
 			},
 			config = function()
 				require("vimrc.plugins.lualine")
@@ -115,6 +116,14 @@ local function setup()
 			lazy = true,
 			config = function()
 				require("lspkind").init({ mode = "text" }) -- Icons in autocomplete popup
+			end,
+		},
+		{
+			"linrongbin16/lsp-progress.nvim",
+			event = { "VeryLazy" },
+			lazy = true,
+			config = function()
+				require("lsp-progress").setup()
 			end,
 		},
 		{ "fladson/vim-kitty", ft = { "kitty" }, event = { "VeryLazy" }, lazy = true },
