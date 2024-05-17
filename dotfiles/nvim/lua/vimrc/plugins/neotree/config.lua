@@ -28,8 +28,6 @@ require("neo-tree").setup({
 			["Q"] = "close_window",
 			["R"] = "refresh",
 			["i"] = "show_file_details",
-			["z"] = "close_all_nodes",
-			["Z"] = "expand_all_nodes",
 			["[h"] = "prev_git_modified",
 			["]h"] = "next_git_modified",
 		},
