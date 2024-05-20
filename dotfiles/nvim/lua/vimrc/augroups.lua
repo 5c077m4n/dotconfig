@@ -134,6 +134,9 @@ create_autocmd({ "LspAttach" }, {
 			telescope_builtin.lsp_references,
 			{ buffer = buffer_num, desc = "Find references" }
 		)
+		keymap.nnoremap("gh", function()
+			lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled({ bufnr = nil }))
+		end, { buffer = buffer_num, desc = "Toggle inlay hints" })
 		keymap.nnoremap("g?", function()
 			diagnostic.open_float({ bufnr = buffer_num, scope = "line", border = "single" })
 		end, { buffer = buffer_num, desc = "Open diagnostics floating window" })
