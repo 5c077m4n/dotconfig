@@ -58,6 +58,11 @@ local SERVER_CONFIG_MAP = {
 					diagnostics = {
 						globals = { "vim", "string" },
 					},
+					hint = {
+						enable = true,
+						arrayIndex = "Enable",
+						setType = true,
+					},
 				},
 			},
 		})
