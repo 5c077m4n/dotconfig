@@ -30,5 +30,16 @@ alt + shift - p : yabai -m display --focus west;
 ctrl + shift + alt - n : yabai -m window --display east; yabai -m display --focus east;
 ctrl + shift + alt - p : yabai -m window --display west; yabai -m display --focus west;
 
+# Vim keybindings
+## hyper = cmd + shift + alt + ctrl
+hyper - h : skhd --key left
+hyper - j : skhd --key down
+hyper - k : skhd --key up
+hyper - l : skhd --key right
+hyper - u : skhd --key pageup
+hyper - d : skhd --key pagedown
+hyper - 0 : skhd --key home
+hyper - 4 : skhd --key end
+
 # Restart yabai & skhd
 alt + shift - r : yabai --restart-service; skhd --reload;
