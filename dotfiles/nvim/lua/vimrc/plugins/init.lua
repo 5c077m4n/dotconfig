@@ -403,7 +403,7 @@ local function setup()
 		},
 		{
 			"hrsh7th/nvim-cmp",
-			event = { "InsertEnter" },
+			event = { "InsertEnter", "CmdlineEnter" },
 			dependencies = {
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-buffer",
@@ -412,7 +412,7 @@ local function setup()
 				{
 					"L3MON4D3/LuaSnip",
 					event = { "InsertEnter" },
-					version = "v1.*",
+					version = "v2.*",
 					build = "make install_jsregexp",
 					dependencies = { "saadparwaiz1/cmp_luasnip" },
 				},

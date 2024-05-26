@@ -1,7 +1,7 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
-local has_words_before = function()
+local function has_words_before()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 	return (
 		col ~= 0
@@ -12,27 +12,14 @@ end
 
 cmp.setup({
 	sources = cmp.config.sources({
-		{ name = "nvim_lsp", priority = 10 },
-		{ name = "luasnip", priority = 9 },
-		{ name = "path", priority = 8 },
-		{ name = "calc", priority = 7 },
-		{ name = "spell", priority = 1 },
+		{ name = "nvim_lsp" },
+		{ name = "luasnip" },
+		{ name = "path" },
+		{ name = "calc" },
+		{ name = "spell" },
 	}, {
 		{ name = "buffer" },
 	}),
-	sorting = {
-		comparators = {
-			cmp.config.compare.offset,
-			cmp.config.compare.exact,
-			cmp.config.compare.score,
-			cmp.config.compare.recently_used,
-			cmp.config.compare.locality,
-			cmp.config.compare.kind,
-			cmp.config.compare.sort_text,
-			cmp.config.compare.length,
-			cmp.config.compare.order,
-		},
-	},
 	formatting = {
 		format = require("lspkind").cmp_format({
 			maxwidth = 50,
@@ -46,30 +33,18 @@ cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		["<C-d>"] = cmp.mapping.scroll_docs(4),
 		["<C-u>"] = cmp.mapping.scroll_docs(-4),
-		["<A-Space>"] = cmp.mapping.complete({}),
-		["<C-["] = cmp.mapping.abort(),
+		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+		["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
 		["<ESC>"] = cmp.mapping.abort(),
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<A-Space>"] = cmp.mapping.complete({}),
 		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			elseif luasnip.expand_or_locally_jumpable() then
-				luasnip.expand_or_jump()
-			elseif has_words_before() then
+			if has_words_before() then
 				cmp.complete()
 			else
 				fallback()
 			end
 		end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			elseif luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
+		["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
 	}),
 	snippet = {
 		expand = function(args)
