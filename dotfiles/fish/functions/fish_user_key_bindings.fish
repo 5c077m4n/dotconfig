@@ -8,6 +8,9 @@ function fish_user_key_bindings
     bind --mode insert \cp up-or-search
     bind --mode insert \cn down-or-search
 
+    bind --mode insert \ef forward-word
+    bind --mode insert \eb backward-word
+
     bind --erase --preset \ee
     bind --erase --preset \ev
     bind --erase --preset --mode insert \ee
