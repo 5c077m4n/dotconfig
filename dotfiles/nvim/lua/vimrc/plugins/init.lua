@@ -308,23 +308,15 @@ local function setup()
 					signs = { error = "E", warning = "W", hint = "H", information = "I" },
 				})
 
-				keymap.nnoremap(
-					"<leader>xx",
-					vim.cmd.TroubleToggle,
-					{ desc = "Toggle trouble panel" }
-				)
-				keymap.nnoremap("<leader>xw", function()
-					vim.cmd.TroubleToggle("workspace_diagnostics")
-				end, { desc = "Toggle trouble workspace diagnostics" })
+				keymap.nnoremap("<leader>xx", function()
+					vim.cmd.Trouble("diagnostics toggle")
+				end, { desc = "Toggle trouble diagnostics" })
 				keymap.nnoremap("<leader>xd", function()
-					vim.cmd.TroubleToggle("document_diagnostics")
-				end, { desc = "Toggle trouble document diagnostics" })
-				keymap.nnoremap("<leader>xq", function()
-					vim.cmd.TroubleToggle("quickfix")
-				end, { desc = "Toggle trouble quick fix panel" })
+					vim.cmd.Trouble("diagnostics toggle filter.buf=0")
+				end, { desc = "Toggle trouble diagnostics for current buffer" })
 				keymap.nnoremap("<leader>xl", function()
-					vim.cmd.TroubleToggle("loclist")
-				end, { desc = "Toggle trouble loclist panel" })
+					vim.cmd.Trouble("lsp toggle")
+				end, { desc = "Toggle LSP definitions & refernces" })
 			end,
 		},
 		{
