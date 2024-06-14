@@ -75,12 +75,11 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-
-
 (setq-default delete-by-moving-to-trash t)         ; Delete files to trash
 (setq-default window-combination-resize t)         ; take new window space from all other windows (not just current)
 (setq-default x-stretch-cursor t)                  ; Stretch cursor to the glyph width
 
+(setq shell-file-name (executable-find "bash"))
 (setq undo-limit 80000000)                         ; Raise undo-limit to 80Mb
 (setq evil-want-fine-undo t)                       ; By default while in insert all changes are one big blob. Be more granular
 (setq auto-save-default t)                         ; Nobody likes to loose work, I certainly don't
