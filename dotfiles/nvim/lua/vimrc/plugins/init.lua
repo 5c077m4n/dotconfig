@@ -115,7 +115,7 @@ local function setup()
 			"onsails/lspkind-nvim",
 			lazy = true,
 			config = function()
-				require("lspkind").init({ mode = "text" }) -- Icons in autocomplete popup
+				require("lspkind").init({ mode = "text" })
 			end,
 		},
 		{
@@ -354,36 +354,10 @@ local function setup()
 			lazy = true,
 		},
 		{
-			"ray-x/go.nvim",
-			dependencies = { "neovim/nvim-lspconfig", "nvim-treesitter/nvim-treesitter" },
-			ft = { "go", "gomod", "godoc", "gotexttmpl", "gohtmltmpl" },
-			event = { "CmdlineEnter" },
-			lazy = true,
-			build = function()
-				require("go.install").update_all()
-			end,
-			config = function()
-				local go = require("go")
-				local go_lsp_config = require("go.lsp").config()
-				local lspconfig = require("lspconfig")
-
-				go.setup({
-					disable_defaults = true,
-					lsp_cfg = false,
-					lsp_inlay_hints = { enable = false },
-					trouble = true,
-					lsp_keymaps = false,
-				})
-				vim.tbl_deep_extend("force", go_lsp_config, {
-					settings = {
-						gopls = {
-							analyses = { undparams = true },
-							staticcheck = true,
-						},
-					},
-				})
-				lspconfig.gopls.setup(go_lsp_config)
-			end,
+			"zeioth/garbage-day.nvim",
+			dependencies = { "neovim/nvim-lspconfig" },
+			event = "VeryLazy",
+			opts = {},
 		},
 		{
 			"nvimtools/none-ls.nvim",
