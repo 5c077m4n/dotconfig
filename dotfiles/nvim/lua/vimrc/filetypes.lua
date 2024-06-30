@@ -8,6 +8,7 @@ vim.filetype.add({
 		[".prettierrc"] = "json",
 		[".babelrc"] = "json",
 		[".swcrc"] = "json",
+		[".sqlfluff"] = "toml",
 		["tmux.conf"] = "tmux",
 	},
 	pattern = {

@@ -30,7 +30,8 @@ local sources = {
 	null_ls.builtins.formatting.shellharden,
 	null_ls.builtins.formatting.shfmt,
 	-- SQL
-	null_ls.builtins.formatting.sqlformat,
+	null_ls.builtins.formatting.sqlfluff,
+	null_ls.builtins.diagnostics.sqlfluff,
 	-- Go
 	null_ls.builtins.diagnostics.revive.with({
 		condition = function(utils)
