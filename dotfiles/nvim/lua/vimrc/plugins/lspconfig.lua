@@ -129,6 +129,9 @@ local SERVER_CONFIG_MAP = {
 	pyright = function()
 		return make_config()
 	end,
+	svelte = function()
+		return make_config()
+	end,
 }
 
 return {
