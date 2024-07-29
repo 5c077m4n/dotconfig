@@ -144,7 +144,8 @@ local function setup()
 			"nvim-treesitter/nvim-treesitter",
 			event = { "BufReadPre", "BufNewFile" },
 			build = function()
-				vim.cmd.TSUpdate()
+				local tree_updater = require("nvim-treesitter.install").update({ with_sync = true })
+				tree_updater()
 			end,
 			config = function()
 				local MAX_FILE_SIZE = 100 * 1024 -- 100KB
