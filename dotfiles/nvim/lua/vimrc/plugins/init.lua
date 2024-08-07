@@ -520,6 +520,7 @@ local function setup()
 			"nvim-telescope/telescope-fzf-native.nvim",
 			dependencies = { "nvim-telescope/telescope.nvim" },
 			event = { "VeryLazy" },
+			lazy = true,
 			build = "make",
 			config = function()
 				require("telescope").load_extension("fzf")
