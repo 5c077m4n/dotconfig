@@ -28,7 +28,6 @@ local function setup()
 		{
 			"aserowy/tmux.nvim",
 			event = { "VeryLazy" },
-			lazy = true,
 			config = function()
 				require("tmux").setup({
 					resize = { enable_default_keybindings = false },
@@ -63,7 +62,6 @@ local function setup()
 		{
 			"nvim-tree/nvim-web-devicons",
 			event = { "VeryLazy" },
-			lazy = true,
 			config = function()
 				require("nvim-web-devicons").setup({
 					override_by_extension = {
@@ -98,7 +96,6 @@ local function setup()
 		{
 			"norcalli/nvim-colorizer.lua",
 			event = { "VeryLazy" },
-			lazy = true,
 			config = function()
 				require("colorizer").setup()
 			end,
@@ -106,14 +103,13 @@ local function setup()
 		{
 			"folke/todo-comments.nvim",
 			event = { "VeryLazy" },
-			lazy = true,
 			config = function()
 				require("todo-comments").setup()
 			end,
 		},
 		{
 			"onsails/lspkind-nvim",
-			lazy = true,
+			event = { "VeryLazy" },
 			config = function()
 				require("lspkind").init({ mode = "text" })
 			end,
@@ -121,7 +117,6 @@ local function setup()
 		{
 			"linrongbin16/lsp-progress.nvim",
 			event = { "VeryLazy" },
-			lazy = true,
 			config = function()
 				require("lsp-progress").setup()
 			end,
@@ -202,7 +197,6 @@ local function setup()
 				{
 					"williamboman/mason.nvim",
 					event = { "VeryLazy" },
-					lazy = true,
 					build = function()
 						vim.cmd.MasonUpdate()
 					end,
@@ -212,7 +206,6 @@ local function setup()
 				},
 			},
 			event = { "VeryLazy" },
-			lazy = true,
 			config = function()
 				require("mason-lspconfig").setup({
 					ensure_installed = require("vimrc.plugins.lspconfig").SERVER_LIST,
@@ -232,7 +225,6 @@ local function setup()
 			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 			ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
 			event = { "BufEnter" },
-			lazy = true,
 			config = function()
 				local lspconfig = require("lspconfig")
 				local ts_tools = require("typescript-tools")
@@ -301,7 +293,6 @@ local function setup()
 			dependencies = { "neovim/nvim-lspconfig", "nvim-treesitter/nvim-treesitter" },
 			ft = { "go", "gomod", "godoc", "gotexttmpl", "gohtmltmpl" },
 			event = { "CmdlineEnter" },
-			lazy = true,
 			build = function()
 				require("go.install").update_all_sync()
 			end,
@@ -323,7 +314,6 @@ local function setup()
 			"folke/trouble.nvim",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
 			event = { "VeryLazy" },
-			lazy = true,
 			config = function()
 				require("trouble").setup({
 					fold_open = "v",
@@ -371,12 +361,7 @@ local function setup()
 				end, { desc = "Disable session save on exit" })
 			end,
 		},
-		{
-			"folke/neodev.nvim",
-			dependencies = { "folke/neoconf.nvim" },
-			event = { "VeryLazy" },
-			lazy = true,
-		},
+		{ "folke/neodev.nvim", dependencies = { "folke/neoconf.nvim" }, event = { "VeryLazy" } },
 		{
 			"zeioth/garbage-day.nvim",
 			dependencies = { "neovim/nvim-lspconfig" },
@@ -417,7 +402,6 @@ local function setup()
 		{
 			"phaazon/hop.nvim",
 			event = { "FocusGained", "BufEnter" },
-			lazy = true,
 			config = function()
 				local hop = require("hop")
 
@@ -428,7 +412,6 @@ local function setup()
 		{
 			"folke/which-key.nvim",
 			event = { "VeryLazy" },
-			lazy = true,
 			opts = {
 				plugins = { marks = false, registers = false },
 			},
@@ -436,14 +419,12 @@ local function setup()
 		{
 			"kylechui/nvim-surround",
 			event = { "VeryLazy", "InsertEnter" },
-			lazy = true,
 			version = "*",
 			opts = {},
 		},
 		{
 			"windwp/nvim-autopairs",
 			event = { "VeryLazy", "InsertEnter" },
-			lazy = true,
 			config = function()
 				require("nvim-autopairs").setup({ check_ts = true })
 
@@ -457,7 +438,6 @@ local function setup()
 		{
 			"windwp/nvim-ts-autotag",
 			event = { "VeryLazy", "InsertEnter" },
-			lazy = true,
 			config = function()
 				require("nvim-ts-autotag").setup({
 					filetypes = {
@@ -476,7 +456,6 @@ local function setup()
 		{
 			"tpope/vim-fugitive",
 			event = { "VeryLazy" },
-			lazy = true,
 			config = function()
 				require("vimrc.plugins.git-fugitive")
 			end,
@@ -484,7 +463,6 @@ local function setup()
 		{
 			"sindrets/diffview.nvim",
 			event = { "VeryLazy" },
-			lazy = true,
 			dependencies = {
 				"nvim-lua/plenary.nvim",
 				"nvim-tree/nvim-web-devicons",
@@ -505,7 +483,6 @@ local function setup()
 		{
 			"nvim-telescope/telescope.nvim",
 			event = { "VeryLazy" },
-			lazy = true,
 			dependencies = {
 				"nvim-lua/popup.nvim",
 				"nvim-lua/plenary.nvim",
@@ -520,7 +497,6 @@ local function setup()
 			"nvim-telescope/telescope-fzf-native.nvim",
 			dependencies = { "nvim-telescope/telescope.nvim" },
 			event = { "VeryLazy" },
-			lazy = true,
 			build = "make",
 			config = function()
 				require("telescope").load_extension("fzf")
