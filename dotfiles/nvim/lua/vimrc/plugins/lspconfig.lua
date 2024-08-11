@@ -28,7 +28,6 @@ local SERVER_CONFIG_MAP = {
 	tsserver = function() end,
 	rust_analyzer = function() end,
 	gopls = function() end,
-	jdtls = function() end,
 	eslint = function()
 		return make_config()
 	end,
