@@ -447,9 +447,7 @@ local function setup()
 					filetypes = {
 						"html",
 						"javascript",
-						"javascript.tsx",
 						"typescript",
-						"typescript.tsx",
 						"javascriptreact",
 						"typescriptreact",
 						"markdown",
