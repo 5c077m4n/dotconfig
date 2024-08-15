@@ -13,7 +13,7 @@ function filterComments(/** @type {string} */ lines) {
 		.filter((l) => !l.startsWith("#"));
 }
 
-/** @return {string[]} */
+/** @return {Promise<string[]>} */
 async function getHosts(/** @type {string} */ url) {
 	const hostsFileResponse = await fetch(url);
 	const text = await hostsFileResponse.text();
