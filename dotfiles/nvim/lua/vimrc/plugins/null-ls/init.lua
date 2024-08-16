@@ -33,15 +33,7 @@ local sources = {
 	null_ls.builtins.formatting.sqlfluff,
 	null_ls.builtins.diagnostics.sqlfluff,
 	-- Go
-	null_ls.builtins.diagnostics.revive.with({
-		condition = function(utils)
-			return utils.root_has_file({ "revive.toml" })
-		end,
-		args = { "-config", "revive.toml", "-formatter", "json", "./..." },
-	}),
-	--null_ls.builtins.diagnostics.gospel,
-	null_ls.builtins.diagnostics.staticcheck,
-	--null_ls.builtins.formatting.gofmt,
+	null_ls.builtins.diagnostics.golangci_lint,
 	null_ls.builtins.formatting.gofumpt,
 	null_ls.builtins.formatting.goimports,
 	null_ls.builtins.formatting.goimports_reviser,

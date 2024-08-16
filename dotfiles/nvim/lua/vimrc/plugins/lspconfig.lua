@@ -30,6 +30,11 @@ local SERVER_CONFIG_MAP = {
 	end,
 	rust_analyzer = function() end,
 	gopls = function() end,
+	golangci_lint_ls = function()
+		return make_config({
+			filetypes = { "go", "gomod" },
+		})
+	end,
 	eslint = function()
 		return make_config()
 	end,
