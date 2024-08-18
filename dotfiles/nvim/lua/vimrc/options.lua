@@ -131,5 +131,5 @@ if g.neovide then
 	g.neovide_hide_mouse_when_typing = true
 	g.neovide_fullscreen = false
 	g.neovide_input_use_logo = true
-	g.neovide_input_macos_alt_is_meta = true
+	g.neovide_input_macos_option_key_is_meta = true
 end
