@@ -28,11 +28,18 @@ local SERVER_CONFIG_MAP = {
 	tsserver = function()
 		return make_config()
 	end,
-	rust_analyzer = function() end,
-	gopls = function() end,
-	golangci_lint_ls = function()
+	cssls = function()
+		return make_config()
+	end,
+	html = function()
+		return make_config()
+	end,
+	tailwindcss = function()
+		local lspconfig = require("lspconfig")
+
 		return make_config({
-			filetypes = { "go", "gomod" },
+			filetypes = { "javascriptreact", "typescriptreact", "html" },
+			root_dir = lspconfig.util.root_pattern("tailwind.config.js", "tailwind.config.ts"),
 		})
 	end,
 	eslint = function()
@@ -73,6 +80,14 @@ local SERVER_CONFIG_MAP = {
 			},
 		})
 	end,
+	jedi_language_server = function()
+		return make_config()
+	end,
+	rust_analyzer = function() end,
+	gopls = function() end,
+	golangci_lint_ls = function()
+		return make_config({ filetypes = { "go", "gomod" } })
+	end,
 	jsonls = function()
 		local schemastore = require("schemastore")
 
@@ -103,20 +118,6 @@ local SERVER_CONFIG_MAP = {
 			},
 		})
 	end,
-	cssls = function()
-		return make_config()
-	end,
-	html = function()
-		return make_config()
-	end,
-	tailwindcss = function()
-		local lspconfig = require("lspconfig")
-
-		return make_config({
-			filetypes = { "javascriptreact", "typescriptreact", "html" },
-			root_dir = lspconfig.util.root_pattern("tailwind.config.js", "tailwind.config.ts"),
-		})
-	end,
 	marksman = function()
 		return make_config()
 	end,
@@ -130,9 +131,6 @@ local SERVER_CONFIG_MAP = {
 		return make_config()
 	end,
 	zls = function()
-		return make_config()
-	end,
-	pyright = function()
 		return make_config()
 	end,
 	svelte = function()
