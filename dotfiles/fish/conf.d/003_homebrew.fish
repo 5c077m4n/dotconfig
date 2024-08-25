@@ -5,9 +5,9 @@ set --local brew_bin_arm64 /opt/homebrew/bin/brew
 set --local brew_bin_x86 /usr/local/Homebrew/bin/brew
 
 if test -x $brew_bin_x86 -a (uname -m) != arm64 -a (arch) != arm64
-    eval ($brew_bin_x86 shellenv)
+    $brew_bin_x86 shellenv | source
 else if test -x $brew_bin_arm64
-    eval ($brew_bin_arm64 shellenv)
+    $brew_bin_arm64 shellenv | source
 end
 
 fish_add_path "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
