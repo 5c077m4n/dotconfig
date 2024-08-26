@@ -19,6 +19,7 @@ local sources = {
 	-- Python
 	null_ls.builtins.formatting.isort,
 	null_ls.builtins.formatting.black,
+	null_ls.builtins.diagnostics.pylint,
 	null_ls.builtins.diagnostics.mypy,
 	-- Typescript
 	null_ls.builtins.formatting.prettierd,
