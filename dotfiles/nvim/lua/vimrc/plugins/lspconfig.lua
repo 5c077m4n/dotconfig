@@ -1,4 +1,5 @@
 ---@param options? table
+---@return table
 local function make_config(options)
 	local capabilities = require("cmp_nvim_lsp").default_capabilities()
 	vim.tbl_extend("force", capabilities, {
