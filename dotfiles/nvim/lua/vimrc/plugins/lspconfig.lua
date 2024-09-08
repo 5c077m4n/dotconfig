@@ -30,7 +30,7 @@ end
 
 ---@type table<string, fun(): table | nil>
 local SERVER_CONFIG_MAP = {
-	tsserver = function()
+	ts_ls = function()
 		return make_config()
 	end,
 	cssls = function()
