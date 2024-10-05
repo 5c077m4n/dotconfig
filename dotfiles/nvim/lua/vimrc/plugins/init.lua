@@ -245,6 +245,7 @@ local function setup()
 				}
 			end,
 		},
+		{ "ziglang/zig.vim", ft = { "zig" } },
 		{
 			"folke/trouble.nvim",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
