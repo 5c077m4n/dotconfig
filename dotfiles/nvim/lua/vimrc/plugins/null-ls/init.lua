@@ -49,6 +49,10 @@ local sources = {
 	-- Fish
 	null_ls.builtins.formatting.fish_indent,
 	null_ls.builtins.diagnostics.fish,
+	-- Nix
+	null_ls.builtins.formatting.nixfmt,
+	null_ls.builtins.diagnostics.deadnix,
+	null_ls.builtins.code_actions.statix,
 	-- Terraform
 	null_ls.builtins.formatting.terraform_fmt,
 	-- YAML
