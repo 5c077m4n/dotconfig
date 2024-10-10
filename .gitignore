@@ -1,5 +1,13 @@
+# MacOS dir config files
 .DS_Store
+
+# ZSH histories
 .zcompdump*
 .zsh_*
 .zshrc_*
+
+# Python cache
 .mypy_cache/
+
+# Null LS cache files
+.null-ls_*
