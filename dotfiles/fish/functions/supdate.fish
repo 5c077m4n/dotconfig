@@ -1,5 +1,7 @@
 function supdate --description 'Run a full system update'
-    if type --query brew
+    if type --query darwin-rebuild && test -f ~/.config/nix/darwin/flake.nix
+        darwin-rebuild switch --flake ~/.config/nix/darwin/
+    else if type --query brew
         brew update
         brew bundle install
     else if type --query pacman
