@@ -175,6 +175,7 @@
               NSGlobalDomain = {
                 AppleShowAllFiles = true;
                 KeyRepeat = 1;
+                NSWindowShouldDragOnGesture = true;
               };
             };
           };
