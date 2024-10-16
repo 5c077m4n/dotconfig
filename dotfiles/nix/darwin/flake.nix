@@ -197,6 +197,7 @@
               "lulu"
               "maccy"
               "karabiner-elements"
+              "libreoffice"
             ];
           };
         };
