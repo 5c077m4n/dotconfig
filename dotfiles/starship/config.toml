@@ -70,7 +70,7 @@ disabled = true
 disabled = true
 
 [nix_shell]
-disabled = true
+disabled = false
 
 [ocaml]
 disabled = true
