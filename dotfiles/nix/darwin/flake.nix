@@ -49,6 +49,7 @@
               starship
               ranger
               eza
+              bat
               # Search
               fd
               fzf
