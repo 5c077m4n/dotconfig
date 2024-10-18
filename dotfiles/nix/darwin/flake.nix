@@ -54,9 +54,6 @@
               fd
               fzf
               ripgrep
-              # Window Tiling
-              yabai
-              skhd
               # LLMs
               ollama
               # Shells
@@ -129,15 +126,6 @@
           services = {
             # Auto upgrade nix package and the daemon service.
             nix-daemon.enable = true;
-
-            yabai = {
-              enable = true;
-              package = pkgs.yabai;
-            };
-            skhd = {
-              enable = true;
-              package = pkgs.skhd;
-            };
           };
 
           security.pam.enableSudoTouchIdAuth = true;
@@ -177,6 +165,7 @@
                 AppleShowAllFiles = true;
                 KeyRepeat = 1;
                 NSWindowShouldDragOnGesture = true;
+                NSAutomaticWindowAnimationsEnabled = false;
               };
             };
           };
@@ -185,7 +174,7 @@
             enable = true;
             onActivation.cleanup = "zap";
 
-            taps = [ ];
+            taps = [ "nikitabobko/tap" ];
             brews = [ ];
             casks = [
               "arc"
@@ -199,6 +188,7 @@
               "maccy"
               "karabiner-elements"
               "libreoffice"
+              "nikitabobko/tap/aerospace"
             ];
           };
         };
