@@ -22,7 +22,7 @@ local sources = {
 	null_ls.builtins.diagnostics.pylint.with({ prefer_local = ".venv/bin" }),
 	null_ls.builtins.diagnostics.mypy.with({ prefer_local = ".venv/bin" }),
 	-- Typescript
-	null_ls.builtins.formatting.prettierd,
+	null_ls.builtins.formatting.prettierd.with({ extra_filetypes = { "toml" } }),
 	-- CSS
 	null_ls.builtins.formatting.stylelint,
 	-- Rust
