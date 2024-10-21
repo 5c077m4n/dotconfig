@@ -32,7 +32,7 @@
 				statix check "$file"
 				nixfmt --check "$file"
 
-				darwin-rebuild check --flake "${root_dir}/dotfiles/nix/darwin"
+				darwin-rebuild check --flake "${root_dir}"
 				;;
 			*)
 				echo "🤷 Unknown file type 🤷\n"
