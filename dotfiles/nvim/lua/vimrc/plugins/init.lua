@@ -121,8 +121,8 @@ local function setup()
 				require("lsp-progress").setup()
 			end,
 		},
-		{ "fladson/vim-kitty", ft = { "kitty" }, event = { "VeryLazy" }, lazy = true },
-		{ "tmux-plugins/vim-tmux", ft = { "tmux" }, event = { "VeryLazy" }, lazy = true },
+		{ "fladson/vim-kitty", ft = { "kitty" } },
+		{ "tmux-plugins/vim-tmux", ft = { "tmux" } },
 		{
 			"nvim-neo-tree/neo-tree.nvim",
 			branch = "v3.x",
@@ -220,12 +220,11 @@ local function setup()
 				require("vimrc.plugins.lspconfig").setup()
 			end,
 		},
-		{ "b0o/schemastore.nvim", ft = { "json", "jsonc", "yaml" }, event = { "VeryLazy" } },
+		{ "b0o/schemastore.nvim", ft = { "json", "jsonc", "yaml" } },
 		{
 			"mrcjkb/rustaceanvim",
 			version = "^4",
 			ft = { "rust" },
-			event = { "VeryLazy" },
 			init = function()
 				vim.g.rustaceanvim = {
 					server = {
