@@ -2,8 +2,16 @@ name: Lint python
 
 on:
   push:
+    paths:
+      - "**/*.py"
   pull_request:
-  workflow_dispatch:
+    paths:
+      - "**/*.py"
+  workflow_dispatch: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   lint:

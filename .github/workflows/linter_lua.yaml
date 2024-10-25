@@ -3,11 +3,15 @@ name: Lint neovim lua config
 on:
   push:
     paths:
-      - dotfiles/nvim/**
+      - "dotfiles/nvim/**/*.lua"
   pull_request:
     paths:
-      - dotfiles/nvim/**
+      - "dotfiles/nvim/**/*.lua"
   workflow_dispatch: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   lint:
