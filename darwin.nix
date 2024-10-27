@@ -1,9 +1,7 @@
 {
   self,
-  username,
-}:
-{
   pkgs,
+  username,
   ...
 }:
 let
@@ -33,12 +31,6 @@ in
   };
 
   security.pam.enableSudoTouchIdAuth = true;
-
-  programs = {
-    # Create /etc/zshrc that loads the nix-darwin environment.
-    zsh.enable = true;
-    fish.enable = true;
-  };
 
   system = {
     # Set Git commit hash for darwin-version.
