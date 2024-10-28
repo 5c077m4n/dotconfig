@@ -46,6 +46,8 @@ in
           beautysh
           ## Fish
           fish
+          fishPlugins.fzf-fish
+          fishPlugins.autopair
           # JavaScript
           nodejs_22
           deno
@@ -86,7 +88,7 @@ in
           # DBs
           ## TUIs
           pgcli
-          #mycli
+          mycli
           # Bluetooth
           blueutil
           # Fonts
@@ -127,7 +129,20 @@ in
 
       programs = {
         home-manager.enable = true;
-        fish.enable = true;
+
+        fish = {
+          enable = true;
+          plugins = [
+            {
+              name = "fzf-fish";
+              inherit (pkgs.fishPlugins.fzf-fish) src;
+            }
+            {
+              name = "autopair";
+              inherit (pkgs.fishPlugins.autopair) src;
+            }
+          ];
+        };
       };
     };
   };
