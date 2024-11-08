@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.05-darwin";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,16 +19,24 @@
       self,
       nix-darwin,
       home-manager,
+      nixpkgs-unstable,
       ...
     }:
     let
       configName = "tickle";
       username = "roee";
+      hostPlatform = "aarch64-darwin";
+      pkgs-unstable = nixpkgs-unstable.legacyPackages.${hostPlatform};
     in
     {
       darwinConfigurations.${configName} = nix-darwin.lib.darwinSystem {
         specialArgs = {
-          inherit self username;
+          inherit
+            self
+            username
+            hostPlatform
+            pkgs-unstable
+            ;
         };
         modules = [
           (import ./darwin.nix)
