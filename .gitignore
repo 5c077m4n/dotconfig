@@ -11,6 +11,3 @@
 
 # Null LS cache files
 .null-ls_*
-
-# Nix lockfile
-/flake.lock
