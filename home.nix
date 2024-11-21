@@ -126,12 +126,6 @@ in
             recursive = true;
           };
         };
-
-        sessionVariables = {
-          EDITOR = "nvim";
-          VISUAL = "nvim";
-        };
-
       };
 
       programs = {
@@ -139,6 +133,7 @@ in
 
         fish = {
           enable = true;
+
           plugins = [
             {
               name = "fzf-fish";
@@ -149,6 +144,32 @@ in
               inherit (pkgs.fishPlugins.autopair) src;
             }
           ];
+        };
+
+        tmux = {
+          enable = true;
+
+          plugins =
+            let
+              inherit (pkgs) tmuxPlugins fetchFromGitHub;
+            in
+            [
+              tmuxPlugins.sensible
+              tmuxPlugins.resurrect
+              tmuxPlugins.catppuccin
+              (tmuxPlugins.mkTmuxPlugin {
+                pluginName = "tmux.nvim";
+                version = "master";
+                src = fetchFromGitHub {
+                  owner = "aserowy";
+                  repo = "tmux.nvim";
+                  rev = "307bad95a1274f7288aaee09694c25c8cbcd6f1a";
+                  sha256 = "sha256-c/1swuJ6pIiaU8+i62Di/1L/b4V9+5WIVzVVSJJ4ls8=";
+                };
+              })
+              # Must be the last plugin to be cofigured https://github.com/tmux-plugins/tmux-continuum#known-issues
+              tmuxPlugins.continuum
+            ];
         };
       };
     };
