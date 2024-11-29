@@ -90,6 +90,7 @@
       "karabiner-elements"
       "libreoffice"
       "nikitabobko/tap/aerospace"
+	  "zen-browser"
     ];
   };
 }
