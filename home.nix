@@ -5,7 +5,7 @@
   ...
 }:
 let
-  stateVersion = "24.05";
+  stateVersion = "24.11";
 in
 {
   home-manager = {
@@ -134,41 +134,68 @@ in
         fish = {
           enable = true;
 
-          plugins = [
-            {
-              name = "fzf-fish";
-              inherit (pkgs.fishPlugins.fzf-fish) src;
-            }
-            {
-              name = "autopair";
-              inherit (pkgs.fishPlugins.autopair) src;
-            }
-          ];
+          plugins =
+            let
+              inherit (pkgs) fishPlugins;
+            in
+            [
+              {
+                name = "fzf-fish";
+                inherit (fishPlugins.fzf-fish) src;
+              }
+              {
+                name = "autopair";
+                inherit (fishPlugins.autopair) src;
+              }
+            ];
         };
 
         tmux = {
           enable = true;
+          clock24 = true;
 
           plugins =
             let
               inherit (pkgs) tmuxPlugins fetchFromGitHub;
-            in
-            [
-              tmuxPlugins.sensible
-              tmuxPlugins.resurrect
-              tmuxPlugins.catppuccin
-              (tmuxPlugins.mkTmuxPlugin {
+              tmux-nvim = tmuxPlugins.mkTmuxPlugin {
                 pluginName = "tmux.nvim";
-                version = "master";
+                version = "unstable-2024-12-01";
                 src = fetchFromGitHub {
                   owner = "aserowy";
                   repo = "tmux.nvim";
                   rev = "307bad95a1274f7288aaee09694c25c8cbcd6f1a";
                   sha256 = "sha256-c/1swuJ6pIiaU8+i62Di/1L/b4V9+5WIVzVVSJJ4ls8=";
                 };
-              })
-              # Must be the last plugin to be cofigured https://github.com/tmux-plugins/tmux-continuum#known-issues
-              tmuxPlugins.continuum
+              };
+            in
+            [
+              tmuxPlugins.sensible
+              tmux-nvim
+              {
+                plugin = tmuxPlugins.catppuccin;
+                extraConfig = ''
+                  set -g @catppuccin_flavour 'macchiato'
+                  set -g @catppuccin_window_tabs_enabled on
+                  set -g @catppuccin_date_time "%H:%M"
+                '';
+              }
+              {
+                plugin = tmuxPlugins.resurrect;
+                extraConfig = ''
+                  set -g @resurrect-strategy-vim 'session'
+                  set -g @resurrect-strategy-nvim 'session'
+                  set -g @resurrect-capture-pane-contents 'on'
+                '';
+              }
+              {
+                # Must be the last plugin to be cofigured https://github.com/tmux-plugins/tmux-continuum#known-issues
+                plugin = tmuxPlugins.continuum;
+                extraConfig = ''
+                  set -g @continuum-restore 'on'
+                  set -g @continuum-boot 'on'
+                  set -g @continuum-save-interval '10'
+                '';
+              }
             ];
         };
       };
