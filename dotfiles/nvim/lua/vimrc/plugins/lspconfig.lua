@@ -143,13 +143,15 @@ local SERVER_CONFIG_MAP = {
 		return make_config({ filetypes = { "go", "gomod" } })
 	end,
 	nil_ls = function()
-		return make_config({
-			settings = {
-				nix = {
-					flake = { autoArchive = true },
+		if vim.fn.executable("nix") == 1 then
+			return make_config({
+				settings = {
+					nix = {
+						flake = { autoArchive = true },
+					},
 				},
-			},
-		})
+			})
+		end
 	end,
 	jsonls = function()
 		local schemastore = require("schemastore")
