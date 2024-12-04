@@ -118,3 +118,10 @@ end, { desc = "Enable diagnostics for all buffers" })
 keymap.nnoremap("<leader>dN", function()
 	vim.diagnostic.enable(true, { bufnr = nil })
 end, { desc = "Disable diagnostics for all buffers" })
+
+if vim.g.neovide then
+	keymap.nvcinoremap("<D-v>", function()
+		local clipboard_content = vim.fn.getreg("+")
+		vim.api.nvim_paste(clipboard_content, true, -1)
+	end, { desc = "Paste system clipboard into Neovide" })
+end
