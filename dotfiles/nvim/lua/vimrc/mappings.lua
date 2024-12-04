@@ -1,6 +1,8 @@
 local utils = require("vimrc.utils")
 
-local module_utils, signals, keymap = utils.modules, utils.signals, utils.keymapping
+local module_utils = utils.modules
+local signals = utils.signals
+local keymap = utils.keymapping
 local create_command = vim.api.nvim_create_user_command
 
 ---@param cmd string
