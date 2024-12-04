@@ -123,13 +123,11 @@ if vim.loop.os_uname().sysname ~= "Windows" then
 end
 
 if g.neovide then
-	g.neovide_refresh_rate = 60
-	g.neovide_refresh_rate_idle = 10
-	g.neovide_transparency = 1
-	g.neovide_cursor_vfx_mode = "railgun"
-	g.neovide_scroll_animation_length = 0.5
-	g.neovide_hide_mouse_when_typing = true
-	g.neovide_fullscreen = false
-	g.neovide_input_use_logo = true
-	g.neovide_input_macos_option_key_is_meta = true
+	g.neovide_position_animation_length = 0
+	g.neovide_cursor_animation_length = 0.00
+	g.neovide_cursor_trail_size = 0
+	g.neovide_cursor_animate_in_insert_mode = false
+	g.neovide_cursor_animate_command_line = false
+	g.neovide_scroll_animation_far_lines = 0
+	g.neovide_scroll_animation_length = 0.00
 end
