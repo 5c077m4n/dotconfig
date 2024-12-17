@@ -12,34 +12,28 @@ local LOG_LEVELS = {
 	vim_log_levels.INFO, -- map both hint and info to info
 }
 
-local autoread_on_buffer_change_id = create_augroup("autoread_on_buffer_change", { clear = true })
 create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
-	group = autoread_on_buffer_change_id,
+	group = create_augroup("autoread_on_buffer_change", { clear = true }),
 	command = "checktime",
 	desc = "Re-read file when re-entering and idle",
 })
 
-local last_read_point_on_file_open_id =
-	create_augroup("last_read_point_on_file_open", { clear = true })
 create_autocmd({ "BufReadPost" }, {
-	group = last_read_point_on_file_open_id,
+	group = create_augroup("last_read_point_on_file_open", { clear = true }),
 	callback = utils.misc.jump_to_last_visited,
 	desc = "Goto last visited line in file",
 })
 
-local highlight_yank_id = create_augroup("highlight_yank", { clear = true })
 create_autocmd({ "TextYankPost" }, {
-	group = highlight_yank_id,
+	group = create_augroup("highlight_yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 500 })
 	end,
 	desc = "Highlight copied text",
 })
 
-local delete_trailing_spaces_on_save_id =
-	create_augroup("delete_trailing_spaces_on_save", { clear = true })
 create_autocmd({ "BufWritePre" }, {
-	group = delete_trailing_spaces_on_save_id,
+	group = create_augroup("delete_trailing_spaces_on_save", { clear = true }),
 	callback = utils.misc.clean_extra_spaces,
 	desc = "Delete trailing whitespaces from line ends on save",
 })
@@ -60,9 +54,8 @@ create_autocmd({ "WinLeave" }, {
 	desc = "Remove highlight cursor line when exiting buffer",
 })
 
-local lsp_attach_id = create_augroup("lsp_attach", { clear = true })
 create_autocmd({ "LspAttach" }, {
-	group = lsp_attach_id,
+	group = create_augroup("lsp_attach", { clear = true }),
 	callback = function(args)
 		local telescope_builtin = require("telescope.builtin")
 		local keymap = utils.keymapping
@@ -185,12 +178,21 @@ create_autocmd({ "LspAttach" }, {
 	desc = "Setup LSP config on attach",
 })
 
-local open_python_wheel_id = create_augroup("open_python_wheel", { clear = true })
 create_autocmd({ "BufReadCmd" }, {
 	pattern = { "*.whl" },
-	group = open_python_wheel_id,
+	group = create_augroup("open_python_wheel", { clear = true }),
 	callback = function()
 		vim.fn["zip#Browse"](vim.fn.expand("<amatch>"))
 	end,
 	desc = "View python `*.whl` files",
+})
+
+create_autocmd("TermOpen", {
+	group = create_augroup("term_open", { clear = true }),
+	callback = function()
+		vim.opt.number = false
+		vim.opt.relativenumber = false
+		vim.cmd.startinsert()
+	end,
+	desc = "Make the Nvim terminal feel native",
 })
