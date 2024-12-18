@@ -1,12 +1,11 @@
-local cmp = require("cmp_nvim_lsp")
+local blink_cmp = require("blink.cmp")
 
 ---@param options? table
 ---@return table
 local function make_config(options)
-	local cmp_capabilities = cmp.default_capabilities()
-	local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
+	local cmp_capabilities = blink_cmp.get_lsp_capabilities()
 
-	local merged_capabilities = vim.tbl_deep_extend("force", lsp_capabilities, cmp_capabilities, {
+	local merged_capabilities = vim.tbl_deep_extend("force", cmp_capabilities, {
 		textDocument = {
 			completion = {
 				completionItem = { snippetSupport = true },
