@@ -127,6 +127,25 @@ in
             # Misc
             pkgs.gopass
             pkgs.android-tools # ADB
+            # MacOS Applications
+            pkgs.arc-browser
+            pkgs.kitty
+            pkgs.iterm2
+            pkgs.vscodium
+            pkgs.inkscape
+            pkgs.aerospace
+            (pkgs.maccy.overrideAttrs (
+              let
+                version = "2.3.0";
+              in
+              {
+                inherit version;
+                src = builtins.fetchurl {
+                  url = "https://github.com/p0deje/Maccy/releases/download/${version}/Maccy.app.zip";
+                  sha256 = "sha256:17dhaqyrbjl9ck33p64a480zaf7sqd6lrp0da4knagdgffvz9fiy";
+                };
+              }
+            ))
             pkgs.keepassxc
           ];
 
