@@ -112,7 +112,10 @@ in
             pkgs-unstable.kubectx
             pkgs-unstable.k9s
             # Docker
-            pkgs-unstable.docker_27
+            pkgs.docker
+            pkgs.colima
+            pkgs.docker-buildx
+            pkgs.docker-compose
             # DBs
             ## TUIs
             pkgs.pgcli
