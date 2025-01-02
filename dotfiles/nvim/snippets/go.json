@@ -1,0 +1,15 @@
+{
+	"If error isn't nil then return it": {
+		"body": ["if err != nil {", "\treturn err", "}"],
+		"prefix": "iferr"
+	},
+	"Structured log": {
+		"body": [
+			"slog.${1:Info}(",
+			"\t\"${2:title}\",",
+			"\t\"${3:value}\", ${4:content},",
+			")"
+		],
+		"prefix": "log"
+	}
+}
