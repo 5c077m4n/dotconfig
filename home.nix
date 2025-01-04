@@ -116,6 +116,7 @@ in
             pkgs.colima
             pkgs.docker-buildx
             pkgs.docker-compose
+            pkgs.lazydocker
             # DBs
             ## TUIs
             pkgs.pgcli
