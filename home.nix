@@ -2,10 +2,23 @@
   pkgs,
   pkgs-unstable,
   username,
+  hostPlatform,
   ...
 }:
 let
   stateVersion = "24.11";
+
+  inherit (pkgs) lib;
+  pkgs-master = import pkgs-unstable {
+    system = hostPlatform;
+    config = {
+      allowUnfreePredicate =
+        pkg:
+        builtins.elem (lib.getName pkg) [
+          "arc-browser"
+        ];
+    };
+  };
 in
 {
   home-manager = {
@@ -38,7 +51,7 @@ in
 
           packages = [
             # General
-            pkgs-unstable.neovim
+            pkgs-master.neovim
             pkgs.tmux
             pkgs.htop
             pkgs.curl
@@ -74,24 +87,24 @@ in
             pkgs.fishPlugins.autopair
             # JavaScript
             pkgs.nodejs_22
-            pkgs-unstable.deno
-            pkgs-unstable.eslint_d
-            pkgs-unstable.prettierd
-            pkgs-unstable.pnpm
-            pkgs-unstable.yarn-berry # `yarn` >=4.5
+            pkgs-master.deno
+            pkgs-master.eslint_d
+            pkgs-master.prettierd
+            pkgs-master.pnpm
+            pkgs-master.yarn-berry # `yarn` >=4.5
             # Python
-            pkgs-unstable.python313
-            pkgs-unstable.pyenv
-            pkgs-unstable.poetry
-            pkgs-unstable.mypy
-            pkgs-unstable.pylint
-            pkgs-unstable.black
-            pkgs-unstable.isort
+            pkgs-master.python313
+            pkgs-master.pyenv
+            pkgs-master.poetry
+            pkgs-master.mypy
+            pkgs-master.pylint
+            pkgs-master.black
+            pkgs-master.isort
             # Golang
-            pkgs-unstable.go
-            pkgs-unstable.golangci-lint
+            pkgs-master.go
+            pkgs-master.golangci-lint
             # Rust
-            pkgs-unstable.rustup
+            pkgs-master.rustup
             # Zig
             pkgs.zig
             pkgs.zls
@@ -109,8 +122,8 @@ in
             # YAML
             pkgs.yamllint
             # K8s
-            pkgs-unstable.kubectx
-            pkgs-unstable.k9s
+            pkgs-master.kubectx
+            pkgs-master.k9s
             # Docker
             pkgs.docker
             pkgs.colima
@@ -134,7 +147,7 @@ in
             pkgs.gopass
             pkgs.android-tools # ADB
             # MacOS Applications
-            pkgs.arc-browser
+            pkgs-master.arc-browser
             pkgs.kitty
             pkgs.iterm2
             pkgs.neovide
