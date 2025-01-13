@@ -102,6 +102,7 @@ in
             pkgs-master.isort
             # Golang
             pkgs-master.go
+            pkgs-master.tinygo
             pkgs-master.golangci-lint
             # Rust
             pkgs-master.rustup
@@ -119,6 +120,8 @@ in
             pkgs.statix
             pkgs.deadnix
             pkgs.nil
+            # WASM
+            pkgs-master.wasmtime
             # YAML
             pkgs.yamllint
             # K8s
