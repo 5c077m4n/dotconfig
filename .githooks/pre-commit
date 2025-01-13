@@ -35,7 +35,7 @@
 				darwin-rebuild check --flake "${root_dir}"
 				;;
 			*)
-				echo "🤷 Unknown file type 🤷\n"
+				echo "🤷 Unknown file type ($file) 🤷\n"
 				;;
 		esac
 	done
