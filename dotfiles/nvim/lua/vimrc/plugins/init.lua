@@ -153,6 +153,7 @@ local function setup()
 						"vimdoc",
 						"git_config",
 						"ssh_config",
+						"gleam",
 					},
 					highlight = {
 						enable = true,

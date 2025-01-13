@@ -51,6 +51,8 @@ local sources = {
 	null_ls.builtins.formatting.nixfmt,
 	null_ls.builtins.diagnostics.deadnix,
 	null_ls.builtins.code_actions.statix,
+	-- Gleam
+	null_ls.builtins.formatting.gleam_format,
 	-- Terraform
 	null_ls.builtins.formatting.terraform_fmt,
 	-- YAML
