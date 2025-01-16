@@ -2,23 +2,10 @@
   pkgs,
   pkgs-unstable,
   username,
-  hostPlatform,
   ...
 }:
 let
   stateVersion = "24.11";
-
-  inherit (pkgs) lib;
-  pkgs-master = import pkgs-unstable {
-    system = hostPlatform;
-    config = {
-      allowUnfreePredicate =
-        pkg:
-        builtins.elem (lib.getName pkg) [
-          "arc-browser"
-        ];
-    };
-  };
 in
 {
   home-manager = {
@@ -27,31 +14,14 @@ in
     backupFileExtension = "backup";
 
     users.${username} =
-      { lib, config, ... }:
+      { config, ... }:
       {
         home = {
           inherit stateVersion;
 
-          activation =
-            let
-              inherit (lib.hm.dag) entryAfter;
-              inherit (config.home) homeDirectory;
-              inherit (pkgs) rsync;
-            in
-            {
-              rsync-home-manager-applications = entryAfter [ "writeBoundary" ] ''
-                apps_source="$genProfilePath/home-path/Applications"
-                moniker="Home Manager Trampolines"
-                app_target_base="${homeDirectory}/Applications"
-                app_target="$app_target_base/$moniker"
-                mkdir -p "$app_target"
-                ${rsync}/bin/rsync --archive --checksum --chmod=-w --copy-unsafe-links --delete "$apps_source/" "$app_target"
-              '';
-            };
-
           packages = [
             # General
-            pkgs-master.neovim
+            pkgs-unstable.neovim
             pkgs.tmux
             pkgs.htop
             pkgs.curl
@@ -87,26 +57,26 @@ in
             pkgs.fishPlugins.autopair
             # JavaScript
             pkgs.nodejs_22
-            pkgs-master.deno
-            pkgs-master.eslint_d
-            pkgs-master.prettierd
-            pkgs-master.pnpm
-            pkgs-master.yarn-berry # `yarn` >=4.5
+            pkgs-unstable.deno
+            pkgs-unstable.eslint_d
+            pkgs-unstable.prettierd
+            pkgs-unstable.pnpm
+            pkgs-unstable.yarn-berry # `yarn` >=4.5
             # Python
-            pkgs-master.python313
-            pkgs-master.pyenv
-            pkgs-master.poetry
-            pkgs-master.mypy
-            pkgs-master.pylint
-            pkgs-master.black
-            pkgs-master.isort
+            pkgs-unstable.python313
+            pkgs-unstable.pyenv
+            pkgs-unstable.poetry
+            pkgs-unstable.mypy
+            pkgs-unstable.pylint
+            pkgs-unstable.black
+            pkgs-unstable.isort
             # Golang
-            pkgs-master.go
-            pkgs-master.air # Live reloader
-            pkgs-master.tinygo
-            pkgs-master.golangci-lint
+            pkgs-unstable.go
+            pkgs-unstable.air # Live reloader
+            pkgs-unstable.tinygo
+            pkgs-unstable.golangci-lint
             # Rust
-            pkgs-master.rustup
+            pkgs-unstable.rustup
             # Zig
             pkgs.zig
             pkgs.zls
@@ -122,14 +92,14 @@ in
             pkgs.deadnix
             pkgs.nil
             # WASM
-            pkgs-master.wasmtime
+            pkgs-unstable.wasmtime
             # Gleam
-            pkgs-master.gleam
+            pkgs-unstable.gleam
             # YAML
             pkgs.yamllint
             # K8s
-            pkgs-master.kubectx
-            pkgs-master.k9s
+            pkgs-unstable.kubectx
+            pkgs-unstable.k9s
             # Docker
             pkgs.docker
             pkgs.colima
@@ -152,27 +122,6 @@ in
             # Misc
             pkgs.gopass
             pkgs.android-tools # ADB
-            # MacOS Applications
-            pkgs-master.arc-browser
-            pkgs.kitty
-            pkgs.iterm2
-            pkgs.neovide
-            pkgs.vscodium
-            pkgs.inkscape
-            pkgs.aerospace
-            (pkgs.maccy.overrideAttrs (
-              let
-                version = "2.3.0";
-              in
-              {
-                inherit version;
-                src = builtins.fetchurl {
-                  url = "https://github.com/p0deje/Maccy/releases/download/${version}/Maccy.app.zip";
-                  sha256 = "sha256:17dhaqyrbjl9ck33p64a480zaf7sqd6lrp0da4knagdgffvz9fiy";
-                };
-              }
-            ))
-            pkgs.keepassxc
           ];
 
           file = {

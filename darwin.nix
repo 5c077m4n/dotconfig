@@ -76,7 +76,9 @@
     enable = true;
     onActivation.cleanup = "zap";
 
-    taps = [ ];
+    taps = [
+      "nikitabobko/tap"
+    ];
     brews = [ ];
     casks = [
       "displaylink"
@@ -84,6 +86,15 @@
       "karabiner-elements"
       "libreoffice"
       "zen-browser"
+      "arc"
+      "kitty"
+      "iterm2"
+      "neovide"
+      "vscodium"
+      "inkscape"
+      "nikitabobko/tap/aerospace"
+      "maccy"
+      "keepassxc"
     ];
   };
 }
