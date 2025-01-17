@@ -77,6 +77,7 @@ in
             pkgs-unstable.golangci-lint
             # Rust
             pkgs-unstable.rustup
+            pkgs-unstable.cargo-insta # Snapshot testing
             # Zig
             pkgs.zig
             pkgs.zls
