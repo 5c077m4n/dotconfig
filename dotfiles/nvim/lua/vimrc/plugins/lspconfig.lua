@@ -158,8 +158,10 @@ local SERVER_CONFIG_MAP = {
 		if vim.fn.executable("nix") == 1 then
 			return make_config({
 				settings = {
-					nix = {
-						flake = { autoArchive = true },
+					["nil"] = {
+						nix = {
+							flake = { autoArchive = true },
+						},
 					},
 				},
 			})
