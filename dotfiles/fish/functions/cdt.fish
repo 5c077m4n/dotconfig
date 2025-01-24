@@ -1,3 +1,3 @@
 function cdt --description "Chage dir into temp"
-    cd (mktemp -d)
+    cd (mktemp --directory)
 end
