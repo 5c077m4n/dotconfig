@@ -101,12 +101,11 @@ in
             # K8s
             pkgs-unstable.kubectx
             pkgs-unstable.k9s
-            # Docker
-            pkgs.docker
-            pkgs.colima
-            pkgs.docker-buildx
-            pkgs.docker-compose
-            pkgs.lazydocker
+            # Containers
+            ## Podman
+            pkgs-unstable.podman
+            pkgs-unstable.podman-tui
+            pkgs-unstable.podman-compose
             # DBs
             ## TUIs
             pkgs.pgcli
