@@ -58,11 +58,11 @@ in
             pkgs.fishPlugins.autopair
             # JavaScript
             pkgs.nodejs_22
+            pkgs.eslint_d
+            pkgs.prettierd
+            pkgs.pnpm
+            pkgs.yarn-berry # `yarn` >=4.5
             pkgs-unstable.deno
-            pkgs-unstable.eslint_d
-            pkgs-unstable.prettierd
-            pkgs-unstable.pnpm
-            pkgs-unstable.yarn-berry # `yarn` >=4.5
             # Python
             pkgs-unstable.python313
             pkgs-unstable.pyenv
