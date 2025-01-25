@@ -38,9 +38,10 @@ in
             pkgs.git-absorb
             # TUI
             pkgs.starship
-            pkgs.ranger
+            pkgs.lf
             pkgs.eza
             pkgs.bat
+            pkgs.procs
             # Search
             pkgs.fd
             pkgs.fzf
