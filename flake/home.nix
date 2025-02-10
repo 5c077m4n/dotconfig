@@ -16,134 +16,165 @@ in
     users.${username} =
       { config, ... }:
       {
-        home = {
-          inherit stateVersion;
+        home =
+          let
+            inherit (pkgs) lib stdenv;
+          in
+          {
+            inherit stateVersion;
 
-          packages = [
-            # General
-            pkgs-unstable.neovim
-            pkgs.tmux
-            pkgs.htop
-            pkgs.curl
-            pkgs.wget
-            pkgs.coreutils
-            pkgs.jq
-            pkgs.yq
-            pkgs.openssh
-            # VCS
-            pkgs.git
-            pkgs.hub
-            pkgs.lazygit
-            pkgs.delta
-            pkgs.git-absorb
-            # TUI
-            pkgs.starship
-            pkgs.lf
-            pkgs.eza
-            pkgs.bat
-            pkgs.procs
-            # Search
-            pkgs.fd
-            pkgs.fzf
-            pkgs.ripgrep
-            # LLMs
-            pkgs.ollama
-            # Shells
-            ## ZSH
-            pkgs.zsh
-            pkgs.beautysh
-            ## Fish
-            pkgs.fish
-            pkgs.fishPlugins.fzf-fish
-            pkgs.fishPlugins.autopair
-            # JavaScript
-            pkgs.nodejs_22
-            pkgs.eslint_d
-            pkgs.prettierd
-            pkgs.pnpm
-            pkgs.yarn-berry # `yarn` >=4.5
-            pkgs-unstable.deno
-            # Python
-            pkgs-unstable.python313
-            pkgs-unstable.pyenv
-            pkgs-unstable.poetry
-            pkgs-unstable.mypy
-            pkgs-unstable.pylint
-            pkgs-unstable.black
-            pkgs-unstable.isort
-            # Golang
-            pkgs-unstable.go
-            pkgs-unstable.air # Live reloader
-            pkgs-unstable.tinygo
-            pkgs-unstable.golangci-lint
-            # Rust
-            pkgs-unstable.rustup
-            pkgs-unstable.cargo-insta # Snapshot testing
-            pkgs-unstable.pkg-config
-            pkgs-unstable.openssl
-            # Zig
-            pkgs.zig
-            pkgs.zls
-            # Lua
-            pkgs.luajit
-            pkgs.luajitPackages.luacheck
-            pkgs.luarocks
-            pkgs.stylua
-            pkgs.selene
-            # Nix
-            pkgs.nixfmt-rfc-style
-            pkgs.statix
-            pkgs.deadnix
-            pkgs.nil
-            # WASM
-            pkgs-unstable.wasmtime
-            # Gleam
-            pkgs-unstable.gleam
-            pkgs-unstable.erlang
-            # YAML
-            pkgs.yamllint
-            # K8s
-            pkgs-unstable.kubectx
-            pkgs-unstable.k9s
-            # Containers
-            ## Podman
-            pkgs-unstable.podman
-            pkgs-unstable.podman-tui
-            pkgs-unstable.podman-compose
-            # DBs
-            ## TUIs
-            pkgs.pgcli
-            pkgs.mycli
-            # Bluetooth
-            pkgs.blueutil
-            # Fonts
-            (pkgs.nerdfonts.override {
-              fonts = [
-                "FiraMono"
-                "Hack"
+            packages =
+              [
+                # General
+                pkgs-unstable.neovim
+                pkgs.tmux
+                pkgs.htop
+                pkgs.curl
+                pkgs.wget
+                pkgs.coreutils
+                pkgs.jq
+                pkgs.yq
+                pkgs.openssh
+                pkgs.less
+                pkgs.busybox
+                pkgs.gnumake
+                pkgs.gcc
+                # VCS
+                ## Git
+                pkgs.git
+                pkgs.hub
+                pkgs.lazygit
+                pkgs.delta
+                pkgs.git-absorb
+                # TUI
+                pkgs.starship
+                pkgs.lf
+                pkgs.eza
+                pkgs.bat
+                pkgs.procs
+                # Search
+                pkgs.fd
+                pkgs.fzf
+                pkgs.ripgrep
+                # LLMs
+                pkgs.ollama
+                # Shells
+                ## ZSH
+                pkgs.zsh
+                pkgs.beautysh
+                ## Fish
+                pkgs.fish
+                pkgs.fishPlugins.fzf-fish
+                pkgs.fishPlugins.autopair
+                # JavaScript
+                pkgs.nodejs_22
+                pkgs.eslint_d
+                pkgs.prettierd
+                pkgs.pnpm
+                pkgs.yarn-berry # `yarn` >=4.5
+                pkgs-unstable.deno
+                # Python
+                pkgs-unstable.python310
+                pkgs-unstable.pyenv
+                pkgs-unstable.poetry
+                pkgs-unstable.mypy
+                pkgs-unstable.pylint
+                pkgs-unstable.black
+                pkgs-unstable.isort
+                # Golang
+                pkgs-unstable.go
+                pkgs-unstable.air # Live reloader
+                pkgs-unstable.tinygo
+                pkgs-unstable.golangci-lint
+                # Rust
+                pkgs-unstable.rustup
+                pkgs-unstable.cargo-insta # Snapshot testing
+                pkgs-unstable.pkg-config
+                pkgs-unstable.openssl
+                # Zig
+                pkgs.zig
+                pkgs.zls
+                # Lua
+                pkgs.luajit
+                pkgs.luajitPackages.luacheck
+                pkgs.luarocks
+                pkgs.stylua
+                pkgs.selene
+                # Nix
+                pkgs.nixfmt-rfc-style
+                pkgs.statix
+                pkgs.deadnix
+                pkgs.nil
+                # WASM
+                pkgs-unstable.wasmtime
+                # Gleam
+                pkgs-unstable.gleam
+                pkgs-unstable.erlang
+                # YAML
+                pkgs.yamllint
+                # Markdown
+                pkgs.marksman
+                # K8s
+                pkgs-unstable.kubectx
+                pkgs-unstable.k9s
+                # Containers
+                ## Podman
+                pkgs-unstable.podman
+                pkgs-unstable.podman-compose
+                # DBs
+                ## TUIs
+                pkgs.pgcli
+                pkgs.mycli
+                ## SQL
+                ### Formatters
+                pkgs.sqlfluff
+                # Fonts
+                (pkgs.nerdfonts.override {
+                  fonts = [
+                    "FiraMono"
+                    "Hack"
+                  ];
+                })
+                # Cloud
+                pkgs.awscli2
+                # Misc
+                pkgs.gopass
+                pkgs.android-tools # ADB
+              ]
+              ++ lib.optionals stdenv.isLinux [
+                # CLI utils
+                pkgs.xclip
+                # GUIs
+                pkgs.firefox
+                pkgs.google-chrome
+                pkgs.kitty
+              ]
+              ++ lib.optionals stdenv.isDarwin [
+                # Bluetooth
+                pkgs.blueutil
               ];
-            })
-            # Misc
-            pkgs.gopass
-            pkgs.android-tools # ADB
-          ];
 
-          file = {
-            # Legacy config files
-            ".ideavimrc".source = ./home_dotfiles/.ideavimrc;
-            ".sleep".source = ./home_dotfiles/.sleep;
-            ".wakeup".source = ./home_dotfiles/.wakeup;
-            # XDG standard config files
-            ".local/bin" = {
-              source = ./dotlocal/bin;
-              recursive = true;
+            sessionVariables = {
+              # To fix python's pandas package from erroring on `libstdc++.os.6` file not being found
+              LD_LIBRARY_PATH = "${stdenv.cc.cc.lib}/lib/";
             };
-            ".config" = {
-              source = ./dotfiles;
-              recursive = true;
+
+            file = {
+              # Legacy config files
+              ".ideavimrc".source = ../home_dotfiles/.ideavimrc;
+              ".sleep".source = ../home_dotfiles/.sleep;
+              ".wakeup".source = ../home_dotfiles/.wakeup;
+              # XDG standard config files
+              ".local/bin" = {
+                source = ../dotlocal/bin;
+                recursive = true;
+              };
+              ".config" = {
+                source = ../dotfiles;
+                recursive = true;
+              };
             };
           };
-        };
 
         programs = {
           home-manager.enable = true;
