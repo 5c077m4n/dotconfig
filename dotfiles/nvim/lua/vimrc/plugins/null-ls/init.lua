@@ -29,8 +29,12 @@ local sources = {
 	null_ls.builtins.formatting.shellharden,
 	null_ls.builtins.formatting.shfmt,
 	-- SQL
-	null_ls.builtins.formatting.sqlfluff,
-	null_ls.builtins.diagnostics.sqlfluff,
+	null_ls.builtins.formatting.sqlfluff.with({
+		extra_args = { "--dialect", "postgres" },
+	}),
+	null_ls.builtins.diagnostics.sqlfluff.with({
+		extra_args = { "--dialect", "postgres" },
+	}),
 	-- Go
 	null_ls.builtins.formatting.gofumpt,
 	null_ls.builtins.formatting.goimports,
