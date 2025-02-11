@@ -154,6 +154,9 @@ in
                 pkgs.firefox
                 pkgs.google-chrome
                 pkgs.kitty
+                pkgs.copyq
+                pkgs.inkscape
+                pkgs.pgadmin4-desktopmode
               ]
               ++ lib.optionals stdenv.isDarwin [
                 # Bluetooth
