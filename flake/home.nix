@@ -149,7 +149,10 @@ in
               ]
               ++ lib.optionals stdenv.isLinux [
                 # CLI utils
+                ## Clipboard
                 pkgs.xclip
+                ## Audio control
+                pkgs.pulseaudio
                 # GUIs
                 pkgs.firefox
                 pkgs.google-chrome
@@ -173,6 +176,7 @@ in
               ".ideavimrc".source = ../home_dotfiles/.ideavimrc;
               ".sleep".source = ../home_dotfiles/.sleep;
               ".wakeup".source = ../home_dotfiles/.wakeup;
+              ".xinitrc".source = ../home_dotfiles/.xinitrc;
               # XDG standard config files
               ".local/bin" = {
                 source = ../dotlocal/bin;

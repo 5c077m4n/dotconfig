@@ -62,40 +62,57 @@ in
     LC_TIME = "en_GB.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services = {
+    displayManager.defaultSession = "xfce+i3";
+    # Enable touchpad support (enabled default in most desktopManager).
+    libinput.enable = true;
 
-  # Enable the XFCE Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
+    xserver = {
+      enable = true;
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+      desktopManager = {
+        xterm.enable = false;
+        xfce = {
+          enable = true;
+          noDesktop = true;
+          enableXfwm = false;
+        };
+      };
+      windowManager.i3 = {
+        enable = true;
+        extraPackages = with pkgs; [
+          rofi # application launcher
+          i3lock # default i3 screen locker
+          polybar # status bar
+          xorg.xmodmap # keymapper
+        ];
+      };
+
+      # Configure keymap in X11
+      xkb.layout = "us";
+    };
+
+    # Enable CUPS to print documents.
+    printing.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      # If you want to use JACK applications, uncomment this
+      #jack.enable = true;
+
+      # use the example session manager (no others are packaged yet so this is enabled by default, no need to redefine it in your config for now)
+      #media-session.enable = true;
+    };
+
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  hardware = {
+    graphics.enable = true;
+    pulseaudio.enable = false;
+  };
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.roee = {
@@ -118,24 +135,34 @@ in
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    fish
-    neovim
-    curl
-    wget
-    python3
-    gcc
-    gnumake
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      fish
+      neovim
+      curl
+      wget
+      python3
+      gcc
+      gnumake
+    ];
+    pathsToLink = [ "/libexec" ]; # links `/libexec` from derivations to `/run/current-system/sw`
+    variables = {
+      # To fix python's pandas package from erroring on `libstdc++.os.6` file not being found
+      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib/";
+    };
+  };
 
-  programs.fish.enable = true;
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs = {
+    fish.enable = true;
+
+    # Some programs need SUID wrappers, can be configured further or are
+    # started in user sessions.
+    # mtr.enable = true;
+    # gnupg.agent = {
+    #   enable = true;
+    #   enableSSHSupport = true;
+    # };
+  };
 
   # List services that you want to enable:
 
