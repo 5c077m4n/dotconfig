@@ -40,6 +40,7 @@ in
                 pkgs.gnumake
                 pkgs.gcc
                 pkgs.gnupg
+                pkgs.stow
                 # VCS
                 ## Git
                 pkgs.git
@@ -172,23 +173,6 @@ in
             sessionVariables = {
               # To fix python's pandas package from erroring on `libstdc++.os.6` file not being found
               LD_LIBRARY_PATH = "${stdenv.cc.cc.lib}/lib/";
-            };
-
-            file = {
-              # Legacy config files
-              ".ideavimrc".source = ../home_dotfiles/.ideavimrc;
-              ".sleep".source = ../home_dotfiles/.sleep;
-              ".wakeup".source = ../home_dotfiles/.wakeup;
-              ".xinitrc".source = ../home_dotfiles/.xinitrc;
-              # XDG standard config files
-              ".local/bin" = {
-                source = ../dotlocal/bin;
-                recursive = true;
-              };
-              ".config" = {
-                source = ../dotfiles;
-                recursive = true;
-              };
             };
           };
 
