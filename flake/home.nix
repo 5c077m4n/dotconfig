@@ -39,6 +39,7 @@ in
                 pkgs.busybox
                 pkgs.gnumake
                 pkgs.gcc
+                pkgs.gnupg
                 # VCS
                 ## Git
                 pkgs.git
