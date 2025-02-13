@@ -30,7 +30,7 @@
 			nix)
 				deadnix "$file"
 				statix check "$file"
-				nixfmt --check "$file"
+				nixfmt --check "$file" || exit 1
 
 				nix flake check "${root_dir}"
 				;;
