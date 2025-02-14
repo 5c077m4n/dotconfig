@@ -257,7 +257,7 @@ for_window [window_role="task_dialog"] floating enable
 gaps inner 10px
 
 # set background
-# exec --no-startup-id feh --no-fehbg --bg-fill ~/Pictures/backgrounds/underground.png
+exec --no-startup-id feh --no-fehbg --bg-fill ~/Pictures/wallpapers/futurama-spaceship.jpg
 
 # add polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh

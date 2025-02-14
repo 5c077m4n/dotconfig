@@ -162,7 +162,8 @@ in
                 pkgs.google-chrome
                 pkgs.kitty
                 pkgs.copyq
-                pkgs.inkscape
+                pkgs.feh # Image viewer
+                pkgs.inkscape # Image editor
                 pkgs.pgadmin4-desktopmode
               ]
               ++ lib.optionals stdenv.isDarwin [
