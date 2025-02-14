@@ -85,6 +85,7 @@ in
           i3lock # default i3 screen locker
           polybar # status bar
           xorg.xmodmap # keymapper
+          picom # a better compositor
         ];
       };
 
