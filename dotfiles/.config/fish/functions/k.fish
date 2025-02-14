@@ -1,3 +1,3 @@
-function k --description "A kubectl alias"
+function k --wraps kubectl --description "A kubectl alias"
     kubectl $argv
 end

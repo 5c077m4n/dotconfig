@@ -1,3 +1,3 @@
-function kc --description "A kubectx alias"
+function kc --wraps kubectx --description "A kubectx alias"
     kubectx $argv
 end
