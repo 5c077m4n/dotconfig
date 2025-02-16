@@ -157,6 +157,8 @@ in
                 pkgs.pulseaudio
                 ## Screen brightness control
                 pkgs.brightnessctl
+                ## Battery data
+                pkgs.acpi
                 # GUIs
                 pkgs.firefox
                 pkgs.google-chrome
