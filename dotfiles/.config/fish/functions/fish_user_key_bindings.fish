@@ -17,4 +17,7 @@ function fish_user_key_bindings
     bind --erase --preset --mode insert \ev
     bind --erase --preset --mode visual \ee
     bind --erase --preset --mode visual \ev
+
+    bind --erase --preset \cy
+    bind --mode insert \cy accept-autosuggestion
 end
