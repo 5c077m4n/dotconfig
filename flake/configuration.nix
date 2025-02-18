@@ -83,6 +83,7 @@ in
         extraPackages = with pkgs; [
           rofi # application launcher
           i3lock # default i3 screen locker
+          xss-lock # locks screen before suspend
           polybar # status bar
           xorg.xmodmap # keymapper
           picom # a better compositor

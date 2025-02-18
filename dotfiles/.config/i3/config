@@ -10,6 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $alt Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -189,25 +190,26 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'xfce4-session-logout'"
 
 # set lockscreen background
-# set $i3lockwall i3lock -i /home/max/Pictures/backgrounds/underground.png -t
+set $i3lockwall i3lock --color 000000
+
+bindsym Ctrl+$alt+l exec $i3lockwall
+bindsym Ctrl+$mod+q exec $i3lockwall && systemctl suspend
 
 # shutdown / restart / suspend ...
 # set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (CTRL+s) shutdown
-
-# mode "$mode_system" {
-# 	bindsym l exec --no-startup-id $i3lockwall, mode "default"
-# 	bindsym e exec --no-startup-id i3-msg exit, mode "default"
-# 	bindsym s exec --no-startup-id $i3lockwall && systemctl suspend, mode "default"
-# 	bindsym h exec --no-startup-id $i3lockwall && systemctl hibernate, mode "default"
-# 	bindsym r exec --no-startup-id systemctl reboot, mode "default"
-# 	bindsym Ctrl+s exec --no-startup-id systemctl poweroff -i, mode "default"
-#
-# 	# back to normal: Enter or Escape
-# 	bindsym Return mode "default"
-# 	bindsym Escape mode "default"
-# }
-
-# bindsym  $mod+BackSpace mode "$mode_system"
+mode "$mode_system" {
+	bindsym l exec --no-startup-id $i3lockwall, mode "default"
+	bindsym e exec --no-startup-id i3-msg exit, mode "default"
+	bindsym s exec --no-startup-id $i3lockwall && systemctl suspend, mode "default"
+	bindsym h exec --no-startup-id $i3lockwall && systemctl hibernate, mode "default"
+	bindsym r exec --no-startup-id systemctl reboot, mode "default"
+	bindsym Ctrl+s exec --no-startup-id systemctl poweroff -i, mode "default"
+	# back to normal: Enter, Escape or $mod+BackSpace
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+BackSpace mode "default"
+}
+bindsym $mod+BackSpace mode "$mode_system"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
