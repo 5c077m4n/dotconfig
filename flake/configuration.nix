@@ -91,7 +91,7 @@ in
       };
 
       # Configure keymap in X11
-      xkb.layout = "us";
+      xkb.layout = "us,il";
     };
 
     # Enable CUPS to print documents.
