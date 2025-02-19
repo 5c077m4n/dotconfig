@@ -99,10 +99,10 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+Shift+p move workspace to output left
 bindsym $mod+Shift+n move workspace to output right
 
-# split in horizontal orientation
+# split
+## horizontal orientation
 bindsym $mod+Ctrl+h split h
-
-# split in vertical orientation
+## vertical orientation
 bindsym $mod+Ctrl+v split v
 
 # enter fullscreen mode for the focused container
@@ -184,9 +184,9 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 ## exit of i3 session
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar --type warning --message 'Do you really want to logout?' --button-no-terminal 'Exit' 'i3-msg exit'"
 ## exit of Xfce DM session
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'xfce4-session-logout'"
+bindsym $mod+Shift+e exec "i3-nagbar --type warning --message 'Do you really want to logout?' --button-no-terminal 'Exit' 'xfce4-session-logout'"
 
 # set lockscreen background
 set $i3lockwall i3lock --color 000000
