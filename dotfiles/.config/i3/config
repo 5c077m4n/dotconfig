@@ -25,7 +25,7 @@ for_window [class=".*"] title_format " %title"
 
 # Start XDG autostart `.desktop` files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
-exec --no-startup-id dex-autostart --autostart --environment i3
+#exec --no-startup-id dex --autostart --environment i3
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -57,7 +57,6 @@ tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+Return exec kitty
-#bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -213,12 +212,6 @@ bindsym $mod+BackSpace mode "$mode_system"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-	# These bindings trigger as soon as you enter the resize mode
-
-	# Pressing left will shrink the window’s width.
-	# Pressing right will grow the window’s width.
-	# Pressing up will shrink the window’s height.
-	# Pressing down will grow the window’s height.
 	bindsym h resize shrink width 10 px or 10 ppt
 	bindsym j resize grow height 10 px or 10 ppt
 	bindsym k resize shrink height 10 px or 10 ppt
@@ -245,7 +238,7 @@ for_window [window_role="task_dialog"] floating enable
 gaps inner 10px
 
 # set background
-exec --no-startup-id feh --no-fehbg --bg-fill ~/Pictures/wallpapers/futurama-spaceship.jpg
+exec_always --no-startup-id feh --no-fehbg --bg-fill ~/Pictures/wallpapers/futurama-spaceship.jpg
 
 # add polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
