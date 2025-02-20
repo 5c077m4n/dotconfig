@@ -166,7 +166,7 @@ in
                 pkgs.copyq
                 pkgs.feh # Image viewer
                 pkgs.inkscape # Image editor
-                pkgs-unstable.pgadmin4-desktopmode # PostgreSQL viewer
+                pkgs.dbeaver-bin # DB viewer
                 pkgs.libreoffice
               ]
               ++ lib.optionals stdenv.isDarwin [
