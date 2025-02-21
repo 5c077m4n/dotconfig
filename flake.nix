@@ -1,5 +1,5 @@
 {
-  description = "Unix system flake";
+  description = "Unix systems flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
@@ -28,8 +28,8 @@
     }:
     let
       username = "roee";
-      darwinConfigName = "roee@macos";
-      nixosConfigName = "roee@nixos-vivo";
+      darwinConfigName = "${username}@macos";
+      nixosConfigName = "${username}@nixos-vivo";
     in
     {
       darwinConfigurations.${darwinConfigName} =
@@ -49,12 +49,11 @@
             hostPlatform = system;
           };
           modules = [
-            (import ./flake/darwin-configuration.nix)
+            (import ./flake/darwin/configuration.nix)
             home-manager.darwinModules.home-manager
-            (import ./flake/home.nix)
+            (import ./flake/home)
           ];
         };
-      darwinPackages = self.darwinConfigurations.${darwinConfigName}.pkgs;
 
       nixosConfigurations.${nixosConfigName} =
         let
@@ -76,13 +75,12 @@
               ;
           };
           modules = [
-            ./flake/configuration.nix
-            ./flake/hardware-configuration.nix
+            ./flake/linux/configuration.nix
+            ./flake/linux/hardware-configuration.nix
 
             home-manager.nixosModules.home-manager
-            (import ./flake/home.nix)
+            (import ./flake/home)
           ];
         };
-      nixosPackages = self.nixosConfigurations.${nixosConfigName}.pkgs;
     };
 }
