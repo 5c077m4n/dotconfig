@@ -1,3 +1,3 @@
 function rm --wraps rm
-    command rm -i $argv
+    command rm --interactive $argv
 end
