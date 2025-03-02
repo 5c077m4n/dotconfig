@@ -161,7 +161,7 @@ in
                 pkgs.acpi
                 # GUIs
                 ## Browsers
-                pkgs.firefox
+                pkgs.librewolf
                 pkgs.google-chrome
                 ## Terminal
                 pkgs.kitty
