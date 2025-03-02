@@ -63,6 +63,9 @@ in
   };
 
   services = {
+    # Symlinks all `/nix/store/` binaries into `/bin` and `/usr/bin/` to help `$PATH` apps work
+    envfs.enable = true;
+
     displayManager.defaultSession = "xfce+i3";
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
@@ -185,7 +188,14 @@ in
 
   programs = {
     fish.enable = true;
-    nix-ld.enable = true;
+
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        stdenv.cc.cc.lib
+        zlib
+      ];
+    };
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
@@ -195,11 +205,6 @@ in
     #  enableSSHSupport = true;
     #};
   };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  #services.openssh.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
