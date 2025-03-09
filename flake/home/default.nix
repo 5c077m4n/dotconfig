@@ -166,7 +166,7 @@ in
                 pkgs.acpi
                 # GUIs
                 ## Browsers
-                pkgs.floorp
+                pkgs.floorp # Firefox alternative
                 pkgs.google-chrome
                 ## Terminal
                 pkgs.kitty
@@ -177,7 +177,7 @@ in
                 ## Image editor
                 pkgs.inkscape
                 ## DB viewer
-                pkgs.dbeaver-bin
+                pkgs-unstable.dbeaver-bin
                 ## Office
                 pkgs.libreoffice
               ]
