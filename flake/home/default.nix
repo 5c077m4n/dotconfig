@@ -28,6 +28,7 @@ in
                 # General
                 pkgs-unstable.neovim
                 pkgs.tmux
+                pkgs.btop
                 pkgs.htop
                 pkgs.curl
                 pkgs.wget
