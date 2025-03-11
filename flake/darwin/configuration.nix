@@ -1,6 +1,7 @@
 {
   self,
   pkgs,
+  pkgs-unstable,
   username,
   hostPlatform,
   ...
@@ -69,14 +70,17 @@
   };
 
   programs = {
-    fish.enable = true;
+    fish = {
+      enable = true;
+      package = pkgs-unstable.fish;
+    };
   };
 
   users.users.${username} = {
     name = username;
     home = "/Users/${username}";
 
-    shell = pkgs.fish;
+    shell = pkgs-unstable.fish;
   };
 
   homebrew = {

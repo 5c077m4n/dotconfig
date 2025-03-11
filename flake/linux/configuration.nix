@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ pkgs, ... }:
+{ pkgs, pkgs-unstable, ... }:
 let
   stateVersion = "24.11";
 in
@@ -156,7 +156,7 @@ in
     ];
     packages = [ ];
 
-    shell = pkgs.fish;
+    shell = pkgs-unstable.fish;
     useDefaultShell = true;
   };
 
@@ -175,20 +175,23 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
-    systemPackages = with pkgs; [
-      fish
-      neovim
-      curl
-      wget
-      python3
-      gcc
-      gnumake
+    systemPackages = [
+      pkgs-unstable.fish
+      pkgs-unstable.neovim
+      pkgs.curl
+      pkgs.wget
+      pkgs.python3
+      pkgs.gcc
+      pkgs.gnumake
     ];
     pathsToLink = [ "/libexec" ]; # links `/libexec` from derivations to `/run/current-system/sw`
   };
 
   programs = {
-    fish.enable = true;
+    fish = {
+      enable = true;
+      package = pkgs-unstable.fish;
+    };
 
     nix-ld = {
       enable = true;

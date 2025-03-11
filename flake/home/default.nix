@@ -66,9 +66,9 @@ in
                 ## ZSH
                 pkgs.zsh
                 ## Fish
-                pkgs.fish
-                pkgs.fishPlugins.fzf-fish
-                pkgs.fishPlugins.autopair
+                pkgs-unstable.fish
+                pkgs-unstable.fishPlugins.fzf-fish
+                pkgs-unstable.fishPlugins.autopair
                 ## Misc
                 ### Formatters
                 pkgs.beautysh
@@ -190,7 +190,7 @@ in
         programs = {
           home-manager.enable = true;
 
-          fish = import ./apps/fish.nix { inherit pkgs; };
+          fish = import ./apps/fish.nix { inherit pkgs-unstable; };
           tmux = import ./apps/tmux.nix { inherit config pkgs; };
         };
       };
