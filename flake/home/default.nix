@@ -91,10 +91,10 @@ in
                 pkgs-unstable.black
                 pkgs-unstable.isort
                 # Golang
-                pkgs-unstable.go_1_24
+                pkgs-unstable.go
                 ## Tools
                 pkgs-unstable.air # Live reloader
-                pkgs-unstable.tinygo
+                #pkgs-unstable.tinygo
                 ## Formatters/Linters
                 pkgs-unstable.golangci-lint
                 pkgs-unstable.gofumpt
