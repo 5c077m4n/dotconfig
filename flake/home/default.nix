@@ -75,7 +75,6 @@ in
         pkgs-unstable.deno
         # Python
         pkgs-unstable.python310
-        pkgs-unstable.pyenv
         pkgs-unstable.poetry
         pkgs-unstable.mypy
         pkgs-unstable.pylint
