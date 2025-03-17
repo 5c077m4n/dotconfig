@@ -14,6 +14,10 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-1.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -24,18 +28,36 @@
       nixpkgs,
       nixpkgs-darwin,
       nixpkgs-unstable,
+      lix-module,
       ...
     }:
     let
       username = "roee";
       darwinConfigName = "${username}@macos";
       nixosConfigName = "${username}@nixos-vivo";
+      ubuntuConfigName = "${username}@ubuntu-vivo";
     in
-    {
+    rec {
       darwinConfigurations.${darwinConfigName} =
         let
           system = "aarch64-darwin";
           pkgs = import nixpkgs-darwin { inherit system; };
+          home-manager-modules = [
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
+
+                extraSpecialArgs = {
+                  inherit username pkgs-unstable;
+                  homeDirectory = "/home/${username}";
+                };
+                users.${username} = ./flake/home;
+              };
+            }
+          ];
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
         in
         nix-darwin.lib.darwinSystem {
@@ -48,14 +70,10 @@
               ;
             hostPlatform = system;
           };
-          modules = [
-            (import ./flake/darwin/configuration.nix)
-            home-manager.darwinModules.home-manager
-            (import ./flake/home)
-          ];
+          modules = [ ./flake/darwin/configuration.nix ] ++ home-manager-modules;
         };
 
-      nixosConfigurations.${nixosConfigName} =
+      nixosConfigurations =
         let
           system = "x86_64-linux";
           pkgs = import nixpkgs {
@@ -63,8 +81,6 @@
             config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "google-chrome" ];
           };
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
-        in
-        nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit
               self
@@ -74,13 +90,56 @@
               pkgs-unstable
               ;
           };
-          modules = [
-            ./flake/linux/configuration.nix
-            ./flake/linux/hardware-configuration.nix
-
+          home-manager-modules = [
             home-manager.nixosModules.home-manager
-            (import ./flake/home)
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
+
+                extraSpecialArgs = {
+                  inherit username pkgs-unstable;
+                  homeDirectory = "/home/${username}";
+                };
+                users.${username} = ./flake/home;
+              };
+            }
           ];
+        in
+        {
+          ${nixosConfigName} = nixpkgs.lib.nixosSystem {
+            inherit pkgs specialArgs;
+            modules = [
+              lix-module.nixosModules.default
+              ./flake/linux/nixos/configuration.nix
+              ./flake/linux/nixos/hardware-configuration.nix
+            ] ++ home-manager-modules;
+          };
         };
+
+      homeConfigurations = {
+        ${darwinConfigName} =
+          darwinConfigName.${darwinConfigName}.config.home-manager.users.${username}.home;
+        ${nixosConfigName} =
+          nixosConfigurations.${nixosConfigName}.config.home-manager.users.${username}.home;
+        ${ubuntuConfigName} =
+          let
+            system = "x86_64-linux";
+            pkgs = import nixpkgs {
+              inherit system;
+              config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "google-chrome" ];
+            };
+            pkgs-unstable = import nixpkgs-unstable { inherit system; };
+          in
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            extraSpecialArgs = {
+              inherit username pkgs-unstable;
+              homeDirectory = "/home/${username}";
+            };
+            modules = [ ./flake/home ];
+          };
+      };
     };
 }
