@@ -192,6 +192,7 @@ in
     tmux = import ./apps/tmux.nix { inherit config pkgs; };
   };
 
+  fonts.fontconfig.enable = true;
   news = {
     display = "silent";
     entries = lib.mkForce [ ];
