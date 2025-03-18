@@ -67,12 +67,15 @@ in
         pkgs.shfmt
         pkgs.shellharden
         # JavaScript
+        ## Runtimes
         pkgs.nodejs_22
-        pkgs.eslint_d
-        pkgs.prettierd
+        pkgs-unstable.deno
+        ## Package managers
         pkgs.pnpm
         pkgs.yarn-berry # `yarn` >=4.5
-        pkgs-unstable.deno
+        ## Linters
+        pkgs.eslint_d
+        pkgs.prettierd
         # Python
         pkgs-unstable.python310
         pkgs-unstable.poetry
@@ -176,6 +179,14 @@ in
         # Bluetooth
         pkgs.blueutil
       ];
+
+    sessionVariables = {
+      # Allows linkers to find nix packages
+      LD_LIBRARY_PATH = lib.makeLibraryPath [
+        stdenv.cc.cc
+        pkgs.zlib
+      ];
+    };
   };
 
   nix = {
