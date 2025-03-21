@@ -125,10 +125,6 @@ in
         # K8s
         pkgs-unstable.kubectx
         pkgs-unstable.k9s
-        # Containers
-        ## Podman
-        pkgs-unstable.podman
-        pkgs-unstable.podman-compose
         ### Deps
         pkgs-unstable.qemu
         pkgs-unstable.virtiofsd
@@ -164,6 +160,10 @@ in
         pkgs.acpi
       ]
       ++ lib.optionals (stdenv.isLinux && isNixOS) [
+        # Containers
+        ## Podman
+        pkgs-unstable.podman
+        pkgs-unstable.podman-compose
         # GUIs
         ## Browsers
         pkgs.floorp # Firefox alternative
