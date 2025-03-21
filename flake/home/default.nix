@@ -8,6 +8,7 @@
 }:
 let
   stateVersion = "24.11";
+  isNixOS = builtins.pathExists "/etc/nixos/";
   inherit (pkgs) lib stdenv;
 in
 {
@@ -161,6 +162,8 @@ in
         pkgs.brightnessctl
         ## Battery data
         pkgs.acpi
+      ]
+      ++ lib.optionals (stdenv.isLinux && isNixOS) [
         # GUIs
         ## Browsers
         pkgs.floorp # Firefox alternative
