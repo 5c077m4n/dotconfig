@@ -88,17 +88,17 @@ create_autocmd({ "LspAttach" }, {
 		keymap.nnoremap(
 			"gD",
 			telescope_builtin.lsp_dynamic_workspace_symbols,
-			{ buffer = buffer_num, desc = "Go to declaration" }
+			{ buffer = buffer_num, desc = "Show dynamic workspace symbols" }
 		)
 		keymap.nnoremap(
 			"gs",
 			telescope_builtin.lsp_document_symbols,
-			{ buffer = buffer_num, desc = "Get document symbols" }
+			{ buffer = buffer_num, desc = "Show document symbols" }
 		)
 		keymap.nnoremap(
 			"gS",
 			telescope_builtin.lsp_workspace_symbols,
-			{ buffer = buffer_num, desc = "Get workspace symbols" }
+			{ buffer = buffer_num, desc = "Show workspace symbols" }
 		)
 		keymap.nnoremap("K", lsp.buf.hover, { buffer = buffer_num, desc = "Show docs in hover" })
 		keymap.nnoremap(
