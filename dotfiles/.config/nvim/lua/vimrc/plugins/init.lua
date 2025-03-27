@@ -306,7 +306,7 @@ local function setup()
 		{
 			"saghen/blink.cmp",
 			dependencies = { "rafamadriz/friendly-snippets" },
-			version = "v0.*",
+			version = "v1.*",
 			---@module 'blink.cmp'
 			---@type blink.cmp.Config
 			opts = {
