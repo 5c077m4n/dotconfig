@@ -66,9 +66,6 @@ create_autocmd({ "LspAttach" }, {
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		local buffer_num = args.buf
 
-		lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single" })
-		lsp.handlers["textDocument/signatureHelp"] =
-			lsp.with(lsp.handlers.signature_help, { border = "single" })
 		lsp.handlers["window/showMessage"] = function(err, result)
 			vim.notify(
 				result and result.message or "",
