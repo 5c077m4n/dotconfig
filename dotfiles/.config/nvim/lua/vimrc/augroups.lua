@@ -97,17 +97,17 @@ create_autocmd({ "LspAttach" }, {
 			telescope_builtin.lsp_workspace_symbols,
 			{ buffer = buffer_num, desc = "Show workspace symbols" }
 		)
-		keymap.nnoremap("K", lsp.buf.hover, { buffer = buffer_num, desc = "Show docs in hover" })
-		keymap.nnoremap(
-			"<C-s>",
-			lsp.buf.signature_help,
-			{ buffer = buffer_num, desc = "Show function signature" }
-		)
-		keymap.inoremap(
-			"<C-s>",
-			lsp.buf.signature_help,
-			{ buffer = buffer_num, desc = "Show function signature" }
-		)
+		keymap.nnoremap("K", function()
+			lsp.buf.hover({ border = "rounded" })
+		end, { buffer = buffer_num, desc = "Show docs in hover" })
+
+		keymap.nnoremap("<C-s>", function()
+			lsp.buf.signature_help({ border = "rounded" })
+		end, { buffer = buffer_num, desc = "Show function signature" })
+		keymap.inoremap("<C-s>", function()
+			lsp.buf.signature_help({ border = "rounded" })
+		end, { buffer = buffer_num, desc = "Show function signature" })
+
 		keymap.nnoremap(
 			"gi",
 			telescope_builtin.lsp_implementations,
