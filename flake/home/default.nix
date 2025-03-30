@@ -29,6 +29,8 @@ in
         pkgs.yq
         pkgs.openssh
         pkgs.less
+        pkgs.gzip
+        pkgs.unzip
         pkgs.busybox
         pkgs.gnumake
         pkgs.gcc
@@ -77,6 +79,7 @@ in
         ## Linters
         pkgs.eslint_d
         pkgs.prettierd
+        pkgs.stylelint
         # Python
         pkgs-unstable.python310
         pkgs-unstable.poetry
@@ -129,6 +132,8 @@ in
         ## Podman
         pkgs-unstable.podman
         pkgs-unstable.podman-compose
+        ## Linter
+        pkgs.hadolint
         # DBs
         ## TUIs
         pkgs.pgcli
