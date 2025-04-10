@@ -18,15 +18,12 @@ in
     packages =
       [
         # General
+        ## Text editors
         pkgs-unstable.neovim
-        pkgs.tmux
-        pkgs.btop
-        pkgs.htop
+        ## Tooling
         pkgs.curl
         pkgs.wget
         pkgs.coreutils
-        pkgs.jq
-        pkgs.yq
         pkgs.openssh
         pkgs.less
         pkgs.gzip
@@ -40,16 +37,22 @@ in
         # VCS
         ## Git
         pkgs.git
+        ### Tooling
         pkgs.hub
         pkgs.lazygit
         pkgs.delta
         pkgs.git-absorb
         # TUI
+        pkgs.tmux
         pkgs.starship
+        pkgs.btop
+        pkgs.htop
         pkgs.lf
         pkgs.eza
         pkgs.bat
         pkgs.procs
+        pkgs.jq
+        pkgs.yq
         # Search
         pkgs.fd
         pkgs.fzf
