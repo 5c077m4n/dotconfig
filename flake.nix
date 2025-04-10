@@ -36,6 +36,7 @@
       darwinConfigName = "${username}@macos";
       nixosConfigName = "${username}@nixos-vivo";
       ubuntuConfigName = "${username}@ubuntu-vivo";
+      allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "google-chrome" ];
     in
     rec {
       darwinConfigurations.${darwinConfigName} =
@@ -78,7 +79,7 @@
           system = "x86_64-linux";
           pkgs = import nixpkgs {
             inherit system;
-            config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "google-chrome" ];
+            config = { inherit allowUnfreePredicate; };
           };
           pkgs-unstable = import nixpkgs-unstable { inherit system; };
           specialArgs = {
@@ -128,7 +129,7 @@
             system = "x86_64-linux";
             pkgs = import nixpkgs {
               inherit system;
-              config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "google-chrome" ];
+              config = { inherit allowUnfreePredicate; };
             };
             pkgs-unstable = import nixpkgs-unstable { inherit system; };
           in
