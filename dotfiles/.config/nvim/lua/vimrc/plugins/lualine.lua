@@ -8,7 +8,7 @@ local lsp_progress = require("lsp-progress")
 ---@param path string
 ---@return string
 local function fish_style_path(path)
-	local sep
+	local sep ---@type "\\" | "/"
 	if vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1 then
 		sep = "\\"
 	else
