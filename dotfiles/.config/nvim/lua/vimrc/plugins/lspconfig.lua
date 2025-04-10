@@ -46,9 +46,6 @@ local SERVER_CONFIG_MAP = {
 			root_dir = lspconfig.util.root_pattern("tailwind.config.js", "tailwind.config.ts"),
 		})
 	end,
-	eslint = function()
-		return make_config()
-	end,
 	denols = function()
 		local lspconfig = require("lspconfig")
 
