@@ -1,7 +1,15 @@
 {
 	"$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
 	"diagnostics": {
-		"globals": ["vim", "string", "require", "pairs", "ipairs"]
+		"globals": [
+			"vim",
+			"string",
+			"require",
+			"pairs",
+			"ipairs",
+			"unpack",
+			"pcall"
+		]
 	},
 	"workspace": {
 		"library": ["${3rd}/luv/library"],
