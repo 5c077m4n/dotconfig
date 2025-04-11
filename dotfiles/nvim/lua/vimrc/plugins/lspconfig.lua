@@ -5,7 +5,6 @@ local cmp_lsp = require('cmp_nvim_lsp')
 local neodev = require('neodev')
 local telescope_builtin = require('telescope.builtin')
 
-local mod_utils = require('vimrc.utils.modules')
 local keymap = require('vimrc.utils.keymapping')
 local lsp_fns = require('vimrc.utils.lsp')
 
@@ -89,8 +88,8 @@ local function on_attach(_client_data, buffer_num)
 end
 
 local function make_config(options)
-	local client_capabilities = vim.lsp.protocol.make_client_capabilities()
-	local capabilities = cmp_lsp.update_capabilities(client_capabilities)
+	local capabilities = cmp_lsp.default_capabilities()
+	capabilities.textDocument.completion.completionItem.snippetSupport = true
 	capabilities.textDocument.foldingRange = {
 		dynamicRegistration = false,
 		lineFoldingOnly = true,
@@ -99,7 +98,7 @@ local function make_config(options)
 	local base_config = {
 		on_attach = on_attach,
 		capabilities = capabilities,
-		flags = { debounce_text_changes = 200 },
+		flags = { debounce_text_changes = 100 },
 	}
 	if type(options) == 'table' then
 		for key, value in pairs(options) do
