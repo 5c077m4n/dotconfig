@@ -19,10 +19,10 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 	mapping = cmp.mapping.preset.insert({
-		['<A-b>'] = cmp.mapping.scroll_docs(-4),
-		['<A-f>'] = cmp.mapping.scroll_docs(4),
+		['<A-d>'] = cmp.mapping.scroll_docs(-4),
+		['<A-u>'] = cmp.mapping.scroll_docs(4),
 		['<A-Space>'] = cmp.mapping.complete(),
-		['q'] = cmp.mapping.abort(),
+		['<C-['] = cmp.mapping.abort(),
 		['<ESC>'] = cmp.mapping.abort(),
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 		['<Tab>'] = cmp.mapping(function(fallback)
