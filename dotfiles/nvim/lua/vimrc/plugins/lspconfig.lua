@@ -24,6 +24,7 @@ local SERVER_LIST = {
 	'tflint',
 	'tailwindcss',
 	'marksman',
+	'denols',
 }
 local SEVERITY = {
 	vim.log.levels.ERROR,
@@ -140,6 +141,10 @@ local function setup_servers()
 					telemetry = { enable = false },
 				},
 			}
+		elseif server == 'denols' then
+			opts.root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc')
+		elseif server == 'tsserver' then
+			opts.root_dir = lspconfig.util.root_pattern('package.json')
 		end
 
 		lspconfig[server].setup(opts)

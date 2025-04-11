@@ -1,6 +1,16 @@
 local null_ls = require('null-ls')
 
-local ts_config = { prefer_local = 'node_modules/.bin' }
+local deno_config = {
+	condition = function(utils)
+		return utils.root_has_file({ 'deno.json', 'deno.jsonc' })
+	end,
+}
+local ts_config = {
+	prefer_local = 'node_modules/.bin',
+	condition = function(utils)
+		return utils.root_has_file({ 'package.json' })
+	end,
+}
 
 null_ls.setup({
 	diagnostics_format = '[#{c}] #{m} (#{s})',
@@ -19,7 +29,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.eslint.with(ts_config),
 		null_ls.builtins.formatting.prettier.with(ts_config),
 		-- deno
-		--null_ls.builtins.formatting.deno_fmt,
+		null_ls.builtins.formatting.deno_fmt.with(deno_config),
 		-- css
 		null_ls.builtins.formatting.stylelint,
 		-- shell
