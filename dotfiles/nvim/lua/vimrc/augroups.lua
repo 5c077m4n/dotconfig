@@ -53,11 +53,25 @@ local packer_compile_on_config_change_id = create_augroup('packer_compile_on_con
 create_autocmd({ 'BufWritePost' }, {
 	group = packer_compile_on_config_change_id,
 	pattern = '*/vimrc/plugins/*.lua',
-	callback = function(opts)
-		vim.notify('"' .. opts.file .. '" has changed, so recompiling...', vim.log.levels.INFO)
+	callback = function(event)
+		vim.notify('"' .. event.file .. '" has changed, so recompiling...', vim.log.levels.INFO)
 
 		require('packer').compile()
 		vim.loader.reset()
 	end,
 	desc = 'Packer compile on plugin config change',
+})
+
+local lsp_attach_id = create_augroup('lsp_attach', { clear = true })
+create_autocmd({ 'LspAttach' }, {
+	group = lsp_attach_id,
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		vim.notify(
+			client.name .. ' LSP server connected successfully',
+			vim.log.levels.INFO,
+			{ timeout = 1000, title = 'LSP' }
+		)
+	end,
+	desc = 'Notify on LSP attach',
 })
