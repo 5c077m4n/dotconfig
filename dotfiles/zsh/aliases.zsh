@@ -183,6 +183,3 @@ if [[ $(uname) == 'Darwin' ]]; then
 		fi
 	}
 fi
-
-# TMUX
-alias tmux="tmux attach || tmux"
