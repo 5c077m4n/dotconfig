@@ -28,10 +28,11 @@
     }:
     let
       username = "roee";
-      configName = "tickle";
+      darwinConfigName = "roee@macos";
+      nixosConfigName = "roee@nixos-vivo";
     in
     {
-      darwinConfigurations.${configName} =
+      darwinConfigurations.${darwinConfigName} =
         let
           system = "aarch64-darwin";
           pkgs = import nixpkgs-darwin { inherit system; };
@@ -53,9 +54,9 @@
             (import ./flake/home.nix)
           ];
         };
-      darwinPackages = self.darwinConfigurations.${configName}.pkgs;
+      darwinPackages = self.darwinConfigurations.${darwinConfigName}.pkgs;
 
-      nixosConfigurations.${configName} =
+      nixosConfigurations.${nixosConfigName} =
         let
           system = "x86_64-linux";
           pkgs = import nixpkgs {
@@ -82,6 +83,6 @@
             (import ./flake/home.nix)
           ];
         };
-      nixosPackages = self.nixosConfigurations.${configName}.pkgs;
+      nixosPackages = self.nixosConfigurations.${nixosConfigName}.pkgs;
     };
 }
