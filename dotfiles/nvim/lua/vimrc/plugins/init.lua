@@ -1,4 +1,3 @@
-local keymap = require('vimrc.utils.keymapping')
 local M = {}
 
 local function bootstrap()
@@ -220,7 +219,18 @@ local function init_packer()
 				end,
 				cmd = '<leader>rr',
 			})
-			use('folke/which-key.nvim')
+			use({
+				'folke/which-key.nvim',
+				config = function()
+					require('which-key').setup({
+						plugins = {
+							marks = true,
+							registers = true,
+							spelling = { enabled = false, suggestions = 20 },
+						},
+					})
+				end,
+			})
 			use({
 				'5c077m4n/surround-nvim-mirror',
 				config = function()
