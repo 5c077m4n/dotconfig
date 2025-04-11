@@ -36,6 +36,7 @@ create_command('CopyAll', [[normal! gg0VG$"+y]], { desc = 'Copy all buffer conte
 
 keymap.vnoremap('<C-y>', [["+y]], { desc = 'Copy selection to clipboard' })
 keymap.nnoremap('V', 'v$', { desc = 'Select to line end' })
+keymap.nnoremap('S', 'v$hs', { desc = 'Switch to line end' })
 keymap.nnoremap('J', [[J^]], { desc = 'Join the next line and go to the first char' })
 
 -- Jump to line start/end
