@@ -22,5 +22,4 @@ bin/**
 !bin/gsync
 !bin/gum
 !bin/killport
-!bin/restart-ssh
 !bin/update-hosts
