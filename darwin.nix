@@ -64,6 +64,10 @@
     };
   };
 
+  programs = {
+    fish.enable = true;
+  };
+
   users.users.${username} = {
     name = username;
     home = "/Users/${username}";
@@ -90,7 +94,7 @@
       "karabiner-elements"
       "libreoffice"
       "nikitabobko/tap/aerospace"
-	  "zen-browser"
+      "zen-browser"
     ];
   };
 }
