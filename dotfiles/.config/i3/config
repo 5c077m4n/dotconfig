@@ -30,9 +30,12 @@ for_window [class=".*"] title_format " %title"
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
+# set lockscreen background
+set $i3lockwall i3lock --color 000000
+
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- $i3lockwall --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -181,9 +184,6 @@ bindsym $mod+Shift+r restart
 #bindsym $mod+Shift+e exec "i3-nagbar --type warning --message 'Do you really want to logout?' --button-no-terminal 'Exit' 'i3-msg exit'"
 ## exit of Xfce DM session
 bindsym $mod+Shift+e exec "i3-nagbar --type warning --message 'Do you really want to logout?' --button-no-terminal 'Exit' 'xfce4-session-logout'"
-
-# set lockscreen background
-set $i3lockwall i3lock --color 000000
 
 bindsym Ctrl+$alt+l exec $i3lockwall
 bindsym Ctrl+$mod+q exec $i3lockwall && systemctl suspend
