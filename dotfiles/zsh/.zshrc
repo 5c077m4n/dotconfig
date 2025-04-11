@@ -148,4 +148,4 @@ export EDITOR="nvim"
 [[ -f "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Leatherman
-[[ -f "${XDG_DATA_HOME-$HOME/.local/share}/leatherman/source-me.sh" ]] && source "${XDG_DATA_HOME-$HOME/.local/share}/leatherman/source-me.sh"
+[[ -f "$HOME/repos/leatherman/source-me.sh" ]] && source "$HOME/repos/leatherman/source-me.sh"
