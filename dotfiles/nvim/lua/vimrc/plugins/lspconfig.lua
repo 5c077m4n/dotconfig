@@ -25,41 +25,50 @@ local SERVER_LIST = {
 	'tailwindcss',
 }
 
-local function on_attach(_client, bufnr)
+local function on_attach(_client, buffer_num)
 	local lsp = vim.lsp
 	local diagnostic = vim.diagnostic
 	local create_command = vim.api.nvim_create_user_command
 
-	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+	vim.api.nvim_buf_set_option(buffer_num, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
 	lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, { border = 'single' })
 	lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, { border = 'single' })
-	vim.lsp.handlers['$/progress'] = lsp_fns.lsp_progress
+	lsp.handlers['$/progress'] = lsp_fns.lsp_progress
 
-	keymap.nnoremap('gd', telescope_builtin.lsp_definitions, { buffer = bufnr, desc = 'Go to LSP definition' })
+	keymap.nnoremap('gd', telescope_builtin.lsp_definitions, { buffer = buffer_num, desc = 'Go to LSP definition' })
 	keymap.nnoremap(
 		'gD',
 		telescope_builtin.lsp_dynamic_workspace_symbols,
-		{ buffer = bufnr, desc = 'Go to declaration' }
+		{ buffer = buffer_num, desc = 'Go to declaration' }
 	)
-	keymap.nnoremap('gs', telescope_builtin.lsp_document_symbols, { buffer = bufnr, desc = 'Get document symbols' })
-	keymap.nnoremap('gS', telescope_builtin.lsp_workspace_symbols, { buffer = bufnr, desc = 'Get workspace symbols' })
-	keymap.nnoremap('K', lsp.buf.hover, { buffer = bufnr, desc = 'Show docs in hover' })
-	keymap.nnoremap('<C-s>', lsp.buf.signature_help, { buffer = bufnr, desc = 'Show function signature' })
-	keymap.nnoremap('gi', telescope_builtin.lsp_implementations, { buffer = bufnr, desc = 'Go to implementation' })
-	keymap.nnoremap('<leader>gD', lsp.buf.type_definition, { buffer = bufnr, desc = 'Go to type definition' })
-	keymap.nnoremap('<leader>rn', lsp.buf.rename, { buffer = bufnr, desc = 'LSP rename' })
-	keymap.nnoremap('gr', telescope_builtin.lsp_references, { buffer = bufnr, desc = 'Find references' })
+	keymap.nnoremap(
+		'gs',
+		telescope_builtin.lsp_document_symbols,
+		{ buffer = buffer_num, desc = 'Get document symbols' }
+	)
+	keymap.nnoremap(
+		'gS',
+		telescope_builtin.lsp_workspace_symbols,
+		{ buffer = buffer_num, desc = 'Get workspace symbols' }
+	)
+	keymap.nnoremap('K', lsp.buf.hover, { buffer = buffer_num, desc = 'Show docs in hover' })
+	keymap.nnoremap('<C-s>', lsp.buf.signature_help, { buffer = buffer_num, desc = 'Show function signature' })
+	keymap.nnoremap('gi', telescope_builtin.lsp_implementations, { buffer = buffer_num, desc = 'Go to implementation' })
+	keymap.nnoremap('<leader>gD', lsp.buf.type_definition, { buffer = buffer_num, desc = 'Go to type definition' })
+	keymap.nnoremap('<leader>rn', lsp.buf.rename, { buffer = buffer_num, desc = 'LSP rename' })
+	keymap.nnoremap('gr', telescope_builtin.lsp_references, { buffer = buffer_num, desc = 'Find references' })
 	keymap.nnoremap('g[', function()
 		diagnostic.goto_prev({ popup_opts = { border = 'single' } })
-	end, { buffer = bufnr, desc = 'Go to previous diagnostic' })
+	end, { buffer = buffer_num, desc = 'Go to previous diagnostic' })
 	keymap.nnoremap('g]', function()
 		diagnostic.goto_next({ popup_opts = { border = 'single' } })
-	end, { buffer = bufnr, desc = 'Go to next diagnostic' })
-	keymap.nnoremap('<leader>ca', lsp.buf.code_action, { buffer = bufnr, desc = 'Code action' })
-	keymap.vnoremap('<leader>ca', lsp.buf.range_code_action, { buffer = bufnr, desc = 'Code action for range' })
-	keymap.nnoremap('<leader>l', lsp.buf.formatting, { buffer = bufnr, desc = 'Format page' })
-	keymap.vnoremap('<leader>l', lsp.buf.range_formatting, { buffer = bufnr, desc = 'Format range' })
+	end, { buffer = buffer_num, desc = 'Go to next diagnostic' })
+	keymap.nnoremap('<leader>ca', lsp.buf.code_action, { buffer = buffer_num, desc = 'Code action' })
+	keymap.vnoremap('<leader>ca', lsp.buf.range_code_action, { buffer = buffer_num, desc = 'Code action for range' })
+	-- TODO: upgrade to the nvim 0.8 `vim.lsp.buf.format` function
+	keymap.nnoremap('<leader>l', lsp.buf.formatting, { buffer = buffer_num, desc = 'Format page' })
+	keymap.vnoremap('<leader>l', lsp.buf.range_formatting, { buffer = buffer_num, desc = 'Format page' })
 
 	create_command('Format', lsp.buf.formatting, { desc = 'Format page' })
 	create_command('FormatRange', lsp.buf.range_formatting, { desc = 'Format range' })
@@ -77,13 +86,14 @@ local function on_attach(_client, bufnr)
 		['<leader>rn'] = 'Rename',
 		['<leader>l'] = 'Format',
 	}, {
-		buffer = bufnr,
+		buffer = buffer_num,
 		silent = true,
 	})
 end
 
 local function make_config(options)
-	local capabilities = cmp_lsp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	local client_capabilities = vim.lsp.protocol.make_client_capabilities()
+	local capabilities = cmp_lsp.update_capabilities(client_capabilities)
 
 	local base_config = {
 		on_attach = on_attach,
@@ -99,6 +109,9 @@ local function make_config(options)
 end
 
 local function setup_servers()
+	local is_exec = vim.fn.executable
+	local cmd = vim.cmd
+
 	lsp_installer.setup({
 		ensure_installed = SERVER_LIST,
 		automatic_installation = true,
@@ -129,16 +142,10 @@ local function setup_servers()
 		end
 		lspconfig[server].setup(opts)
 
-		vim.cmd([[do User LspAttachBuffers]])
+		cmd([[do User LspAttachBuffers]])
 	end
 
-	if
-		not (
-			vim.fn.executable('prettier')
-			and vim.fn.executable('eslint_d')
-			and vim.fn.executable('diagnostic-languageserver')
-		)
-	then
+	if not (is_exec('prettier') and is_exec('eslint_d') and is_exec('diagnostic-languageserver')) then
 		mod_utils.yarn_global_install({ 'prettier', 'eslint_d', 'diagnostic-languageserver' })
 	end
 end
