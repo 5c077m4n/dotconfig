@@ -14,7 +14,7 @@ o.mouse = nil
 o.foldenable = true
 o.foldmethod = 'indent'
 o.foldlevel = 99
-o.foldlevelstart = 4
+o.foldlevelstart = 10
 
 o.updatetime = 200
 o.timeoutlen = 500
