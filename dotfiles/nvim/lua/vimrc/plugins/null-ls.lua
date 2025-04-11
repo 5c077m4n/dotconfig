@@ -72,6 +72,9 @@ local sources = {
 	null_ls.builtins.code_actions.impl,
 	-- ZSH
 	null_ls.builtins.diagnostics.zsh,
+	-- Fish
+	null_ls.builtins.formatting.fish_indent,
+	null_ls.builtins.diagnostics.fish,
 	-- Terraform
 	null_ls.builtins.formatting.terraform_fmt,
 	-- YAML
