@@ -114,47 +114,43 @@ local function make_config(options)
 	return base_config
 end
 
-local function setup_servers()
-	lsp_installer.setup({
-		ui = {
-			icons = {
-				package_installed = 'V',
-				package_pending = '>',
-				package_uninstalled = 'X',
-			},
-			border = 'single',
+lsp_installer.setup({
+	ui = {
+		icons = {
+			package_installed = 'V',
+			package_pending = '>',
+			package_uninstalled = 'X',
 		},
-	})
-	lsp_installer_config.setup({
-		ensure_installed = SERVER_LIST,
-		automatic_installation = true,
-	})
+		border = 'single',
+	},
+})
+lsp_installer_config.setup({
+	ensure_installed = SERVER_LIST,
+	automatic_installation = true,
+})
 
-	for _, server in ipairs(SERVER_LIST) do
-		local opts = make_config()
-		if server == 'sumneko_lua' then
-			neodev.setup({})
-			opts.settings = {
-				Lua = {
-					completion = { callSnippet = 'Replace' },
-					telemetry = { enable = false },
-					checkThirdParty = false,
-				},
-			}
-		elseif server == 'tailwindcss' then
-			opts.filetypes = { 'javascriptreact', 'javascript.jsx', 'typescriptreact', 'typescript.tsx', 'html' }
-			opts.root_dir = lspconfig.util.root_pattern('tailwind.config.js')
-		elseif server == 'denols' then
-			vim.g.markdown_fenced_languages = { 'ts=typescript' }
-			opts.root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc', 'deno.lock')
-		elseif server == 'tsserver' then
-			opts.root_dir = lspconfig.util.root_pattern('package.json', 'package-lock.json', 'tsconfig.json')
-			opts.single_file_support = false
-		end
-
-		lspconfig[server].setup(opts)
-		vim.cmd([[do User LspAttachBuffers]])
+for _, server in ipairs(SERVER_LIST) do
+	local opts = make_config()
+	if server == 'sumneko_lua' then
+		neodev.setup({})
+		opts.settings = {
+			Lua = {
+				completion = { callSnippet = 'Replace' },
+				telemetry = { enable = false },
+				checkThirdParty = false,
+			},
+		}
+	elseif server == 'tailwindcss' then
+		opts.filetypes = { 'javascriptreact', 'javascript.jsx', 'typescriptreact', 'typescript.tsx', 'html' }
+		opts.root_dir = lspconfig.util.root_pattern('tailwind.config.js')
+	elseif server == 'denols' then
+		vim.g.markdown_fenced_languages = { 'ts=typescript' }
+		opts.root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc', 'deno.lock')
+	elseif server == 'tsserver' then
+		opts.root_dir = lspconfig.util.root_pattern('package.json', 'package-lock.json', 'tsconfig.json')
+		opts.single_file_support = false
 	end
-end
 
-setup_servers()
+	lspconfig[server].setup(opts)
+	vim.cmd([[do User LspAttachBuffers]])
+end
