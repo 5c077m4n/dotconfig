@@ -11,19 +11,13 @@
 
 		local file_ext="${file##*.}"
 		if [[ "$file_ext" == "lua" ]]; then
-			luacheck --config="$luacheck_config" "$file"
-			stylua --config-path="$stylua_config" "$file"
-
-			git add "$file"
+			luacheck --config="$luacheck_config" "$file" || exit 1
+			stylua --check --config-path="$stylua_config" "$file" || exit 1
 		elif [[ "$file_ext" == "py" ]]; then
-			black "$file"
-			mypy --strict "$file"
-
-			git add "$file"
+			black --check "$file" || exit 1
+			mypy --check --strict "$file" || exit 1
 		elif [[ "$file_ext" == "zsh" ]]; then
-			beautysh --tab "$file"
-
-			git add "$file"
+			beautysh --check --tab "$file" || exit 1
 		fi
 	done
 }
