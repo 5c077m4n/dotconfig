@@ -284,6 +284,8 @@ in
             bind-key -T copy-mode-vi y send-keys -X copy-selection
 
             unbind-key -T copy-mode-vi MouseDragEnd1Pane # don't exit copy mode when dragging with mouse
+
+			set -g default-command "$SHELL" # Fix for Fish not being the default shell
           '';
         };
       };
