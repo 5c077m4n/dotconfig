@@ -128,8 +128,8 @@ eval "$(starship init zsh)"
 # Completions
 ## Kubectl
 [[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)
-## K3D
-#[[ -x "$(command -v k3d)" ]] && source <(k3d completion zsh)
+## Kitty search
+[[ -x "$(command -v kitty)" ]] && compdef _rg hg
 
 # Add krew to path
 [[ -d "${KREW_ROOT:-$HOME/.krew}/bin" ]] && path+=("${KREW_ROOT:-$HOME/.krew}/bin")

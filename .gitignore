@@ -22,5 +22,6 @@ bin/**
 !bin/gfix
 !bin/gsync
 !bin/gum
+!bin/hg
 !bin/killport
 !bin/update-hosts
