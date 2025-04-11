@@ -24,11 +24,6 @@ def main():
             ]
         )
 
-    with home_dir.joinpath(".gitconfig").open("w") as gitconfig_write:
-        gitconfig_write.writelines(
-            ["[include]\n", "\tpath = ~/.config/git/config.toml"]
-        )
-
     config_dir = home_dir.joinpath(".config")
     if not config_dir.is_dir():
         mkdir(config_dir)
