@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-alias kctx='kubectx'
-
 alias v='nvim'
 alias vim='nvim'
 
@@ -18,9 +16,11 @@ alias grbim='git rebase --interactive master'
 
 update-hosts() {
 	local current_hosts="$(cat /etc/hosts)"
-
 	local anti_malware_hosts="$(curl https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts)"
 	local fakenews_gambling_hosts="$(curl https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts)"
 
 	echo "${current_hosts} \n${anti_malware_hosts} \n${fakenews_gambling_hosts}" | sed 's/^\s+\|\s+$//g' | sed '/^\s*#\|^$/d' | sort --unique | sudo tee /etc/hosts
 }
+
+alias kx='kubectx'
+alias kc='kubectx --current'
