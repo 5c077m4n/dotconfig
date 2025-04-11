@@ -51,7 +51,7 @@ export CDPATH=":$HOME/.local/share:$HOME/repos"
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+#ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
 #CASE_SENSITIVE="true"
@@ -61,13 +61,13 @@ export CDPATH=":$HOME/.local/share:$HOME/repos"
 HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-#DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 #Uncomment the following line to automatically update without prompting.
 DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=7
+#export UPDATE_ZSH_DAYS=7
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 #DISABLE_MAGIC_FUNCTIONS="true"
@@ -107,7 +107,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kubectl rust zsh-aliases-exa zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(fzf git kubectl terraform rust zsh-autosuggestions zsh-syntax-highlighting)
 source "${ZSH}/oh-my-zsh.sh"
 
 # User configuration
@@ -140,7 +140,7 @@ export EDITOR="nvim"
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
 
 # Kubectl zsh completion
-[[ -x /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+[[ -x "/usr/local/bin/kubectl" ]] && source <(kubectl completion zsh)
 
 [[ -f "${ZDOTDIR}/aliases" ]] && source "${ZDOTDIR}/aliases"
 [[ -f "${ZDOTDIR}/fzf-functions" ]] && source "${ZDOTDIR}/fzf-functions"
