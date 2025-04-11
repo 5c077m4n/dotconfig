@@ -11,16 +11,19 @@ local function bootstrap()
 			'https://github.com/wbthomason/packer.nvim',
 			install_path,
 		})
-		vim.cmd([[packadd packer.nvim]])
+		return true
+	else
+		return false
 	end
 end
 
-local function init_packer()
-	vim.cmd.packadd('packer.nvim')
+function M.setup()
+	local bootstrap_needed = bootstrap()
 
 	require('packer').startup({
 		function(use)
 			-- General
+			use('wbthomason/packer.nvim')
 			use('nvim-lua/plenary.nvim')
 			use({
 				'christoomey/vim-tmux-navigator',
@@ -281,8 +284,10 @@ local function init_packer()
 					require('toggleterm').setup({
 						size = function(term)
 							if term.direction == 'horizontal' then
+								---@diagnostic disable-next-line: undefined-field
 								return vim.o.lines * 0.4
 							elseif term.direction == 'vertical' then
+								---@diagnostic disable-next-line: undefined-field
 								return vim.o.columns * 0.4
 							end
 						end,
@@ -502,17 +507,13 @@ local function init_packer()
 				disable = true,
 			})
 
-			-- Optional
-			use({ 'wbthomason/packer.nvim', opt = true })
-			use({ 'tweekmonster/startuptime.vim', opt = true })
+			-- Sync packer if needed (must be after all config has been set)
+			if bootstrap_needed then
+				require('packer').sync()
+			end
 		end,
 		config = { display = { open_fn = require('packer.util').float } },
 	})
-end
-
-function M.setup()
-	bootstrap()
-	init_packer()
 end
 
 return M
