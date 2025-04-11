@@ -42,6 +42,7 @@
         let
           system = "aarch64-darwin";
           pkgs = import nixpkgs-darwin { inherit system; };
+          pkgs-unstable = import nixpkgs-unstable { inherit system; };
           home-manager-modules = [
             home-manager.nixosModules.home-manager
             {
@@ -58,7 +59,6 @@
               };
             }
           ];
-          pkgs-unstable = import nixpkgs-unstable { inherit system; };
         in
         nix-darwin.lib.darwinSystem {
           specialArgs = {
