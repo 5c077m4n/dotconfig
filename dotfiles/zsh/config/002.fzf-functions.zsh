@@ -1,6 +1,6 @@
 # Will return non-zero status if the current directory is not managed by git
 is_in_git_repo() {
-	git rev-parse HEAD >/dev/null 2>&1
+	[[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]]
 }
 
 export FZF_DEFAULT_OPTS="--bind ctrl-u:preview-page-up --bind ctrl-d:preview-page-down --bind ctrl-/:toggle-preview"
