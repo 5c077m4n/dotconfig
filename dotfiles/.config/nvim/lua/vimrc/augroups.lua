@@ -130,24 +130,18 @@ create_autocmd({ "LspAttach" }, {
 		keymap.nnoremap("g?", function()
 			diagnostic.open_float({ bufnr = buffer_num, scope = "line", border = "single" })
 		end, { buffer = buffer_num, desc = "Open diagnostics floating window" })
-		keymap.nnoremap("[d", function()
-			diagnostic.goto_prev({ float = { border = "single" } })
-		end, { buffer = buffer_num, desc = "Go to previous diagnostic" })
-		keymap.nnoremap("]d", function()
-			diagnostic.goto_next({ float = { border = "single" } })
-		end, { buffer = buffer_num, desc = "Go to next diagnostic" })
 		keymap.nnoremap("[e", function()
-			diagnostic.goto_prev({
+			diagnostic.jump({
+				count = 1,
 				severity = vim.diagnostic.severity.ERROR,
-				float = { border = "single" },
 			})
-		end, { buffer = buffer_num, desc = "Go to previous diagnostic error" })
+		end, { buffer = buffer_num, desc = "Go to previous diagnostic error in current buffer" })
 		keymap.nnoremap("]e", function()
-			diagnostic.goto_next({
+			diagnostic.jump({
+				count = -1,
 				severity = vim.diagnostic.severity.ERROR,
-				float = { border = "single" },
 			})
-		end, { buffer = buffer_num, desc = "Go to next diagnostic error" })
+		end, { buffer = buffer_num, desc = "Go to next diagnostic error in current buffer" })
 		keymap.nvnoremap(
 			"<leader>ca",
 			lsp.buf.code_action,
