@@ -88,7 +88,7 @@ local function make_config(options)
 	local base_config = {
 		on_attach = on_attach,
 		capabilities = capabilities,
-		flags = { debounce_text_changes = 100 },
+		flags = { debounce_text_changes = 400 },
 	}
 	if type(options) == 'table' then
 		for key, value in pairs(options) do
