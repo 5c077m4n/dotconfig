@@ -134,14 +134,18 @@ local function init_packer()
 				'simrat39/rust-tools.nvim',
 				requires = {
 					'neovim/nvim-lspconfig',
-					'nvim-lua/popup.nvim',
 					'nvim-lua/plenary.nvim',
-					'nvim-telescope/telescope.nvim',
 					'mfussenegger/nvim-dap',
 				},
 				ft = { 'rust' },
 				config = function()
 					require('rust-tools').setup({
+						tools = {
+							inlay_hints = {
+								auto = true,
+								only_current_line = true,
+							},
+						},
 						server = {
 							settings = {
 								['rust-analyzer'] = {
@@ -153,6 +157,17 @@ local function init_packer()
 									procMacro = { enable = true },
 								},
 							},
+							on_attach = function(_, buffer_num)
+								local rust_tools = require('rust-tools')
+								local keymap = require('vimrc.utils.keymapping')
+
+								keymap.nnoremap('J', rust_tools.join_lines.join_lines, { buffer = buffer_num })
+								keymap.nnoremap(
+									'<leader>ca',
+									rust_tools.hover_actions.hover_actions,
+									{ buffer = buffer_num, desc = 'Hover actions' }
+								)
+							end,
 						},
 					})
 				end,
@@ -214,7 +229,6 @@ local function init_packer()
 			use({
 				'francoiscabrol/ranger.vim',
 				requires = 'rbgrouleff/bclose.vim',
-				cmd = '<leader>rr',
 				config = function()
 					require('vimrc.plugins.ranger')
 				end,

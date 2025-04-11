@@ -30,10 +30,9 @@ local SEVERITY = {
 	vim.log.levels.INFO, -- map both hint and info to info
 }
 
-local function on_attach(_client, buffer_num)
+local function on_attach(_client_data, buffer_num)
 	local lsp = vim.lsp
 	local diagnostic = vim.diagnostic
-	local create_command = vim.api.nvim_create_user_command
 
 	vim.api.nvim_buf_set_option(buffer_num, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -85,20 +84,6 @@ local function on_attach(_client, buffer_num)
 			async = true,
 		})
 	end, { buffer = buffer_num, desc = 'Format page' })
-
-	create_command('Format', function()
-		if type(lsp.buf.format) == 'function' then
-			vim.lsp.buf.format({
-				filter = function(client)
-					return client.name == 'null-ls'
-				end,
-				bufnr = buffer_num,
-				async = true,
-			})
-		else
-			lsp.buf.formatting({})
-		end
-	end, { desc = 'Format page' })
 end
 
 local function make_config(options)
