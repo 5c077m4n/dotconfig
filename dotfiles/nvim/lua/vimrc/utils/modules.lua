@@ -8,8 +8,9 @@ function M.reload_vimrc()
 	reload.reload_module('vimrc')
 	vim.cmd.source(vim.env.MYVIMRC)
 
-	vim.loader.reset()
 	packer.compile()
+	vim.loader.reset()
+	vim.cmd.LspRestart()
 
 	vim.notify('Reload successful', vim.lsp.log_levels.INFO, { title = 'VIMRC' })
 end
