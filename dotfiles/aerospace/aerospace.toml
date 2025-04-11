@@ -1,0 +1,111 @@
+after-login-command = []
+after-startup-command = []
+start-at-login = true
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+default-root-container-layout = 'tiles'
+
+# Possible values: horizontal|vertical|auto
+# 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
+#               tall monitor (anything higher than wide) gets vertical orientation
+default-root-container-orientation = 'auto'
+on-focus-changed = ['move-mouse window-lazy-center']
+
+# You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
+# Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
+# Also see: https://nikitabobko.github.io/AeroSpace/goodness#disable-hide-app
+automatically-unhide-macos-hidden-apps = true
+
+[gaps]
+inner.horizontal = 0
+inner.vertical = 0
+outer.left = 0
+outer.bottom = 0
+outer.top = 0
+outer.right = 0
+
+[key-mapping]
+preset = 'qwerty'
+
+[mode.main.binding]
+# See: https://nikitabobko.github.io/AeroSpace/commands#layout
+alt-shift-period = 'layout tiles horizontal vertical'
+alt-shift-comma = 'layout accordion horizontal vertical'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#focus
+alt-shift-h = 'focus left'
+alt-shift-j = 'focus down'
+alt-shift-k = 'focus up'
+alt-shift-l = 'focus right'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#move
+alt-shift-ctrl-h = 'move left'
+alt-shift-ctrl-j = 'move down'
+alt-shift-ctrl-k = 'move up'
+alt-shift-ctrl-l = 'move right'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#resize
+alt-shift-minus = 'resize smart -50'
+alt-shift-equal = 'resize smart +50'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#workspace
+## In your config, you can drop workspace bindings that you don't need
+alt-shift-1 = 'workspace 1'
+alt-shift-2 = 'workspace 2'
+alt-shift-3 = 'workspace 3'
+alt-shift-4 = 'workspace 4'
+alt-shift-5 = 'workspace 5'
+alt-shift-6 = 'workspace 6'
+alt-shift-7 = 'workspace 7'
+alt-shift-8 = 'workspace 8'
+alt-shift-9 = 'workspace 9'
+
+alt-shift-f = 'workspace --wrap-around next'
+alt-shift-b = 'workspace --wrap-around prev'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
+alt-shift-ctrl-1 = 'move-node-to-workspace 1'
+alt-shift-ctrl-2 = 'move-node-to-workspace 2'
+alt-shift-ctrl-3 = 'move-node-to-workspace 3'
+alt-shift-ctrl-4 = 'move-node-to-workspace 4'
+alt-shift-ctrl-5 = 'move-node-to-workspace 5'
+alt-shift-ctrl-6 = 'move-node-to-workspace 6'
+alt-shift-ctrl-7 = 'move-node-to-workspace 7'
+alt-shift-ctrl-8 = 'move-node-to-workspace 8'
+alt-shift-ctrl-9 = 'move-node-to-workspace 9'
+
+alt-shift-n = 'focus-monitor --wrap-around next'
+alt-shift-p = 'focus-monitor --wrap-around prev'
+
+alt-shift-ctrl-n = ['move-node-to-monitor --wrap-around next', 'focus-monitor --wrap-around next']
+alt-shift-ctrl-p = ['move-node-to-monitor --wrap-around prev', 'focus-monitor --wrap-around prev']
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
+alt-tab = 'workspace-back-and-forth'
+
+alt-shift-r = 'reload-config'
+
+# See: https://nikitabobko.github.io/AeroSpace/commands#mode
+alt-r = 'mode resize'
+
+
+[mode.resize.binding]
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+b = 'balance-sizes'
+
+minus = 'resize smart -50'
+equal = 'resize smart +50'
+
+enter = 'mode main'
+esc = 'mode main'
+
+
+[workspace-to-monitor-force-assignment]
+C = 1
+W = 2
+M = ['^built-in retina display$', 3]
