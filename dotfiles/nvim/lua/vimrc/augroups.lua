@@ -145,10 +145,10 @@ create_autocmd({ 'LspAttach' }, {
 		end, { buffer = buffer_num, desc = 'Format selected page/range' })
 
 		vim.notify(
-			client.name .. ' LSP server connected successfully',
+			client.name .. ' LSP server connected successfully (buffer #' .. buffer_num .. ')',
 			vim.log.levels.INFO,
 			{ timeout = 1000, title = 'LSP' }
 		)
 	end,
-	desc = 'Notify on LSP attach',
+	desc = 'Setup LSP config on attach',
 })
