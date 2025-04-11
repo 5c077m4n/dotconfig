@@ -27,6 +27,7 @@ function M.setup()
 		{ "nvim-lua/plenary.nvim", lazy = true },
 		{
 			"aserowy/tmux.nvim",
+			event = "VeryLazy",
 			config = function()
 				require("tmux").setup({
 					resize = { enable_default_keybindings = false },
@@ -35,6 +36,7 @@ function M.setup()
 		},
 		{
 			"rcarriga/nvim-notify",
+			event = "VeryLazy",
 			config = function()
 				local notify = require("notify")
 
@@ -69,10 +71,11 @@ function M.setup()
 		},
 		{
 			"nvim-lualine/lualine.nvim",
+			event = { "VeryLazy" },
 			dependencies = {
 				"projekt0n/github-nvim-theme",
 				"SmiteshP/nvim-navic",
-				{ "nvim-tree/nvim-web-devicons", lazy = true },
+				{ "nvim-tree/nvim-web-devicons", event = { "VeryLazy" } },
 			},
 			config = function()
 				require("vimrc.plugins.lualine")
@@ -98,8 +101,8 @@ function M.setup()
 				require("lspkind").init({ mode = "text" }) -- Icons in autocomplete popup
 			end,
 		},
-		{ "fladson/vim-kitty", ft = { "kitty" } },
-		{ "tmux-plugins/vim-tmux", ft = { "tmux" } },
+		{ "fladson/vim-kitty", ft = { "kitty" }, event = { "VeryLazy" } },
+		{ "tmux-plugins/vim-tmux", ft = { "tmux" }, event = { "VeryLazy" } },
 		{
 			"nvim-neo-tree/neo-tree.nvim",
 			branch = "v3.x",
@@ -320,6 +323,7 @@ function M.setup()
 		},
 		{
 			"hrsh7th/nvim-cmp",
+			event = { "InsertEnter" },
 			dependencies = {
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-buffer",
@@ -327,6 +331,7 @@ function M.setup()
 				"hrsh7th/cmp-cmdline",
 				{
 					"L3MON4D3/LuaSnip",
+					event = { "InsertEnter" },
 					version = "v1.*",
 					build = "make install_jsregexp",
 					dependencies = { "saadparwaiz1/cmp_luasnip" },
@@ -446,7 +451,8 @@ function M.setup()
 		},
 		{
 			"lewis6991/gitsigns.nvim",
-			dependencies = "nvim-lua/plenary.nvim",
+			event = { "BufReadPre", "BufNewFile" },
+			dependencies = { "nvim-lua/plenary.nvim" },
 			config = function()
 				require("vimrc.plugins.gitsigns")
 			end,
