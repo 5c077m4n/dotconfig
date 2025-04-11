@@ -42,10 +42,11 @@ null_ls.setup({
 		-- CSS
 		null_ls.builtins.formatting.stylelint,
 		-- Shell
-		null_ls.builtins.formatting.shellharden,
-		null_ls.builtins.formatting.shfmt,
 		null_ls.builtins.diagnostics.shellcheck,
 		null_ls.builtins.code_actions.shellcheck,
+		null_ls.builtins.formatting.shellharden,
+		null_ls.builtins.formatting.shfmt,
+		null_ls.builtins.formatting.beautysh,
 		-- SQL
 		null_ls.builtins.formatting.sqlformat,
 		-- Rust
