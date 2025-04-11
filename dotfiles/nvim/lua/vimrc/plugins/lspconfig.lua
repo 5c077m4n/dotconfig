@@ -1,5 +1,4 @@
 local SERVER_LIST = {
-	"pylsp",
 	"denols",
 	"tsserver",
 	"bashls",
@@ -17,6 +16,7 @@ local SERVER_LIST = {
 	"rust_analyzer",
 	"zls",
 	"jdtls",
+	"pyright",
 }
 
 ---@param options? table
