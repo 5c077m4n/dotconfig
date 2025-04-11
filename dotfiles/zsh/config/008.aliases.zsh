@@ -3,15 +3,13 @@ alias cdt='cd "$(mktemp -d)"'
 # Make `rm` safe by default
 alias rm='rm -i'
 
-# exa -> ls
-if (( $+commands[exa] )); then
-	alias ls='exa' # just replace ls by exa and allow all other exa arguments
-	alias tree='exa --tree' # tree view
+if (( $+commands[eza] )); then
+	alias ls='eza'
+	alias tree='eza --tree'
 fi
 alias l='ls -lbF' # list, size, type
 alias ll='ls -la' # long, all
 alias la='ls -lbhHigUmuSa' # all list
-alias lx='ls -lbhHigUmuSa@' # all list and extended
 
 # Package manager update
 if (( $+commands[brew] )); then
@@ -165,6 +163,7 @@ fi
 
 # Python
 alias python='python3'
+alias pip='pip3'
 
 # SSH
 alias evssh='eval "$(ssh-agent -s)"'
@@ -190,11 +189,13 @@ if [[ $(uname) == 'Darwin' ]]; then
 	}
 fi
 
-# Ranger - make sure that there's only one instance active
-ranger() {
-	if [[ -z "$RANGER_LEVEL" ]]; then
-		$commands[ranger] "$@"
-	else
-		exit
-	fi
-}
+if (( $+commands[ranger] )); then
+	# Ranger - make sure that there's only one instance active
+	ranger() {
+		if [[ -z "$RANGER_LEVEL" ]]; then
+			$commands[ranger] "$@"
+		else
+			exit
+		fi
+	}
+fi
