@@ -2,8 +2,6 @@ local utils = require("vimrc.utils")
 
 local keymap = utils.keymapping
 
-local M = {}
-
 local function bootstrap()
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -20,7 +18,7 @@ local function bootstrap()
 	vim.opt.rtp:prepend(lazypath)
 end
 
-function M.setup()
+local function setup()
 	bootstrap()
 
 	require("lazy").setup({
@@ -325,7 +323,7 @@ function M.setup()
 		},
 		{
 			"nvimtools/none-ls.nvim",
-			dependencies = "nvim-lua/plenary.nvim",
+			dependencies = { "nvim-lua/plenary.nvim" },
 			config = function()
 				require("vimrc.plugins.null-ls")
 			end,
@@ -388,14 +386,6 @@ function M.setup()
 						hint_offset = 1,
 					})
 				end)
-			end,
-		},
-		{
-			"francoiscabrol/ranger.vim",
-			event = "VeryLazy",
-			dependencies = "rbgrouleff/bclose.vim",
-			config = function()
-				keymap.nnoremap("<leader>rr", vim.cmd.Ranger, { desc = "Open ranger file browser" })
 			end,
 		},
 		{
@@ -489,4 +479,4 @@ function M.setup()
 	}, { ui = { border = "single" } })
 end
 
-return M
+return { setup = setup }
