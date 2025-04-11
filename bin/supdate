@@ -14,5 +14,5 @@ elif (( $+commands[apt] )); then
 	sudo apt upgrade
 fi
 
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+nvim --headless +"Lazy! sync" +qa
 if (( $+commands[rustup] )); then rustup upgrade; fi

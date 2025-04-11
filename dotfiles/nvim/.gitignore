@@ -18,10 +18,6 @@ tags
 # Persistent undo
 [._]*.un~
 
-# Packer.nvim build file
-packer_compiled.vim
-packer_compiled.lua
-
 # Lua modules
 lua_modules/
 
