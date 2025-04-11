@@ -24,10 +24,10 @@ in
     wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
     # Configure network proxy if necessary
-    proxy = {
-      # default = "http://user:password@proxy:port/";
-      # noProxy = "127.0.0.1,localhost,internal.domain";
-    };
+    #proxy = {
+    #  default = "http://user:password@proxy:port/";
+    #  noProxy = "127.0.0.1,localhost,internal.domain";
+    #};
 
     # Enable networking
     networkmanager.enable = true;
@@ -195,17 +195,17 @@ in
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
-    # mtr.enable = true;
-    # gnupg.agent = {
-    #   enable = true;
-    #   enableSSHSupport = true;
-    # };
+    #mtr.enable = true;
+    #gnupg.agent = {
+    #  enable = true;
+    #  enableSSHSupport = true;
+    #};
   };
 
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  #services.openssh.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -213,7 +213,5 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system = {
-    inherit stateVersion;
-  };
+  system = { inherit stateVersion; };
 }
