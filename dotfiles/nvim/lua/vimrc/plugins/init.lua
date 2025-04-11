@@ -262,7 +262,6 @@ local function setup()
 						},
 					},
 				},
-				lsp_inlay_hints = { enable = false },
 				trouble = true,
 				lsp_keymaps = false,
 			},
