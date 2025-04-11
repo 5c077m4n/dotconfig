@@ -14,3 +14,9 @@ set --global --export XDG_PICTURES_DIR "$HOME/Pictures"
 set --global --export XDG_PUBLICSHARE_DIR "$HOME/Public"
 set --global --export XDG_TEMPLATES_DIR "$HOME/Templates"
 set --global --export XDG_VIDEOS_DIR "$HOME/Videos"
+
+for xdg_dir in (printenv | grep '^XDG_.*_HOME=' | sed 's/.*=//')
+    if ! test -d "$xdg_dir"
+        mkdir -p "$xdg_dir"
+    end
+end
