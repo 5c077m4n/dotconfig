@@ -140,7 +140,7 @@ export EDITOR="nvim"
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
 
 # Kubectl zsh completion
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+[[ -x /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 
 [[ -f "${ZDOTDIR}/aliases" ]] && source "${ZDOTDIR}/aliases"
 [[ -f "${ZDOTDIR}/fzf-functions" ]] && source "${ZDOTDIR}/fzf-functions"
