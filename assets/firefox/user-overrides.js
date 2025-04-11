@@ -37,4 +37,7 @@ user_pref("javascript.options.wasm", true); // 5506 default-inactive in user.js 
 user_pref("keyword.enabled", true); // 0801
 
 /* override recipe: letterboxing ***/
-//user_pref("privacy.resistFingerprinting.letterboxing", false);
+//user_pref("privacy.resistFingerprinting.letterboxing", false); // 4504
+
+/* override recipe: set startup page ***/
+//user_pref("browser.startup.page", 1); // 0102
