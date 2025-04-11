@@ -56,12 +56,20 @@ local sources = {
 		end,
 	}),
 	-- Go
-	null_ls.builtins.diagnostics.golangci_lint,
-	null_ls.builtins.diagnostics.gospel,
+	--null_ls.builtins.diagnostics.revive,
+	--null_ls.builtins.diagnostics.gospel,
 	null_ls.builtins.diagnostics.staticcheck,
-	null_ls.builtins.formatting.gofmt,
+	--null_ls.builtins.formatting.gofmt,
+	null_ls.builtins.formatting.gofumpt,
 	null_ls.builtins.formatting.goimports,
-	null_ls.builtins.formatting.golines,
+	null_ls.builtins.formatting.goimports_reviser,
+	null_ls.builtins.formatting.golines.with({
+		extra_args = {
+			'--max-len=100',
+			'--base-formatter=gofumpt',
+		},
+	}),
+	null_ls.builtins.code_actions.impl,
 	-- ZSH
 	null_ls.builtins.diagnostics.zsh,
 	-- Terraform

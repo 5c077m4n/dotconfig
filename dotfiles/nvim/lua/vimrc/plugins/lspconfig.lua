@@ -14,6 +14,7 @@ local SERVER_LIST = {
 	'rust_analyzer',
 	'sqlls',
 	'dockerls',
+	'gopls',
 	'zls',
 }
 
@@ -68,7 +69,7 @@ return {
 			elseif server == 'denols' then
 				vim.g.markdown_fenced_languages = { 'ts=typescript' }
 				opts.root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc', 'deno.lock')
-			elseif server == 'tsserver' or server == 'rust_analyzer' then
+			elseif server == 'tsserver' or server == 'rust_analyzer' or server == 'gopls' then
 				return
 			end
 
