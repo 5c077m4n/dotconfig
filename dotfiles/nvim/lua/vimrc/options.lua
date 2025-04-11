@@ -30,9 +30,9 @@ o.shiftwidth = o.tabstop:get()
 o.autoindent = true
 o.smartindent = true
 o.signcolumn = 'yes'
-o.wrap = false
+o.wrap = true
 if o.wrap:get() then
-	o.showbreak = '+ '
+	o.showbreak = '⏎ '
 end
 -- Toggle paste mode
 o.pastetoggle = '<F3>'
