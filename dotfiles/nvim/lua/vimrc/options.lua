@@ -77,7 +77,7 @@ o.showmatch = true
 o.mat = 2
 
 o.undofile = true
-o.undodir = vim.fn.stdpath('data') .. '/undo_dir/'
+o.undodir = vim.fn.stdpath('state') .. '/undo_dir/'
 
 o.swapfile = false
 o.title = true
