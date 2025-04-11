@@ -94,7 +94,7 @@ brew "sleepwatcher", restart_service: true
 brew "starship"
 brew "stern"
 brew "stylua"
-brew "tmux"
+brew "tmux", args: ["HEAD"]
 brew "tor"
 brew "tree"
 brew "watch"
