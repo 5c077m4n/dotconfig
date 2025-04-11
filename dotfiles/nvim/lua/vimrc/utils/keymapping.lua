@@ -15,6 +15,7 @@ local function create_keymap_fn(mode)
 end
 
 M.nnoremap = create_keymap_fn('n')
+M.nvnoremap = create_keymap_fn({ 'n', 'v' })
 M.vnoremap = create_keymap_fn('v')
 M.inoremap = create_keymap_fn('i')
 M.tnoremap = create_keymap_fn('t')
