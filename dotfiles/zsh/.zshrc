@@ -127,7 +127,8 @@ eval "$(starship init zsh)"
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
 
 # Kubectl zsh completion
-(( $+commands[kubectl] )) && source <(kubectl completion zsh)
+
+[[ -x "/opt/homebrew/bin/kubectl" ]] && source <(kubectl completion zsh)
 [[ -f "${HOME}/.cargo/env" ]] && source "${HOME}/.cargo/env"
 [[ -f "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
 
