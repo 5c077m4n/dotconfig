@@ -96,10 +96,23 @@ alias nclean='npm cache clean --force'
 
 # Kubectl
 alias k='kubectl'
+alias ke='kubectl edit'
 alias kk='kubectl krew'
+alias kg='kubectl get'
+alias kd='kubectl delete'
+alias kds='kubectl delete service'
+alias kdc='kubectl delete configmap'
+alias kdn='kubectl delete namespace'
+alias kc='kubectl create'
+alias kcn='kubectl create namespace'
+alias kgp='kubectl get pod'
+alias kgs='kubectl get service'
+alias kgc='kubectl get configmap'
+alias kgn='kubectl get namespace'
 alias kpf='kubectl port-forward'
 # Kubectl utils
 alias kns='kubens'
+alias knsc='kubens --current'
 alias kc='kubectx'
 alias kcc='kubectx --current'
 # Terraform
