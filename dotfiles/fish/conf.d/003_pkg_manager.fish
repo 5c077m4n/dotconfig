@@ -4,8 +4,6 @@ set --local nixd_init /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fis
 
 if test -e $nixd_init
     . $nixd_init
-
-    fish_add_path /run/current-system/sw/bin/
 else
     set --export --global HOMEBREW_BUNDLE_FILE "$XDG_CONFIG_HOME/homebrew/Brewfile"
 

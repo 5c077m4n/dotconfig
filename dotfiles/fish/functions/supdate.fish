@@ -1,7 +1,7 @@
 function supdate --description 'Run a full system update'
-    if type --query darwin-rebuild && test -f ~/workspace/dotconfig/dotfiles/nix/darwin/flake.nix
-        nix flake update ~/workspace/dotconfig/dotfiles/nix/darwin
-        darwin-rebuild switch --flake ~/workspace/dotconfig/dotfiles/nix/darwin
+    if type --query darwin-rebuild && test -f ~/workspace/dotconfig/flake.nix
+        nix flake update ~/workspace/dotconfig/
+        darwin-rebuild switch --flake ~/workspace/dotconfig/
     else if type --query brew
         brew update
         brew bundle install
