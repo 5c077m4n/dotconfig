@@ -27,8 +27,8 @@ o.tabstop = 4
 o.shiftwidth = o.tabstop:get()
 o.autoindent = true
 o.smartindent = true
-o.wrap = false
 o.signcolumn = 'yes'
+o.wrap = false
 if o.wrap:get() then
 	o.showbreak = '+ '
 end
