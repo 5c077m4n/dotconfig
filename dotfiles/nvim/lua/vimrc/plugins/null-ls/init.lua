@@ -1,5 +1,7 @@
 local null_ls = require("null-ls")
 
+local null_ls_builtins = require("vimrc.plugins.null-ls.builtins")
+
 local sources = {
 	-- Snippet support
 	null_ls.builtins.completion.luasnip,
@@ -22,6 +24,8 @@ local sources = {
 	null_ls.builtins.formatting.prettierd,
 	-- CSS
 	null_ls.builtins.formatting.stylelint,
+	-- Rust
+	null_ls_builtins.formatting.rustfmt,
 	-- Shell
 	null_ls.builtins.formatting.shellharden,
 	null_ls.builtins.formatting.shfmt,
@@ -64,5 +68,5 @@ null_ls.setup({
 	diagnostics_format = "[#{c}] #{m} (#{s})",
 	sources = sources,
 	update_in_insert = false,
-	debounce = 200,
+	debounce = 400,
 })

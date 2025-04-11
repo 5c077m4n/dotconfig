@@ -261,7 +261,7 @@ local function setup()
 			version = "^4",
 			ft = { "rust" },
 			event = { "VeryLazy" },
-			config = function()
+			init = function()
 				vim.g.rustaceanvim = {
 					server = {
 						default_settings = {
