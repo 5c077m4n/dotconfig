@@ -33,21 +33,27 @@ symbol = "aws "
 
 [c]
 symbol = "C "
+disabled = true
 
 [cobol]
 symbol = "cobol "
+disabled = true
 
 [conda]
 symbol = "conda "
+disabled = true
 
 [crystal]
 symbol = "cr "
+disabled = true
 
 [cmake]
 symbol = "cmake "
+disabled = true
 
 [daml]
 symbol = "daml "
+disabled = true
 
 [dart]
 symbol = "dart "
@@ -57,6 +63,7 @@ symbol = "deno "
 
 [dotnet]
 symbol = ".NET "
+disabled = true
 
 [directory]
 read_only = " ro"
@@ -67,9 +74,11 @@ symbol = "docker "
 
 [elixir]
 symbol = "exs "
+disabled = true
 
 [elm]
 symbol = "elm "
+disabled = true
 
 [git_branch]
 symbol = "git "
@@ -79,12 +88,15 @@ symbol = "go "
 
 [hg_branch]
 symbol = "hg "
+disabled = true
 
 [java]
 symbol = "java "
+disabled = true
 
 [julia]
 symbol = "jl "
+disabled = true
 
 [kotlin]
 symbol = "kt "
@@ -100,45 +112,55 @@ symbol = "memory "
 
 [nim]
 symbol = "nim "
+disabled = true
 
 [nix_shell]
 symbol = "nix "
+disabled = true
 
 [ocaml]
 symbol = "ml "
+disabled = true
 
 [package]
 symbol = "pkg "
 
 [perl]
 symbol = "pl "
+disabled = true
 
 [php]
 symbol = "php "
+disabled = true
 
 [pulumi]
 symbol = "pulumi "
 
 [purescript]
 symbol = "purs "
+disabled = true
 
 [python]
 symbol = "py "
 
 [raku]
 symbol = "raku "
+disabled = true
 
 [ruby]
 symbol = "rb "
+disabled = true
 
 [rust]
 symbol = "rs "
 
 [scala]
 symbol = "scala "
+disabled = true
 
 [spack]
 symbol = "spack "
+disabled = true
 
 [sudo]
 symbol = "sudo "
@@ -146,6 +168,7 @@ disabled = false
 
 [swift]
 symbol = "swift "
+disabled = true
 
 [kubernetes]
 symbol = "kube "
