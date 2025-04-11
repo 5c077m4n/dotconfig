@@ -11,7 +11,7 @@ function M.reload_vimrc()
 end
 
 function M.update_vimrc()
-	utils.async_cmd({ 'git', '-C', vim.env.HOME .. '/.config/nvim', 'pull', '--force', 'origin', 'master' })
+	utils.async_cmd({ 'git', '-C', vim.fn.stdpath('config'), 'pull', '--force', 'origin', 'master' })
 end
 
 return M
