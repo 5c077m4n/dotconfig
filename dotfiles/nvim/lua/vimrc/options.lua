@@ -1,9 +1,11 @@
-local o = vim.opt
 local g = vim.g
+local o = vim.opt
 
 g.mapleader = ' '
 g.maplocalleader = ' '
 g.python3_host_prog = vim.trim(vim.fn.system('which python3'))
+-- Autoread file on change
+o.autoread = true
 
 -- Configure backspace so it acts as it should
 o.backspace = { 'eol', 'start', 'indent' }
