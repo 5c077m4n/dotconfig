@@ -1,3 +1,5 @@
+[user]
+	name = "Roee"
 [alias]
 	co = "checkout"
 	wt = "worktree"
