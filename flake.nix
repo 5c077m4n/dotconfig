@@ -23,15 +23,17 @@
       ...
     }:
     let
-      configName = "tickle";
       username = "roee";
       hostPlatform = "aarch64-darwin";
+      configName = "tickle";
     in
     {
       darwinConfigurations.${configName} = nix-darwin.lib.darwinSystem {
         specialArgs = {
           inherit self username hostPlatform;
-          pkgs-unstable = nixpkgs-unstable;
+          pkgs-unstable = import nixpkgs-unstable {
+            system = hostPlatform;
+          };
         };
         modules = [
           (import ./darwin.nix)
