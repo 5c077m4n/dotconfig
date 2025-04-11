@@ -1,7 +1,10 @@
 [alias]
-     whoami = !git config user.name && git config user.email
+	exec = "!exec "
+	root = "!git rev-parse --show-toplevel"
+	whoami = "!git config user.name && git config user.email"
+	wt = "!git worktree "
 [core]
-    autocrlf = input
+	autocrlf = input
 [help]
 	autocorrect = 50
 
