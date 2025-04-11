@@ -246,27 +246,6 @@ local function setup()
 			end,
 		},
 		{
-			"ray-x/go.nvim",
-			dependencies = { "neovim/nvim-lspconfig", "nvim-treesitter/nvim-treesitter" },
-			ft = { "go", "gomod", "godoc", "gotexttmpl", "gohtmltmpl" },
-			event = { "CmdlineEnter" },
-			build = function()
-				require("go.install").update_all_sync()
-			end,
-			opts = {
-				lsp_cfg = {
-					settings = {
-						gopls = {
-							analyses = { undparams = true },
-							staticcheck = true,
-						},
-					},
-				},
-				trouble = true,
-				lsp_keymaps = false,
-			},
-		},
-		{
 			"folke/trouble.nvim",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
 			event = { "VeryLazy" },

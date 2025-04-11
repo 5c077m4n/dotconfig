@@ -129,7 +129,16 @@ local SERVER_CONFIG_MAP = {
 		})
 	end,
 	rust_analyzer = function() end,
-	gopls = function() end,
+	gopls = function()
+		return make_config({
+			settings = {
+				gopls = {
+					analyses = { undparams = true },
+					staticcheck = true,
+				},
+			},
+		})
+	end,
 	golangci_lint_ls = function()
 		return make_config({ filetypes = { "go", "gomod" } })
 	end,
