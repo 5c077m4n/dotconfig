@@ -166,7 +166,7 @@ in
                 pkgs.copyq
                 pkgs.feh # Image viewer
                 pkgs.inkscape # Image editor
-                pkgs.pgadmin4-desktopmode
+                pkgs-unstable.pgadmin4-desktopmode # PostgreSQL viewer
               ]
               ++ lib.optionals stdenv.isDarwin [
                 # Bluetooth
