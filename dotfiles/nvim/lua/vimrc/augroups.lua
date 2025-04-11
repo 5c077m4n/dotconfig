@@ -55,8 +55,9 @@ create_autocmd({ 'BufWritePost' }, {
 	pattern = '*/vimrc/plugins/*.lua',
 	callback = function(opts)
 		vim.notify('"' .. opts.file .. '" has changed, so recompiling...', vim.log.levels.INFO)
-		require('plenary.reload').reload_module('vimrc.plugins')
+
 		require('packer').compile()
+		vim.loader.reset()
 	end,
 	desc = 'Packer compile on plugin config change',
 })
