@@ -160,3 +160,24 @@ alias python='python3'
 
 # SSH
 alias evssh='eval "$(ssh-agent -s)"'
+
+# MacOS Microphone
+if [[ $(uname) == 'Darwin' ]]; then
+	alias 'mic-vol-current'='osascript -e "input volume of (get volume settings)"'
+	mic-vol-set () {
+		local required_vol="${1}"
+		if (( $required_vol < 0 || $required_vol > 100 )); then
+			>&2 echo "The volume needs to be between 0 and 100"
+			return 1
+		fi
+		osascript -e "set volume input volume $required_vol"
+	}
+	mic-power () {
+		mic-vol-set $(if (( $(mic-vol-current) == 0 )); then echo 75; else echo 0; fi)
+		if (( $(mic-vol-current) > 0 )); then
+			echo "Turned microphone $(tput setaf 2; tput bold)on$(tput sgr0) ($(mic-vol-current)%)"
+		else
+			echo "Turned microphone $(tput setaf 1; tput bold)off$(tput sgr0)"
+		fi
+	}
+fi
