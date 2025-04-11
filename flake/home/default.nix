@@ -76,11 +76,11 @@ in
                 pkgs.shfmt
                 pkgs.shellharden
                 # JavaScript
-                pkgs-unstable.nodejs_22
-                pkgs-unstable.eslint_d
-                pkgs-unstable.prettierd
-                pkgs-unstable.pnpm
-                pkgs-unstable.yarn-berry # `yarn` >=4.5
+                pkgs.nodejs_22
+                pkgs.eslint_d
+                pkgs.prettierd
+                pkgs.pnpm
+                pkgs.yarn-berry # `yarn` >=4.5
                 pkgs-unstable.deno
                 # Python
                 pkgs-unstable.python310
