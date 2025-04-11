@@ -1,0 +1,8 @@
+.git
+
+README\.md
+
+fish/conf\.d/plugin-*\.fish
+fish/fish_variables
+
+karabiner/assets
