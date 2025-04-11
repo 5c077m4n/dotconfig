@@ -19,5 +19,8 @@ if [[ -x /opt/homebrew/bin/brew ]]; then
 	# Use GNU tools as default
 	path=("${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin" $path)
 
-	export GOROOT="$(brew --prefix golang)/libexec"
+	if (( $+commands[go] )); then
+		export GOROOT="$(brew --prefix go)/libexec"
+		typeset -TU GOPATH gopath
+	fi
 fi
