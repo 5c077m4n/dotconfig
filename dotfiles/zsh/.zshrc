@@ -98,6 +98,8 @@ HIST_STAMPS="dd/mm/yyyy"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(fzf rust zsh-autosuggestions zsh-syntax-highlighting)
+
+[[ -f "${ZDOTDIR}/oh-my-zsh-upsert.zsh" ]] && source "${ZDOTDIR}/oh-my-zsh-upsert.zsh"
 source "${ZSH}/oh-my-zsh.sh"
 
 # User configuration
