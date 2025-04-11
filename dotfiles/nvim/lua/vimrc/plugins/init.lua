@@ -248,6 +248,11 @@ local function setup()
 				ts_tools.setup({
 					settings = {
 						jsx_close_tag = { enable = false },
+						tsserver_file_preferences = {
+							includeInlayParameterNameHints = "all",
+							includeCompletionsForModuleExports = true,
+							quotePreference = "auto",
+						},
 					},
 					single_file_support = false,
 					root_dir = lspconfig.util.root_pattern(
