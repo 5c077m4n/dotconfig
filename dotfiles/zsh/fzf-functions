@@ -24,6 +24,8 @@ _fzf_complete_ga() {
 		--preview 'git diff --color=always -- {}' \
 		--preview-window 'top:70%' \
 		-- "$@" < <(
+			git add --intent-to-add --all
+
 			changed_files="$(git diff --name-only)"
 			[[ -z "$changed_files" ]] && exit 2
 
