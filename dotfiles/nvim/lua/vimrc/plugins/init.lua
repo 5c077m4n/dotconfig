@@ -214,10 +214,10 @@ local function init_packer()
 			use({
 				'francoiscabrol/ranger.vim',
 				requires = 'rbgrouleff/bclose.vim',
-				setup = function()
+				cmd = '<leader>rr',
+				config = function()
 					require('vimrc.plugins.ranger')
 				end,
-				cmd = '<leader>rr',
 			})
 			use({
 				'folke/which-key.nvim',
