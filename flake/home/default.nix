@@ -126,9 +126,9 @@ in
         pkgs-unstable.kubectx
         pkgs-unstable.k9s
         # Containers
-        ## Docker
-        pkgs-unstable.docker
-        pkgs-unstable.docker-compose
+        ## Podman
+        pkgs-unstable.podman
+        pkgs-unstable.podman-compose
         # DBs
         ## TUIs
         pkgs.pgcli
@@ -204,6 +204,10 @@ in
 
     fish = import ./apps/fish.nix { inherit pkgs-unstable; };
     tmux = import ./apps/tmux.nix { inherit config pkgs; };
+  };
+
+  services = {
+    podman.enable = true;
   };
 
   fonts.fontconfig.enable = true;
