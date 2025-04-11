@@ -1,7 +1,14 @@
 function supdate --description 'Run a full system update'
     if type --query nix && test -f ~/workspace/dotconfig/flake.nix
         nix flake update --flake ~/workspace/dotconfig/
-        nix run nix-darwin -- switch --flake ~/workspace/dotconfig/
+
+        if type --query nix-darwin
+            sudo nix-darwin switch --flake ~/workspace/dotconfig/#roee@macos
+        else if type --query nixos-rebuild
+            sudo nixos-rebuild switch --flake ~/workspace/dotconfig/#roee@nixos-vivo
+        else if type --query home-manager
+            home-manager switch --flake ~/workspace/dotconfig/#roee@ubuntu-vivo
+        end
     else if type --query brew
         brew update
         brew bundle install
@@ -13,9 +20,11 @@ function supdate --description 'Run a full system update'
     else if type --query apk
         sudo apk update
         sudo apk upgrade
-    else if type --query apt
+    end
+
+    if type --query apt
         sudo apt update
-        sudo apt upgrade
+        sudo apt upgrade --yes
     end
 
     nvim --headless +"Lazy! sync" +qa
