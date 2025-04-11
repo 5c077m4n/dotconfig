@@ -197,6 +197,9 @@ local SERVER_CONFIG_MAP = {
 	zls = function()
 		return make_config()
 	end,
+	gleam = function()
+		return make_config()
+	end,
 	svelte = function()
 		return make_config()
 	end,

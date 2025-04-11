@@ -123,6 +123,8 @@ in
             pkgs.nil
             # WASM
             pkgs-master.wasmtime
+            # Gleam
+            pkgs-master.gleam
             # YAML
             pkgs.yamllint
             # K8s
