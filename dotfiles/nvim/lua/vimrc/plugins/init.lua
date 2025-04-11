@@ -35,6 +35,37 @@ local function init_packer()
 				end,
 			})
 			use({
+				'nvim-treesitter/nvim-treesitter-context',
+				requires = { 'nvim-treesitter/nvim-treesitter' },
+				config = function()
+					require('treesitter-context').setup({
+						max_lines = 3,
+						patters = {
+							default = {
+								'class',
+								'function',
+								'method',
+								'for',
+								'while',
+								'if',
+								'switch',
+								'case',
+							},
+							rust = {
+								'impl',
+								'mod',
+								'struct',
+								'fn',
+							},
+							typescript = {
+								'const',
+								'let',
+							},
+						},
+					})
+				end,
+			})
+			use({
 				'nathom/filetype.nvim',
 				config = function()
 					require('filetype').setup({
@@ -46,6 +77,22 @@ local function init_packer()
 						literal = {
 							['.babelrc'] = 'json',
 							['.swcrc'] = 'json',
+						},
+					})
+				end,
+			})
+			use({
+				'samodostal/image.nvim',
+				requires = { 'nvim-lua/plenary.nvim' },
+				config = function()
+					require('image').setup({
+						render = {
+							min_padding = 5,
+							show_label = true,
+							use_dither = true,
+						},
+						events = {
+							update_on_nvim_resize = true,
 						},
 					})
 				end,
@@ -355,23 +402,6 @@ local function init_packer()
 				requires = 'mfussenegger/nvim-dap',
 				ft = { 'javascript', 'lua', 'rust' },
 				disable = true,
-			})
-			-- Misc
-			use({
-				'samodostal/image.nvim',
-				requires = { 'nvim-lua/plenary.nvim' },
-				config = function()
-					require('image').setup({
-						render = {
-							min_padding = 5,
-							show_label = true,
-							use_dither = true,
-						},
-						events = {
-							update_on_nvim_resize = true,
-						},
-					})
-				end,
 			})
 
 			-- Optional
