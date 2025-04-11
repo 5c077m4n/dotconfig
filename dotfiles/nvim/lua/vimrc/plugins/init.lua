@@ -488,18 +488,10 @@ local function setup()
 				"nvim-lua/plenary.nvim",
 				"sharkdp/fd",
 				"BurntSushi/ripgrep",
+				{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			},
 			config = function()
 				require("vimrc.plugins.telescope")
-			end,
-		},
-		{
-			"nvim-telescope/telescope-fzf-native.nvim",
-			dependencies = { "nvim-telescope/telescope.nvim" },
-			event = { "VeryLazy" },
-			build = "make",
-			config = function()
-				require("telescope").load_extension("fzf")
 			end,
 		},
 	}, { ui = { border = "single" } })
