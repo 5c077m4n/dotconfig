@@ -1,4 +1,5 @@
 local cmp = require('cmp')
+local lspkind = require('lspkind')
 
 local has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -9,6 +10,20 @@ local feedkey = function(key, mode)
 end
 
 cmp.setup({
+	formatting = {
+		format = lspkind.cmp_format(),
+	},
+	sorting = {
+		comparators = {
+			cmp.config.compare.offset,
+			cmp.config.compare.exact,
+			cmp.config.compare.score,
+			cmp.config.compare.kind,
+			cmp.config.compare.length,
+			cmp.config.compare.order,
+			cmp.config.compare.sort_text,
+		},
+	},
 	snippet = {
 		expand = function(args)
 			vim.fn['vsnip#anonymous'](args.body)
