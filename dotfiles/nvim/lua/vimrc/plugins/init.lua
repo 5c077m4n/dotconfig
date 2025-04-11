@@ -198,24 +198,8 @@ local function init_packer()
 						end,
 						open_mapping = [[<F12>]],
 						hide_numbers = false,
-						winbar = {
-							enabled = false,
-							name_formatter = function(term)
-								return term.name
-							end,
-						},
-					})
-
-					local toggleterm_keymap = vim.api.nvim_create_augroup('toggleterm_keymap', { clear = true })
-					vim.api.nvim_create_autocmd({ 'TermOpen' }, {
-						group = toggleterm_keymap,
-						pattern = { 'term://*' },
-						callback = function()
-							local opts = { buffer = 0 }
-							keymap.tnoremap('<Esc>', [[<C-\><C-n>]], opts)
-							keymap.tnoremap('<C-]>', [[<C-\><C-n>]], opts)
-						end,
-						desc = 'Set Toggleterm keymappings',
+						insert_mappings = true,
+						terminal_mappings = true,
 					})
 				end,
 			})
