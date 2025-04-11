@@ -62,10 +62,10 @@ keymap.nnoremap(
 keymap.inoremap("<C-b>", norBang("b"), { desc = "Traverse one word left" })
 keymap.inoremap("<C-e>", norBang("e"), { desc = "Traverse one word right" })
 keymap.inoremap("<C-w>", norBang("w"), { desc = "Traverse one word right" })
-keymap.inoremap("<C-h>", norBang("h"), { desc = "Traverse one letter left" })
-keymap.inoremap("<C-j>", norBang("j"), { desc = "Traverse one line down" })
-keymap.inoremap("<C-k>", norBang("k"), { desc = "Traverse one line up" })
-keymap.inoremap("<C-l>", norBang("l"), { desc = "Traverse one letter right" })
+keymap.inoremap("<C-h>", "<Left>", { desc = "Traverse one letter left" })
+keymap.inoremap("<C-j>", "<Down>", { desc = "Traverse one line down" })
+keymap.inoremap("<C-k>", "<Up>", { desc = "Traverse one line up" })
+keymap.inoremap("<C-l>", "<Right>", { desc = "Traverse one letter right" })
 
 -- Special paste
 keymap.vnoremap(
