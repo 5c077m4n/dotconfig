@@ -90,7 +90,7 @@ in
                 pkgs-unstable.black
                 pkgs-unstable.isort
                 # Golang
-                pkgs-unstable.go
+                pkgs-unstable.go_1_24
                 pkgs-unstable.air # Live reloader
                 pkgs-unstable.tinygo
                 pkgs-unstable.golangci-lint
