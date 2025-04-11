@@ -1,0 +1,64 @@
+# Options
+
+set refresh-mode = auto
+## Ignore case in searches
+set ignore-case = true
+set editor-line-number = yes
+## Ignore end of line spacing in staging mode
+set ignore-space = at-eol
+
+
+# Commands
+
+## Rebase commands
+bind main <Ctrl-r> !git rebase --interactive %(commit)^
+bind diff <Ctrl-r> !git rebase --interactive %(commit)^
+
+## Diffs from HEAD
+bind main . !sh -c "git diff %(commit) | tig"
+bind diff . !sh -c "git diff %(commit) | tig"
+bind refs . !sh -c "git diff %(branch) | tig"
+
+## Main mode commands
+### Fetch all remotes
+bind main F @git fetch --all
+### Show commit statistics for the author under the cursor
+bind main U +sh -c 'git --no-pager shortlog -s --author="$(git show -s --format=%aE %(commit))" </dev/tty'
+bind main ^ ?git reset --soft HEAD^
+### Pull
+bind main p ?git pull --rebase %(remote) %(repo:head)
+bind main P ?git pull --rebase %(remote) master
+### Push
+bind main <Ctrl-p> ?git push -u %(remote) %(repo:head)
+bind main <Ctrl-o> ?git push -u --force %(remote) %(repo:head)
+
+## Status mode commands
+bind status + !git commit --amend
+bind status <Del> ?rm -f %(file)
+bind status C !git commit -m "%(prompt Enter a commit message: )"
+### Revert current file
+bind status R !git checkout . -- %(file)
+### Push
+bind status <Ctrl-p> ?git push -u %(remote) %(repo:head)
+bind status <Ctrl-o> ?git push -u --force %(remote) %(repo:head)
+
+## Refs mode commands
+bind refs a !git checkout -b "%(prompt Enter new branch name: )"
+bind refs <Del> ?git branch -D %(branch)
+### Pull
+bind refs p ?git pull --rebase %(remote) %(repo:head)
+bind refs P ?git pull --rebase %(remote) master
+### Pull
+bind refs p ?git pull --rebase %(remote) %(repo:head)
+bind refs P ?git pull --rebase %(remote) master
+### Push
+bind refs <Ctrl-p> ?git push -u %(remote) %(repo:head)
+bind refs <Ctrl-o> ?git push -u --force %(remote) %(repo:head)
+
+## Stage mode commands
+bind stage C !git commit -m "%(prompt Enter a commit message: )"
+### Revert current file
+bind stage R ?git checkout . -- %(file)
+### Push
+bind stage <Ctrl-p> ?git push -u %(remote) %(repo:head)
+bind stage <Ctrl-o> ?git push -u --force %(remote) %(repo:head)

@@ -1,0 +1,7 @@
+.DS_Store
+
+dotfiles/zsh/**
+!dotfiles/zsh/.zshrc
+!dotfiles/zsh/.zshenv
+!dotfiles/zsh/aliases
+!dotfiles/zsh/fzf-functions

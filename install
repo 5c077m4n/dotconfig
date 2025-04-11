@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+
+from os import path, environ, mkdir, listdir, remove, symlink, unlink
+import shutil
+
+home_dir = environ.get("HOME")
+if home_dir is None:
+    raise Exception("The $HOME param is not set")
+
+with open(path.join(home_dir, ".zshenv"), "w") as zshenv_write:
+    zshenv_content = [
+        'export ZDOTDIR="${HOME}/.config/zsh"\n',
+        '[[ -f "${ZDOTDIR}/.zshenv" ]] && source "${ZDOTDIR}/.zshenv"\n',
+    ]
+    zshenv_write.writelines(zshenv_content)
+
+config_dir = path.join(home_dir, ".config")
+if not path.isdir(config_dir):
+    mkdir(config_dir)
+
+for dir in listdir("./dotfiles"):
+    source_dir = path.abspath(path.join("./dotfiles", dir))
+    dest_dir = path.join(config_dir, dir)
+
+    if path.islink(dest_dir):
+        unlink(dest_dir)
+    elif path.isdir(dest_dir):
+        shutil.rmtree(dest_dir)
+    elif path.exists(dest_dir):
+        remove(dest_dir)
+
+    symlink(source_dir, dest_dir, True)
