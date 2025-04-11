@@ -160,13 +160,20 @@ in
                 ## Battery data
                 pkgs.acpi
                 # GUIs
+                ## Browsers
                 pkgs.firefox
                 pkgs.google-chrome
+                ## Terminal
                 pkgs.kitty
+                ## Clipboard manager
                 pkgs.copyq
-                pkgs.feh # Image viewer
-                pkgs.inkscape # Image editor
-                pkgs.dbeaver-bin # DB viewer
+                ## Image viewer
+                pkgs.feh
+                ## Image editor
+                pkgs.inkscape
+                ## DB viewer
+                pkgs.dbeaver-bin
+                ## Office
                 pkgs.libreoffice
               ]
               ++ lib.optionals stdenv.isDarwin [
