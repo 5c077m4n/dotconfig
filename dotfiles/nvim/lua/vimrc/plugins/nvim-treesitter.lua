@@ -14,6 +14,7 @@ require('nvim-treesitter.configs').setup({
 		'yaml',
 		'lua',
 		'bash',
+		'vimdoc',
 	},
 	ignore_install = {},
 	highlight = {
