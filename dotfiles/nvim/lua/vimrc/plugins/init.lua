@@ -200,10 +200,25 @@ local function init_packer()
 			})
 			use({
 				'folke/trouble.nvim',
-				event = { 'CursorHold', 'CursorHoldI' },
 				requires = 'kyazdani42/nvim-web-devicons',
 				config = function()
-					require('vimrc.plugins.trouble')
+					local trouble = require('trouble')
+					local keymap = require('vimrc.utils.keymapping')
+
+					trouble.setup()
+					keymap.nnoremap('<leader>xx', vim.cmd.TroubleToggle)
+					keymap.nnoremap('<leader>xw', function()
+						vim.cmd.TroubleToggle('workspace_diagnostics')
+					end)
+					keymap.nnoremap('<leader>xd', function()
+						vim.cmd.TroubleToggle('document_diagnostics')
+					end)
+					keymap.nnoremap('<leader>xq', function()
+						vim.cmd.TroubleToggle('quickfix')
+					end)
+					keymap.nnoremap('<leader>xl', function()
+						vim.cmd.TroubleToggle('loclist')
+					end)
 				end,
 			})
 			use('folke/neodev.nvim')
