@@ -8,7 +8,7 @@ alt + shift - l : yabai -m window --focus east;
 alt + shift - return : yabai -m window --toggle zoom-fullscreen;
 
 # Reset pane sizes
-shift + alt - e : yabai -m space --balance;
+alt + shift - e : yabai -m space --balance;
 
 # Swap windows
 shift + alt - j : yabai -m window --swap south;
@@ -31,4 +31,4 @@ ctrl + shift + alt - n : yabai -m window --display east; yabai -m display --focu
 ctrl + shift + alt - p : yabai -m window --display west; yabai -m display --focus west;
 
 # Restart yabai & skhd
-shift + alt - r : brew services restart yabai; skhd --reload;
+alt + shift - r : yabai --restart-service; skhd --reload;
