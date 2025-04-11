@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Will return non-zero status if the current directory is not managed by git
 is_in_git_repo() {
@@ -54,6 +54,6 @@ _fzf_complete_gco() {
 		--preview-window 'top:75%' \
 		-- "$@" < <(
 			git fetch --all --prune --quiet
-			git branch --all --format='%(refname:short)'
+			git branch --all --sort=-committerdate --format='%(refname:short)'
 		)
 }
