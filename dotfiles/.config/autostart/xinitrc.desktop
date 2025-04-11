@@ -1,0 +1,10 @@
+[Desktop Entry]
+
+Encoding=UTF-8
+Type=Application
+Name=Xinitrc
+Comment=Run the X initailization commands
+Exec=sh -c ". ~/.xinitrc"
+StartupNotify=false
+Terminal=false
+Hidden=false
