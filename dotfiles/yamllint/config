@@ -7,3 +7,5 @@ rules:
     max: 120
     level: warning
     allow-non-breakable-inline-mappings: true
+  braces:
+    max-spaces-inside: 1
