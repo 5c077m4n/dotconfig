@@ -91,9 +91,14 @@ in
                 pkgs-unstable.isort
                 # Golang
                 pkgs-unstable.go_1_24
+                ## Tools
                 pkgs-unstable.air # Live reloader
                 pkgs-unstable.tinygo
+                ## Formatters/Linters
                 pkgs-unstable.golangci-lint
+                pkgs-unstable.gofumpt
+                pkgs-unstable.goimports-reviser
+                pkgs-unstable.golines
                 # Rust
                 pkgs-unstable.rustup
                 pkgs-unstable.cargo-insta # Snapshot testing
