@@ -2,8 +2,7 @@
 
 if (( $+commands[brew] )); then
 	brew update
-	brew upgrade
-	brew upgrade --cask
+	brew bundle install
 elif (( $+commands[pacman] )); then
 	sudo pacman -Syu
 elif (( $+commands[pkg] )); then
