@@ -1,6 +1,6 @@
 { pkgs, username, ... }:
 let
-  stateVersion = "24.11";
+  stateVersion = "24.05";
 in
 {
   home-manager = {
