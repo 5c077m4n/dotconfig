@@ -21,32 +21,36 @@ alias tree='exa --tree' # tree view
 alias lS='exa -1' # one column by just names
 
 # Kubectl
+alias kk='kubectl krew'
 alias kns='kubens'
 alias kc='kubectx'
 alias kcc='kubectx --current'
 
 # Git
+gbdefault () {
+	command git rev-parse --git-dir &> /dev/null || return 1
+
+	local ref
+	for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk}; do
+		if [[ $(git show-ref -q --verify "$ref") ]]; then
+			echo "${ref:t}"
+			return
+		fi
+	done
+	echo "master"
+}
 alias gbcurrent='git branch --show-current'
 alias gsync='git fetch --all --prune && git pull origin "$(gbcurrent)" --all --rebase --autostash'
 alias gupa='git pull --rebase --autostash origin "$(gbcurrent)"'
 alias ggpf='git push --force origin "$(gbcurrent)"'
-alias gprom='git pull --rebase --autostash origin "$(git_main_branch)"'
-alias grbim='git rebase --interactive --autostash --autosquash "$(git_main_branch)"'
-## Worktree
-gwta() {
-	cd "$(git rev-parse --show-toplevel)"
-	git worktree add "$1"
-	cd "$1"
-}
-alias gwtr='git worktree remove'
-alias gwtl='git worktree list'
-alias gwtp='git worktree prune'
+alias gprom='git pull --rebase --autostash origin "$(gbdefault)"'
+alias grbim='git rebase --interactive --autostash --autosquash "$(gbdefault)"'
 
 # Rust
 alias c='cargo'
 alias ct='cargo test'
 alias ctw='cargo test --workspace'
-ctwl() {
+ctwl () {
 	RUST_LOG=debug cargo test --workspace "$@" -- --nocapture
 }
 alias cc='cargo clean'
