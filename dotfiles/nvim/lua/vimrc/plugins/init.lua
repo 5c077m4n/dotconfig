@@ -116,10 +116,13 @@ function M.setup()
 		},
 		{
 			'nvim-treesitter/nvim-treesitter',
+			events = { 'BufReadPre', 'BufNewFile' },
 			build = function()
 				vim.cmd.TSUpdate()
 			end,
 			config = function()
+				local MAX_FILE_SIZE = 100 * 1024 -- 100KB
+
 				require('nvim-treesitter.configs').setup({
 					ensure_installed = {
 						'javascript',
@@ -144,8 +147,25 @@ function M.setup()
 						'git_config',
 						'ssh_config',
 					},
-					ignore_install = {},
-					highlight = { enable = true, disable = {} },
+					highlight = {
+						enable = true,
+						disable = function(_lang, buf)
+							---@diagnostic disable-next-line: undefined-field
+							local ok, status = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+							return ok and status and status.size > MAX_FILE_SIZE
+						end,
+					},
+					indent = { enable = true },
+					additional_vim_regex_highlighting = false,
+					incremental_selection = {
+						enable = true,
+						keymaps = {
+							init_selection = 'vO',
+							node_incremental = 'vO',
+							node_decremental = 'vo',
+							scope_incremental = false,
+						},
+					},
 				})
 			end,
 		},
