@@ -4521,6 +4521,30 @@
                     "ignore": true,
                     "manipulate_caps_lock_led": true,
                     "simple_modifications": []
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 130,
+                        "vendor_id": 12136
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": true,
+                    "simple_modifications": [
+                        {
+                            "from": {
+                                "key_code": "application"
+                            },
+                            "to": [
+                                {
+                                    "key_code": "right_control"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ],
             "fn_function_keys": [
