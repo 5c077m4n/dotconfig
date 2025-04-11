@@ -89,7 +89,7 @@ end, { desc = 'Switch CWD to the directory of the open buffer' })
 keymap.nnoremap('U', '<C-r>', { desc = 'Redo last change' })
 
 create_command('CopyCursorLocation', function()
-	local file_path = vim.fn.expand('%')
+	local file_path = vim.fn.expand('%:.')
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 
 	local cursor_location = file_path .. ':' .. line .. ':' .. col
