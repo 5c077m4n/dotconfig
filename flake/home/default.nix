@@ -192,7 +192,7 @@ in
 
     sessionVariables = {
       # Allows linkers to find nix packages
-      LD_LIBRARY_PATH = lib.makeLibraryPath [
+      NIX_LD_LIBRARY_PATH = lib.makeLibraryPath [
         stdenv.cc.cc
         pkgs.zlib
       ];
