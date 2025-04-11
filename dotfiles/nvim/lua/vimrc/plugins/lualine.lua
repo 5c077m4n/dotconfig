@@ -1,19 +1,19 @@
-local lualine = require('lualine')
-local navic = require('nvim-navic')
+local lualine = require("lualine")
+local navic = require("nvim-navic")
 
 ---@description Fish shell style path (`~/a/.b/c/filename.lua`)
 ---@param path string
 ---@return string
 local function fish_style_path(path)
 	local sep
-	if vim.fn.has('win32') == 1 or vim.fn.has('win32unix') == 1 then
-		sep = '\\'
+	if vim.fn.has("win32") == 1 or vim.fn.has("win32unix") == 1 then
+		sep = "\\"
 	else
-		sep = '/'
+		sep = "/"
 	end
 	local segments = vim.split(path, sep)
 
-	local fish_path = ''
+	local fish_path = ""
 	for index, segment in pairs(segments) do
 		if index ~= 1 then
 			fish_path = fish_path .. sep
@@ -21,7 +21,7 @@ local function fish_style_path(path)
 
 		if index == #segments then
 			fish_path = fish_path .. segment
-		elseif segment:sub(1, 1) == '.' then
+		elseif segment:sub(1, 1) == "." then
 			fish_path = fish_path .. segment:sub(1, 2)
 		else
 			fish_path = fish_path .. segment:sub(1, 1)
@@ -34,13 +34,13 @@ lualine.setup({
 	sections = {
 		lualine_c = {
 			{
-				'filename',
-				symbols = { readonly = '🔒', modified = '💾' },
+				"filename",
+				symbols = { readonly = "🔒", modified = "💾" },
 				file_status = true,
 				newfile_status = true,
 				path = 1,
 				cond = function()
-					return vim.bo.filetype ~= 'TelescopePrompt'
+					return vim.bo.filetype ~= "TelescopePrompt"
 				end,
 				fmt = function(filepath)
 					return fish_style_path(filepath)
@@ -49,9 +49,9 @@ lualine.setup({
 		},
 		lualine_x = {
 			{
-				'fileformat',
+				"fileformat",
 				icons_enabled = true,
-				symbols = { unix = 'LF', dos = 'CRLF', mac = 'CR' },
+				symbols = { unix = "LF", dos = "CRLF", mac = "CR" },
 			},
 		},
 	},
@@ -62,20 +62,20 @@ lualine.setup({
 					return navic.get_location()
 				end,
 				cond = function()
-					return vim.bo.filetype ~= 'neo-tree' and navic.is_available()
+					return vim.bo.filetype ~= "neo-tree" and navic.is_available()
 				end,
 				fmt = function(location)
-					return location or ' '
+					return location or " "
 				end,
 			},
 		},
 		lualine_x = {
 			{
 				function()
-					return (vim.bo.modified and ' 💾' or ' ')
+					return (vim.bo.modified and " 💾" or " ")
 				end,
 				cond = function()
-					return vim.bo.filetype ~= 'neo-tree' and navic.is_available()
+					return vim.bo.filetype ~= "neo-tree" and navic.is_available()
 				end,
 			},
 		},
@@ -83,12 +83,12 @@ lualine.setup({
 	inactive_winbar = {
 		lualine_c = {
 			{
-				'filename',
+				"filename",
 				file_status = true,
 				newfile_status = true,
 				path = 1,
 				cond = function()
-					return vim.bo.filetype ~= 'neo-tree' and vim.bo.filetype ~= 'TelescopePrompt'
+					return vim.bo.filetype ~= "neo-tree" and vim.bo.filetype ~= "TelescopePrompt"
 				end,
 			},
 		},
@@ -96,10 +96,10 @@ lualine.setup({
 	tabline = {
 		lualine_b = {
 			{
-				'tabs',
+				"tabs",
 				mode = 2,
 				fmt = function(tab_name)
-					return tab_name .. (vim.bo.modified == 1 and ' 💾' or '')
+					return tab_name .. (vim.bo.modified == 1 and " 💾" or "")
 				end,
 			},
 		},
