@@ -478,7 +478,6 @@ local function setup()
 				})
 			end,
 		},
-		{ "numToStr/Comment.nvim", opts = {}, event = { "VeryLazy" }, lazy = false },
 		{
 			"tpope/vim-fugitive",
 			event = { "VeryLazy" },
