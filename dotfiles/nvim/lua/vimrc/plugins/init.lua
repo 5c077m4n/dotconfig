@@ -221,6 +221,7 @@ local function setup()
 			event = { "BufEnter" },
 			lazy = true,
 			config = function()
+				local lspconfig = require("lspconfig")
 				local ts_tools = require("typescript-tools")
 				local ts_tools_api = require("typescript-tools.api")
 
@@ -228,7 +229,7 @@ local function setup()
 					vim.notify(
 						"The `node` executable is not installed",
 						vim.log.levels.ERROR,
-						{ title = "typescript" }
+						{ title = "typescript-tools.nvim" }
 					)
 				end
 
@@ -236,6 +237,14 @@ local function setup()
 					settings = {
 						jsx_close_tag = { enable = false },
 					},
+					single_file_support = false,
+					root_dir = lspconfig.util.root_pattern(
+						"package.json",
+						"tsconfig.json",
+						"package-lock.json",
+						"yarn.lock",
+						"pnpm.lock"
+					),
 					handlers = {
 						["textDocument/publishDiagnostics"] = ts_tools_api.filter_diagnostics({
 							80001, -- Ignore the 'File is a CommonJS module; it may be converted to an ES module.' diagnostic.

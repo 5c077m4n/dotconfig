@@ -1,42 +1,26 @@
-local function genServerList()
-	local serverList = {
-		"taplo",
-		"pylsp",
-		"bashls",
-		"html",
-		"lua_ls",
-		"jsonls",
-		"yamlls",
-		"cssls",
-		"tailwindcss",
-		"marksman",
-		"tsserver",
-		"denols",
-		"sqlls",
-	}
-	if vim.fn.executable("docker") == 1 then
-		vim.list_extend(serverList, { "dockerls" })
-	end
-	if vim.fn.executable("go") == 1 then
-		vim.list_extend(serverList, { "gopls" })
-	end
-	if vim.fn.executable("rustc") == 1 then
-		vim.list_extend(serverList, { "rust_analyzer" })
-	end
-	if vim.fn.executable("zig") == 1 then
-		vim.list_extend(serverList, { "zls" })
-	end
-
-	return serverList
-end
-
-local SERVER_LIST = genServerList()
+local SERVER_LIST = {
+	"pylsp",
+	"denols",
+	"tsserver",
+	"bashls",
+	"lua_ls",
+	"jsonls",
+	"yamlls",
+	"cssls",
+	"html",
+	"tailwindcss",
+	"marksman",
+	"sqlls",
+	"taplo",
+	"dockerls",
+	"gopls",
+	"rust_analyzer",
+	"zls",
+}
 
 ---@param options? table
 local function make_config(options)
-	local cmp_lsp = require("cmp_nvim_lsp")
-
-	local capabilities = cmp_lsp.default_capabilities()
+	local capabilities = require("cmp_nvim_lsp").default_capabilities()
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
 	capabilities.textDocument.foldingRange = {
 		dynamicRegistration = false,
@@ -56,11 +40,10 @@ end
 return {
 	SERVER_LIST = SERVER_LIST,
 	setup = function()
-		local neoconf = require("neoconf")
+		require("neoconf").setup({})
 		local lspconfig = require("lspconfig")
 
-		neoconf.setup({})
-		for _, server in ipairs(SERVER_LIST) do
+		for _, server in pairs(SERVER_LIST) do
 			local opts = make_config()
 
 			if server == "lua_ls" then
