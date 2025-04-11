@@ -8,7 +8,7 @@ require('neo-tree').setup({
 		mappings = {
 			['<CR>'] = 'open',
 			['l'] = 'open',
-			['<c-s>'] = 'open_split',
+			['<c-h>'] = 'open_split',
 			['<c-v>'] = 'open_vsplit',
 			['<c-t>'] = 'open_tabnew',
 			['h'] = 'close_node',
