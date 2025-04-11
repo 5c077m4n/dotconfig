@@ -49,12 +49,16 @@ local highlight_cursor_line_id = create_augroup('highlight_cursor_line', { clear
 create_autocmd({ 'VimEnter', 'WinEnter', 'BufWinEnter' }, {
 	group = highlight_cursor_line_id,
 	pattern = { '*' },
-	command = 'setlocal cursorline',
+	callback = function()
+		vim.opt.cursorline = true
+	end,
 	desc = 'Highlight cursor line in buffer',
 })
 create_autocmd({ 'WinLeave' }, {
 	group = highlight_cursor_line_id,
 	pattern = { '*' },
-	command = 'setlocal nocursorline',
+	callback = function()
+		vim.opt.cursorline = false
+	end,
 	desc = 'Remove highlight cursor line when exiting buffer',
 })
