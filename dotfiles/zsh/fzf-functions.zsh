@@ -68,6 +68,14 @@ _fzf_complete_gco() {
 			git branch --all --sort=-committerdate --format='%(refname:short)'
 		)
 }
+_fzf_complete_gco_post() {
+	local branch=$1
+	if [[ "$branch" == "origin/"* ]]; then
+		echo "--track $branch"
+	else
+		echo $branch
+	fi
+}
 # `nr **<Tab>`
 _fzf_complete_nr() {
 	is_in_git_repo && [[ -f package.json ]] || return
