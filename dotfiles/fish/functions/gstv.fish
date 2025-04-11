@@ -1,3 +1,3 @@
 function gstv
-    git status --untracked-files -vv $args
+    git status -vv $args
 end

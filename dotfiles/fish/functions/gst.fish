@@ -1,3 +1,3 @@
 function gst
-    git status --untracked-files $argv
+    git status $argv (pwd)
 end
