@@ -124,8 +124,8 @@ in
         CPU_MAX_PERF_ON_BAT = 80;
 
         # [Optional] helps save long term battery health
-        START_CHARGE_THRESH_BAT0 = 50; # bellow it starts to charge
-        STOP_CHARGE_THRESH_BAT0 = 80; # above it stops charging
+        START_CHARGE_THRESH_BAT0 = 40; # below it start to charge
+        STOP_CHARGE_THRESH_BAT0 = 80; # above it stop charging
 
         # Always run on battery mode (in case of overheating on AC power)
         #TLP_DEFAULT_MODE = "BAT";
