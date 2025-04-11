@@ -38,7 +38,6 @@ gitsigns.setup({
 	},
 	watch_gitdir = { interval = 800, follow_files = true },
 	update_debounce = 400,
-	keymaps = { noremap = false },
 	on_attach = function(buffer_num)
 		keymap.nnoremap('<leader>hr', gitsigns.reset_hunk, { buffer = buffer_num, desc = 'Reset current hunk' })
 		keymap.vnoremap('<leader>hr', function()
