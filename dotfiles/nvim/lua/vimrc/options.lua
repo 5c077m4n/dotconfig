@@ -22,6 +22,7 @@ o.ignorecase = true
 o.smartcase = true
 o.incsearch = true
 o.history = 5000
+o.tabpagemax = 50
 o.tabstop = 4
 o.shiftwidth = o.tabstop:get()
 o.autoindent = true
@@ -35,7 +36,7 @@ o.pastetoggle = '<F3>'
 -- Show tabs and spaces
 o.list = true
 if o.list:get() then
-	o.listchars = { tab = '| ', space = ' ', trail = '·' }
+	o.listchars = { tab = '> ', space = ' ', trail = '·' }
 end
 
 -- Global statusline
@@ -43,7 +44,18 @@ o.laststatus = 3
 
 o.termguicolors = true
 
+o.complete:remove('i')
 o.completeopt = { 'menuone', 'noselect' }
+o.smarttab = true
+
+-- Delete comment character when joining commented lines
+o.formatoptions:append('j')
+
+o.autoread = true
+o.sessionoptions:remove('options')
+o.viewoptions:remove('options')
+-- Disable a legacy behavior that can break plugin maps
+o.langremap = false
 
 -- Incremental live completion
 o.inccommand = 'nosplit'

@@ -23,7 +23,6 @@ local function init_packer()
 		function(use)
 			-- General
 			use('lewis6991/impatient.nvim')
-			use('tpope/vim-sensible')
 			use('nvim-lua/plenary.nvim')
 			use({
 				'rcarriga/nvim-notify',
