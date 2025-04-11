@@ -12,6 +12,13 @@ if [[ -x "$HOMEBREW_BIN" ]]; then
 
 	export PATH="/opt/homebrew/bin:${PATH}"
 	export FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
+
+	if [[ -d "$HOMEBREW_PREFIX/Caskroom/google-cloud-sdk" ]]; then
+		# Gcloud init
+		export GOOGLE_APPLICATION_CREDENTIALS="${HOME}/.config/gcloud/application_default_credentials.json"
+		source "$HOMEBREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+		source "$HOMEBREW_PREFIX/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+	fi
 fi
 
 # Init starship
@@ -131,13 +138,6 @@ export EDITOR="nvim"
 #alias ohmyzsh="mate ~/.oh-my-zsh"
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-
-if [[ -d "$(brew --prefix)/Caskroom/google-cloud-sdk" ]]; then
-	# Gcloud init
-	export GOOGLE_APPLICATION_CREDENTIALS="${HOME}/.config/gcloud/application_default_credentials.json"
-	source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-	source "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-fi
 
 # Kubectl zsh completion
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
