@@ -1,4 +1,4 @@
-plugins=(fzf)
+plugins=(fzf rust)
 [[ -n "${ITERM_SESSION_ID}" ]] && plugins+=(iterm2)
 
 () {
