@@ -1,10 +1,11 @@
-{ pkgs }:
+{ pkgs-unstable }:
 {
   enable = true;
+  package = pkgs-unstable.fish;
 
   plugins =
     let
-      inherit (pkgs) fishPlugins;
+      inherit (pkgs-unstable) fishPlugins;
     in
     [
       {
