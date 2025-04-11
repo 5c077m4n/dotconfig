@@ -25,6 +25,7 @@ local SERVER_LIST = {
 	'marksman',
 	'denols',
 	'dockerls',
+	'zls',
 }
 local SEVERITY = {
 	vim.log.levels.ERROR,

@@ -48,6 +48,12 @@ null_ls.setup({
 		null_ls.builtins.formatting.sqlformat,
 		-- rust
 		null_ls.builtins.formatting.rustfmt.with({ args = { '+nightly' } }),
+		-- zig
+		null_ls.builtins.formatting.zigfmt.with({
+			condition = function(utils)
+				return utils.root_has_file({ 'build.zig' })
+			end,
+		}),
 		-- zsh
 		null_ls.builtins.diagnostics.zsh,
 		-- terraform
