@@ -354,9 +354,6 @@ local function setup()
 				})
 				lspconfig.gopls.setup(go_lsp_config)
 			end,
-			cond = function()
-				return vim.fn.executable("go") == 1
-			end,
 		},
 		{
 			"nvimtools/none-ls.nvim",
