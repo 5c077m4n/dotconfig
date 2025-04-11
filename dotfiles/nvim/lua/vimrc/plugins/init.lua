@@ -163,7 +163,6 @@ function M.setup()
 					require('typescript').setup({
 						go_to_source_definition = { fallback = true },
 						server = {
-							on_attach = require('vimrc.plugins.lspconfig').on_attach,
 							root_dir = require('lspconfig').util.root_pattern(
 								'package.json',
 								'package-lock.json',
@@ -189,11 +188,9 @@ function M.setup()
 							},
 						},
 						server = {
-							on_attach = function(client, buffer_n)
+							on_attach = function(_client, buffer_n)
 								local keymap = require('vimrc.utils.keymapping')
-								local on_attach = require('vimrc.plugins.lspconfig').on_attach
 
-								on_attach(client, buffer_n)
 								keymap.nnoremap(
 									'<leader>cA',
 									rust_tools.code_action_group.code_action_group,

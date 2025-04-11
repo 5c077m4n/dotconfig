@@ -1,7 +1,4 @@
 local cmp_lsp = require('cmp_nvim_lsp')
-local telescope_builtin = require('telescope.builtin')
-
-local keymap = require('vimrc.utils.keymapping')
 
 local SERVER_LIST = {
 	'taplo',
@@ -18,74 +15,6 @@ local SERVER_LIST = {
 	'dockerls',
 	'zls',
 }
-local SEVERITY = {
-	vim.log.levels.ERROR,
-	vim.log.levels.WARN,
-	vim.log.levels.INFO,
-	vim.log.levels.INFO, -- map both hint and info to info
-}
-
-local function on_attach(client, buffer_num)
-	local lsp = vim.lsp
-	local diagnostic = vim.diagnostic
-
-	if vim.bo.filetype ~= 'lua' then
-		vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
-	end
-
-	lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, { border = 'single' })
-	lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, { border = 'single' })
-	---@diagnostic disable-next-line: unused-local, duplicate-set-field
-	lsp.handlers['window/showMessage'] = function(_err, method, params, _client_id)
-		vim.notify(method.message, SEVERITY[params.type])
-	end
-	if client.server_capabilities.documentSymbolProvider then
-		require('nvim-navic').attach(client, buffer_num)
-	end
-
-	keymap.nnoremap('gd', telescope_builtin.lsp_definitions, { buffer = buffer_num, desc = 'Go to LSP definition' })
-	keymap.nnoremap(
-		'gD',
-		telescope_builtin.lsp_dynamic_workspace_symbols,
-		{ buffer = buffer_num, desc = 'Go to declaration' }
-	)
-	keymap.nnoremap(
-		'gs',
-		telescope_builtin.lsp_document_symbols,
-		{ buffer = buffer_num, desc = 'Get document symbols' }
-	)
-	keymap.nnoremap(
-		'gS',
-		telescope_builtin.lsp_workspace_symbols,
-		{ buffer = buffer_num, desc = 'Get workspace symbols' }
-	)
-	keymap.nnoremap('K', lsp.buf.hover, { buffer = buffer_num, desc = 'Show docs in hover' })
-	keymap.nnoremap('<C-s>', lsp.buf.signature_help, { buffer = buffer_num, desc = 'Show function signature' })
-	keymap.inoremap('<C-s>', lsp.buf.signature_help, { buffer = buffer_num, desc = 'Show function signature' })
-	keymap.nnoremap('gi', telescope_builtin.lsp_implementations, { buffer = buffer_num, desc = 'Go to implementation' })
-	keymap.nnoremap('<leader>gD', lsp.buf.type_definition, { buffer = buffer_num, desc = 'Go to type definition' })
-	keymap.nnoremap('<leader>rn', lsp.buf.rename, { buffer = buffer_num, desc = 'LSP rename' })
-	keymap.nnoremap('gr', telescope_builtin.lsp_references, { buffer = buffer_num, desc = 'Find references' })
-	keymap.nnoremap('g?', function()
-		diagnostic.open_float({ bufnr = buffer_num, scope = 'line', border = 'single' })
-	end, { buffer = buffer_num, desc = 'Open diagnostics floating window' })
-	keymap.nnoremap('g[', function()
-		diagnostic.goto_prev({ float = { border = 'single' } })
-	end, { buffer = buffer_num, desc = 'Go to previous diagnostic' })
-	keymap.nnoremap('g]', function()
-		diagnostic.goto_next({ float = { border = 'single' } })
-	end, { buffer = buffer_num, desc = 'Go to next diagnostic' })
-	keymap.nvnoremap('<leader>ca', lsp.buf.code_action, { buffer = buffer_num, desc = 'Code action' })
-	keymap.nvnoremap('<leader>l', function()
-		vim.lsp.buf.format({
-			filter = function(formatter)
-				return formatter.name == 'null-ls'
-			end,
-			bufnr = buffer_num,
-			async = true,
-		})
-	end, { buffer = buffer_num, desc = 'Format selected page/range' })
-end
 
 ---@param options? table
 local function make_config(options)
@@ -97,7 +26,6 @@ local function make_config(options)
 	}
 
 	local base_config = {
-		on_attach = on_attach,
 		capabilities = capabilities,
 		flags = { debounce_text_changes = 100 },
 	}
@@ -109,7 +37,6 @@ end
 
 return {
 	SERVER_LIST = SERVER_LIST,
-	on_attach = on_attach,
 	setup = function()
 		local lspconfig = require('lspconfig')
 
