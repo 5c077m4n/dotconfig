@@ -49,12 +49,6 @@ keymap.nnoremap('V', 'v$', { desc = 'Select to line end' })
 keymap.nnoremap('S', 'v$hs', { desc = 'Switch to line end' })
 keymap.nnoremap('J', [[J^]], { desc = 'Join the next line and go to the first char' })
 
--- Move selection up/down
-keymap.vnoremap('<A-k>', [[:m '>-2<CR>gv=gv]], { desc = 'Move selection up' })
-keymap.nnoremap('<A-k>', [[:m .-2<CR>==]], { desc = 'Move selection up' })
-keymap.vnoremap('<A-j>', [[:m '>+1<CR>gv=gv]], { desc = 'Move selection down' })
-keymap.nnoremap('<A-j>', [[:m .+1<CR>==]], { desc = 'Move selection down' })
-
 keymap.nnoremap('<CR>', vim.cmd.nohlsearch, { desc = 'Stops the highlight on the last search pattern matches' })
 
 -- Word traversing in insert mode
