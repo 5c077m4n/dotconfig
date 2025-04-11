@@ -142,6 +142,9 @@ local SERVER_CONFIG_MAP = {
 	golangci_lint_ls = function()
 		return make_config({ filetypes = { "go", "gomod" } })
 	end,
+	nil_ls = function()
+		return make_config()
+	end,
 	jsonls = function()
 		local schemastore = require("schemastore")
 

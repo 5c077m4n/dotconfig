@@ -13,7 +13,6 @@
     {
       self,
       nix-darwin,
-      nixpkgs,
       ...
     }:
     let
@@ -92,6 +91,7 @@
               nixfmt-rfc-style
               statix
               deadnix
+              nil
               # K8s
               kubectx
               k9s
