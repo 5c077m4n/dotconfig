@@ -7,6 +7,8 @@ g.python3_host_prog = vim.trim(vim.fn.system('which python3'))
 
 -- Configure backspace so it acts as it should
 o.backspace = { 'eol', 'start', 'indent' }
+-- Disable mouse
+o.mouse = nil
 
 -- Fold config
 o.foldmethod = 'indent'
