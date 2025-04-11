@@ -285,9 +285,16 @@ local function setup()
 			end,
 		},
 		{
-			"folke/neodev.nvim",
-			dependencies = { "folke/neoconf.nvim" },
-			event = { "VeryLazy" },
+			"folke/lazydev.nvim",
+			ft = "lua",
+			opts = {
+				library = {
+					{
+						path = "${3rd}/luv/library",
+						words = { "vim%.uv" },
+					},
+				},
+			},
 		},
 		{
 			"zeioth/garbage-day.nvim",
@@ -327,7 +334,14 @@ local function setup()
 					},
 				},
 				sources = {
-					default = { "lsp", "path", "snippets", "buffer" },
+					default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+					providers = {
+						lazydev = {
+							name = "LazyDev",
+							module = "lazydev.integrations.blink",
+							score_offset = 100,
+						},
+					},
 				},
 				signature = {
 					enabled = false,

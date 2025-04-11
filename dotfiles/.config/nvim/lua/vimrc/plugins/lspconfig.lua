@@ -61,8 +61,6 @@ local SERVER_CONFIG_MAP = {
 		return make_config()
 	end,
 	lua_ls = function()
-		require("neodev").setup({})
-
 		return make_config({
 			settings = {
 				Lua = {
@@ -227,10 +225,7 @@ return {
 	end, vim.tbl_keys(SERVER_CONFIG_MAP)),
 
 	setup = function()
-		local neoconf = require("neoconf")
 		local lspconfig = require("lspconfig")
-
-		neoconf.setup({})
 
 		for server, config_fn in pairs(SERVER_CONFIG_MAP) do
 			local server_config = config_fn()
