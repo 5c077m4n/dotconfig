@@ -1,4 +1,9 @@
-{ pkgs, username, ... }:
+{
+  pkgs,
+  pkgs-unstable,
+  username,
+  ...
+}:
 let
   stateVersion = "24.05";
 in
@@ -12,98 +17,98 @@ in
       home = {
         inherit stateVersion;
 
-        packages = with pkgs; [
+        packages = [
           # General
-          neovim
-          tmux
-          htop
-          curl
-          wget
-          coreutils
-          jq
-          yq
-          openssh
+          pkgs-unstable.neovim
+          pkgs.tmux
+          pkgs.htop
+          pkgs.curl
+          pkgs.wget
+          pkgs.coreutils
+          pkgs.jq
+          pkgs.yq
+          pkgs.openssh
           # VCS
-          git
-          hub
-          lazygit
-          delta
-          git-absorb
+          pkgs.git
+          pkgs.hub
+          pkgs.lazygit
+          pkgs.delta
+          pkgs.git-absorb
           # TUI
-          starship
-          ranger
-          eza
-          bat
+          pkgs.starship
+          pkgs.ranger
+          pkgs.eza
+          pkgs.bat
           # Search
-          fd
-          fzf
-          ripgrep
+          pkgs.fd
+          pkgs.fzf
+          pkgs.ripgrep
           # LLMs
-          ollama
+          pkgs.ollama
           # Shells
           ## ZSH
-          zsh
-          beautysh
+          pkgs.zsh
+          pkgs.beautysh
           ## Fish
-          fish
-          fishPlugins.fzf-fish
-          fishPlugins.autopair
+          pkgs.fish
+          pkgs.fishPlugins.fzf-fish
+          pkgs.fishPlugins.autopair
           # JavaScript
-          nodejs_22
-          deno
-          eslint_d
-          prettierd
-          pnpm
-          yarn-berry # `yarn` >=4.5
+          pkgs.nodejs_22
+          pkgs-unstable.deno
+          pkgs-unstable.eslint_d
+          pkgs-unstable.prettierd
+          pkgs-unstable.pnpm
+          pkgs-unstable.yarn-berry # `yarn` >=4.5
           # Python
-          python313
-          pyenv
-          poetry
-          mypy
-          pylint
-          black
-          isort
+          pkgs-unstable.python313
+          pkgs-unstable.pyenv
+          pkgs-unstable.poetry
+          pkgs-unstable.mypy
+          pkgs-unstable.pylint
+          pkgs-unstable.black
+          pkgs-unstable.isort
           # Golang
-          go
-          golangci-lint
+          pkgs-unstable.go
+          pkgs-unstable.golangci-lint
           # Rust
-          rustup
+          pkgs-unstable.rustup
           # Zig
-          zig
-          zls
+          pkgs.zig
+          pkgs.zls
           # Lua
-          luajit
-          luajitPackages.luacheck
-          luarocks
-          stylua
-          selene
+          pkgs.luajit
+          pkgs.luajitPackages.luacheck
+          pkgs.luarocks
+          pkgs.stylua
+          pkgs.selene
           # Nix
-          nixfmt-rfc-style
-          statix
-          deadnix
-          nil
+          pkgs.nixfmt-rfc-style
+          pkgs.statix
+          pkgs.deadnix
+          pkgs.nil
           # K8s
-          kubectx
-          k9s
+          pkgs-unstable.kubectx
+          pkgs-unstable.k9s
           # Docker
-          docker_27
+          pkgs-unstable.docker_27
           # DBs
           ## TUIs
-          pgcli
-          mycli
+          pkgs.pgcli
+          pkgs.mycli
           # Bluetooth
-          blueutil
+          pkgs.blueutil
           # Fonts
-          (nerdfonts.override {
+          (pkgs.nerdfonts.override {
             fonts = [
               "FiraMono"
               "Hack"
             ];
           })
           # Misc
-          gopass
-          android-tools # ADB
-          keepassxc
+          pkgs.gopass
+          pkgs.android-tools # ADB
+          pkgs.keepassxc
         ];
 
         file = {

@@ -2,11 +2,9 @@
   self,
   pkgs,
   username,
+  hostPlatform,
   ...
 }:
-let
-  hostPlatform = "aarch64-darwin";
-in
 {
   nixpkgs = {
     # The platform the configuration will be used on.
