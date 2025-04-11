@@ -11,6 +11,7 @@ if [[ -x "$HOMEBREW_BIN" ]]; then
 	unset gnu_bin_dir
 
 	export PATH="/opt/homebrew/bin:${PATH}"
+	export FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
 fi
 
 # Init starship
