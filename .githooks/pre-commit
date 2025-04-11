@@ -18,6 +18,9 @@
 			mypy --check --strict "$file" || exit 1
 		elif [[ "$file_ext" == "zsh" ]]; then
 			beautysh --check --tab "$file" || exit 1
+		elif [[ "$file_ext" == "fish" ]]; then
+			fish --no-execute "$file" || exit 1
+			fish_indent --check "$file" || exit 1
 		fi
 	done
 }
