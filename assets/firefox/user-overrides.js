@@ -35,3 +35,6 @@ user_pref("javascript.options.wasm", true); // 5506 default-inactive in user.js 
 
 /* override recipe: allow search automaticall on invalid URLs typed into the URLbar ***/
 user_pref("keyword.enabled", true); // 0801
+
+/* override recipe: letterboxing ***/
+//user_pref("privacy.resistFingerprinting.letterboxing", false);
