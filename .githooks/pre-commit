@@ -7,8 +7,9 @@
 
 	local file
 	for file in $(git diff --name-only --staged); do
-		local file_ext="${file##*.}"
+		[[ ! -f "$file" ]] && continue
 
+		local file_ext="${file##*.}"
 		if [[ "$file_ext" == "lua" ]]; then
 			luacheck --config="$luacheck_config" "$file"
 			stylua --config-path="$stylua_config" "$file"
