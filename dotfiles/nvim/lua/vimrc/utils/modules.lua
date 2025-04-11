@@ -1,12 +1,18 @@
+local reload = require('plenary.reload')
+local packer = require('packer')
+
 local utils = require('vimrc.utils')
 
 local M = {}
 
 function M.reload_vimrc()
-	require('packer').compile()
-	vim.loader.reset()
+	reload.reload_module('vimrc')
+	vim.cmd.source(vim.env.MYVIMRC)
 
-	vim.notify('The vimrc has been reloaded successfully', vim.lsp.log_levels.INFO)
+	vim.loader.reset()
+	packer.compile()
+
+	vim.notify('VIMRC has been reloaded successfully', vim.lsp.log_levels.INFO)
 end
 
 function M.update_vimrc()
