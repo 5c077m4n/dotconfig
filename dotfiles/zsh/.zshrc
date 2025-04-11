@@ -137,7 +137,7 @@ export EDITOR="nvim"
 #alias zshconfig="mate ~/.zshrc"
 #alias ohmyzsh="mate ~/.oh-my-zsh"
 
-[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+[[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
 
 # Kubectl zsh completion
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
