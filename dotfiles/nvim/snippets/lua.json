@@ -1,0 +1,18 @@
+{
+	"autocmd": {
+		"body": [
+			"vim.api.nvim_create_autocmd(\"${1:events}\", {",
+			"\tgroup = vim.api.nvim_create_augroup(\"${2:name}\", { clear = true })",
+			"\tpattern = \"${3:ft}\",",
+			"\tcallback = function()",
+			"\t\t$0",
+			"\tend,",
+			"})"
+		],
+		"prefix": "autocmd"
+	},
+	"file exists": {
+		"body": "local fileExists = vim.uv.fs_stat(\"${1:filepath}\") ~= nil",
+		"prefix": "file exists"
+	}
+}
