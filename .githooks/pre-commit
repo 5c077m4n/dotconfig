@@ -20,7 +20,7 @@
 				black --check "$file" || exit 1
 				mypy --check --strict "$file" || exit 1
 				;;
-			zsh)
+			bash | zsh | .zshrc | .zshenv)
 				beautysh --check --tab "$file" || exit 1
 				;;
 			fish)
@@ -28,11 +28,14 @@
 				fish_indent --check "$file" || exit 1
 				;;
 			nix)
-				deadnix "$file"
-				statix check "$file"
+				deadnix "$file" || exit 1
+				statix check "$file" || exit 1
 				nixfmt --check "$file" || exit 1
 
-				nix flake check "${root_dir}"
+				nix flake check "$root_dir"
+				;;
+			yaml)
+				yamllint "$file" || exit 1
 				;;
 			*)
 				echo "🤷 Unknown file type ($file) 🤷\n"
