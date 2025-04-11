@@ -129,7 +129,7 @@ eval "$(starship init zsh)"
 ## Kubectl
 [[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)
 ## K3D
-[[ -x "$(command -v k3d)" ]] && source <(k3d completion zsh)
+#[[ -x "$(command -v k3d)" ]] && source <(k3d completion zsh)
 
 # Add krew to path
 [[ -d "${KREW_ROOT:-$HOME/.krew}/bin" ]] && path+=("${KREW_ROOT:-$HOME/.krew}/bin")
