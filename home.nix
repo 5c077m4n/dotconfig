@@ -79,6 +79,8 @@ in
             # Rust
             pkgs-unstable.rustup
             pkgs-unstable.cargo-insta # Snapshot testing
+            pkgs-unstable.pkg-config
+            pkgs-unstable.openssl
             # Zig
             pkgs.zig
             pkgs.zls
