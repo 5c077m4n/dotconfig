@@ -3,8 +3,6 @@ for zsh_config_file in ${ZDOTDIR}/conf.d/*.zsh; do
 done
 unset zsh_config_file
 
-eval "$(starship init zsh)"
-
 # De-duplicate path environment variables
 typeset -U path
 typeset -U fpath
