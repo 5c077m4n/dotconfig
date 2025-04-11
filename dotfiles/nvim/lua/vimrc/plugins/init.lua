@@ -21,7 +21,6 @@ local function init_packer()
 	require('packer').startup({
 		function(use)
 			-- General
-			use('lewis6991/impatient.nvim')
 			use('nvim-lua/plenary.nvim')
 			use({
 				'christoomey/vim-tmux-navigator',
