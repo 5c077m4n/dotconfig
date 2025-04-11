@@ -206,7 +206,10 @@ function M.setup()
 						},
 					},
 					server = {
-						on_attach = function(_client, buffer_n)
+						on_attach = function(
+							_, --[[ client ]]
+							buffer_n
+						)
 							keymap.nnoremap(
 								'<leader>cA',
 								rust_tools.code_action_group.code_action_group,
@@ -379,19 +382,7 @@ function M.setup()
 				})
 			end,
 		},
-		{
-			'terrortylor/nvim-comment',
-			event = 'VeryLazy',
-			config = function()
-				require('nvim_comment').setup({
-					marker_padding = true,
-					comment_empty = false,
-					create_mappings = true,
-					line_mapping = '<leader>/',
-					operator_mapping = '<leader>/',
-				})
-			end,
-		},
+		{ 'numToStr/Comment.nvim', opts = {}, lazy = false },
 		{
 			'tpope/vim-fugitive',
 			event = 'VeryLazy',
