@@ -1,7 +1,7 @@
 local gitsigns = require('gitsigns')
 local gitsigns_actions = require('gitsigns.actions')
 
-local keymap = require('vimrc.utils.keymapping')
+local keymap = require('vimrc.utils').keymapping
 
 gitsigns.setup({
 	signs = {

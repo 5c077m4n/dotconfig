@@ -13,7 +13,7 @@ create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' }, {
 local last_read_point_on_file_open_id = create_augroup('last_read_point_on_file_open', { clear = true })
 create_autocmd({ 'BufReadPost' }, {
 	group = last_read_point_on_file_open_id,
-	callback = utils.jump_to_last_visited,
+	callback = utils.misc.jump_to_last_visited,
 	desc = 'Goto last visited line in file',
 })
 
@@ -29,7 +29,7 @@ create_autocmd({ 'TextYankPost' }, {
 local delete_trailing_spaces_on_save_id = create_augroup('delete_trailing_spaces_on_save', { clear = true })
 create_autocmd({ 'BufWritePre' }, {
 	group = delete_trailing_spaces_on_save_id,
-	callback = utils.clean_extra_spaces,
+	callback = utils.misc.clean_extra_spaces,
 	desc = 'Delete trailing whitespaces from line ends on save',
 })
 
@@ -54,7 +54,7 @@ create_autocmd({ 'LspAttach' }, {
 	group = lsp_attach_id,
 	callback = function(args)
 		local telescope_builtin = require('telescope.builtin')
-		local keymap = require('vimrc.utils.keymapping')
+		local keymap = utils.keymapping
 
 		local lsp = vim.lsp
 		local diagnostic = vim.diagnostic

@@ -1,3 +1,7 @@
+local utils = require('vimrc.utils')
+
+local keymap = utils.keymapping
+
 local M = {}
 
 local function bootstrap()
@@ -181,8 +185,6 @@ function M.setup()
 					},
 					server = {
 						on_attach = function(_client, buffer_n)
-							local keymap = require('vimrc.utils.keymapping')
-
 							keymap.nnoremap(
 								'<leader>cA',
 								rust_tools.code_action_group.code_action_group,
@@ -206,8 +208,6 @@ function M.setup()
 					indent_lines = true,
 					signs = { error = 'E', warning = 'W', hint = 'H', information = 'I' },
 				})
-
-				local keymap = require('vimrc.utils.keymapping')
 
 				keymap.nnoremap('<leader>xx', vim.cmd.TroubleToggle, { desc = 'Toggle trouble panel' })
 				keymap.nnoremap('<leader>xw', function()
@@ -286,8 +286,6 @@ function M.setup()
 				local hop = require('hop')
 				local directions = require('hop.hint').HintDirection
 
-				local keymap = require('vimrc.utils.keymapping')
-
 				hop.setup({ keys = 'etovxqpdygfblzhckisuran' })
 				keymap.nvnoremap('<C-f>', hop.hint_words)
 				keymap.nvnoremap('f', function()
@@ -323,8 +321,6 @@ function M.setup()
 			event = 'VeryLazy',
 			dependencies = 'rbgrouleff/bclose.vim',
 			config = function()
-				local keymap = require('vimrc.utils.keymapping')
-
 				keymap.nnoremap('<leader>rr', vim.cmd.Ranger, { desc = 'Open ranger file browser' })
 			end,
 		},

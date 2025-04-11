@@ -1,4 +1,4 @@
-local keymap = require('vimrc.utils.keymapping')
+local keymap = require('vimrc.utils').keymapping
 
 keymap.nnoremap('<leader>tf', vim.cmd.Neotree)
 keymap.nnoremap('<leader>tt', function()
