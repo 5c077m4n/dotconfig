@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import shutil
 from os import environ, listdir, mkdir, path, remove, symlink, unlink
 
