@@ -285,6 +285,9 @@ function M.setup()
 				})
 				lspconfig.gopls.setup(go_lsp_config)
 			end,
+			cond = function()
+				return vim.fn.executable('go') == 1
+			end,
 		},
 		{
 			'5c077m4n/null-ls.nvim',
