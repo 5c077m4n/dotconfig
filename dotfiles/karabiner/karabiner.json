@@ -1,5 +1,6 @@
 {
 	"global": {
+		"ask_for_confirmation_before_quitting": true,
 		"check_for_updates_on_startup": true,
 		"show_in_menu_bar": true,
 		"show_profile_name_in_menu_bar": false,
@@ -17,13 +18,92 @@
 				},
 				"rules": [
 					{
+						"description": "Use F2 as Rename",
+						"manipulators": [
+							{
+								"conditions": [
+									{
+										"bundle_identifiers": [
+											"^com.apple.finder"
+										],
+										"type": "frontmost_application_if"
+									}
+								],
+								"from": {
+									"key_code": "f2"
+								},
+								"to": [
+									{
+										"key_code": "return_or_enter"
+									}
+								],
+								"type": "basic"
+							}
+						]
+					},
+					{
+						"description": "Use Delete as Move to Trash",
+						"manipulators": [
+							{
+								"conditions": [
+									{
+										"bundle_identifiers": [
+											"^com.apple.finder"
+										],
+										"type": "frontmost_application_if"
+									}
+								],
+								"from": {
+									"key_code": "delete_forward",
+									"modifiers": {
+										"optional": ["any"]
+									}
+								},
+								"to": [
+									{
+										"key_code": "delete_or_backspace",
+										"modifiers": ["left_command"]
+									}
+								],
+								"type": "basic"
+							}
+						]
+					},
+					{
+						"description": "Use Return as Open",
+						"manipulators": [
+							{
+								"conditions": [
+									{
+										"bundle_identifiers": [
+											"^com.apple.finder"
+										],
+										"type": "frontmost_application_if"
+									}
+								],
+								"from": {
+									"key_code": "return_or_enter",
+									"modifiers": {
+										"optional": ["any"]
+									}
+								},
+								"to": [
+									{
+										"key_code": "o",
+										"modifiers": ["right_command"]
+									}
+								],
+								"type": "basic"
+							}
+						]
+					},
+					{
 						"description": "(Vim 1/11) caps_lock -> on, caps_lock, esc, control+[ or any pointing_button -> off",
 						"manipulators": [
 							{
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -80,7 +160,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -113,7 +192,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -146,7 +224,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -182,7 +259,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -279,7 +355,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -323,7 +398,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -362,7 +436,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -390,7 +463,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -418,7 +490,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -446,7 +517,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -474,7 +544,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -502,7 +571,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -530,7 +598,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -568,7 +635,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -602,7 +668,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -636,7 +701,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -684,7 +748,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -726,7 +789,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -760,7 +822,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -794,7 +855,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -828,7 +888,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -871,7 +930,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -914,7 +972,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -957,7 +1014,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -999,7 +1055,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1029,7 +1084,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1059,7 +1113,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1094,7 +1147,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1142,7 +1194,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1196,7 +1247,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1239,7 +1289,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1282,7 +1331,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1335,7 +1383,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1384,7 +1431,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1433,7 +1479,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1492,7 +1537,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1538,7 +1582,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1587,7 +1630,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1636,7 +1678,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1683,7 +1724,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1731,7 +1771,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1785,7 +1824,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1828,7 +1866,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1871,7 +1908,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1924,7 +1960,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -1973,7 +2008,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2022,7 +2056,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2081,7 +2114,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2127,7 +2159,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2176,7 +2207,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2225,7 +2255,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2279,7 +2308,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2327,7 +2355,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2390,7 +2417,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2442,7 +2468,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2494,7 +2519,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2556,7 +2580,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2614,7 +2637,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2672,7 +2694,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2731,7 +2752,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2786,7 +2806,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2844,7 +2863,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2902,7 +2920,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2965,7 +2982,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -2992,7 +3008,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3022,7 +3037,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3050,7 +3064,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3081,7 +3094,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3109,7 +3121,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3148,7 +3159,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3183,7 +3193,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3218,7 +3227,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3253,7 +3261,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3288,7 +3295,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3316,7 +3322,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3344,7 +3349,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3376,7 +3380,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3407,7 +3410,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3438,7 +3440,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3486,7 +3487,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3525,7 +3525,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3556,7 +3555,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3587,7 +3585,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3623,7 +3620,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3656,7 +3652,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3696,7 +3691,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3729,7 +3723,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3769,7 +3762,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3809,7 +3801,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3860,7 +3851,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3896,7 +3886,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3932,7 +3921,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -3973,7 +3961,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -4003,7 +3990,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -4033,7 +4019,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -4063,7 +4048,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -4093,7 +4077,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -4123,7 +4106,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -4153,7 +4135,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -4183,7 +4164,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -4213,7 +4193,6 @@
 								"conditions": [
 									{
 										"bundle_identifiers": [
-											"com.googlecode.iterm2",
 											"com.github.atom",
 											"com.jetbrains.pycharm",
 											"com.visualstudio.code.oss"
@@ -4235,111 +4214,6 @@
 								"to": [
 									{
 										"key_code": "vk_none"
-									}
-								],
-								"type": "basic"
-							}
-						]
-					},
-					{
-						"description": "Use Return as Open",
-						"manipulators": [
-							{
-								"conditions": [
-									{
-										"bundle_identifiers": [
-											"^com.apple.finder"
-										],
-										"type": "frontmost_application_if"
-									}
-								],
-								"from": {
-									"key_code": "return_or_enter",
-									"modifiers": {
-										"optional": ["any"]
-									}
-								},
-								"to": [
-									{
-										"key_code": "o",
-										"modifiers": ["right_command"]
-									}
-								],
-								"type": "basic"
-							}
-						]
-					},
-					{
-						"description": "Use F2 as Rename",
-						"manipulators": [
-							{
-								"conditions": [
-									{
-										"bundle_identifiers": [
-											"^com.apple.finder"
-										],
-										"type": "frontmost_application_if"
-									}
-								],
-								"from": {
-									"key_code": "f2"
-								},
-								"to": [
-									{
-										"key_code": "return_or_enter"
-									}
-								],
-								"type": "basic"
-							}
-						]
-					},
-					{
-						"description": "Use Delete as Move to Trash",
-						"manipulators": [
-							{
-								"conditions": [
-									{
-										"bundle_identifiers": [
-											"^com.apple.finder"
-										],
-										"type": "frontmost_application_if"
-									}
-								],
-								"from": {
-									"key_code": "delete_forward",
-									"modifiers": {
-										"optional": ["any"]
-									}
-								},
-								"to": [
-									{
-										"key_code": "delete_or_backspace",
-										"modifiers": ["left_command"]
-									}
-								],
-								"type": "basic"
-							}
-						]
-					},
-					{
-						"description": "Use Backspace as Go to Previous Folder",
-						"manipulators": [
-							{
-								"conditions": [
-									{
-										"bundle_identifiers": [
-											"^com.apple.finder"
-										],
-										"type": "frontmost_application_if"
-									}
-								],
-								"from": {
-									"key_code": "delete_or_backspace"
-								},
-								"to": [
-									{
-										"key_code": "semicolon",
-										"modifiers": ["left_command"]
 									}
 								],
 								"type": "basic"
