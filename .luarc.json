@@ -1,5 +1,9 @@
 {
 	"$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-	"diagnostics.globals": ["vim", "string"],
-	"workspace.library": ["${3rd}/luv/library"]
+	"diagnostics": { "globals": ["vim", "string"] },
+	"workspace": {
+		"library": ["${3rd}/luv/library"],
+		"ignoreDir": ["*", "!dotfiles/nvim/", "dotfiles/nvim/plugin/"]
+	},
+	"telemetry": { "enable": false }
 }
