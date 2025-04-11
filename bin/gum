@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 () {
-	local branch_current="$(gbcurrent)"
+	local branch_current="$(git branch --show-current)"
 	local branch_default="$(gbdefault)"
 
 	if [[ "$branch_current" == "$branch_default" ]]; then
