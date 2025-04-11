@@ -1,30 +1,36 @@
-local SERVER_LIST = {
-	'taplo',
-	'pylsp',
-	'bashls',
-	'html',
-	'lua_ls',
-	'jsonls',
-	'yamlls',
-	'cssls',
-	'tailwindcss',
-	'marksman',
-	'tsserver',
-	'denols',
-	'sqlls',
-}
-if vim.fn.executable('docker') == 1 then
-	vim.list_extend(SERVER_LIST, { 'dockerls' })
+local function genServerList()
+	local serverList = {
+		'taplo',
+		'pylsp',
+		'bashls',
+		'html',
+		'lua_ls',
+		'jsonls',
+		'yamlls',
+		'cssls',
+		'tailwindcss',
+		'marksman',
+		'tsserver',
+		'denols',
+		'sqlls',
+	}
+	if vim.fn.executable('docker') == 1 then
+		vim.list_extend(serverList, { 'dockerls' })
+	end
+	if vim.fn.executable('go') == 1 then
+		vim.list_extend(serverList, { 'gopls' })
+	end
+	if vim.fn.executable('rustc') == 1 then
+		vim.list_extend(serverList, { 'rust_analyzer' })
+	end
+	if vim.fn.executable('zig') == 1 then
+		vim.list_extend(serverList, { 'zls' })
+	end
+
+	return serverList
 end
-if vim.fn.executable('go') == 1 then
-	vim.list_extend(SERVER_LIST, { 'gopls' })
-end
-if vim.fn.executable('rustc') == 1 then
-	vim.list_extend(SERVER_LIST, { 'rust_analyzer' })
-end
-if vim.fn.executable('zig') == 1 then
-	vim.list_extend(SERVER_LIST, { 'zls' })
-end
+
+local SERVER_LIST = genServerList()
 
 ---@param options? table
 local function make_config(options)
