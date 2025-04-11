@@ -78,11 +78,14 @@ function M.setup()
 			})
 			use({
 				'projekt0n/github-nvim-theme',
+				branch = '0.0.x',
 				config = function()
 					require('github-theme').setup({
 						theme_style = 'dark_default',
 						sidebars = { 'lazygit', 'terminal', 'packer' },
+						dark_sidebar = false,
 					})
+					vim.cmd.colorscheme('github_dark_default')
 				end,
 			})
 			use({
