@@ -229,7 +229,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 
 # configure gaps
-gaps inner 10px
+gaps inner 5px
 
 # set background
 exec_always --no-startup-id feh --no-fehbg --bg-fill ~/Pictures/wallpapers/futurama-spaceship.jpg
