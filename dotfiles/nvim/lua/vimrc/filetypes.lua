@@ -12,5 +12,6 @@ vim.filetype.add({
 	},
 	pattern = {
 		[".*/kitty/.*%.conf$"] = "kitty",
+		[".*/git/config"] = "gitconfig",
 	},
 })
