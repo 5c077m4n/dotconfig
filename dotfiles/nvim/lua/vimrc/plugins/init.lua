@@ -246,17 +246,10 @@ local function init_packer()
 				end,
 			})
 			use({
-				'5c077m4n/surround-nvim-mirror',
+				'kylechui/nvim-surround',
+				tag = '*',
 				config = function()
-					require('surround').setup({
-						prefix = 'S',
-						mappings_style = 'sandwich',
-						pairs = {
-							nestable = { { '(', ')' }, { '[', ']' }, { '{', '}' }, { '<', '>' } },
-							linear = { { [[']], [[']] }, { [["]], [["]] }, { [[`]], [[`]] } },
-						},
-						brackets = { '(', '{', '[', '<' },
-					})
+					require('nvim-surround').setup({})
 				end,
 			})
 			use({
