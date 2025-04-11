@@ -82,6 +82,10 @@ keymap.nnoremap("<leader>cd", function()
 	vim.notify('Changed current work dir to "' .. cwd .. '"')
 end, { desc = "Switch CWD to the directory of the open buffer" })
 
+keymap.nnoremap("<leader>rl", function()
+	vim.wo.rightleft = not vim.wo.rightleft
+end, { desc = "Toggle window's right-to-left mode" })
+
 -- Undo
 keymap.nnoremap("U", "<C-r>", { desc = "Redo last change" })
 
