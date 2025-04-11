@@ -10,6 +10,8 @@ local eslint_config = {
 null_ls.setup({
 	diagnostics_format = '[#{c}] #{m} (#{s})',
 	sources = {
+		-- snippets support
+		null_ls.builtins.completion.luasnip,
 		-- lua
 		null_ls.builtins.formatting.stylua.with({
 			condition = function(utils)
