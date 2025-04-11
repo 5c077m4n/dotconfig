@@ -103,7 +103,7 @@ local SERVER_CONFIG_MAP = {
 
 		return make_config({
 			filetypes = { "javascriptreact", "typescriptreact", "html" },
-			root_dir = lspconfig.util.root_pattern("tailwind.config.js"),
+			root_dir = lspconfig.util.root_pattern("tailwind.config.js", "tailwind.config.ts"),
 		})
 	end,
 	marksman = function()
