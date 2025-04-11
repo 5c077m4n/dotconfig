@@ -1,4 +1,5 @@
 *
 !.gitignore
 
+!assets/complex_modifications/*.json
 !karabiner.json
