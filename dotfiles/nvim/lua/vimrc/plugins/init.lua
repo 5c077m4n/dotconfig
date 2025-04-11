@@ -26,6 +26,7 @@ local function setup()
 		{
 			"aserowy/tmux.nvim",
 			event = "VeryLazy",
+			lazy = true,
 			config = function()
 				require("tmux").setup({
 					resize = { enable_default_keybindings = false },
@@ -60,6 +61,7 @@ local function setup()
 		{
 			"nvim-tree/nvim-web-devicons",
 			event = "VeryLazy",
+			lazy = true,
 			config = function()
 				require("nvim-web-devicons").setup({
 					override_by_extension = {
@@ -70,9 +72,11 @@ local function setup()
 		},
 		{
 			"projekt0n/github-nvim-theme",
+			init = function()
+				vim.cmd.colorscheme("github_dark_colorblind")
+			end,
 			config = function()
 				require("github-theme").setup({ options = { dim_inactive = true } })
-				vim.cmd.colorscheme("github_dark_colorblind")
 			end,
 			priority = 1000,
 		},
@@ -91,25 +95,28 @@ local function setup()
 		{
 			"norcalli/nvim-colorizer.lua",
 			event = "VeryLazy",
+			lazy = true,
 			config = function()
 				require("colorizer").setup()
 			end,
 		},
 		{
 			"folke/todo-comments.nvim",
-			event = "VeryLazy",
+			event = { "VeryLazy" },
+			lazy = true,
 			config = function()
 				require("todo-comments").setup()
 			end,
 		},
 		{
 			"onsails/lspkind-nvim",
+			lazy = true,
 			config = function()
 				require("lspkind").init({ mode = "text" }) -- Icons in autocomplete popup
 			end,
 		},
-		{ "fladson/vim-kitty", ft = { "kitty" }, event = { "VeryLazy" } },
-		{ "tmux-plugins/vim-tmux", ft = { "tmux" }, event = { "VeryLazy" } },
+		{ "fladson/vim-kitty", ft = { "kitty" }, event = { "VeryLazy" }, lazy = true },
+		{ "tmux-plugins/vim-tmux", ft = { "tmux" }, event = { "VeryLazy" }, lazy = true },
 		{
 			"nvim-neo-tree/neo-tree.nvim",
 			branch = "v3.x",
@@ -178,21 +185,22 @@ local function setup()
 			end,
 		},
 		{
-			"williamboman/mason.nvim",
-			event = { "VeryLazy" },
-			build = function()
-				vim.cmd.MasonUpdate()
-			end,
-			config = function()
-				require("mason").setup({
-					ui = { border = "single" },
-				})
-			end,
-		},
-		{
 			"williamboman/mason-lspconfig.nvim",
-			dependencies = { "williamboman/mason.nvim" },
+			dependencies = {
+				{
+					"williamboman/mason.nvim",
+					event = { "VeryLazy" },
+					lazy = true,
+					build = function()
+						vim.cmd.MasonUpdate()
+					end,
+					config = function()
+						require("mason").setup({ ui = { border = "single" } })
+					end,
+				},
+			},
 			event = { "VeryLazy" },
+			lazy = true,
 			config = function()
 				require("mason-lspconfig").setup({
 					ensure_installed = require("vimrc.plugins.lspconfig").SERVER_LIST,
@@ -211,6 +219,7 @@ local function setup()
 			"pmizio/typescript-tools.nvim",
 			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 			event = { "BufEnter" },
+			lazy = true,
 			config = function()
 				if vim.fn.executable("node") ~= 1 then
 					vim.notify(
@@ -229,6 +238,7 @@ local function setup()
 			"simrat39/rust-tools.nvim",
 			dependencies = { "neovim/nvim-lspconfig" },
 			ft = { "rust" },
+			lazy = true,
 			config = function()
 				local rust_tools = require("rust-tools")
 
@@ -257,6 +267,7 @@ local function setup()
 		{
 			"folke/trouble.nvim",
 			event = "VeryLazy",
+			lazy = true,
 			dependencies = { "nvim-tree/nvim-web-devicons" },
 			config = function()
 				require("trouble").setup({
@@ -285,12 +296,13 @@ local function setup()
 				end, { desc = "Toggle trouble loclist panel" })
 			end,
 		},
-		{ "folke/neodev.nvim", dependencies = { "folke/neoconf.nvim" } },
+		{ "folke/neodev.nvim", dependencies = { "folke/neoconf.nvim" }, lazy = true },
 		{
 			"ray-x/go.nvim",
 			dependencies = { "neovim/nvim-lspconfig", "nvim-treesitter/nvim-treesitter" },
 			ft = { "go", "gomod", "godoc", "gotexttmpl", "gohtmltmpl" },
 			event = { "CmdlineEnter" },
+			lazy = true,
 			build = function()
 				require("go.install").update_all()
 			end,
@@ -324,6 +336,7 @@ local function setup()
 		{
 			"nvimtools/none-ls.nvim",
 			dependencies = { "nvim-lua/plenary.nvim" },
+			event = { "InsertEnter" },
 			config = function()
 				require("vimrc.plugins.null-ls")
 			end,
@@ -354,6 +367,7 @@ local function setup()
 		{
 			"phaazon/hop.nvim",
 			event = { "FocusGained", "BufEnter" },
+			lazy = true,
 			config = function()
 				local hop = require("hop")
 				local directions = require("hop.hint").HintDirection
@@ -391,14 +405,16 @@ local function setup()
 		{
 			"folke/which-key.nvim",
 			event = "VeryLazy",
+			lazy = true,
 			opts = {
 				plugins = { marks = false, registers = false },
 			},
 		},
-		{ "kylechui/nvim-surround", event = "VeryLazy", version = "*", opts = {} },
+		{ "kylechui/nvim-surround", event = { "VeryLazy" }, lazy = true, version = "*", opts = {} },
 		{
 			"windwp/nvim-autopairs",
 			event = "VeryLazy",
+			lazy = true,
 			config = function()
 				require("nvim-autopairs").setup({ check_ts = true })
 
@@ -411,7 +427,8 @@ local function setup()
 		},
 		{
 			"windwp/nvim-ts-autotag",
-			event = "InsertEnter",
+			event = { "InsertEnter" },
+			lazy = true,
 			config = function()
 				require("nvim-ts-autotag").setup({
 					filetypes = {
@@ -427,10 +444,11 @@ local function setup()
 				})
 			end,
 		},
-		{ "numToStr/Comment.nvim", opts = {}, lazy = false },
+		{ "numToStr/Comment.nvim", opts = {}, event = { "VeryLazy" }, lazy = false },
 		{
 			"tpope/vim-fugitive",
 			event = "VeryLazy",
+			lazy = true,
 			config = function()
 				require("vimrc.plugins.git-fugitive")
 			end,
@@ -438,6 +456,7 @@ local function setup()
 		{
 			"sindrets/diffview.nvim",
 			event = "VeryLazy",
+			lazy = true,
 			dependencies = {
 				"nvim-lua/plenary.nvim",
 				"nvim-tree/nvim-web-devicons",
@@ -458,6 +477,7 @@ local function setup()
 		{
 			"nvim-telescope/telescope.nvim",
 			event = "VeryLazy",
+			lazy = true,
 			dependencies = {
 				"nvim-lua/popup.nvim",
 				"nvim-lua/plenary.nvim",
@@ -470,7 +490,7 @@ local function setup()
 		},
 		{
 			"nvim-telescope/telescope-fzf-native.nvim",
-			dependencies = "nvim-telescope/telescope.nvim",
+			dependencies = { "nvim-telescope/telescope.nvim" },
 			build = "make",
 			config = function()
 				require("telescope").load_extension("fzf")
