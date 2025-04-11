@@ -4040,7 +4040,7 @@
         }
       },
       "miniconda": {
-        "version": "py311_23.11.0-1",
+        "version": "py311_23.11.0-2",
         "options": {
           "full_name": "miniconda"
         }
@@ -4052,7 +4052,7 @@
         }
       },
       "slack": {
-        "version": "4.36.134",
+        "version": "4.36.136",
         "options": {
           "full_name": "slack"
         }
@@ -4064,7 +4064,7 @@
         }
       },
       "tor-browser": {
-        "version": "13.0.7",
+        "version": "13.0.8",
         "options": {
           "full_name": "tor-browser"
         }
