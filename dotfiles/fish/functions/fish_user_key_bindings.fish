@@ -5,6 +5,9 @@ function fish_user_key_bindings
     bind --mode insert \cc kill-whole-line repaint
     bind --mode insert \cx\ce edit_command_buffer
 
+    bind --mode insert \cp up-or-search
+    bind --mode insert \cn down-or-search
+
     bind --erase --preset \ee
     bind --erase --preset \ev
     bind --erase --preset --mode insert \ee
