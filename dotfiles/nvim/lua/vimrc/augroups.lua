@@ -174,3 +174,13 @@ create_autocmd({ "LspAttach" }, {
 	end,
 	desc = "Setup LSP config on attach",
 })
+
+local open_python_wheel_id = create_augroup("open_python_wheel", { clear = true })
+create_autocmd({ "BufReadCmd" }, {
+	pattern = { "*.whl" },
+	group = open_python_wheel_id,
+	callback = function()
+		vim.fn["zip#Browse"](vim.fn.expand("<amatch>"))
+	end,
+	desc = "View python `*.whl` files",
+})
