@@ -23,24 +23,16 @@
     let
       configName = "tickle";
       username = "roee";
-      config = import ./darwin.nix {
-        inherit self username;
-      };
-      inherit (nix-darwin.lib) darwinSystem;
     in
     {
-      darwinConfigurations.${configName} = darwinSystem {
+      darwinConfigurations.${configName} = nix-darwin.lib.darwinSystem {
+        specialArgs = {
+          inherit self username;
+        };
         modules = [
-          config
+          (import ./darwin.nix)
           home-manager.darwinModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-
-              users.${username} = import ./home.nix;
-            };
-          }
+          (import ./home.nix)
         ];
       };
       # Expose the package set, including overlays, for convenience.
