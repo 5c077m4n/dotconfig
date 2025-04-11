@@ -102,6 +102,7 @@ in
             pkgs-master.isort
             # Golang
             pkgs-master.go
+            pkgs-master.air # Live reloader
             pkgs-master.tinygo
             pkgs-master.golangci-lint
             # Rust
