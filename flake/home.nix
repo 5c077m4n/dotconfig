@@ -153,6 +153,8 @@ in
                 pkgs.xclip
                 ## Audio control
                 pkgs.pulseaudio
+                ## Screen brightness control
+                pkgs.brightnessctl
                 # GUIs
                 pkgs.firefox
                 pkgs.google-chrome
