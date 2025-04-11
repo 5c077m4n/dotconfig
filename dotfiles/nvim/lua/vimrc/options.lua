@@ -46,7 +46,7 @@ o.laststatus = 3
 o.termguicolors = true
 
 o.complete:remove('i')
-o.completeopt = { 'menuone', 'noselect' }
+o.completeopt = { 'menu', 'menuone', 'noselect', 'preview' }
 o.smarttab = true
 
 -- Delete comment character when joining commented lines

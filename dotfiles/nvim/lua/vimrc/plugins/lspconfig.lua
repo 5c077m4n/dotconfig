@@ -37,7 +37,7 @@ local function on_attach(client, buffer_num)
 	local lsp = vim.lsp
 	local diagnostic = vim.diagnostic
 
-	vim.api.nvim_buf_set_option(buffer_num, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+	vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
 	lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, { border = 'single' })
 	lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, { border = 'single' })
