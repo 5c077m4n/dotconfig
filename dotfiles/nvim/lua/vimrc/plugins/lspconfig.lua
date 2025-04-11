@@ -1,5 +1,6 @@
 local lspconfig = require('lspconfig')
-local lsp_installer = require('nvim-lsp-installer')
+local lsp_installer = require('mason')
+local lsp_installer_config = require('mason-lspconfig')
 local telescope_builtin = require('telescope.builtin')
 local which_key = require('which-key')
 local cmp_lsp = require('cmp_nvim_lsp')
@@ -146,15 +147,17 @@ local function setup_servers()
 	local cmd = vim.cmd
 
 	lsp_installer.setup({
-		ensure_installed = SERVER_LIST,
-		automatic_installation = true,
 		ui = {
 			icons = {
-				server_installed = 'V',
-				server_pending = '>',
-				server_uninstalled = 'X',
+				package_installed = 'V',
+				package_pending = '>',
+				package_uninstalled = 'X',
 			},
 		},
+	})
+	lsp_installer_config.setup({
+		ensure_installed = SERVER_LIST,
+		automatic_installation = true,
 	})
 
 	for _, server in ipairs(SERVER_LIST) do

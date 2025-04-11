@@ -120,8 +120,8 @@ local function init_packer()
 				end,
 			})
 			use({
-				'williamboman/nvim-lsp-installer',
-				requires = { 'neovim/nvim-lspconfig' },
+				'williamboman/mason.nvim',
+				requires = { 'williamboman/mason-lspconfig.nvim' },
 			})
 			use({
 				'folke/trouble.nvim',
