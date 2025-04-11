@@ -19,6 +19,5 @@ function supdate --description 'Run a full system update'
     end
 
     nvim --headless +"Lazy! sync" +qa
-    type --query rustup && rustup upgrade
     type --query fisher && fisher update
 end
