@@ -1,25 +1,10 @@
 local null_ls = require('null-ls')
 
-local ts_config = {
+local eslint_config = {
 	prefer_local = 'node_modules/.bin',
 	condition = function(utils)
 		return utils.root_has_file({ 'package.json' })
 	end,
-	filetypes = {
-		'javascript',
-		'javascriptreact',
-		'typescript',
-		'typescriptreact',
-		'vue',
-		'css',
-		'scss',
-		'html',
-		'json',
-		'jsonc',
-		'yaml',
-		'markdown',
-		'graphql',
-	},
 }
 
 null_ls.setup({
@@ -42,10 +27,10 @@ null_ls.setup({
 		null_ls.builtins.formatting.black,
 		null_ls.builtins.diagnostics.mypy,
 		-- typescript
-		null_ls.builtins.code_actions.eslint.with(ts_config),
-		null_ls.builtins.diagnostics.eslint.with(ts_config),
-		null_ls.builtins.formatting.eslint.with(ts_config),
-		null_ls.builtins.formatting.prettier.with(ts_config),
+		null_ls.builtins.code_actions.eslint.with(eslint_config),
+		null_ls.builtins.diagnostics.eslint.with(eslint_config),
+		null_ls.builtins.formatting.eslint.with(eslint_config),
+		null_ls.builtins.formatting.prettier.with({ prefer_local = 'node_modules/.bin' }),
 		-- deno
 		null_ls.builtins.formatting.deno_fmt.with({
 			condition = function(utils)
