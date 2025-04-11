@@ -78,14 +78,14 @@ function M.setup()
 		},
 		{
 			'norcalli/nvim-colorizer.lua',
-			events = 'VeryLazy',
+			event = 'VeryLazy',
 			config = function()
 				require('colorizer').setup()
 			end,
 		},
 		{
 			'folke/todo-comments.nvim',
-			events = 'VeryLazy',
+			event = 'VeryLazy',
 			config = function()
 				require('todo-comments').setup()
 			end,
@@ -168,7 +168,6 @@ function M.setup()
 		{
 			'simrat39/rust-tools.nvim',
 			dependencies = { 'neovim/nvim-lspconfig' },
-			after = { 'nvim-lspconfig' },
 			ft = { 'rust' },
 			config = function()
 				local rust_tools = require('rust-tools')
@@ -229,7 +228,6 @@ function M.setup()
 		{
 			'ray-x/go.nvim',
 			dependencies = { 'neovim/nvim-lspconfig', 'nvim-treesitter/nvim-treesitter' },
-			after = { 'nvim-lspconfig' },
 			ft = { 'go', 'gomod', 'godoc', 'gotexttmpl', 'gohtmltmpl' },
 			config = function()
 				local go = require('go')
@@ -322,7 +320,7 @@ function M.setup()
 		},
 		{
 			'francoiscabrol/ranger.vim',
-			events = 'VeryLazy',
+			event = 'VeryLazy',
 			dependencies = 'rbgrouleff/bclose.vim',
 			config = function()
 				local keymap = require('vimrc.utils.keymapping')
@@ -332,6 +330,7 @@ function M.setup()
 		},
 		{
 			'folke/which-key.nvim',
+			event = 'VeryLazy',
 			config = function()
 				require('which-key').setup({
 					plugins = {
