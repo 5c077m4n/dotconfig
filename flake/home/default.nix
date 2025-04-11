@@ -31,6 +31,7 @@ in
         pkgs.less
         pkgs.gzip
         pkgs.unzip
+        pkgs.ps
         pkgs.busybox
         pkgs.gnumake
         pkgs.gcc
