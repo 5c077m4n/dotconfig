@@ -1,10 +1,14 @@
 local utils = require('vimrc.utils')
 
-local module_utils = utils.modules
-local signals = utils.signals
-local keymap = utils.keymapping
-
+local module_utils, signals, keymap = utils.modules, utils.signals, utils.keymapping
 local create_command = vim.api.nvim_create_user_command
+
+---@param cmd string
+local function norBang(cmd)
+	return function()
+		vim.cmd.normal({ cmd, bang = true })
+	end
+end
 
 keymap.nnoremap('<leader>0', module_utils.update_vimrc, { desc = 'Git pull latest vimrc' })
 keymap.nnoremap('<leader>1', function()
@@ -59,28 +63,14 @@ keymap.nnoremap('<A-j>', [[:m .+1<CR>==]], { desc = 'Move selection down' })
 
 keymap.nnoremap('<CR>', vim.cmd.nohlsearch, { desc = 'Stops the highlight on the last search pattern matches' })
 
--- Word traversing
-keymap.inoremap('<C-b>', function()
-	vim.cmd.normal({ 'b', bang = true })
-end, { desc = 'Traverse one word left' })
-keymap.inoremap('<C-e>', function()
-	vim.cmd.normal({ 'e', bang = true })
-end, { desc = 'Traverse one word right' })
-keymap.inoremap('<C-w>', function()
-	vim.cmd.normal({ 'w', bang = true })
-end, { desc = 'Traverse one word right' })
-keymap.inoremap('<C-h>', function()
-	vim.cmd.normal({ 'h', bang = true })
-end, { desc = 'Traverse one letter left' })
-keymap.inoremap('<C-j>', function()
-	vim.cmd.normal({ 'j', bang = true })
-end, { desc = 'Traverse one line down' })
-keymap.inoremap('<C-k>', function()
-	vim.cmd.normal({ 'k', bang = true })
-end, { desc = 'Traverse one line up' })
-keymap.inoremap('<C-l>', function()
-	vim.cmd.normal({ 'l', bang = true })
-end, { desc = 'Traverse one letter right' })
+-- Word traversing in insert mode
+keymap.inoremap('<C-b>', norBang('b'), { desc = 'Traverse one word left' })
+keymap.inoremap('<C-e>', norBang('e'), { desc = 'Traverse one word right' })
+keymap.inoremap('<C-w>', norBang('w'), { desc = 'Traverse one word right' })
+keymap.inoremap('<C-h>', norBang('h'), { desc = 'Traverse one letter left' })
+keymap.inoremap('<C-j>', norBang('j'), { desc = 'Traverse one line down' })
+keymap.inoremap('<C-k>', norBang('k'), { desc = 'Traverse one line up' })
+keymap.inoremap('<C-l>', norBang('l'), { desc = 'Traverse one letter right' })
 
 -- Special paste
 keymap.vnoremap('p', [["_dP]], { desc = "Paste after without overriding the current register's content" })
@@ -108,6 +98,7 @@ create_command('CopyCursorLocation', function()
 	vim.notify(cursor_location, vim.lsp.log_levels.INFO)
 end, { desc = 'Copy the current cursor location' })
 
+-- Diagnostics toggles
 keymap.nnoremap('<leader>dy', function()
 	vim.diagnostic.enable(0)
 end, { desc = 'Enable diagnostics for current buffer' })
