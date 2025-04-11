@@ -371,7 +371,6 @@ local function setup()
 				go.setup({
 					disable_defaults = true,
 					lsp_cfg = false,
-					max_line_len = 100,
 					lsp_inlay_hints = { enable = false },
 					trouble = true,
 					lsp_keymaps = false,
