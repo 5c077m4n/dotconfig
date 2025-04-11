@@ -24,8 +24,18 @@ local sources = {
 		end,
 	}),
 	null_ls.builtins.diagnostics.mypy.with({ prefer_local = ".venv/bin" }),
-	-- Typescript
+	-- Typescript/Javascript
 	null_ls.builtins.formatting.prettierd.with({ extra_filetypes = { "toml" } }),
+	null_ls_builtins.diagnostics.eslint_d.with({
+		condition = function(utils)
+			return utils.root_has_file({ ".eslintrc.js", ".eslintrc.json" })
+		end,
+	}),
+	null_ls_builtins.code_actions.eslint_d.with({
+		condition = function(utils)
+			return utils.root_has_file({ ".eslintrc.js", ".eslintrc.json" })
+		end,
+	}),
 	-- CSS
 	null_ls.builtins.formatting.stylelint,
 	-- Rust
