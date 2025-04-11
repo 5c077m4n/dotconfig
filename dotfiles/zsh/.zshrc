@@ -123,7 +123,8 @@ export EDITOR="nvim"
 # Init starship
 eval "$(starship init zsh)"
 
-[[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
+[[ -f "${HOME}/.fzf.zsh" ]] && source "${HOME}/.fzf.zsh" || true
+[[ -f "${XDG_CONFIG_HOME}/tabtab/zsh/__tabtab.zsh" ]] && . "${XDG_CONFIG_HOME}/tabtab/zsh/__tabtab.zsh" || true
 
 # Completions
 ## Kubectl
