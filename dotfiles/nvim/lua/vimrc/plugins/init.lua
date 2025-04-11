@@ -470,7 +470,7 @@ function M.setup()
 				require('telescope').load_extension('fzf')
 			end,
 		},
-	})
+	}, { ui = { border = 'single' } })
 end
 
 return M
