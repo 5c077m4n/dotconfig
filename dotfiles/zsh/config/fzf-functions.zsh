@@ -8,11 +8,11 @@ is_in_git_repo() {
 export FZF_DEFAULT_OPTS="--bind ctrl-u:preview-page-up --bind ctrl-d:preview-page-down --bind ctrl-/:toggle-preview"
 # Use fd (https://github.com/sharkdp/fd) instead of the default find command for listing path candidates.
 _fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
+	fd --hidden --follow --exclude ".git" . "$1"
 }
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
+	fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
 __fzf_down() {
@@ -33,13 +33,13 @@ _fzf_complete_ga() {
 		--preview 'git diff --color=always -- {}' \
 		--preview-window 'top:70%' \
 		-- "$@" < <(
-			git add --intent-to-add --all
+		git add --intent-to-add --all
 
-			changed_files="$(git diff --name-only)"
-			[[ -z "$changed_files" ]] && exit 2
+		changed_files="$(git diff --name-only)"
+		[[ -z "$changed_files" ]] && exit 2
 
-			echo "$changed_files"
-		)
+		echo "$changed_files"
+	)
 }
 # `gc **<Tab>`
 _fzf_complete_gc() {
@@ -50,11 +50,11 @@ _fzf_complete_gc() {
 		--preview 'git diff --color=always --staged -- {}' \
 		--preview-window 'top:70%' \
 		-- "$@" < <(
-			changed_files="$(git diff --name-only --staged)"
-			[[ -z "$changed_files" ]] && exit 2
+		changed_files="$(git diff --name-only --staged)"
+		[[ -z "$changed_files" ]] && exit 2
 
-			echo "$changed_files"
-		)
+		echo "$changed_files"
+	)
 }
 # `gco **<Tab>`
 _fzf_complete_gco() {
@@ -64,9 +64,9 @@ _fzf_complete_gco() {
 		--preview 'git diff --stat --color=always origin/master {}' \
 		--preview-window 'top:75%' \
 		-- "$@" < <(
-			git fetch --all --prune --quiet
-			git branch --all --sort=-committerdate --format='%(refname:short)'
-		)
+		git fetch --all --prune --quiet
+		git branch --all --sort=-committerdate --format='%(refname:short)'
+	)
 }
 _fzf_complete_gco_post() {
 	local branch=$1
@@ -84,8 +84,8 @@ _fzf_complete_nr() {
 		--preview "jq -r '.scripts.\"{}\"' package.json | bat --force-colorization --style='plain' --language='bash'" \
 		--preview-window 'top:25%' \
 		-- "$@" < <(
-			jq -r ".scripts | keys | .[]" package.json
-		)
+		jq -r ".scripts | keys | .[]" package.json
+	)
 }
 # `npm run **<Tab>`
 _fzf_complete_npm () {
@@ -97,8 +97,8 @@ _fzf_complete_npm () {
 			--preview "jq -r '.scripts.\"{}\"' package.json | bat --force-colorization --style='plain' --language='bash'" \
 			--preview-window 'top:25%' \
 			-- "$@" < <(
-				jq --raw-output ".scripts | keys | .[]" package.json
-			)
+			jq --raw-output ".scripts | keys | .[]" package.json
+		)
 	else
 		eval "zle ${fzf_default_completion:-expand-or-complete}"
 	fi
