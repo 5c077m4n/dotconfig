@@ -1,8 +1,12 @@
+local cmp = require("cmp_nvim_lsp")
+
 ---@param options? table
 ---@return table
 local function make_config(options)
-	local capabilities = require("cmp_nvim_lsp").default_capabilities()
-	vim.tbl_extend("force", capabilities, {
+	local cmp_capabilities = cmp.default_capabilities()
+	local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
+
+	local merged_capabilities = vim.tbl_deep_extend("force", lsp_capabilities, cmp_capabilities, {
 		textDocument = {
 			completion = {
 				completionItem = { snippetSupport = true },
@@ -15,11 +19,11 @@ local function make_config(options)
 	})
 
 	local base_config = {
-		capabilities = capabilities,
+		capabilities = merged_capabilities,
 		flags = { debounce_text_changes = 400 },
 	}
 	if type(options) == "table" then
-		base_config = vim.tbl_extend("force", base_config, options)
+		base_config = vim.tbl_deep_extend("force", base_config, options)
 	end
 	return base_config
 end
