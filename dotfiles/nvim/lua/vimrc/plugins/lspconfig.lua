@@ -25,7 +25,7 @@ local SERVER_LIST = {
 	'tailwindcss',
 }
 
-local function on_attach(client, bufnr)
+local function on_attach(_client, bufnr)
 	local lsp = vim.lsp
 	local diagnostic = vim.diagnostic
 	local create_command = vim.api.nvim_create_user_command
