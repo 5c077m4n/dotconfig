@@ -1,4 +1,6 @@
 local keymap = require('vimrc.utils.keymapping')
 
-keymap.nnoremap('<leader>tf', ':Neotree<CR>')
-keymap.nnoremap('<leader>tt', ':Neotree toggle<CR>')
+keymap.nnoremap('<leader>tf', vim.cmd.Neotree)
+keymap.nnoremap('<leader>tt', function()
+	vim.cmd.Neotree('toggle')
+end)
