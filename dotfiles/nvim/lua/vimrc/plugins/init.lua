@@ -4,7 +4,6 @@ local function bootstrap()
 	local fn = vim.fn
 	local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
-	---@diagnostic disable-next-line: missing-parameter
 	if fn.empty(fn.glob(install_path)) > 0 then
 		fn.system({
 			'git',
@@ -17,7 +16,7 @@ local function bootstrap()
 end
 
 local function init_packer()
-	vim.cmd([[packadd packer.nvim]])
+	vim.cmd.packadd('packer.nvim')
 
 	require('packer').startup({
 		function(use)
@@ -32,21 +31,6 @@ local function init_packer()
 					notify.setup({ background_colour = '#000000' })
 					vim.notify = notify
 				end,
-			})
-			use({
-				'nvim-treesitter/nvim-treesitter-context',
-				requires = { 'nvim-treesitter/nvim-treesitter' },
-				config = function()
-					require('treesitter-context').setup({
-						max_lines = 3,
-						patters = {
-							default = { 'class', 'function', 'method', 'for', 'while', 'if', 'switch', 'case' },
-							rust = { 'impl', 'mod', 'struct', 'fn' },
-							typescript = { 'const', 'let' },
-						},
-					})
-				end,
-				disable = true,
 			})
 			use({
 				'nathom/filetype.nvim',
@@ -105,12 +89,14 @@ local function init_packer()
 			})
 			use({
 				'norcalli/nvim-colorizer.lua',
+				events = { 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' },
 				config = function()
 					require('colorizer').setup()
 				end,
 			})
 			use({
 				'folke/todo-comments.nvim',
+				events = { 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' },
 				config = function()
 					require('todo-comments').setup()
 				end,
@@ -125,6 +111,7 @@ local function init_packer()
 			})
 			use({
 				'SmiteshP/nvim-navic',
+				events = { 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' },
 				requires = { 'neovim/nvim-lspconfig', 'feline-nvim/feline.nvim' },
 				config = function()
 					local navic = require('nvim-navic')
@@ -176,7 +163,7 @@ local function init_packer()
 					require('lspkind').init({ mode = 'text' }) -- Icons in autocomplete popup
 				end,
 			})
-			use('fladson/vim-kitty')
+			use({ 'fladson/vim-kitty', ft = { 'kitty' } })
 			-- File tree
 			use({
 				'nvim-neo-tree/neo-tree.nvim',
@@ -213,6 +200,7 @@ local function init_packer()
 			})
 			use({
 				'folke/trouble.nvim',
+				event = { 'CursorHold', 'CursorHoldI' },
 				requires = 'kyazdani42/nvim-web-devicons',
 				config = function()
 					require('vimrc.plugins.trouble')
@@ -268,6 +256,7 @@ local function init_packer()
 			-- Code workflow
 			use({
 				'phaazon/hop.nvim',
+				event = { 'FocusGained', 'BufEnter' },
 				config = function()
 					local hop = require('hop')
 					local directions = require('hop.hint').HintDirection
@@ -306,6 +295,7 @@ local function init_packer()
 			})
 			use({
 				'francoiscabrol/ranger.vim',
+				event = { 'CursorHold', 'CursorHoldI' },
 				requires = 'rbgrouleff/bclose.vim',
 				config = function()
 					require('vimrc.plugins.ranger')
@@ -325,6 +315,7 @@ local function init_packer()
 			})
 			use({
 				'kylechui/nvim-surround',
+				event = 'InsertEnter',
 				tag = '*',
 				config = function()
 					require('nvim-surround').setup({})
@@ -349,6 +340,7 @@ local function init_packer()
 			})
 			use({
 				'windwp/nvim-ts-autotag',
+				event = 'InsertEnter',
 				config = function()
 					require('nvim-ts-autotag').setup({
 						filetypes = {
@@ -366,6 +358,7 @@ local function init_packer()
 			})
 			use({
 				'terrortylor/nvim-comment',
+				event = { 'VimEnter', 'WinEnter', 'BufWinEnter' },
 				config = function()
 					require('nvim_comment').setup({
 						marker_padding = true,
@@ -379,6 +372,7 @@ local function init_packer()
 			-- Git
 			use({
 				'tpope/vim-fugitive',
+				event = { 'VimEnter', 'WinEnter', 'BufWinEnter' },
 				config = function()
 					require('vimrc.plugins.git-fugitive')
 				end,
@@ -396,6 +390,7 @@ local function init_packer()
 			})
 			use({
 				'lewis6991/gitsigns.nvim',
+				event = { 'VimEnter', 'WinEnter', 'BufWinEnter' },
 				requires = 'nvim-lua/plenary.nvim',
 				config = function()
 					require('vimrc.plugins.gitsigns')
