@@ -3,14 +3,10 @@
   pkgs,
   username,
   hostPlatform,
-  lib,
   ...
 }:
 {
-  nixpkgs = {
-    inherit hostPlatform;
-    config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "arc-browser" ];
-  };
+  nixpkgs = { inherit hostPlatform; };
 
   nix = {
     package = pkgs.nix;

@@ -26,17 +26,12 @@
       configName = "tickle";
       username = "roee";
       hostPlatform = "aarch64-darwin";
-      pkgs-unstable = nixpkgs-unstable.legacyPackages.${hostPlatform};
     in
     {
       darwinConfigurations.${configName} = nix-darwin.lib.darwinSystem {
         specialArgs = {
-          inherit
-            self
-            username
-            hostPlatform
-            pkgs-unstable
-            ;
+          inherit self username hostPlatform;
+          pkgs-unstable = nixpkgs-unstable;
         };
         modules = [
           (import ./darwin.nix)
