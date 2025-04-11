@@ -46,6 +46,7 @@ require('neo-tree').setup({
 		},
 		follow_current_file = { enabled = true },
 		use_libuv_file_watcher = true,
+		hijack_netrw_behavior = 'open_current',
 		window = {
 			mappings = {
 				['<bs>'] = 'navigate_up',
