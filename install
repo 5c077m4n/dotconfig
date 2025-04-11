@@ -8,11 +8,16 @@ if home_dir is None:
     raise Exception("The $HOME param is not set")
 
 with open(path.join(home_dir, ".zshenv"), "w") as zshenv_write:
-    zshenv_content = [
+    zshenv_write.writelines([
         'export ZDOTDIR="${HOME}/.config/zsh"\n',
         '[[ -f "${ZDOTDIR}/.zshenv" ]] && source "${ZDOTDIR}/.zshenv"\n',
-    ]
-    zshenv_write.writelines(zshenv_content)
+    ])
+
+with open(path.join(home_dir, ".gitconfig"), "a") as gitconfig_append:
+    gitconfig_append.writelines([
+        '[include]\n'
+        '\tpath = ~/.config/git/config.toml'
+    ])
 
 config_dir = path.join(home_dir, ".config")
 if not path.isdir(config_dir):
