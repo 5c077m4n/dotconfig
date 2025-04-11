@@ -5,5 +5,10 @@
 		"library": ["${3rd}/luv/library"],
 		"ignoreDir": ["*", "!dotfiles/nvim/", "dotfiles/nvim/plugin/"]
 	},
-	"telemetry": { "enable": false }
+	"telemetry": { "enable": false },
+	"hint": {
+		"enable": true,
+		"arrayIndex": "Enable",
+		"setType": true
+	}
 }
