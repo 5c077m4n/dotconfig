@@ -32,8 +32,8 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 # Set key-repeat times
 defaults write -g InitialKeyRepeat -int 15
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
-defaults write -g KeyRepeat -int 2
-defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write -g KeyRepeat -int 1
+defaults write NSGlobalDomain KeyRepeat -int 1
 
 # Window drag and drop
 defaults write -g NSWindowShouldDragOnGestiure -bool true
