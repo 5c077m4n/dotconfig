@@ -57,3 +57,11 @@ alias cr='cargo run'
 alias crl='RUST_LOG=debug cargo run'
 alias cb='cargo build'
 alias cu='cargo update'
+
+# NPM
+alias ni='npm install'
+alias nis='npm install --save'
+alias nisd='npm install --save-dev'
+alias nif='npm install --force'
+alias nr='npm run'
+alias nclean='npm cache clean --force'
