@@ -24,6 +24,12 @@ local function init_packer()
 			use('lewis6991/impatient.nvim')
 			use('nvim-lua/plenary.nvim')
 			use({
+				'christoomey/vim-tmux-navigator',
+				cond = function()
+					return vim.env.TMUX ~= nil
+				end,
+			})
+			use({
 				'rcarriga/nvim-notify',
 				config = function()
 					local notify = require('notify')
