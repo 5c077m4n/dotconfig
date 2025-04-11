@@ -3,6 +3,7 @@
 	iam = "!echo \"$(git config user.name) <$(git config user.email)>\""
 	whoami = "!git config user.name && git config user.email"
 	fh = "!git log --follow --all --patch -- \"$(git ls-files | fzf)\""
+	co = "checkout"
 	unstage = "!git reset HEAD -- \"$(git ls-files | fzf --multi --preview 'cat {}')\""
 	wt = "worktree"
 	root = "rev-parse --show-toplevel"

@@ -21,32 +21,48 @@ alias tree='exa --tree' # tree view
 alias lS='exa -1' # one column by just names
 
 # Kubectl
+alias k='kubectl'
 alias kk='kubectl krew'
+alias kpf='kubectl port-forward'
+# Kubectl utils
 alias kns='kubens'
 alias kc='kubectx'
 alias kcc='kubectx --current'
+# Terraform
+alias t='terraform'
+alias ta='terraform apply'
+alias tp='terraform plan'
 
 # Git
-gbdefault () {
-	command git rev-parse --git-dir &> /dev/null || return 1
-
-	local ref
-	for ref in refs/{heads,remotes/{origin,upstream}}/{main,trunk}; do
-		if $(git show-ref --quiet --verify "$ref"); then
-			echo "${ref:t}"
-			return
-		fi
-	done
-	echo "master"
-}
+alias gsh='git show --show-signature'
+alias gst='git status'
+alias ga.='git add .'
+alias gaa='git add --all'
+alias gau='git add --update'
+alias gap='git add --patch'
+alias gc='git commit --verbose'
+alias gcmsg='git commit --verbose --message'
+alias gcam='git commit --verbose --all --message'
+alias 'gcan!'='git commit --verbose --amend --all --no-edit'
+alias 'gc!'='git commit --verbose --amend'
 alias gbcurrent='git branch --show-current'
+alias gco='git checkout'
+alias gcb='git checkout -b'
 alias gcm='git checkout "$(gbdefault)"'
 alias 'gc-'='git checkout -'
 alias gupa='git pull --rebase --autostash origin "$(gbcurrent)"'
-alias ggpf='git push --force origin "$(gbcurrent)"'
+alias ggpf='git push --force-with-lease origin "$(gbcurrent)"'
 alias gprom='git pull --rebase --autostash --stat origin "$(gbdefault)"'
+alias grbi='git rebase --interactive'
+alias grbc='git rebase --continue'
+alias grba='git rebase --abort'
+alias grbq='git rebase --quit'
 alias grbim='git rebase --interactive --autostash --autosquash "$(gbdefault)"'
 alias gum='git fetch origin "$(gbdefault)":"$(gbdefault)"'
+alias glol='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
+alias glols='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --stat'
+alias glola='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --all'
+alias gclean='git clean -d --interactive'
 
 # Rust
 alias c='cargo'
