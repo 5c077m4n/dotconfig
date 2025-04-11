@@ -6,6 +6,7 @@ alias python='python3'
 # Neovim
 alias v='nvim'
 alias vim='nvim'
+alias 'v.'='nvim .'
 
 # exa -> ls
 if (( $+commands[exa] )); then
