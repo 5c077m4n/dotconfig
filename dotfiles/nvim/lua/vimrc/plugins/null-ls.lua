@@ -34,10 +34,8 @@ null_ls.setup({
 		-- deno
 		null_ls.builtins.formatting.deno_fmt.with({
 			condition = function(utils)
-				return utils.root_has_file({ 'deno.json', 'deno.jsonc' })
+				return utils.root_has_file({ 'deno.json', 'deno.jsonc', 'deno.lock' })
 			end,
-			command = 'deno',
-			args = { 'fmt', '.' },
 		}),
 		-- css
 		null_ls.builtins.formatting.stylelint,

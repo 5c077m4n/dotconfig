@@ -21,10 +21,10 @@ local SERVER_LIST = {
 	'yamlls',
 	'eslint',
 	'cssls',
-	'tflint',
 	'tailwindcss',
 	'marksman',
 	'denols',
+	'dockerls',
 }
 local SEVERITY = {
 	vim.log.levels.ERROR,
@@ -140,10 +140,15 @@ local function setup_servers()
 					telemetry = { enable = false },
 				},
 			}
+		elseif server == 'tailwindcss' then
+			opts.filetypes = { 'javascriptreact', 'javascript.jsx', 'typescriptreact', 'typescript.tsx', 'html' }
+			opts.root_dir = lspconfig.util.root_pattern('tailwind.config.js')
 		elseif server == 'denols' then
-			opts.root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc')
+			vim.g.markdown_fenced_languages = { 'ts=typescript' }
+			opts.root_dir = lspconfig.util.root_pattern('deno.json', 'deno.jsonc', 'deno.lock')
 		elseif server == 'tsserver' then
-			opts.root_dir = lspconfig.util.root_pattern('package.json')
+			opts.root_dir = lspconfig.util.root_pattern('package.json', 'package-lock.json', 'tsconfig.json')
+			opts.single_file_support = false
 		end
 
 		lspconfig[server].setup(opts)
