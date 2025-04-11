@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+while true; do
+	"$@"
+	sleep 10
+done
