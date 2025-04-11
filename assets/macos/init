@@ -200,23 +200,24 @@ defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
 
 ###############################################################################
-# Homebrew                                                                    #
+# Shell config                                                                #
 ###############################################################################
 
-# Install script
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew update
-
-# Dot files
-mkdir -p "$HOME/repos"
-git -C "$HOME/repos" https://github.com/5c077m4n/dotconfig.git
-brew bundle install --file "$HOME/repos/dotconfig/assets/macos/Brewfile"
+allowed_shells_file="/etc/shells"
 
 # Add updated GNU Bash to allowed shells
 new_bash_path="$(which -a bash | grep brew)"
-allowed_shells_file="/etc/shells"
 if ! grep -q "^${new_bash_path}$" "$allowed_shells_file"; then
 	echo "$new_bash_path" | sudo tee -a "$allowed_shells_file"
 fi
 unset new_bash_path
+
+# Add Fish to allowed shells and make default
+fish_path="$(which -a fish | grep brew)"
+if ! grep -q "^${fish_path}$" "$allowed_shells_file"; then
+	echo "$fish_path" | sudo tee -a "$allowed_shells_file"
+fi
+chsh -s "$fish_path"
+unset fish_path
+
 unset allowed_shells_file
