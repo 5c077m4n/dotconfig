@@ -1,29 +1,16 @@
 local vscode = require("vscode-neovim")
 
----@param mode string|table
-local function create_keymap_fn(mode)
-	mode = mode or "n"
-
-	---@param buttons string
-	---@param command string|function
-	---@param options table|nil
-	return function(buttons, command, options)
-		local opts = vim.tbl_extend("force", { remap = true, silent = true }, options or {})
-		vim.keymap.set(mode, buttons, command, opts)
-	end
-end
-
-local nnoremap = create_keymap_fn("n")
-local vnoremap = create_keymap_fn("v")
+local nnoremap = require("vimrc.utils").nnoremap
+local vnoremap = require("vimrc.utils").vnoremap
 
 -- Splits
 --- Traversal
-nnoremap("<C-h>", "<C-w>h")
-nnoremap("<C-j>", "<C-w>j")
-nnoremap("<C-k>", "<C-w>k")
-nnoremap("<C-l>", "<C-w>l")
+nnoremap("<C-h>", "<C-w>h", { desc = "Move to split on the left" })
+nnoremap("<C-j>", "<C-w>j", { desc = "Move to split on the bottom" })
+nnoremap("<C-k>", "<C-w>k", { desc = "Move to split on the top" })
+nnoremap("<C-l>", "<C-w>l", { desc = "Move to split on the right" })
 --- Creating/removing
-nnoremap("<leader>wq", "<C-w>q", { desc = "Close split" })
+nnoremap("<leader>wq", "<C-w>q", { desc = "Close current split" })
 nnoremap("<leader>wv", function()
 	vscode.action("workbench.action.splitEditorRight")
 end, { desc = "New vertical split" })
@@ -31,18 +18,21 @@ nnoremap("<leader>wh", function()
 	vscode.action("workbench.action.splitEditorDown")
 end, { desc = "New horizontal split" })
 
+-- Tabs
+nnoremap("]t", function()
+	vscode.action("workbench.action.quickOpenNavigateNextInEditorPicker")
+end, { desc = "Next tab" })
+nnoremap("[t", function()
+	vscode.action("workbench.action.quickOpenNavigatePreviousInEditorPicker")
+end, { desc = "Next tab" })
+
 -- Searching
+nnoremap("<leader>fs", function()
+	vscode.action("workbench.action.findInFiles")
+end, { desc = "Search in workspace" })
 nnoremap("<leader>f#", function()
 	vscode.action("workbench.action.findInFiles", { args = { query = vim.fn.expand("<cword>") } })
-end)
-nnoremap("<leader>fs", function()
-	vscode.action("workbench.action.terminal.searchWorkspace")
-end)
-
--- Filetree
-nnoremap("<leader>tf", function()
-	vscode.action("explorer.openAndPassFocus")
-end)
+end, { desc = "Find current word in workspace" })
 
 -- Formatting
 vnoremap("<leader>l", function()
@@ -50,4 +40,4 @@ vnoremap("<leader>l", function()
 end, { desc = "Format page" })
 vnoremap("<leader>l", function()
 	vscode.action("editor.action.formatSelection")
-end)
+end, { desc = "Format selection" })
