@@ -1,14 +1,5 @@
 local M = {}
 
-function M.check_back_space()
-	local col = vim.fn.col(".") - 1
-	return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-end
-
-function M.get_termcode(str)
-	return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
 function M.clean_extra_spaces()
 	vim.cmd([[silent! %s/\s\+$//]])
 end
@@ -19,6 +10,11 @@ function M.jump_to_last_visited()
 	if line([['"]]) > 1 and line([['"]]) < line("$") then
 		vim.cmd([[normal! g'"]])
 	end
+end
+
+function M.is_git_repo()
+	vim.fn.system("git rev-parse --is-inside-work-tree")
+	return vim.v.shell_error == 0
 end
 
 return M

@@ -1,19 +1,23 @@
 local telescope_builtin = require("telescope.builtin")
 
-local keymap = require("vimrc.utils").keymapping
+local utils = require("vimrc.utils")
+
+local keymap = utils.keymapping
+local is_git_repo = utils.misc.is_git_repo
 
 keymap.nnoremap("<leader>fls", function()
-	local opts = {}
-	vim.fn.system("git rev-parse --is-inside-work-tree")
-
-	if vim.v.shell_error == 0 then
-		telescope_builtin.git_files(opts)
+	if is_git_repo() then
+		telescope_builtin.git_files()
 	else
-		telescope_builtin.find_files(opts)
+		telescope_builtin.find_files()
 	end
 end, { desc = "Find project files" })
-keymap.nnoremap("<C-p>", telescope_builtin.find_files, { desc = "Find project files" })
-keymap.nnoremap("<leader>fs", telescope_builtin.live_grep, { desc = "Search project for a string" })
+keymap.nnoremap("<C-p>", function()
+	telescope_builtin.find_files({ cwd = vim.fn.getcwd() })
+end, { desc = "Find project files (from current work directory)" })
+keymap.nnoremap("<leader>fs", function()
+	telescope_builtin.live_grep({ cwd = vim.fn.getcwd() })
+end, { desc = "Search project for a string (from current work directory)" })
 keymap.nnoremap(
 	"<leader>f#",
 	telescope_builtin.grep_string,
