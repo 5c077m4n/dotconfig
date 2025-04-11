@@ -54,7 +54,7 @@ create_autocmd({ 'BufWritePost' }, {
 	group = packer_compile_on_config_change_id,
 	pattern = '*/vimrc/plugins/*.lua',
 	callback = function(event)
-		vim.notify('"' .. event.file .. '" has changed, so recompiling...', vim.log.levels.INFO)
+		vim.notify('"' .. event.file .. '" has changed, so recompiling...', vim.log.levels.INFO, { title = 'VIMRC' })
 
 		require('packer').compile()
 		vim.loader.reset()

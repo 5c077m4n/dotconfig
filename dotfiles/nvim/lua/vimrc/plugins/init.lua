@@ -41,7 +41,7 @@ function M.setup()
 				config = function()
 					local notify = require('notify')
 
-					notify.setup({ stages = 'slide', render = 'minimal', fps = 60 })
+					notify.setup({ stages = 'slide', render = 'compact', fps = 60 })
 					vim.notify = notify
 				end,
 			})
