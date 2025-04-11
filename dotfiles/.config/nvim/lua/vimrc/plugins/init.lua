@@ -333,6 +333,14 @@ local function setup()
 					enabled = false,
 					window = { border = "single" },
 				},
+				cmdline = {
+					completion = {
+						menu = { auto_show = true },
+					},
+				},
+				fuzzy = {
+					implementation = "prefer_rust",
+				},
 			},
 			opts_extend = { "sources.default" },
 		},
