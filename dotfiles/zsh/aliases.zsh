@@ -40,11 +40,13 @@ gbdefault () {
 	echo "master"
 }
 alias gbcurrent='git branch --show-current'
-alias gcom='git checkout "$(gbdefault)"'
+alias gcm='git checkout "$(gbdefault)"'
+alias 'gc-'='git checkout -'
 alias gupa='git pull --rebase --autostash origin "$(gbcurrent)"'
 alias ggpf='git push --force origin "$(gbcurrent)"'
 alias gprom='git pull --rebase --autostash --stat origin "$(gbdefault)"'
 alias grbim='git rebase --interactive --autostash --autosquash "$(gbdefault)"'
+alias gum='git fetch origin "$(gbdefault)":"$(gbdefault)"'
 
 # Rust
 alias c='cargo'
