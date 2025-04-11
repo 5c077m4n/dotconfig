@@ -1,7 +1,7 @@
 local telescope = require("telescope")
 local actions = require("telescope.actions")
 local telescope_config = require("telescope.config")
-local trouble = require("trouble.providers.telescope")
+local trouble = require("trouble.sources.telescope")
 
 local vimgrep_arguments = { unpack(telescope_config.values.vimgrep_arguments) }
 table.insert(vimgrep_arguments, "--hidden")
@@ -18,7 +18,7 @@ telescope.setup({
 				["<C-h>"] = actions.select_horizontal,
 				["<C-v>"] = actions.select_vertical,
 				["<C-t>"] = actions.select_tab,
-				["<C-x>"] = trouble.open_with_trouble,
+				["<C-x>"] = trouble.open,
 			},
 			n = {
 				["<C-k>"] = actions.cycle_history_next,
@@ -27,7 +27,7 @@ telescope.setup({
 				["<C-h>"] = actions.select_horizontal,
 				["<C-v>"] = actions.select_vertical,
 				["<C-t>"] = actions.select_tab,
-				["<C-x>"] = trouble.open_with_trouble,
+				["<C-x>"] = trouble.open,
 			},
 		},
 	},
