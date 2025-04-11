@@ -50,6 +50,8 @@ keymap.nnoremap("V", "v$", { desc = "Select to line end" })
 keymap.nnoremap("S", "v$hs", { desc = "Switch to line end" })
 keymap.nnoremap("J", [[J^]], { desc = "Join the next line and go to the first char" })
 
+keymap.vnoremap("/", [[y/\V<C-R>=escape(@",'/\')<CR><CR>]], { desc = "Search page for selection" })
+
 keymap.nnoremap(
 	"<CR>",
 	vim.cmd.nohlsearch,
@@ -88,7 +90,7 @@ keymap.nnoremap("<leader>rl", function()
 end, { desc = "Toggle window's right-to-left mode" })
 
 -- Undo
-keymap.nnoremap("U", "<C-r>", { desc = "Redo last change" })
+keymap.nnoremap("U", vim.cmd.undo, { desc = "Redo last change" })
 
 create_command("CopyCursorLocation", function()
 	local file_path = vim.fn.expand("%:.")
