@@ -7,20 +7,29 @@
 
 	local file
 	for file in $(git diff --name-only --staged); do
-		[[ ! -f "$file" ]] && continue
-
-		local file_ext="${file##*.}"
-		if [[ "$file_ext" == "lua" ]]; then
-			selene --config "$selene_config" "$file" || exit 1
-			stylua --check --config-path="$stylua_config" "$file" || exit 1
-		elif [[ "$file_ext" == "py" ]]; then
-			black --check "$file" || exit 1
-			mypy --check --strict "$file" || exit 1
-		elif [[ "$file_ext" == "zsh" ]]; then
-			beautysh --check --tab "$file" || exit 1
-		elif [[ "$file_ext" == "fish" ]]; then
-			fish --no-execute "$file" || exit 1
-			fish_indent --check "$file" || exit 1
+		if [[ ! -f "$file" ]]; then
+			continue
 		fi
+
+		case "${file##*.}" in
+			lua)
+				selene --config "$selene_config" "$file" || exit 1
+				stylua --check --config-path="$stylua_config" "$file" || exit 1
+				;;
+			py)
+				black --check "$file" || exit 1
+				mypy --check --strict "$file" || exit 1
+				;;
+			zsh)
+				beautysh --check --tab "$file" || exit 1
+				;;
+			fish)
+				fish --no-execute "$file" || exit 1
+				fish_indent --check "$file" || exit 1
+				;;
+			*)
+				echo "Unknown file type 🤷\n"
+				;;
+		esac
 	done
 }
