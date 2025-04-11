@@ -1,6 +1,6 @@
 [commit]
     gpgsign = true
 [gpg]
-    format = ssh
+    format = "ssh"
 [gpg "ssh"]
-    defaultKeyCommand = ssh-add -L
+    defaultKeyCommand = "ssh-add -L"

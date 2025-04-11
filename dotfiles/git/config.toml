@@ -1,10 +1,14 @@
 [alias]
 	sh = "!exec "
-	iam = "!git config user.name && git config user.email"
+	iam = "!echo \"$(git config user.name) <$(git config user.email)>\""
+	whoami = "!git config user.name && git config user.email"
 	fh = "!git log --follow --all --patch -- \"$(git ls-files | fzf)\""
 	unstage = "!git reset HEAD -- \"$(git ls-files | fzf --multi --preview 'cat {}')\""
 	wt = "worktree"
 	root = "rev-parse --show-toplevel"
+	lol = "log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
+	lols = "log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --stat"
+	lola = "log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all"
 	aliases = "config --get-regexp ^alias\\."
 [core]
 	autocrlf = input
