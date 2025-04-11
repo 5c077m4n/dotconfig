@@ -27,13 +27,13 @@
 	prune = true
 
 # Commit sign
-#[commit]
-#	gpgsign = true
-#[gpg]
-#	format = "ssh"
-#[gpg "ssh"]
-#	defaultKeyCommand = "ssh-add -L"
-#	allowedSignersFile = "~/.ssh/allowed_signers"
+[commit]
+	gpgsign = true
+[gpg]
+	format = "ssh"
+[gpg "ssh"]
+	defaultKeyCommand = "ssh-add -L"
+	allowedSignersFile = "~/.ssh/allowed_signers"
 
 # Git diff
 [pager]
