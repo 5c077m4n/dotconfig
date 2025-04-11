@@ -1,0 +1,10 @@
+local keymap = require('vimrc.utils.keymapping')
+
+keymap.nnoremap('<F9>', ':FloatermPrev<CR>')
+keymap.tnoremap('<F9>', [[<C-\><C-n>:FloatermPrev<CR>]])
+keymap.nnoremap('<F10>', ':FloatermNext<CR>')
+keymap.tnoremap('<F10>', [[<C-\><C-n>:FloatermNext<CR>]])
+keymap.nnoremap('<F11>', ':FloatermNew<CR>')
+keymap.tnoremap('<F11>', [[<C-\><C-n>:FloatermNew<CR>]])
+keymap.nnoremap('<F12>', ':FloatermToggle<CR>')
+keymap.tnoremap('<F12>', [[<C-\><C-n>:FloatermToggle<CR>]])
