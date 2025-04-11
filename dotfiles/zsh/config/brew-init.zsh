@@ -2,6 +2,7 @@
 	if (( $+commands[brew] )); then
 		export HOMEBREW_NO_ANALYTICS=1
 		export HOMEBREW_PREFIX="$(brew --prefix)"
+		export HOMEBREW_BUNDLE_FILE="${HOME}/repos/dotconfig/assets/macos/Brewfile"
 
 		eval "$(brew shellenv)"
 
