@@ -111,8 +111,8 @@
 (map! :desc "Foramt entire buffer" :n "SPC l" #'format-all-buffer)
 ;;; LSP Actions
 (map! :desc "Rename symbol in entire project" :n "SPC r n" #'lsp-rename)
-(map! :desc "Goto next diagnostic error" :n "g ]" #'flycheck-next-error)
-(map! :desc "Goto prev diagnostic error" :n "g [" #'flycheck-previous-error)
+(map! :desc "Goto next diagnostic error" :n "] g" #'flycheck-next-error)
+(map! :desc "Goto prev diagnostic error" :n "[ g" #'flycheck-previous-error)
 (map! :desc "Find all references" :n "g r" #'lsp-find-references)
 ;;; Search
 (map! :desc "Search entire project" :n "SPC f s" #'+vertico/project-search)
