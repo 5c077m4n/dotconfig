@@ -4,6 +4,7 @@ local function bootstrap()
 	local fn = vim.fn
 	local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
+	---@diagnostic disable-next-line: missing-parameter
 	if fn.empty(fn.glob(install_path)) > 0 then
 		fn.system({
 			'git',
@@ -75,38 +76,11 @@ local function init_packer()
 					local feline = require('feline')
 
 					feline.setup({ preset = 'noicon' })
-					local ok, winbar_support = pcall(function()
-						return vim.fn.getwininfo(vim.api.nvim_get_current_win())[1].winbar
-					end)
-					if ok and winbar_support == 1 then
-						feline.winbar.setup()
-					end
-				end,
-			})
-			use({
-				'akinsho/nvim-bufferline.lua',
-				branch = 'main',
-				config = function()
-					require('bufferline').setup({
-						options = {
-							numbers = 'both',
-							offsets = {
-								{
-									filetype = 'neo-tree',
-									text = 'File Explorer',
-									highlight = 'Directory',
-									text_align = 'left',
-								},
-							},
-							diagnostics = 'nvim_lsp',
-							diagnostics_indicator = function(count, _level, _diagnostics_dict, _context)
-								return '(' .. count .. ')'
-							end,
+					feline.winbar.setup({
+						disable = {
+							filetypes = { [[^neo-tree$]] },
 						},
 					})
-				end,
-				cond = function()
-					return vim.fn.has('gui_vimr') ~= 1
 				end,
 			})
 			use({
