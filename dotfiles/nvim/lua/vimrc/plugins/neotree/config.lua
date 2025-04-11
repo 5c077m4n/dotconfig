@@ -1,3 +1,5 @@
+vim.g.neo_tree_remove_legacy_commands = true
+
 require('neo-tree').setup({
 	close_if_last_window = false,
 	enable_git_status = true,
@@ -15,9 +17,10 @@ require('neo-tree').setup({
 			['a'] = 'add',
 			['A'] = 'add_directory',
 			['<del>'] = 'delete',
+			['d'] = 'delete',
 			['r'] = 'rename',
-			['yy'] = 'copy_to_clipboard',
-			['dd'] = 'cut_to_clipboard',
+			['y'] = 'copy_to_clipboard',
+			['x'] = 'cut_to_clipboard',
 			['p'] = 'paste_from_clipboard',
 			['vy'] = 'copy', -- takes text input for destination
 			['vd'] = 'move', -- takes text input for destination
