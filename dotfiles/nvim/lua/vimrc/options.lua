@@ -95,6 +95,9 @@ o.undofile = true
 o.swapfile = false
 o.title = true
 
+g.ranger_map_keys = 0
+g.ranger_command_override = [[ranger --cmd "set show_hidden=true"]]
+
 if g.neovide then
 	g.neovide_refresh_rate = 60
 	g.neovide_refresh_rate_idle = 10
