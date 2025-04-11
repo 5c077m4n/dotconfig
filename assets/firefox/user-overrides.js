@@ -32,3 +32,6 @@ user_pref("privacy.window.maxInnerHeight", 4502);  // 4502 [default 900 in user.
 user_pref("javascript.options.wasm", true); // 5506 default-inactive in user.js v91
 //user_pref("dom.webaudio.enabled", true); // 8001 default-inactive in user.js v90
 //user_pref("media.getusermedia.screensharing.enabled", true); // removed from user.js v91
+
+/* override recipe: allow search automaticall on invalid URLs typed into the URLbar ***/
+user_pref("keyword.enabled", true); // 0801
