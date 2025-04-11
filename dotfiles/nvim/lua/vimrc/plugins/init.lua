@@ -171,9 +171,10 @@ local function setup()
 					},
 					highlight = {
 						enable = true,
-						disable = function(_lang, buf)
-							local ok, status =
-								pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+						disable = function(_lang, buf_num)
+							local buf_name = vim.api.nvim_buf_get_name(buf_num)
+							local ok, status = pcall(vim.loop.fs_stat, buf_name)
+
 							return ok and status and status.size > MAX_FILE_SIZE
 						end,
 					},
@@ -182,9 +183,9 @@ local function setup()
 					incremental_selection = {
 						enable = true,
 						keymaps = {
-							init_selection = "vO",
-							node_incremental = "vO",
-							node_decremental = "vo",
+							init_selection = "]v",
+							node_incremental = "]v",
+							node_decremental = "[v",
 							scope_incremental = false,
 						},
 					},
