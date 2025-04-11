@@ -5,20 +5,18 @@ local module_utils = require('vimrc.utils.modules')
 
 local create_command = vim.api.nvim_create_user_command
 
-keymap.nnoremap('<leader>1', [[:edit ~/.config/nvim/init.lua<CR>]], { desc = 'Edit the main vimrc file' })
+keymap.nnoremap('<leader>0', module_utils.update_vimrc, { desc = 'Git pull latest vimrc' })
+keymap.nnoremap('<leader>1', packer.sync, { desc = 'Packer sync' })
 keymap.nnoremap('<leader>2', module_utils.reload_vimrc, { desc = 'Reload the vimrc config' })
-keymap.nnoremap('<leader>3', module_utils.update_vimrc, { desc = 'Git pull latest vimrc' })
-keymap.nnoremap('<leader>4', packer.sync, { desc = 'Packer sync' })
 
 -- Splits
-keymap.nnoremap('<C-h>', '<C-w>h')
-keymap.nnoremap('<C-j>', '<C-w>j')
-keymap.nnoremap('<C-k>', '<C-w>k')
-keymap.nnoremap('<C-l>', '<C-w>l')
+keymap.nnoremap('<C-h>', '<C-w>h', { desc = 'Move one split left' })
+keymap.nnoremap('<C-j>', '<C-w>j', { desc = 'Move one split down' })
+keymap.nnoremap('<C-k>', '<C-w>k', { desc = 'Move one split up' })
+keymap.nnoremap('<C-l>', '<C-w>l', { desc = 'Move one split right' })
 keymap.nnoremap('<leader>wq', '<C-w>q', { desc = 'Close split' })
-keymap.nnoremap('<leader>wv', ':vertical split<CR>')
-keymap.nnoremap('<leader>wh', ':split<CR>')
-keymap.nnoremap('<leader>wt', ':vs#<CR>', { desc = 'Re-open last closed split' })
+keymap.nnoremap('<leader>wv', ':vertical split<CR>', { desc = 'New vertical split' })
+keymap.nnoremap('<leader>wh', ':split<CR>', { desc = 'New horizontal split' })
 
 -- Tabs
 keymap.nnoremap('<leader>tn', ':tab split<CR>', { desc = 'New tab' })
@@ -33,8 +31,8 @@ keymap.tnoremap('<C-]>', [[<C-\><C-n>]], { desc = 'Goto insert mode in terminal'
 create_command('SelectAll', [[normal! gg0VG$]], { desc = 'Select all buffer content' })
 create_command('CopyAll', [[normal! gg0VG$"+y]], { desc = 'Copy all buffer content' })
 
-keymap.vnoremap('<C-y>', [["+y]], { desc = 'Ctrl+y copys to clipboard' })
-keymap.nnoremap('V', 'v$', { desc = 'V selects to line end' })
+keymap.vnoremap('<C-y>', [["+y]], { desc = 'Copy selection to clipboard' })
+keymap.nnoremap('V', 'v$', { desc = 'Select to line end' })
 keymap.nnoremap('J', [[mzJ`z]], { desc = 'Join line does not go one down' })
 
 -- Jump to line start/end
@@ -44,10 +42,10 @@ keymap.nnoremap(']]', '$', { desc = 'Jump to line end' })
 keymap.vnoremap(']]', '$', { desc = 'Jump to line end' })
 
 -- Move selection up/down
-keymap.vnoremap('<A-k>', [[:m '>-2<CR>gv=gv]])
-keymap.vnoremap('<A-j>', [[:m '>+1<CR>gv=gv]])
-keymap.nnoremap('<A-k>', [[:m .-2<CR>==]])
-keymap.nnoremap('<A-j>', [[:m .+1<CR>==]])
+keymap.vnoremap('<A-k>', [[:m '>-2<CR>gv=gv]], { desc = 'Move selection up' })
+keymap.nnoremap('<A-k>', [[:m .-2<CR>==]], { desc = 'Move selection up' })
+keymap.vnoremap('<A-j>', [[:m '>+1<CR>gv=gv]], { desc = 'Move selection down' })
+keymap.nnoremap('<A-j>', [[:m .+1<CR>==]], { desc = 'Move selection down' })
 
 keymap.nnoremap('<CR>', ':nohlsearch<CR><CR>', { desc = 'Unsets the last search pattern register by hitting return' })
 
@@ -72,7 +70,7 @@ keymap.nnoremap('<leader>cd', [[:cd %:p:h<CR>:pwd<CR>]], { desc = 'Switch CWD to
 keymap.nnoremap('U', '<C-r>')
 
 create_command('CopyCursorLocation', function()
-	local cursor_location = vim.fn.expand('%') .. ':' .. vim.fn.line('.') .. ':' .. vim.fn.col('.')
+	local cursor_location = vim.fn.expand('%', nil, nil) .. ':' .. vim.fn.line('.') .. ':' .. vim.fn.col('.')
 	if vim.fn.has('clipboard') then
 		vim.fn.setreg('+', cursor_location)
 	else
