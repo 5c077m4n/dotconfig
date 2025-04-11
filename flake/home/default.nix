@@ -9,13 +9,16 @@
 let
   stateVersion = "24.11";
   isNixOS = builtins.pathExists "/etc/nixos/";
-  inherit (pkgs) lib stdenv;
+  inherit (pkgs) lib;
 in
 {
   home = {
     inherit username homeDirectory stateVersion;
 
     packages =
+      let
+        inherit (pkgs.stdenv) isLinux isDarwin;
+      in
       [
         # General
         ## Text editors
@@ -160,7 +163,7 @@ in
         pkgs.gopass
         pkgs.android-tools # ADB
       ]
-      ++ lib.optionals stdenv.isLinux [
+      ++ lib.optionals isLinux [
         # CLI utils
         ## Clipboard
         pkgs.xclip
@@ -171,7 +174,7 @@ in
         ## Battery data
         pkgs.acpi
       ]
-      ++ lib.optionals (stdenv.isLinux && isNixOS) [
+      ++ lib.optionals (isLinux && isNixOS) [
         # GUIs
         ## Browsers
         pkgs.floorp # Firefox alternative
@@ -189,17 +192,21 @@ in
         ## Office
         pkgs.libreoffice
       ]
-      ++ lib.optionals stdenv.isDarwin [
+      ++ lib.optionals isDarwin [
         # Bluetooth
         pkgs.blueutil
       ];
 
     sessionVariables = {
       # Allows linkers to find nix packages
-      NIX_LD_LIBRARY_PATH = lib.makeLibraryPath [
-        stdenv.cc.cc
-        pkgs.zlib
-      ];
+      NIX_LD_LIBRARY_PATH =
+        let
+          inherit (pkgs) stdenv zlib;
+        in
+        lib.makeLibraryPath [
+          stdenv.cc.cc
+          zlib
+        ];
     };
   };
 
