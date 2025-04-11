@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
+from typing import String, Optional
 from os import path, environ, mkdir, listdir, remove, symlink, unlink
 import shutil
 
-home_dir = environ.get("HOME")
+home_dir: Optional[String] = environ.get("HOME")
 if home_dir is None:
     raise Exception("The $HOME param is not set")
 
@@ -19,13 +20,13 @@ with open(path.join(home_dir, ".gitconfig"), "a") as gitconfig_append:
         '\tpath = ~/.config/git/config.toml'
     ])
 
-config_dir = path.join(home_dir, ".config")
+config_dir: String = path.join(home_dir, ".config")
 if not path.isdir(config_dir):
     mkdir(config_dir)
 
 for dir in listdir("./dotfiles"):
-    source_dir = path.abspath(path.join("./dotfiles", dir))
-    dest_dir = path.join(config_dir, dir)
+    source_dir: String = path.abspath(path.join("./dotfiles", dir))
+    dest_dir: String = path.join(config_dir, dir)
 
     if path.islink(dest_dir):
         unlink(dest_dir)
