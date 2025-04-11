@@ -1,8 +1,9 @@
 [alias]
-	exec = "!exec "
+	sh = "!exec "
 	root = "!git rev-parse --show-toplevel"
-	whoami = "!git config user.name && git config user.email"
+	iam = "!git config user.name && git config user.email"
 	wt = "!git worktree "
+	fh = "!git log --follow --all --patch -- \"$(fzf)\""
 [core]
 	autocrlf = input
 [help]
