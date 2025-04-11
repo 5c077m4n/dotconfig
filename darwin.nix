@@ -3,12 +3,13 @@
   pkgs,
   username,
   hostPlatform,
+  lib,
   ...
 }:
 {
   nixpkgs = {
-    # The platform the configuration will be used on.
     inherit hostPlatform;
+    config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "arc-browser" ];
   };
 
   nix = {
@@ -79,21 +80,13 @@
     enable = true;
     onActivation.cleanup = "zap";
 
-    taps = [ "nikitabobko/tap" ];
+    taps = [ ];
     brews = [ ];
     casks = [
-      "arc"
-      "firefox"
-      "kitty"
-      "iterm2"
-      "vscodium"
       "displaylink"
-      "inkscape"
       "lulu"
-      "maccy"
       "karabiner-elements"
       "libreoffice"
-      "nikitabobko/tap/aerospace"
       "zen-browser"
     ];
   };
