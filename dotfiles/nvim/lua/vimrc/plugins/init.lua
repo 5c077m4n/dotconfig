@@ -158,7 +158,7 @@ function M.setup()
 			use({
 				'jose-elias-alvarez/typescript.nvim',
 				requires = { 'neovim/nvim-lspconfig' },
-				after = 'nvim-lspconfig',
+				after = { 'nvim-lspconfig' },
 				config = function()
 					require('typescript').setup({
 						go_to_source_definition = { fallback = true },
@@ -170,6 +170,36 @@ function M.setup()
 								'tsconfig.json'
 							),
 							single_file_support = false,
+						},
+					})
+				end,
+			})
+			use({
+				'simrat39/rust-tools.nvim',
+				requires = { 'neovim/nvim-lspconfig' },
+				after = { 'nvim-lspconfig' },
+				config = function()
+					local rust_tools = require('rust-tools')
+
+					rust_tools.setup({
+						tools = {
+							inlay_hints = {
+								auto = true,
+								only_current_line = true,
+							},
+						},
+						server = {
+							on_attach = function(client, buffer_n)
+								local keymap = require('vimrc.utils.keymapping')
+								local on_attach = require('vimrc.plugins.lspconfig').on_attach
+
+								on_attach(client, buffer_n)
+								keymap.nnoremap(
+									'<leader>cA',
+									rust_tools.code_action_group.code_action_group,
+									{ buffer = buffer_n, desc = 'Open rust tools code actions pane' }
+								)
+							end,
 						},
 					})
 				end,

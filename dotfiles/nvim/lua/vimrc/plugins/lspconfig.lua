@@ -7,7 +7,6 @@ local SERVER_LIST = {
 	'taplo',
 	'pylsp',
 	'bashls',
-	'rust_analyzer',
 	'html',
 	'lua_ls',
 	'jsonls',
