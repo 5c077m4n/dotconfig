@@ -302,27 +302,32 @@ local function setup()
 			end,
 		},
 		{
-			"hrsh7th/nvim-cmp",
-			event = { "InsertEnter", "CmdlineEnter" },
-			dependencies = {
-				"hrsh7th/cmp-nvim-lsp",
-				"hrsh7th/cmp-buffer",
-				"hrsh7th/cmp-path",
-				"hrsh7th/cmp-cmdline",
-				{
-					"L3MON4D3/LuaSnip",
-					event = { "InsertEnter" },
-					version = "v2.*",
-					build = "make install_jsregexp",
-					dependencies = { "saadparwaiz1/cmp_luasnip" },
+			"saghen/blink.cmp",
+			dependencies = { "rafamadriz/friendly-snippets" },
+			version = "v0.*",
+			---@module 'blink.cmp'
+			---@type blink.cmp.Config
+			opts = {
+				keymap = { preset = "default" },
+				appearance = {
+					use_nvim_cmp_as_default = true,
+					nerd_font_variant = "mono",
 				},
-				"hrsh7th/cmp-calc",
-				"f3fora/cmp-spell",
-				"onsails/lspkind-nvim",
+				completion = {
+					menu = {
+						enabled = true,
+						border = "single",
+					},
+				},
+				sources = {
+					default = { "lsp", "path", "snippets", "buffer" },
+				},
+				signature = {
+					enabled = false,
+					window = { border = "single" },
+				},
 			},
-			config = function()
-				require("vimrc.plugins.cmp")
-			end,
+			opts_extend = { "sources.default" },
 		},
 		{
 			"phaazon/hop.nvim",

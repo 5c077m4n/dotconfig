@@ -3,8 +3,6 @@ local null_ls = require("null-ls")
 local null_ls_builtins = require("vimrc.plugins.null-ls.builtins")
 
 local sources = {
-	-- Snippet support
-	null_ls.builtins.completion.luasnip,
 	-- Lua
 	null_ls.builtins.formatting.stylua.with({
 		condition = function(utils)
