@@ -106,6 +106,8 @@ in
             pkgs.statix
             pkgs.deadnix
             pkgs.nil
+            # YAML
+            pkgs.yamllint
             # K8s
             pkgs-unstable.kubectx
             pkgs-unstable.k9s
