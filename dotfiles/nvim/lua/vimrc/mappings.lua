@@ -82,7 +82,7 @@ keymap.vnoremap(
 keymap.nnoremap("<leader>cd", function()
 	local cwd = vim.fn.expand("%:p:h")
 	vim.cmd.cd(cwd)
-	vim.notify('Changed current work dir to "' .. cwd .. '"')
+	vim.notify(cwd, vim.log.levels.INFO, { title = "New CWD" })
 end, { desc = "Switch CWD to the directory of the open buffer" })
 
 keymap.nnoremap("<leader>rl", function()
@@ -102,7 +102,7 @@ create_command("CopyCursorLocation", function()
 	else
 		vim.fn.setreg("1", cursor_location)
 	end
-	vim.notify(cursor_location, tonumber(vim.lsp.log_levels.INFO))
+	vim.notify(cursor_location, vim.log.levels.INFO, { title = "Cursor location" })
 end, { desc = "Copy the current cursor location" })
 
 -- Diagnostics toggles

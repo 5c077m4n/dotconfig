@@ -1,5 +1,7 @@
 local M = {}
 
+local log_level = vim.log.levels
+
 local function unload_background_buffers()
 	local buffer_list = vim.fn.getbufinfo()
 
@@ -17,7 +19,7 @@ function M.reload_vimrc()
 
 	unload_background_buffers()
 
-	vim.notify("Reload successful", tonumber(vim.lsp.log_levels.INFO), { title = "VIMRC" })
+	vim.notify("Reload successful", vim.log.levels.INFO, { title = "VIMRC" })
 end
 
 function M.update_vimrc()
@@ -28,9 +30,9 @@ function M.update_vimrc()
 			cwd = vim.fn.stdpath("config"),
 			on_exit = function(j, status_code)
 				if status_code == 0 then
-					vim.notify(j:result(), vim.log.levels.INFO, { title = "VIMRC Update" })
+					vim.notify(j:result(), log_level.INFO, { title = "VIMRC Update" })
 				else
-					vim.notify(j:result(), vim.log.levels.ERROR, { title = "VIMRC Update" })
+					vim.notify(j:result(), log_level.ERROR, { title = "VIMRC Update" })
 				end
 			end,
 		})
