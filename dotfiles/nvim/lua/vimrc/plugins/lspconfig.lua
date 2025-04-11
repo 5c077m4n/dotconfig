@@ -83,7 +83,7 @@ local function on_attach(client, buffer_num)
 	end, { buffer = buffer_num, desc = 'Go to next diagnostic' })
 	keymap.nnoremap('<leader>ca', lsp.buf.code_action, { buffer = buffer_num, desc = 'Code action' })
 	keymap.vnoremap('<leader>ca', lsp.buf.range_code_action, { buffer = buffer_num, desc = 'Code action for range' })
-	keymap.nnoremap('<leader>l', function()
+	keymap.nvnoremap('<leader>l', function()
 		vim.lsp.buf.format({
 			filter = function(formatter)
 				return formatter.name == 'null-ls'
@@ -91,7 +91,7 @@ local function on_attach(client, buffer_num)
 			bufnr = buffer_num,
 			async = true,
 		})
-	end, { buffer = buffer_num, desc = 'Format page' })
+	end, { buffer = buffer_num, desc = 'Format selected page/range' })
 end
 
 local function make_config(options)
