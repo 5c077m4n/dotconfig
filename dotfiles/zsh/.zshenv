@@ -8,4 +8,5 @@ export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
 export ZSH="${HOME}/.oh-my-zsh"
+export ZSH_COMPDUMP="${XDG_CACHE_HOME}/zsh/zcompdump"
 export STARSHIP_CONFIG="${XDG_CONFIG_HOME}/starship/config.toml"
