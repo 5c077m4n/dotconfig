@@ -1,3 +1,4 @@
+local keymap = require('vimrc.utils.keymapping')
 local M = {}
 
 local function bootstrap()
@@ -184,9 +185,38 @@ local function init_packer()
 			})
 			-- Terminal
 			use({
-				'voldikss/vim-floaterm',
+				'akinsho/toggleterm.nvim',
+				tag = 'v2.*',
 				config = function()
-					require('vimrc.plugins.terminal')
+					require('toggleterm').setup({
+						size = function(term)
+							if term.direction == 'horizontal' then
+								return vim.o.lines * 0.4
+							elseif term.direction == 'vertical' then
+								return vim.o.columns * 0.4
+							end
+						end,
+						open_mapping = [[<F12>]],
+						hide_numbers = false,
+						winbar = {
+							enabled = false,
+							name_formatter = function(term)
+								return term.name
+							end,
+						},
+					})
+
+					local toggleterm_keymap = vim.api.nvim_create_augroup('toggleterm_keymap', { clear = true })
+					vim.api.nvim_create_autocmd({ 'TermOpen' }, {
+						group = toggleterm_keymap,
+						pattern = { 'term://*' },
+						callback = function()
+							local opts = { buffer = 0 }
+							keymap.tnoremap('<Esc>', [[<C-\><C-n>]], opts)
+							keymap.tnoremap('<C-]>', [[<C-\><C-n>]], opts)
+						end,
+						desc = 'Set Toggleterm keymappings',
+					})
 				end,
 			})
 			-- Code workflow
