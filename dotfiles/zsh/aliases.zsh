@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+# A git wrapper
+alias git='hub'
 # Python
 alias python='python3'
 
