@@ -2,7 +2,7 @@ local M = {}
 
 local function bootstrap()
 	local fn = vim.fn
-	local install_path = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
+	local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 	if fn.empty(fn.glob(install_path)) > 0 then
 		fn.system({
