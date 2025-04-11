@@ -1,6 +1,7 @@
 *
 !.gitignore
 
+!add-allowed-signer
 !denc
 !enc
 !forever
