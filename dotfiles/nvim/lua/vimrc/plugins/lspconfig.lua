@@ -20,7 +20,6 @@ local SERVER_LIST = {
 	'yamlls',
 	'eslint',
 	'cssls',
-	'solang',
 	'tflint',
 	'tailwindcss',
 }
@@ -128,9 +127,9 @@ local function setup_servers()
 		automatic_installation = true,
 		ui = {
 			icons = {
-				server_installed = '✓',
-				server_pending = '➜',
-				server_uninstalled = '✗',
+				server_installed = 'V',
+				server_pending = '>',
+				server_uninstalled = 'X',
 			},
 		},
 	})
