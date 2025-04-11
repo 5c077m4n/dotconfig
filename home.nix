@@ -53,6 +53,8 @@ in
           deno
           eslint_d
           prettierd
+          pnpm
+          yarn-berry # `yarn` >=4.5
           # Python
           python313
           pyenv
