@@ -99,8 +99,30 @@ o.undofile = true
 o.swapfile = false
 o.title = true
 
+-- Ranger config
+
 g.ranger_map_keys = 0
 g.ranger_command_override = [[ranger --cmd "set show_hidden=true"]]
+
+-- Netrw
+
+--- Hide main banner
+g.netrw_banner = 0
+--- Show directories first (sorting)
+g.netrw_sort_sequence = [[[\/]$,*]]
+--- Netrw list style
+--- 0: thin listing (one file per line)
+--- 1: long listing (one file per line with timestamp information and file size)
+--- 2: wide listing (multiple files in columns)
+--- 3: tree style listing
+g.netrw_liststyle = 3
+--- Setup file operations commands
+if vim.loop.os_uname().sysname ~= "Windows" then
+	g.netrw_localcopydircmd = "cp -r"
+	g.netrw_localmkdir = "mkdir -p"
+	-- NOTE: 'rm' is used instead of 'rmdir' (default) to be able to remove non-empty directories
+	g.netrw_localrmdir = "rm -r"
+end
 
 if g.neovide then
 	g.neovide_refresh_rate = 60
