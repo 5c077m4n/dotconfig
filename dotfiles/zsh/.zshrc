@@ -146,3 +146,7 @@ eval "$(starship init zsh)"
 # Autocompletion
 autoload -Uz compinit
 compinit
+# Expand alias on `<C-x>a`/`<Tab>`
+bindkey "^Xa" _expand_alias
+zstyle ':completion:*' completer _expand_alias _complete _ignored
+zstyle ':completion:*' regular true
