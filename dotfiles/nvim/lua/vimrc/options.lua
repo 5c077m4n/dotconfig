@@ -12,9 +12,11 @@ o.mouse = nil
 
 -- Fold config
 o.foldenable = true
-o.foldmethod = 'indent'
+o.foldmethod = 'expr'
+o.foldexpr = 'nvim_treesitter#foldexpr()'
 o.foldlevel = 99
 o.foldlevelstart = 10
+
 o.sessionoptions = { 'buffers', 'tabpages', 'curdir', 'winsize' }
 
 o.timeoutlen = 500
