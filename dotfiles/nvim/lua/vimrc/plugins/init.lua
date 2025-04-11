@@ -7,7 +7,6 @@ local M = {}
 local function bootstrap()
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-	---@diagnostic disable-next-line: undefined-field
 	if not vim.loop.fs_stat(lazypath) then
 		vim.fn.system({
 			"git",
@@ -18,7 +17,6 @@ local function bootstrap()
 			lazypath,
 		})
 	end
-	---@diagnostic disable-next-line: undefined-field
 	vim.opt.rtp:prepend(lazypath)
 end
 
@@ -150,9 +148,7 @@ function M.setup()
 					highlight = {
 						enable = true,
 						disable = function(_lang, buf)
-							---@diagnostic disable-next-line: undefined-field
 							local ok, status =
-								---@diagnostic disable-next-line: undefined-field
 								pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
 							return ok and status and status.size > MAX_FILE_SIZE
 						end,
@@ -279,7 +275,7 @@ function M.setup()
 				end, { desc = "Toggle trouble loclist panel" })
 			end,
 		},
-		{ "folke/neodev.nvim" },
+		{ "folke/neodev.nvim", dependencies = { "folke/neoconf.nvim" } },
 		{
 			"ray-x/go.nvim",
 			dependencies = { "neovim/nvim-lspconfig", "nvim-treesitter/nvim-treesitter" },

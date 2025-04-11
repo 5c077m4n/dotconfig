@@ -4,13 +4,14 @@ local uv, split, trim, system = vim.loop, vim.split, vim.trim, vim.fn.system
 local USR1_SIGNAL = "sigusr1"
 
 local function handle_usr1()
-	---@diagnostic disable-next-line: undefined-field
 	local signal_handler = uv.new_signal()
-	---@diagnostic disable-next-line: undefined-field
-	uv.signal_start_oneshot(signal_handler, USR1_SIGNAL, function(signal_usr1)
-		vim.notify('Received a "' .. string.upper(signal_usr1) .. '" signal, reloading...')
-		vim.schedule(reload_vimrc)
-	end)
+
+	if signal_handler ~= nil then
+		uv.signal_start_oneshot(signal_handler, USR1_SIGNAL, function(signal_usr1)
+			vim.notify('Received a "' .. string.upper(signal_usr1) .. '" signal, reloading...')
+			vim.schedule(reload_vimrc)
+		end)
+	end
 end
 
 local function send_usr1_to_all_nvim()
@@ -21,7 +22,6 @@ local function send_usr1_to_all_nvim()
 
 		if type(pid) == "number" then
 			vim.notify("Sending a reload signal to NVIM instance (PID " .. pid .. ")")
-			---@diagnostic disable-next-line: undefined-field
 			uv.kill(pid, USR1_SIGNAL)
 		end
 	end

@@ -67,7 +67,7 @@ create_autocmd({ "LspAttach" }, {
 		lsp.handlers["textDocument/hover"] = lsp.with(lsp.handlers.hover, { border = "single" })
 		lsp.handlers["textDocument/signatureHelp"] =
 			lsp.with(lsp.handlers.signature_help, { border = "single" })
-		---@diagnostic disable-next-line: unused-local, duplicate-set-field
+		---@diagnostic disable-next-line: duplicate-set-field
 		lsp.handlers["window/showMessage"] = function(_err, method, params, _client_id)
 			vim.notify(
 				method.message,
