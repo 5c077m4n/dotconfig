@@ -205,12 +205,14 @@ defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
 
 # Install script
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
 brew update
 
-curl https://gist.githubusercontent.com/5c077m4n/2e27f6ef11dea84071845fd85fc9fd84/raw/ >"$HOME/Brewfile"
-brew bundle install --file "$HOME/Brewfile"
+# Dot files
+mkdir -p "$HOME/repos"
+git -C "$HOME/repos" https://github.com/5c077m4n/dotconfig.git
+brew bundle install --file "$HOME/repos/dotconfig/assets/macos/Brewfile"
 
+# Add updated GNU Bash to allowed shells
 new_bash_path="$(which -a bash | grep brew)"
 allowed_shells_file="/etc/shells"
 if ! grep -q "^${new_bash_path}$" "$allowed_shells_file"; then
@@ -218,6 +220,3 @@ if ! grep -q "^${new_bash_path}$" "$allowed_shells_file"; then
 fi
 unset new_bash_path
 unset allowed_shells_file
-
-# Dot files
-git -C "$HOME" https://github.com/5c077m4n/dotconfig.git .config
