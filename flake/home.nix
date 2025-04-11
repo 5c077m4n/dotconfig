@@ -215,8 +215,8 @@ in
                     src = fetchFromGitHub {
                       owner = "aserowy";
                       repo = "tmux.nvim";
-                      rev = "307bad95a1274f7288aaee09694c25c8cbcd6f1a";
-                      sha256 = "sha256-c/1swuJ6pIiaU8+i62Di/1L/b4V9+5WIVzVVSJJ4ls8=";
+                      rev = "b646e89907a84bf40c9bda3de6fbcab2edd6e393";
+                      sha256 = "sha256-28JOlTOBjwlOnu2/L1w5AIaW21Q3c3Ah0ZqPuz02s4o=";
                     };
                   };
                 in
