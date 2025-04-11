@@ -1,7 +1,16 @@
-if [[ -x /opt/homebrew/bin/brew ]]; then
+brew_bin_arm64="/opt/homebrew/bin/brew"
+brew_bin_x86="/usr/local/Homebrew/bin/brew"
+
+if [[ -x "$brew_bin_x86" && "$(uname -m)" != arm64 ]]; then
+	brew_bin="$brew_bin_x86"
+elif [[ -x "$brew_bin_arm64" ]]; then
+	brew_bin="$brew_bin_arm64"
+fi
+
+if [[ -n "$brew_bin" ]]; then
 	export HOMEBREW_NO_ANALYTICS=1
 
-	eval "$(/opt/homebrew/bin/brew shellenv)"
+	eval "$($brew_bin shellenv)"
 
 	export HOMEBREW_PREFIX="$(brew --prefix)"
 	export HOMEBREW_BUNDLE_FILE="${HOME}/.config/homebrew/Brewfile"
