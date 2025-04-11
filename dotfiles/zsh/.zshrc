@@ -1,6 +1,8 @@
 # Homebrew init
 export HOMEBREW_BIN="/opt/homebrew/bin/brew"
 if [[ -x "$HOMEBREW_BIN" ]]; then
+	export HOMEBREW_NO_ANALYTICS=1
+
 	eval "$("$HOMEBREW_BIN" shellenv)"
 
 	# Use gnu tools as default
