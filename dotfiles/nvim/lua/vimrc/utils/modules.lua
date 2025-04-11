@@ -17,7 +17,7 @@ function M.reload_vimrc()
 
 	unload_background_buffers()
 
-	vim.notify("Reload successful", vim.lsp.log_levels.INFO, { title = "VIMRC" })
+	vim.notify("Reload successful", tonumber(vim.lsp.log_levels.INFO), { title = "VIMRC" })
 end
 
 function M.update_vimrc()

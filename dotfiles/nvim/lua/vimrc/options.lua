@@ -27,15 +27,13 @@ o.incsearch = true
 o.history = 5000
 o.tabpagemax = 50
 o.tabstop = 4
----@diagnostic disable-next-line: assign-type-mismatch
+---@diagnostic disable-next-line: undefined-field
 o.shiftwidth = o.tabstop:get()
 o.autoindent = true
 o.smartindent = true
 o.signcolumn = "yes"
 o.wrap = true
 o.showbreak = "⏎ "
--- Toggle paste mode
-o.pastetoggle = "<F3>"
 -- Show tabs and spaces
 o.list = true
 o.listchars = { tab = "> ", space = " ", trail = "·" }

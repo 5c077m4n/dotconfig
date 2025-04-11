@@ -102,23 +102,19 @@ create_command("CopyCursorLocation", function()
 	else
 		vim.fn.setreg("1", cursor_location)
 	end
-	vim.notify(cursor_location, vim.lsp.log_levels.INFO)
+	vim.notify(cursor_location, tonumber(vim.lsp.log_levels.INFO))
 end, { desc = "Copy the current cursor location" })
 
 -- Diagnostics toggles
 keymap.nnoremap("<leader>dy", function()
-	vim.diagnostic.enable(0)
+	vim.diagnostic.enable(true, { bufnr = 0 })
 end, { desc = "Enable diagnostics for current buffer" })
 keymap.nnoremap("<leader>dn", function()
-	vim.diagnostic.disable(0)
+	vim.diagnostic.enable(false, { bufnr = 0 })
 end, { desc = "Disable diagnostics for current buffer" })
-keymap.nnoremap(
-	"<leader>dY",
-	vim.diagnostic.enable,
-	{ desc = "Enable diagnostics for all buffers" }
-)
-keymap.nnoremap(
-	"<leader>dN",
-	vim.diagnostic.disable,
-	{ desc = "Disable diagnostics for all buffers" }
-)
+keymap.nnoremap("<leader>dY", function()
+	vim.diagnostic.enable(true, { bufnr = nil })
+end, { desc = "Enable diagnostics for all buffers" })
+keymap.nnoremap("<leader>dN", function()
+	vim.diagnostic.enable(true, { bufnr = nil })
+end, { desc = "Disable diagnostics for all buffers" })

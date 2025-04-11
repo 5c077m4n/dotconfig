@@ -11,16 +11,33 @@ local has_words_before = function()
 end
 
 cmp.setup({
+	sources = cmp.config.sources({
+		{ name = "nvim_lsp", priority = 10 },
+		{ name = "luasnip", priority = 9 },
+		{ name = "path", priority = 8 },
+		{ name = "calc", priority = 7 },
+		{ name = "spell", priority = 1 },
+	}, {
+		{ name = "buffer" },
+	}),
+	sorting = {
+		comparators = {
+			cmp.config.compare.offset,
+			cmp.config.compare.exact,
+			cmp.config.compare.score,
+			cmp.config.compare.recently_used,
+			cmp.config.compare.locality,
+			cmp.config.compare.kind,
+			cmp.config.compare.sort_text,
+			cmp.config.compare.length,
+			cmp.config.compare.order,
+		},
+	},
 	formatting = {
 		format = require("lspkind").cmp_format({
 			maxwidth = 50,
 			ellipsis_char = "…",
 		}),
-	},
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
 	},
 	window = {
 		completion = cmp.config.window.bordered(),
@@ -54,27 +71,10 @@ cmp.setup({
 			end
 		end, { "i", "s" }),
 	}),
-	sources = cmp.config.sources({
-		{ name = "nvim_lsp", priority = 10 },
-		{ name = "luasnip", priority = 9 },
-		{ name = "path", priority = 8 },
-		{ name = "calc", priority = 7 },
-		{ name = "spell", priority = 1 },
-	}, {
-		{ name = "buffer" },
-	}),
-	sorting = {
-		comparators = {
-			cmp.config.compare.offset,
-			cmp.config.compare.exact,
-			cmp.config.compare.score,
-			cmp.config.compare.recently_used,
-			cmp.config.compare.locality,
-			cmp.config.compare.kind,
-			cmp.config.compare.sort_text,
-			cmp.config.compare.length,
-			cmp.config.compare.order,
-		},
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end,
 	},
 })
 
