@@ -53,6 +53,7 @@ alias -s toml='bat'
 # Git
 if (( $+commands[hub] )); then
 	alias git='hub'
+	alias gs='git sync'
 fi
 alias g='git'
 alias gsh='git show --show-signature'
