@@ -1,10 +1,11 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
-(
-	cd "$(git rev-parse --show-toplevel)/dotfiles/nvim/" || exit 1
+() {
+	local root_dir="$(git rev-parse --show-toplevel)/dotfiles/nvim/"
+	cd "$root_dir" || exit 1
 
 	luacheck .
 	stylua .
 
 	git add --update
-)
+}
