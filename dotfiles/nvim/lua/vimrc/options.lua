@@ -19,7 +19,8 @@ o.foldlevelstart = 10
 
 o.sessionoptions = { 'buffers', 'tabpages', 'curdir', 'winsize' }
 
-o.timeoutlen = 500
+o.timeout = true
+o.timeoutlen = 300
 o.ignorecase = true
 o.smartcase = true
 o.incsearch = true
@@ -31,16 +32,12 @@ o.autoindent = true
 o.smartindent = true
 o.signcolumn = 'yes'
 o.wrap = true
-if o.wrap:get() then
-	o.showbreak = '⏎ '
-end
+o.showbreak = '⏎ '
 -- Toggle paste mode
 o.pastetoggle = '<F3>'
 -- Show tabs and spaces
 o.list = true
-if o.list:get() then
-	o.listchars = { tab = '> ', space = ' ', trail = '·' }
-end
+o.listchars = { tab = '> ', space = ' ', trail = '·' }
 
 -- Global statusline
 o.laststatus = 3

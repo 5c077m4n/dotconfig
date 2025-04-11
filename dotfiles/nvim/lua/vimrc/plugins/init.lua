@@ -324,30 +324,11 @@ function M.setup()
 				keymap.nnoremap('<leader>rr', vim.cmd.Ranger, { desc = 'Open ranger file browser' })
 			end,
 		},
-		{
-			'folke/which-key.nvim',
-			event = 'VeryLazy',
-			config = function()
-				require('which-key').setup({
-					plugins = {
-						marks = true,
-						registers = true,
-						spelling = { enabled = false, suggestions = 20 },
-					},
-				})
-			end,
-		},
-		{
-			'kylechui/nvim-surround',
-			event = 'InsertEnter',
-			version = '*',
-			config = function()
-				require('nvim-surround').setup({})
-			end,
-		},
+		{ 'folke/which-key.nvim', event = 'VeryLazy', opts = {} },
+		{ 'kylechui/nvim-surround', event = 'VeryLazy', version = '*', opts = {} },
 		{
 			'windwp/nvim-autopairs',
-			event = 'InsertEnter',
+			event = 'VeryLazy',
 			config = function()
 				require('nvim-autopairs').setup({ check_ts = true })
 
