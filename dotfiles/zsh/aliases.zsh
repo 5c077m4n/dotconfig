@@ -64,7 +64,16 @@ alias grbc='git rebase --continue'
 alias grba='git rebase --abort'
 alias grbq='git rebase --quit'
 alias grbim='git rebase --interactive --autostash --autosquash "$(gbdefault)"'
-alias gum='git fetch origin "$(gbdefault)":"$(gbdefault)"'
+gum () {
+	local branch_current="$(gbcurrent)"
+	local branch_default="$(gbdefault)"
+
+	if [[ "$branch_current" == "$branch_default" ]]; then
+		git pull --autostash origin "$branch_default"
+	else
+		git fetch origin "$branch_default":"$branch_default"
+	fi
+}
 alias glol='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset"'
 alias glols='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --stat'
 alias glola='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset" --all'
