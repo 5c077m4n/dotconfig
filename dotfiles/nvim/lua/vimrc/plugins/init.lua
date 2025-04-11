@@ -256,6 +256,7 @@ local function setup()
 				})
 			end,
 		},
+		{ "b0o/schemastore.nvim", ft = { "json", "jsonc", "yaml" }, event = { "VeryLazy" } },
 		{
 			"mrcjkb/rustaceanvim",
 			version = "^4",
