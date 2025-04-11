@@ -130,8 +130,10 @@ in
         pkgs-unstable.k9s
         # Containers
         ## Podman
-        pkgs-unstable.podman
-        pkgs-unstable.podman-compose
+        pkgs.podman
+        pkgs.podman-compose
+        ### deps
+        pkgs.virtiofsd
         ## Linter
         pkgs.hadolint
         # DBs
