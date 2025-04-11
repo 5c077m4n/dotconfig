@@ -131,6 +131,7 @@ in
             pkgs.arc-browser
             pkgs.kitty
             pkgs.iterm2
+            pkgs.neovide
             pkgs.vscodium
             pkgs.inkscape
             pkgs.aerospace
