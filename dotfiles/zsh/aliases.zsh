@@ -86,6 +86,7 @@ alias cu='cargo update'
 # NPM
 alias ni='npm install'
 alias nci='npm clean-install'
+alias ncif='npm clean-install --force'
 alias nis='npm install --save'
 alias nisd='npm install --save-dev'
 alias nif='npm install --force'
