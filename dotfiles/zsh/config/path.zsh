@@ -1,5 +1,9 @@
 if [[ -d "${KREW_ROOT:-$HOME/.krew}/bin" ]]; then
 	path+=("${KREW_ROOT:-$HOME/.krew}/bin")
 fi
-# Kubectl
-[[ -x "$(command -v kubectl)" ]] && source <(kubectl completion zsh)
+if [[ -x "$(command -v kubectl)" ]]; then
+	source <(kubectl completion zsh)
+fi
+
+path+=("${HOME}/.local/bin")
+cdpath+=("${HOME}/repos")

@@ -1,9 +1,10 @@
-if (( $+commands[brew] )); then
+if [[ -x /opt/homebrew/bin/brew ]]; then
 	export HOMEBREW_NO_ANALYTICS=1
+
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+
 	export HOMEBREW_PREFIX="$(brew --prefix)"
 	export HOMEBREW_BUNDLE_FILE="${HOME}/repos/dotconfig/assets/macos/Brewfile"
-
-	eval "$(brew shellenv)"
 
 	if [[ -d "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk" ]]; then
 		# Gcloud init

@@ -1,6 +1,5 @@
-export HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
-export HISTSIZE=50000
-export SAVEHIST=50000
+export ZSH_COMPDUMP="${ZSH_CACHE_DIR}/.zcompdump"
+compinit -d "${ZSH_COMPDUMP}"
 
 setopt BEEP
 setopt AUTO_CD
@@ -11,10 +10,14 @@ setopt EXTENDED_GLOB
 setopt INTERACTIVE_COMMENTS
 setopt APPEND_HISTORY
 
+export HISTFILE="${ZSH_CACHE_DIR}/.zsh_history"
+export HISTSIZE=60000
+export SAVEHIST=50000
+
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
-#setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
-#setopt SHARE_HISTORY             # Share history between all sessions.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
 setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
 setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
