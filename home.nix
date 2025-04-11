@@ -13,282 +13,301 @@ in
     useUserPackages = true;
     backupFileExtension = "backup";
 
-    users.${username} = {
-      home = {
-        inherit stateVersion;
+    users.${username} =
+      { lib, config, ... }:
+      {
+        home = {
+          inherit stateVersion;
 
-        packages = [
-          # General
-          pkgs-unstable.neovim
-          pkgs.tmux
-          pkgs.htop
-          pkgs.curl
-          pkgs.wget
-          pkgs.coreutils
-          pkgs.jq
-          pkgs.yq
-          pkgs.openssh
-          # VCS
-          pkgs.git
-          pkgs.hub
-          pkgs.lazygit
-          pkgs.delta
-          pkgs.git-absorb
-          # TUI
-          pkgs.starship
-          pkgs.ranger
-          pkgs.eza
-          pkgs.bat
-          # Search
-          pkgs.fd
-          pkgs.fzf
-          pkgs.ripgrep
-          # LLMs
-          pkgs.ollama
-          # Shells
-          ## ZSH
-          pkgs.zsh
-          pkgs.beautysh
-          ## Fish
-          pkgs.fish
-          pkgs.fishPlugins.fzf-fish
-          pkgs.fishPlugins.autopair
-          # JavaScript
-          pkgs.nodejs_22
-          pkgs-unstable.deno
-          pkgs-unstable.eslint_d
-          pkgs-unstable.prettierd
-          pkgs-unstable.pnpm
-          pkgs-unstable.yarn-berry # `yarn` >=4.5
-          # Python
-          pkgs-unstable.python313
-          pkgs-unstable.pyenv
-          pkgs-unstable.poetry
-          pkgs-unstable.mypy
-          pkgs-unstable.pylint
-          pkgs-unstable.black
-          pkgs-unstable.isort
-          # Golang
-          pkgs-unstable.go
-          pkgs-unstable.golangci-lint
-          # Rust
-          pkgs-unstable.rustup
-          # Zig
-          pkgs.zig
-          pkgs.zls
-          # Lua
-          pkgs.luajit
-          pkgs.luajitPackages.luacheck
-          pkgs.luarocks
-          pkgs.stylua
-          pkgs.selene
-          # Nix
-          pkgs.nixfmt-rfc-style
-          pkgs.statix
-          pkgs.deadnix
-          pkgs.nil
-          # K8s
-          pkgs-unstable.kubectx
-          pkgs-unstable.k9s
-          # Docker
-          pkgs-unstable.docker_27
-          # DBs
-          ## TUIs
-          pkgs.pgcli
-          pkgs.mycli
-          # Bluetooth
-          pkgs.blueutil
-          # Fonts
-          (pkgs.nerdfonts.override {
-            fonts = [
-              "FiraMono"
-              "Hack"
-            ];
-          })
-          # Misc
-          pkgs.gopass
-          pkgs.android-tools # ADB
-          pkgs.keepassxc
-        ];
-
-        file = {
-          # Legacy config files
-          ".ideavimrc".source = ./home_dotfiles/.ideavimrc;
-          ".sleep".source = ./home_dotfiles/.sleep;
-          ".wakeup".source = ./home_dotfiles/.wakeup;
-          # XDG standard config files
-          ".local/bin" = {
-            source = ./dotlocal/bin;
-            recursive = true;
-          };
-          ".config" = {
-            source = ./dotfiles;
-            recursive = true;
-          };
-        };
-      };
-
-      programs = {
-        home-manager.enable = true;
-
-        fish = {
-          enable = true;
-
-          plugins =
+          activation =
             let
-              inherit (pkgs) fishPlugins;
+              inherit (lib.hm.dag) entryAfter;
+              inherit (config.home) homeDirectory;
+              inherit (pkgs) rsync;
             in
-            [
-              {
-                name = "fzf-fish";
-                inherit (fishPlugins.fzf-fish) src;
-              }
-              {
-                name = "autopair";
-                inherit (fishPlugins.autopair) src;
-              }
-            ];
+            {
+              rsync-home-manager-applications = entryAfter [ "writeBoundary" ] ''
+                apps_source="$genProfilePath/home-path/Applications"
+                moniker="Home Manager Trampolines"
+                app_target_base="${homeDirectory}/Applications"
+                app_target="$app_target_base/$moniker"
+                mkdir -p "$app_target"
+                ${rsync}/bin/rsync --archive --checksum --chmod=-w --copy-unsafe-links --delete "$apps_source/" "$app_target"
+              '';
+            };
+
+          packages = [
+            # General
+            pkgs-unstable.neovim
+            pkgs.tmux
+            pkgs.htop
+            pkgs.curl
+            pkgs.wget
+            pkgs.coreutils
+            pkgs.jq
+            pkgs.yq
+            pkgs.openssh
+            # VCS
+            pkgs.git
+            pkgs.hub
+            pkgs.lazygit
+            pkgs.delta
+            pkgs.git-absorb
+            # TUI
+            pkgs.starship
+            pkgs.ranger
+            pkgs.eza
+            pkgs.bat
+            # Search
+            pkgs.fd
+            pkgs.fzf
+            pkgs.ripgrep
+            # LLMs
+            pkgs.ollama
+            # Shells
+            ## ZSH
+            pkgs.zsh
+            pkgs.beautysh
+            ## Fish
+            pkgs.fish
+            pkgs.fishPlugins.fzf-fish
+            pkgs.fishPlugins.autopair
+            # JavaScript
+            pkgs.nodejs_22
+            pkgs-unstable.deno
+            pkgs-unstable.eslint_d
+            pkgs-unstable.prettierd
+            pkgs-unstable.pnpm
+            pkgs-unstable.yarn-berry # `yarn` >=4.5
+            # Python
+            pkgs-unstable.python313
+            pkgs-unstable.pyenv
+            pkgs-unstable.poetry
+            pkgs-unstable.mypy
+            pkgs-unstable.pylint
+            pkgs-unstable.black
+            pkgs-unstable.isort
+            # Golang
+            pkgs-unstable.go
+            pkgs-unstable.golangci-lint
+            # Rust
+            pkgs-unstable.rustup
+            # Zig
+            pkgs.zig
+            pkgs.zls
+            # Lua
+            pkgs.luajit
+            pkgs.luajitPackages.luacheck
+            pkgs.luarocks
+            pkgs.stylua
+            pkgs.selene
+            # Nix
+            pkgs.nixfmt-rfc-style
+            pkgs.statix
+            pkgs.deadnix
+            pkgs.nil
+            # K8s
+            pkgs-unstable.kubectx
+            pkgs-unstable.k9s
+            # Docker
+            pkgs-unstable.docker_27
+            # DBs
+            ## TUIs
+            pkgs.pgcli
+            pkgs.mycli
+            # Bluetooth
+            pkgs.blueutil
+            # Fonts
+            (pkgs.nerdfonts.override {
+              fonts = [
+                "FiraMono"
+                "Hack"
+              ];
+            })
+            # Misc
+            pkgs.gopass
+            pkgs.android-tools # ADB
+            pkgs.keepassxc
+          ];
+
+          file = {
+            # Legacy config files
+            ".ideavimrc".source = ./home_dotfiles/.ideavimrc;
+            ".sleep".source = ./home_dotfiles/.sleep;
+            ".wakeup".source = ./home_dotfiles/.wakeup;
+            # XDG standard config files
+            ".local/bin" = {
+              source = ./dotlocal/bin;
+              recursive = true;
+            };
+            ".config" = {
+              source = ./dotfiles;
+              recursive = true;
+            };
+          };
         };
 
-        tmux = {
-          enable = true;
-          clock24 = true;
-          shell = "${pkgs.fish}/bin/fish";
+        programs = {
+          home-manager.enable = true;
 
-          plugins =
-            let
-              inherit (pkgs) tmuxPlugins fetchFromGitHub;
-              tmux-nvim = tmuxPlugins.mkTmuxPlugin {
-                pluginName = "tmux.nvim";
-                version = "unstable-2024-12-01";
-                src = fetchFromGitHub {
-                  owner = "aserowy";
-                  repo = "tmux.nvim";
-                  rev = "307bad95a1274f7288aaee09694c25c8cbcd6f1a";
-                  sha256 = "sha256-c/1swuJ6pIiaU8+i62Di/1L/b4V9+5WIVzVVSJJ4ls8=";
+          fish = {
+            enable = true;
+
+            plugins =
+              let
+                inherit (pkgs) fishPlugins;
+              in
+              [
+                {
+                  name = "fzf-fish";
+                  inherit (fishPlugins.fzf-fish) src;
+                }
+                {
+                  name = "autopair";
+                  inherit (fishPlugins.autopair) src;
+                }
+              ];
+          };
+
+          tmux = {
+            enable = true;
+            clock24 = true;
+            shell = "${pkgs.fish}/bin/fish";
+
+            plugins =
+              let
+                inherit (pkgs) tmuxPlugins fetchFromGitHub;
+                tmux-nvim = tmuxPlugins.mkTmuxPlugin {
+                  pluginName = "tmux.nvim";
+                  version = "unstable-2024-12-01";
+                  src = fetchFromGitHub {
+                    owner = "aserowy";
+                    repo = "tmux.nvim";
+                    rev = "307bad95a1274f7288aaee09694c25c8cbcd6f1a";
+                    sha256 = "sha256-c/1swuJ6pIiaU8+i62Di/1L/b4V9+5WIVzVVSJJ4ls8=";
+                  };
                 };
-              };
-            in
-            [
-              tmuxPlugins.sensible
-              {
-                plugin = tmux-nvim;
-                extraConfig = ''
-                  set-option -g @tmux-nvim-navigation true
-                  set-option -g @tmux-nvim-navigation-cycle true
-                  set-option -g @tmux-nvim-navigation-keybinding-left "C-h"
-                  set-option -g @tmux-nvim-navigation-keybinding-down "C-j"
-                  set-option -g @tmux-nvim-navigation-keybinding-up "C-k"
-                  set-option -g @tmux-nvim-navigation-keybinding-right "C-l"
-                  set-option -g @tmux-nvim-resize false
-                '';
-              }
-              {
-                plugin = tmuxPlugins.catppuccin;
-                extraConfig = ''
-                  set-option -g @catppuccin_flavor "macchiato" # `latte`, `frappe`, `macchiato` or `mocha`
-                  set-option -g @catppuccin_window_status_style "rounded"
-                  set-option -g @catppuccin_window_text " #W#{?window_zoomed_flag, [],}"
-                  set-option -g @catppuccin_window_current_text " #W#{?window_zoomed_flag, [],}"
-                  set-option -g status-right "#{E:@catppuccin_status_application}"
-                  set-option -ag status-right "#{E:@catppuccin_status_session}"
-                '';
-              }
-              {
-                plugin = tmuxPlugins.resurrect;
-                extraConfig = ''
-                  set -g @resurrect-strategy-vim 'session'
-                  set -g @resurrect-strategy-nvim 'session'
-                  set -g @resurrect-capture-pane-contents 'on'
-                '';
-              }
-              {
-                # Must be the last plugin to be cofigured https://github.com/tmux-plugins/tmux-continuum#known-issues
-                plugin = tmuxPlugins.continuum;
-                extraConfig = ''
-                  set -g @continuum-restore 'on'
-                  set -g @continuum-boot 'on'
-                  set -g @continuum-save-interval '10'
-                '';
-              }
-            ];
-          extraConfig = ''
-                        unbind-key C-b
-                        set-option -g prefix C-a # Change prefix command
-                        bind-key C-a send-prefix
+              in
+              [
+                tmuxPlugins.sensible
+                {
+                  plugin = tmux-nvim;
+                  extraConfig = ''
+                    set-option -g @tmux-nvim-navigation true
+                    set-option -g @tmux-nvim-navigation-cycle true
+                    set-option -g @tmux-nvim-navigation-keybinding-left "C-h"
+                    set-option -g @tmux-nvim-navigation-keybinding-down "C-j"
+                    set-option -g @tmux-nvim-navigation-keybinding-up "C-k"
+                    set-option -g @tmux-nvim-navigation-keybinding-right "C-l"
+                    set-option -g @tmux-nvim-resize false
+                  '';
+                }
+                {
+                  plugin = tmuxPlugins.catppuccin;
+                  extraConfig = ''
+                    set-option -g @catppuccin_flavor "macchiato" # `latte`, `frappe`, `macchiato` or `mocha`
+                    set-option -g @catppuccin_window_status_style "rounded"
+                    set-option -g @catppuccin_window_text " #W#{?window_zoomed_flag, [],}"
+                    set-option -g @catppuccin_window_current_text " #W#{?window_zoomed_flag, [],}"
+                    set-option -g status-right "#{E:@catppuccin_status_application}"
+                    set-option -ag status-right "#{E:@catppuccin_status_session}"
+                  '';
+                }
+                {
+                  plugin = tmuxPlugins.resurrect;
+                  extraConfig = ''
+                    set -g @resurrect-strategy-vim 'session'
+                    set -g @resurrect-strategy-nvim 'session'
+                    set -g @resurrect-capture-pane-contents 'on'
+                  '';
+                }
+                {
+                  # Must be the last plugin to be cofigured https://github.com/tmux-plugins/tmux-continuum#known-issues
+                  plugin = tmuxPlugins.continuum;
+                  extraConfig = ''
+                    set -g @continuum-restore 'on'
+                    set -g @continuum-boot 'on'
+                    set -g @continuum-save-interval '10'
+                  '';
+                }
+              ];
+            extraConfig = ''
+                          unbind-key C-b
+                          set-option -g prefix C-a # Change prefix command
+                          bind-key C-a send-prefix
 
-                        set-option -g mouse off # Disable mouse
-                        set-option -g detach-on-destroy off # Switch to another active session instead of quitting
+                          set-option -g mouse off # Disable mouse
+                          set-option -g detach-on-destroy off # Switch to another active session instead of quitting
 
-                        set-option -g base-index 1 # Fix window numbering
-                        set-window-option -g pane-base-index 1
-                        set-option -g renumber-windows on
+                          set-option -g base-index 1 # Fix window numbering
+                          set-window-option -g pane-base-index 1
+                          set-option -g renumber-windows on
 
-                        # Add more space for the status's bar
-                        set-option -g status-left-length 100
-                        set-option -g status-right-length 100
-                        set-option -g status-left ""
-                        # Add support for nvim/vim focus events
-                        set-option -g focus-events on
-                        # Resize fix
-                        set-window-option -g aggressive-resize on
+                          # Add more space for the status's bar
+                          set-option -g status-left-length 100
+                          set-option -g status-right-length 100
+                          set-option -g status-left ""
+                          # Add support for nvim/vim focus events
+                          set-option -g focus-events on
+                          # Resize fix
+                          set-window-option -g aggressive-resize on
 
-                        set-window-option -g mode-keys vi
+                          set-window-option -g mode-keys vi
 
-                        # Bell notification on process event
-                        set-window-option -g visual-bell both
-                        set-window-option -g bell-action other
+                          # Bell notification on process event
+                          set-window-option -g visual-bell both
+                          set-window-option -g bell-action other
 
-                        # Remove delay for exiting insert mode with ESC in Neovim
-                        set-option -sg escape-time 10
+                          # Remove delay for exiting insert mode with ESC in Neovim
+                          set-option -sg escape-time 10
 
-                        # Pane split commands
-                        unbind-key %
-                        bind-key '\' split-window -h -l 40% -c "#{pane_current_path}"
-                        unbind-key '"'
-                        bind-key - split-window -v -l 40% -c "#{pane_current_path}"
+                          # Pane split commands
+                          unbind-key %
+                          bind-key '\' split-window -h -l 40% -c "#{pane_current_path}"
+                          unbind-key '"'
+                          bind-key - split-window -v -l 40% -c "#{pane_current_path}"
 
-                        # Pane resize
-                        bind-key -r j resize-pane -D 10
-                        bind-key -r k resize-pane -U 10
-                        bind-key -r l resize-pane -R 10
-                        bind-key -r h resize-pane -L 10
+                          # Pane resize
+                          bind-key -r j resize-pane -D 10
+                          bind-key -r k resize-pane -U 10
+                          bind-key -r l resize-pane -R 10
+                          bind-key -r h resize-pane -L 10
 
-                        unbind-key Enter
-                        bind-key Enter resize-pane -Z # Toggle pane full-screen
+                          unbind-key Enter
+                          bind-key Enter resize-pane -Z # Toggle pane full-screen
 
-                        bind-key -n M-k send-keys -R \; send-keys C-l \; clear-history # Clear pane scroll
+                          bind-key -n M-k send-keys -R \; send-keys C-l \; clear-history # Clear pane scroll
 
-                        unbind-key c
-                        unbind-key n
-                        bind-key n new-window -c "#{pane_current_path}" # Add new window
+                          unbind-key c
+                          unbind-key n
+                          bind-key n new-window -c "#{pane_current_path}" # Add new window
 
-                        unbind-key w
-                        bind-key w kill-window # Close current window
+                          unbind-key w
+                          bind-key w kill-window # Close current window
 
-                        unbind-key q
-                        bind-key q kill-server # Close current server
+                          unbind-key q
+                          bind-key q kill-server # Close current server
 
-                        unbind-key C-a
-                        bind-key C-a choose-tree -wZ # Show all windows
+                          unbind-key C-a
+                          bind-key C-a choose-tree -wZ # Show all windows
 
-                        unbind-key Escape
-                        bind-key -rn "M-[" previous-window
-                        bind-key -rn "M-]" next-window
-                        bind-key -rn "M-{" swap-window -t -1\; select-window -t -1
-                        bind-key -rn "M-}" swap-window -t +1\; select-window -t +1
+                          unbind-key Escape
+                          bind-key -rn "M-[" previous-window
+                          bind-key -rn "M-]" next-window
+                          bind-key -rn "M-{" swap-window -t -1\; select-window -t -1
+                          bind-key -rn "M-}" swap-window -t +1\; select-window -t +1
 
-                        bind-key -T copy-mode-vi v send-keys -X begin-selection
-                        bind-key -T copy-mode-vi V send-keys -X select-line
-                        bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-                        bind-key -T copy-mode-vi y send-keys -X copy-selection
+                          bind-key -T copy-mode-vi v send-keys -X begin-selection
+                          bind-key -T copy-mode-vi V send-keys -X select-line
+                          bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+                          bind-key -T copy-mode-vi y send-keys -X copy-selection
 
-                        unbind-key -T copy-mode-vi MouseDragEnd1Pane # don't exit copy mode when dragging with mouse
+                          unbind-key -T copy-mode-vi MouseDragEnd1Pane # don't exit copy mode when dragging with mouse
 
-            			set-option -g default-command "$SHELL" # Fix for Fish not being the default shell
-          '';
+              			set-option -g default-command "$SHELL" # Fix for Fish not being the default shell
+            '';
+          };
         };
       };
-    };
   };
 }
