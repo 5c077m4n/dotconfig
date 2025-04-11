@@ -11,12 +11,20 @@ local SERVER_LIST = {
 	'marksman',
 	'tsserver',
 	'denols',
-	'rust_analyzer',
 	'sqlls',
-	'dockerls',
-	'gopls',
-	'zls',
 }
+if vim.fn.executable('docker') == 1 then
+	vim.list_extend(SERVER_LIST, { 'dockerls' })
+end
+if vim.fn.executable('go') == 1 then
+	vim.list_extend(SERVER_LIST, { 'gopls' })
+end
+if vim.fn.executable('rustc') == 1 then
+	vim.list_extend(SERVER_LIST, { 'rust_analyzer' })
+end
+if vim.fn.executable('zig') == 1 then
+	vim.list_extend(SERVER_LIST, { 'zls' })
+end
 
 ---@param options? table
 local function make_config(options)
@@ -64,7 +72,7 @@ return {
 					},
 				}
 			elseif server == 'tailwindcss' then
-				opts.filetypes = { 'javascriptreact', 'javascript.jsx', 'typescriptreact', 'typescript.tsx', 'html' }
+				opts.filetypes = { 'javascriptreact', 'typescriptreact', 'html' }
 				opts.root_dir = lspconfig.util.root_pattern('tailwind.config.js')
 			elseif server == 'denols' then
 				vim.g.markdown_fenced_languages = { 'ts=typescript' }
