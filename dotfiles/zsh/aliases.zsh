@@ -34,16 +34,25 @@ alias v='nvim'
 alias vim='nvim'
 alias 'v.'='nvim .'
 
+# Filetype aliases
+## Neovim
+alias -s rs='nvim'
+alias -s ts='nvim'
+alias -s tsx='nvim'
+alias -s js='nvim'
+alias -s jsx='nvim'
+## bat
+alias -s json='bat'
+alias -s yaml='bat'
+alias -s toml='bat'
+
 # Git
 if (( $+commands[hub] )); then
 	alias git='hub'
 fi
 alias gsh='git show --show-signature'
 alias gst='git status'
-<<<<<<< HEAD
-=======
 alias gstv='git status -vv'
->>>>>>> b366f57 (fixup! Add conditions on aliases)
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gdw='git diff --word-diff'
