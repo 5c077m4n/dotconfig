@@ -2,7 +2,7 @@
 
 () {
 	local root_dir="$(git rev-parse --show-toplevel)"
-	local luacheck_config="${root_dir}/.luacheckrc"
+	local selene_config="${root_dir}/selene.toml"
 	local stylua_config="${root_dir}/.stylua.toml"
 
 	local file
@@ -11,7 +11,7 @@
 
 		local file_ext="${file##*.}"
 		if [[ "$file_ext" == "lua" ]]; then
-			luacheck --config="$luacheck_config" "$file" || exit 1
+			selene --config "$selene_config" "$file" || exit 1
 			stylua --check --config-path="$stylua_config" "$file" || exit 1
 		elif [[ "$file_ext" == "py" ]]; then
 			black --check "$file" || exit 1

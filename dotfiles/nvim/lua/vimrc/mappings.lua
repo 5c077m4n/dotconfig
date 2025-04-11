@@ -6,6 +6,7 @@ local create_command = vim.api.nvim_create_user_command
 ---@param cmd string
 local function norBang(cmd)
 	return function()
+		-- selene: allow(mixed_table)
 		vim.cmd.normal({ cmd, bang = true })
 	end
 end

@@ -1,3 +1,5 @@
+--# selene: allow(mixed_table)
+
 local lualine = require("lualine")
 local navic = require("nvim-navic")
 
