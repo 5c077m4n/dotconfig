@@ -25,11 +25,12 @@ alias kc='kubectx'
 alias kcc='kubectx --current'
 
 # Git
-alias gsync='git fetch --all --prune && git pull origin "$(git branch --show-current) --all --rebase --autostash'
-alias gupa='git pull --rebase --autostash origin "$(git branch --show-current)"'
-alias ggpf='git push --force origin "$(git branch --show-current)"'
+alias gbcurrent='git branch --show-current'
+alias gsync='git fetch --all --prune && git pull origin "$(gbcurrent)" --all --rebase --autostash'
+alias gupa='git pull --rebase --autostash origin "$(gbcurrent)"'
+alias ggpf='git push --force origin "$(gbcurrent)"'
 alias gprom='git pull --rebase --autostash origin "$(git_main_branch)"'
-alias grbim='git fetch --all --prune && git rebase --interactive master'
+alias grbim='git rebase --interactive --autostash --autosquash "$(git_main_branch)"'
 ## Worktree
 gwta() {
 	cd "$(git rev-parse --show-toplevel)"
