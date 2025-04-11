@@ -79,6 +79,25 @@ local function init_packer()
 			})
 			-- Theme
 			use({
+				'akinsho/bufferline.nvim',
+				tag = 'v3.*',
+				requires = { 'nvim-tree/nvim-web-devicons' },
+				config = function()
+					require('bufferline').setup({
+						options = {
+							mode = 'tabs',
+							diagnostics = 'nvim_lsp',
+							diagnostics_update_in_insert = false,
+							show_buffer_close_icons = false,
+							show_close_icon = false,
+							separator_style = 'thick',
+							hover = { enabled = false },
+							sort_by = 'relative_directory',
+						},
+					})
+				end,
+			})
+			use({
 				'projekt0n/github-nvim-theme',
 				config = function()
 					require('github-theme').setup({
@@ -266,6 +285,8 @@ local function init_packer()
 						insert_mappings = true,
 						terminal_mappings = true,
 						shade_terminals = true,
+						truncate_names = true,
+						enforce_regular_tabs = false,
 					})
 				end,
 			})
