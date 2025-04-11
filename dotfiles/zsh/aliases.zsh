@@ -12,6 +12,7 @@ alias l='ls -lbF' # list, size, type
 alias ll='ls -la' # long, all
 alias la='ls -lbhHigUmuSa' # all list
 alias lx='ls -lbhHigUmuSa@' # all list and extended
+
 # Package manager update
 if (( $+commands[brew] )); then
 	alias pkgup='brew update && brew upgrade && brew upgrade --cask'
@@ -22,6 +23,10 @@ elif (( $+commands[pacman] )); then
 	alias pkgdblock='rm /var/lib/pacman/db.lock'
 elif (( $+commands[apk] )); then
 	alias pkgup='sudo apk update && sudo apk upgrade'
+	alias pkgupy='sudo apk update && sudo apk upgrade --yes'
+elif (( $+commands[apt] )); then
+	alias pkgup='sudo apt update && sudo apt upgrade'
+	alias pkgupy='sudo apt update && sudo apt upgrade --yes'
 fi
 
 # Neovim
@@ -35,6 +40,10 @@ if (( $+commands[hub] )); then
 fi
 alias gsh='git show --show-signature'
 alias gst='git status'
+<<<<<<< HEAD
+=======
+alias gstv='git status -vv'
+>>>>>>> b366f57 (fixup! Add conditions on aliases)
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gdw='git diff --word-diff'
@@ -72,53 +81,65 @@ alias gclean='git clean -d --interactive'
 alias gnewtag='git describe --tags "$(git rev-list --tags --max-count=1)"'
 
 # Rust
-alias c='cargo'
-alias ct='cargo test'
-alias ctw='cargo test --workspace'
-ctwl () {
-	RUST_LOG=debug cargo test --workspace "$@" -- --nocapture
-}
-alias cc='cargo clean'
-alias cr='cargo run'
-alias crl='RUST_LOG=debug cargo run'
-alias cb='cargo build'
-alias cu='cargo update'
+if (( $+commands[cargo] )); then
+	alias c='cargo'
+	alias ct='cargo test'
+	alias ctw='cargo test --workspace'
+	ctwl () {
+		RUST_LOG=debug cargo test --workspace "$@" -- --nocapture
+	}
+	alias cc='cargo clean'
+	alias cr='cargo run'
+	alias crl='RUST_LOG=debug cargo run'
+	alias cb='cargo build'
+	alias cu='cargo update'
+fi
 
 # NPM
-alias ni='npm install'
-alias nci='npm clean-install'
-alias ncif='npm clean-install --force'
-alias nis='npm install --save'
-alias nisd='npm install --save-dev'
-alias nif='npm install --force'
-alias nr='npm run'
-alias nclean='npm cache clean --force'
+if (( $+commands[npm] )); then
+	alias ni='npm install'
+	alias nci='npm clean-install'
+	alias ncif='npm clean-install --force'
+	alias nis='npm install --save'
+	alias nisd='npm install --save-dev'
+	alias nif='npm install --force'
+	alias nr='npm run'
+	alias nclean='npm cache clean --force'
+fi
 
 # Kubectl
-alias k='kubectl'
-alias ke='kubectl edit'
-alias kk='kubectl krew'
-alias kg='kubectl get'
-alias kd='kubectl delete'
-alias kds='kubectl delete service'
-alias kdc='kubectl delete configmap'
-alias kdn='kubectl delete namespace'
-alias kc='kubectl create'
-alias kcn='kubectl create namespace'
-alias kgp='kubectl get pod'
-alias kgs='kubectl get service'
-alias kgc='kubectl get configmap'
-alias kgn='kubectl get namespace'
-alias kpf='kubectl port-forward'
+if (( $+commands[kubectl] )); then
+	alias k='kubectl'
+	alias ke='kubectl edit'
+	alias kk='kubectl krew'
+	alias kg='kubectl get'
+	alias kd='kubectl delete'
+	alias kds='kubectl delete service'
+	alias kdc='kubectl delete configmap'
+	alias kdn='kubectl delete namespace'
+	alias kc='kubectl create'
+	alias kcn='kubectl create namespace'
+	alias kgp='kubectl get pod'
+	alias kgs='kubectl get service'
+	alias kgc='kubectl get configmap'
+	alias kgn='kubectl get namespace'
+	alias kpf='kubectl port-forward'
+fi
 # Kubectl utils
-alias kns='kubens'
-alias knsc='kubens --current'
-alias kc='kubectx'
-alias kcc='kubectx --current'
+if (( $+commands[kubens] )); then
+	alias kns='kubens'
+	alias knsc='kubens --current'
+fi
+if (( $+commands[kubectx] )); then
+	alias kc='kubectx'
+	alias kcc='kubectx --current'
+fi
 # Terraform
-alias t='terraform'
-alias ta='terraform apply'
-alias tp='terraform plan'
+if (( $+commands[terraform] )); then
+	alias t='terraform'
+	alias ta='terraform apply'
+	alias tp='terraform plan'
+fi
 
 # Python
 alias python='python3'
