@@ -209,8 +209,9 @@ local function setup()
 		{ "b0o/schemastore.nvim", ft = { "json", "jsonc", "yaml" } },
 		{
 			"mrcjkb/rustaceanvim",
-			version = "^4",
+			version = "^5",
 			ft = { "rust" },
+			lazy = false,
 			init = function()
 				vim.g.rustaceanvim = {
 					server = {
@@ -226,6 +227,28 @@ local function setup()
 								procMacro = { enable = true },
 							},
 						},
+						on_attach = function()
+							local timer = vim.uv.new_timer()
+							if not timer then
+								return
+							end
+
+							timer:start(
+								200,
+								0,
+								vim.schedule_wrap(function()
+									vim.cmd.RustAnalyzer("start")
+
+									keymap.nnoremap("<leader>ca", function()
+										vim.cmd.RustLsp("codeAction")
+									end, { buffer = true, desc = "RustLSP code actions" })
+
+									keymap.nnoremap("K", function()
+										vim.cmd.RustLsp({ "hover", "actions" })
+									end, { buffer = true, desc = "RustLSP hover action" })
+								end)
+							)
+						end,
 					},
 				}
 			end,
