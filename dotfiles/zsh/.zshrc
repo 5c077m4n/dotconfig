@@ -15,6 +15,7 @@ manpath=("/usr/local/man" $manpath)
 brew_bin="/opt/homebrew/bin/brew"
 if [[ -x "$brew_bin" ]]; then
 	export HOMEBREW_NO_ANALYTICS=1
+	export HOMEBREW_PREFIX="$($brew_bin --prefix)"
 
 	eval "$($brew_bin shellenv)"
 
@@ -22,7 +23,6 @@ if [[ -x "$brew_bin" ]]; then
 	fpath+=("${HOMEBREW_PREFIX}/share/zsh/site-functions")
 
 	# Use GNU tools as default
-	export HOMEBREW_PREFIX="$($brew_bin --prefix)"
 	for gnu_bin_dir in ${HOMEBREW_PREFIX}/opt/*/libexec/gnubin; do
 		[[ -d $gnu_bin_dir ]] && path+=("$gnu_bin_dir")
 	done
