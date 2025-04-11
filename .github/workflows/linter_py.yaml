@@ -1,6 +1,7 @@
+---
 name: Lint python
 
-on:
+on:  # yamllint disable-line rule:truthy
   push:
     paths:
       - "**/*.py"

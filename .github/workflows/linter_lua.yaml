@@ -1,12 +1,13 @@
+---
 name: Lint neovim lua config
 
-on:
+on:  # yamllint disable-line rule:truthy
   push:
     paths:
-      - "dotfiles/nvim/**/*.lua"
+      - "**/*.lua"
   pull_request:
     paths:
-      - "dotfiles/nvim/**/*.lua"
+      - "**/*.lua"
   workflow_dispatch: {}
 
 concurrency:
@@ -27,4 +28,4 @@ jobs:
           sh /tmp/rustup-init.sh -y
           cargo install selene
       - name: Run selene
-        run: selene dotfiles/nvim/ dotfiles/nvim_vscode/
+        run: selene dotfiles/.config/nvim/ dotfiles/.config/nvim_vscode/
