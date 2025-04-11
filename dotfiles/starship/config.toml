@@ -119,4 +119,11 @@ format = "⏱️  [$duration]($style) "
 
 [time]
 disabled = false
-format = '[$time]($style) '
+format = "[$time]($style) "
+
+[custom.arch]
+disabled = false
+symbol = "🏛"
+when = true
+shell = ["uname", "-m"]
+format = "$symbol  $output "
