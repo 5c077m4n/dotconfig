@@ -58,12 +58,17 @@ keymap.inoremap('<C-j>', [[<C-o>j]])
 keymap.inoremap('<C-k>', [[<C-o>k]])
 keymap.inoremap('<C-l>', [[<C-o>l]])
 
+-- Whole word commands
 keymap.nnoremap('<leader>V', 'viw', { desc = 'Select currect word' })
 keymap.nnoremap('<leader>Y', 'viwy', { desc = 'Yank currect word' })
-keymap.nnoremap('<leader><C-y>', [[viw"+y]], { desc = 'Yank current word to clipboard' })
+keymap.nnoremap('<leader><C-y>', [[viw"+y]], { desc = 'Yank current word to the system clipboard register' })
 keymap.nnoremap('<leader>S', 'viws', { desc = 'Switch currect word' })
 keymap.nnoremap('<leader>D', 'daw', { desc = 'Delete current word' })
 keymap.nnoremap('<leader>U', 'viwU', { desc = 'Uppercase current word' })
+
+-- Special paste
+keymap.vnoremap('<leader>p', [["_dp]], { desc = "Paste after without overriding the current register's content" })
+keymap.vnoremap('<leader>P', [["_dP]], { desc = "Paste before without overriding the current register's content" })
 
 keymap.nnoremap('<leader>cd', [[:cd %:p:h<CR>:pwd<CR>]], { desc = 'Switch CWD to the directory of the open buffer' })
 
