@@ -18,11 +18,9 @@ end, { desc = "Find project files (from current work directory)" })
 keymap.nnoremap("<leader>fs", function()
 	telescope_builtin.live_grep({ cwd = vim.fn.getcwd() })
 end, { desc = "Search project for a string (from current work directory)" })
-keymap.nnoremap(
-	"<leader>f#",
-	telescope_builtin.grep_string,
-	{ desc = "Search project for the word under the cursor" }
-)
+keymap.vnoremap("<leader>fs", function()
+	telescope_builtin.grep_string({ cwd = vim.fn.getcwd() })
+end, { desc = "Search project for the current selection (from current work directory)" })
 keymap.nnoremap("<leader>f:", telescope_builtin.commands, { desc = "Search commands" })
 keymap.nnoremap("<leader>fr", telescope_builtin.registers, { desc = "Search registers" })
 keymap.inoremap("<C-r>", telescope_builtin.registers, { desc = "Search registers" })
