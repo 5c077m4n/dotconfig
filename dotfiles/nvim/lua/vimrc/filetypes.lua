@@ -10,6 +10,8 @@ vim.filetype.add({
 		[".swcrc"] = "json",
 		[".sqlfluff"] = "toml",
 		["tmux.conf"] = "tmux",
+		[".env"] = "env",
+		[".env.local"] = "env",
 	},
 	pattern = {
 		[".*/kitty/.*%.conf$"] = "kitty",
