@@ -19,4 +19,6 @@ plugins=(fzf)
 		fi
 		plugins+=($plug_name)
 	done
+
+	fpath+=("${ZSH_CUSTOM}/plugins/zsh-completions/src")
 }
