@@ -40,26 +40,9 @@ local function init_packer()
 					require('treesitter-context').setup({
 						max_lines = 3,
 						patters = {
-							default = {
-								'class',
-								'function',
-								'method',
-								'for',
-								'while',
-								'if',
-								'switch',
-								'case',
-							},
-							rust = {
-								'impl',
-								'mod',
-								'struct',
-								'fn',
-							},
-							typescript = {
-								'const',
-								'let',
-							},
+							default = { 'class', 'function', 'method', 'for', 'while', 'if', 'switch', 'case' },
+							rust = { 'impl', 'mod', 'struct', 'fn' },
+							typescript = { 'const', 'let' },
 						},
 					})
 				end,
@@ -75,6 +58,7 @@ local function init_packer()
 							toml = 'toml',
 						},
 						literal = {
+							['.prettierrc'] = 'json',
 							['.babelrc'] = 'json',
 							['.swcrc'] = 'json',
 						},
