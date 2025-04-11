@@ -361,12 +361,16 @@ local function setup()
 				end, { desc = "Disable session save on exit" })
 			end,
 		},
-		{ "folke/neodev.nvim", dependencies = { "folke/neoconf.nvim" }, event = { "VeryLazy" } },
+		{
+			"folke/neodev.nvim",
+			dependencies = { "folke/neoconf.nvim" },
+			event = { "VeryLazy" },
+		},
 		{
 			"zeioth/garbage-day.nvim",
 			dependencies = { "neovim/nvim-lspconfig" },
 			event = "VeryLazy",
-			opts = {},
+			opts = { aggressive_mode = true, wakeup_delay = 250 },
 		},
 		{
 			"nvimtools/none-ls.nvim",
