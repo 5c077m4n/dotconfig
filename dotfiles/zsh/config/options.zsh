@@ -1,6 +1,3 @@
-export ZSH_COMPDUMP="${ZSH_CACHE_DIR}/.zcompdump"
-compinit -d "${ZSH_COMPDUMP}"
-
 setopt BEEP
 setopt AUTO_CD
 setopt GLOB_DOTS

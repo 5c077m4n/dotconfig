@@ -1,24 +1,16 @@
-if [[ ! -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ]]; then
-	zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --keep
-fi
-source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
+zstyle ':omz:update' mode auto
+zstyle ':omz:update' frequency 2
 
-plug "zap-zsh/completions"
-plug "zsh-users/zsh-autosuggestions"
-plug "zsh-users/zsh-syntax-highlighting"
-plug "zsh-users/zsh-history-substring-search"
-plug "hlissner/zsh-autopair"
+HYPHEN_INSENSITIVE="true"
+COMPLETION_WAITING_DOTS="true"
+HIST_STAMPS="yyyy.mm.dd"
 
 for zsh_config_file in "${ZDOTDIR}/config/"*; do
-	plug "$zsh_config_file"
+	source "$zsh_config_file"
 done
 unset zsh_config_file
 
-plug "${HOME}/.fzf.zsh"
-plug "${HOME}/.cargo/env"
-plug "${HOME}/.iterm2_shell_integration.zsh"
-
-# Init starship
+source "${ZSH}/oh-my-zsh.sh"
 eval "$(starship init zsh)"
 
 # De-duplicate path environment variables
