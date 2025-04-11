@@ -416,14 +416,6 @@ local function init_packer()
 				end,
 			})
 			use({ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' })
-			-- Session
-			use({
-				'rmagatti/auto-session',
-				config = function()
-					require('vimrc.plugins.auto-session')
-				end,
-				disable = true,
-			})
 			-- Debugging
 			use({ 'nvim-telescope/telescope-dap.nvim', disable = true })
 			use({ 'mfussenegger/nvim-dap', ft = { 'javascript', 'lua', 'rust' }, disable = true })

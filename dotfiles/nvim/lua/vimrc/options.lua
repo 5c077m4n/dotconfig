@@ -15,6 +15,18 @@ o.foldenable = true
 o.foldmethod = 'indent'
 o.foldlevel = 99
 o.foldlevelstart = 10
+o.sessionoptions = {
+	'blank',
+	'buffers',
+	'curdir',
+	'folds',
+	'help',
+	'tabpages',
+	'winsize',
+	'winpos',
+	'terminal',
+	'localoptions',
+}
 
 o.updatetime = 200
 o.timeoutlen = 500
