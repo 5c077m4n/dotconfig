@@ -52,15 +52,27 @@ local function init_packer()
 				'nathom/filetype.nvim',
 				config = function()
 					require('filetype').setup({
-						extensions = {
-							tsx = 'typescriptreact',
-							jsx = 'javascriptreact',
-							toml = 'toml',
-						},
-						literal = {
-							['.prettierrc'] = 'json',
-							['.babelrc'] = 'json',
-							['.swcrc'] = 'json',
+						overrides = {
+							extensions = {
+								tsx = 'typescriptreact',
+								jsx = 'javascriptreact',
+								toml = 'toml',
+							},
+							literal = {
+								['.prettierrc'] = 'json',
+								['.babelrc'] = 'json',
+								['.swcrc'] = 'json',
+							},
+							function_extensions = {
+								conf = function()
+									local filepath = vim.fn.expand('%')
+									if string.find(filepath, '/kitty/') ~= nil then
+										vim.bo.filetype = 'kitty'
+									else
+										vim.bo.filetype = 'conf'
+									end
+								end,
+							},
 						},
 					})
 				end,
@@ -165,6 +177,7 @@ local function init_packer()
 				end,
 				event = 'BufReadPost',
 			})
+			use('fladson/vim-kitty')
 			-- File tree
 			use({
 				'nvim-neo-tree/neo-tree.nvim',
