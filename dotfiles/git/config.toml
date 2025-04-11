@@ -3,7 +3,7 @@
 [core]
     autocrlf = input
 [help]
-	autocorrect = true
+	autocorrect = 50
 
 [include]
 	path = ~/.config/git/git-diff.toml
