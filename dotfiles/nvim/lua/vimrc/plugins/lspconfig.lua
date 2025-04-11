@@ -206,7 +206,11 @@ local SERVER_CONFIG_MAP = {
 }
 
 return {
-	SERVER_LIST = vim.tbl_keys(SERVER_CONFIG_MAP),
+	-- This hack is needed untill Mason will add `gleam` to its registery
+	SERVER_LIST = vim.tbl_filter(function(server)
+		return server ~= "gleam"
+	end, vim.tbl_keys(SERVER_CONFIG_MAP)),
+
 	setup = function()
 		local neoconf = require("neoconf")
 		local lspconfig = require("lspconfig")
