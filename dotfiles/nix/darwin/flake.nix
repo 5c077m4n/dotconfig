@@ -103,8 +103,9 @@
               # Docker
               docker_27
               # DBs
+              ## TUIs
               pgcli
-              mycli
+              #mycli
               # Bluetooth
               blueutil
               # Fonts
