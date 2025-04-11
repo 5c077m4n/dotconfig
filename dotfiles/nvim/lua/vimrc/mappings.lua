@@ -9,6 +9,9 @@ keymap.nnoremap('<leader>0', module_utils.update_vimrc, { desc = 'Git pull lates
 keymap.nnoremap('<leader>1', packer.sync, { desc = 'Packer sync' })
 keymap.nnoremap('<leader>2', module_utils.reload_vimrc, { desc = 'Reload the vimrc config' })
 
+-- Save only if needed
+keymap.nnoremap('<leader>up', vim.cmd.update, { desc = 'Save buffer only if changed' })
+
 -- Center screen on page up/down
 keymap.nnoremap('<C-u>', '<C-u>zz')
 keymap.nnoremap('<C-d>', '<C-d>zz')
