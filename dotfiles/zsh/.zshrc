@@ -4,7 +4,6 @@ fi
 source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
 plug "zap-zsh/completions"
-plug "zap-zsh/supercharge"
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "zsh-users/zsh-history-substring-search"
@@ -22,9 +21,6 @@ plug "${HOME}/.iterm2_shell_integration.zsh"
 
 # Leatherman
 plug "${HOME}/repos/leatherman/source-me.sh"
-
-# Hide commands staring with a space
-setopt histignorespace
 
 # Init starship
 eval "$(starship init zsh)"
