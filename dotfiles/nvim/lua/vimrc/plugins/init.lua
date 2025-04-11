@@ -63,14 +63,11 @@ function M.setup()
 			-- Theme
 			use({
 				'projekt0n/github-nvim-theme',
-				branch = '0.0.x',
 				config = function()
 					require('github-theme').setup({
-						theme_style = 'dark_default',
-						sidebars = { 'lazygit', 'terminal', 'packer' },
-						dark_sidebar = false,
+						options = { dim_inactive = true },
 					})
-					vim.cmd.colorscheme('github_dark_default')
+					vim.cmd.colorscheme('github_dark_colorblind')
 				end,
 				use({
 					'nvim-lualine/lualine.nvim',
