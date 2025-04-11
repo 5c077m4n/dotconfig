@@ -25,6 +25,13 @@ user_pref("privacy.window.maxInnerHeight", 4502); // 4502 [default 900 in user.j
 //user_pref("media.autoplay.blocking_policy", 0); // 2031 optional [otherwise add site exceptions]
 //user_pref("webgl.disabled", false); // 4520 optional [required for Zoom]
 
+// Disable auto-playing audio and video
+user_pref("media.autoplay.default", 5);
+user_pref("media.autoplay.blocking_policy", 2);
+user_pref("media.autoplay.allow-extension-background-pages", false);
+user_pref("media.autoplay.block-event.enabled", true);
+user_pref("media.block-autoplay-until-in-foreground", true);
+
 // RESET these - all now inactive or removed from user.js
 // ^ except media.peerconnection.ice.no_host can be used to harden if it works for you
 //user_pref("media.peerconnection.enabled", true); // 2001 default-inactive in user.js 95
