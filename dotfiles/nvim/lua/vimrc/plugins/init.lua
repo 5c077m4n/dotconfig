@@ -399,7 +399,10 @@ function M.setup()
 						---@diagnostic disable-next-line: undefined-field
 						options = vim.opt.sessionoptions:get(),
 						pre_save = function()
-							require('neo-tree').close()
+							local ok, neo_tree = pcall(require, 'neo-tree')
+							if ok then
+								neo_tree.close()
+							end
 						end,
 					})
 					keymap.nnoremap('<leader>sl', persistence.load, { desc = 'Load relevant session' })
