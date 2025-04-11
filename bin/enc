@@ -1,0 +1,6 @@
+#!/bin/sh
+
+export GPG_TTY
+GPG_TTY="$(tty)"
+
+tar czvpf - "$@" | gpg --symmetric --cipher-algo aes256 --output dir.tar.gz.gpg
