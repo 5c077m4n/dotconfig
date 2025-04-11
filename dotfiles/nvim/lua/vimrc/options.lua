@@ -59,7 +59,7 @@ o.viewoptions:remove("options")
 o.langremap = false
 
 -- Incremental live completion
-o.inccommand = "nosplit"
+o.inccommand = "split"
 
 -- Line numbering
 o.number = true

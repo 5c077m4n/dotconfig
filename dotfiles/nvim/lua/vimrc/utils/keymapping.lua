@@ -1,4 +1,4 @@
----@param mode string|table
+---@param mode string|string[]
 local function create_keymap_fn(mode)
 	mode = mode or "n"
 
