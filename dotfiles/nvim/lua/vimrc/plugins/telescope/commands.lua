@@ -4,8 +4,11 @@ local keymap = require('vimrc.utils.keymapping')
 
 keymap.nnoremap('<leader>fls', function()
 	local opts = {}
-	local ok = pcall(telescope_builtin.git_files, opts)
-	if not ok then
+	vim.fn.system('git rev-parse --is-inside-work-tree')
+
+	if vim.v.shell_error == 0 then
+		telescope_builtin.git_files(opts)
+	else
 		telescope_builtin.find_files(opts)
 	end
 end, { desc = 'Find project files' })

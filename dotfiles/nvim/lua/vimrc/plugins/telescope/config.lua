@@ -1,9 +1,16 @@
 local telescope = require('telescope')
 local actions = require('telescope.actions')
+local telescope_config = require('telescope.config')
 local trouble = require('trouble.providers.telescope')
+
+local vimgrep_arguments = { unpack(telescope_config.values.vimgrep_arguments) }
+table.insert(vimgrep_arguments, '--hidden')
+table.insert(vimgrep_arguments, '--glob')
+table.insert(vimgrep_arguments, '!**/.git/*')
 
 telescope.setup({
 	defaults = {
+		vimgrep_arguments = vimgrep_arguments,
 		mappings = {
 			i = {
 				['<C-k>'] = actions.cycle_history_next,
@@ -22,6 +29,12 @@ telescope.setup({
 				['<C-t>'] = actions.select_tab,
 				['<C-x>'] = trouble.open_with_trouble,
 			},
+		},
+	},
+	pickers = {
+		find_files = {
+			-- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+			find_command = { 'rg', '--files', '--hidden', '--glob', '!**/.git/*' },
 		},
 	},
 	extensions = {
