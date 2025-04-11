@@ -22,7 +22,7 @@ def main() -> None:
         zshenv_write.writelines(
             [
                 'export ZDOTDIR="${HOME}/.config/zsh"\n',
-                '[[ -f "${ZDOTDIR}/.zshenv" ]] && source "${ZDOTDIR}/.zshenv"\n',
+                '[[ -f "${ZDOTDIR}/.zshenv" ]] && . "${ZDOTDIR}/.zshenv"\n',
             ]
         )
 
