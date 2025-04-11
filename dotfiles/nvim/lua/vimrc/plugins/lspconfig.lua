@@ -22,6 +22,7 @@ local SERVER_LIST = {
 	'cssls',
 	'tflint',
 	'tailwindcss',
+	'marksman',
 }
 local SEVERITY = {
 	vim.log.levels.ERROR,
