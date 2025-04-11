@@ -1,4 +1,7 @@
 # TMUX - TPM
-if [[ ! -d "${HOME}/.tmux/plugins/tpm/" ]]; then
-	git clone https://github.com/tmux-plugins/tpm "${HOME}/.tmux/plugins/tpm/"
-fi
+() {
+	local tpm_path="${XDG_STATE_HOME}/tmux/plugins/tpm/"
+	if [[ -x "$(command -v tmux)" && ! -d "$tpm_path" ]]; then
+		git clone https://github.com/tmux-plugins/tpm "$tpm_path"
+	fi
+}
