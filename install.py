@@ -3,7 +3,7 @@ from pathlib import Path
 from shutil import rmtree
 
 
-def wipe(dir: Path):
+def wipe(dir: Path) -> None:
     if dir.is_symlink():
         dir.unlink()
     elif dir.is_dir():
@@ -12,7 +12,7 @@ def wipe(dir: Path):
         remove(dir)
 
 
-def main():
+def main() -> None:
     home_dir = Path().home()
     __dirname = Path(__file__).parent.absolute()
 
