@@ -109,7 +109,12 @@ in
   };
 
   hardware = {
-    graphics.enable = true;
+    graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        vpl-gpu-rt # intel graphics driver
+      ];
+    };
     pulseaudio.enable = false;
   };
   security.rtkit.enable = true;
