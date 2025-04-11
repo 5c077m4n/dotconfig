@@ -45,21 +45,6 @@ local function setup()
 			end,
 		},
 		{
-			"samodostal/image.nvim",
-			event = { "VeryLazy" },
-			dependencies = { "nvim-lua/plenary.nvim" },
-			config = function()
-				require("image").setup({
-					render = {
-						min_padding = 5,
-						show_label = true,
-						_dither = true,
-					},
-					events = { update_on_nvim_resize = true },
-				})
-			end,
-		},
-		{
 			"nvim-tree/nvim-web-devicons",
 			event = { "VeryLazy" },
 			config = function()
