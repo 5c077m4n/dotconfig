@@ -360,6 +360,23 @@ local function init_packer()
 				ft = { 'javascript', 'lua', 'rust' },
 				disable = true,
 			})
+			-- Misc
+			use({
+				'samodostal/image.nvim',
+				requires = { 'nvim-lua/plenary.nvim' },
+				config = function()
+					require('image').setup({
+						render = {
+							min_padding = 5,
+							show_label = true,
+							use_dither = true,
+						},
+						events = {
+							update_on_nvim_resize = true,
+						},
+					})
+				end,
+			})
 
 			-- Optional
 			use({ 'wbthomason/packer.nvim', opt = true })
