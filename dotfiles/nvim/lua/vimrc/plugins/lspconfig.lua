@@ -21,11 +21,17 @@ local SERVER_LIST = {
 ---@param options? table
 local function make_config(options)
 	local capabilities = require("cmp_nvim_lsp").default_capabilities()
-	capabilities.textDocument.completion.completionItem.snippetSupport = true
-	capabilities.textDocument.foldingRange = {
-		dynamicRegistration = false,
-		lineFoldingOnly = true,
-	}
+	vim.tbl_extend("force", capabilities, {
+		textDocument = {
+			completion = {
+				completionItem = { snippetSupport = true },
+			},
+			foldingRange = {
+				dynamicRegistration = false,
+				lineFoldingOnly = true,
+			},
+		},
+	})
 
 	local base_config = {
 		capabilities = capabilities,
@@ -43,7 +49,11 @@ return {
 		require("neoconf").setup({})
 		local lspconfig = require("lspconfig")
 
-		for _, server in pairs(SERVER_LIST) do
+		local servers_needing_lsp_setup = vim.tbl_filter(function(server)
+			return server ~= "tsserver" and server ~= "rust_analyzer" and server ~= "gopls"
+		end, SERVER_LIST)
+
+		for _, server in pairs(servers_needing_lsp_setup) do
 			local opts = make_config()
 
 			if server == "lua_ls" then
@@ -68,8 +78,6 @@ return {
 			elseif server == "denols" then
 				vim.g.markdown_fenced_languages = { "ts=typescript" }
 				opts.root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deno.lock")
-			elseif server == "tsserver" or server == "rust_analyzer" or server == "gopls" then
-				return
 			end
 
 			lspconfig[server].setup(opts)
