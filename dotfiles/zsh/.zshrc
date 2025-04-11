@@ -5,7 +5,7 @@ compinit
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 typeset -UT PATH path
-path=($path "${HOME}/.local/bin" ".")
+path=($path "${HOME}/.local/bin")
 # Like `PATH` but for the command completions
 typeset -UT FPATH fpath
 # Like `PATH` but for the `cd` command
@@ -16,14 +16,13 @@ typeset -UT MANPATH manpath
 manpath=("/usr/local/man" $manpath)
 
 # Homebrew init
-export HOMEBREW_BIN="/opt/homebrew/bin/brew"
-if [[ -x "$HOMEBREW_BIN" ]]; then
+if (( $+commands[brew] )); then
 	export HOMEBREW_NO_ANALYTICS=1
 
-	eval "$($HOMEBREW_BIN shellenv)"
+	eval "$(brew shellenv)"
 
 	# Use GNU tools as default
-	export HOMEBREW_PREFIX="$($HOMEBREW_BIN --prefix)"
+	export HOMEBREW_PREFIX="$(brew --prefix)"
 	for gnu_bin_dir in ${HOMEBREW_PREFIX}/opt/*/libexec/gnubin; do
 		[[ -d $gnu_bin_dir ]] && path+=("$gnu_bin_dir")
 	done
@@ -147,12 +146,12 @@ eval "$(starship init zsh)"
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
 
 # Kubectl zsh completion
-[[ -x "/usr/local/bin/kubectl" ]] && source <(kubectl completion zsh)
+(( $+commands[kubectl] )) && source <(kubectl completion zsh)
 [[ -f "${HOME}/.cargo/env" ]] && source "${HOME}/.cargo/env"
 [[ -f "${HOME}/.iterm2_shell_integration.zsh" ]] && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Leatherman
 [[ -f "$HOME/repos/leatherman/source-me.sh" ]] && source "$HOME/repos/leatherman/source-me.sh"
 
-[[ -f "${ZDOTDIR}/aliases" ]] && source "${ZDOTDIR}/aliases"
-[[ -f "${ZDOTDIR}/fzf-functions" ]] && source "${ZDOTDIR}/fzf-functions"
+[[ -f "${ZDOTDIR}/aliases.zsh" ]] && source "${ZDOTDIR}/aliases.zsh"
+[[ -f "${ZDOTDIR}/fzf-functions.zsh" ]] && source "${ZDOTDIR}/fzf-functions.zsh"
