@@ -60,15 +60,13 @@ function M.lsp_progress(_, result, ctx)
 			hide_from_history = false,
 		})
 	elseif val.kind == 'end' and notif_data then
-		notif_data.notification = vim.notify(
-			val.message and format_message(val.message) or 'Complete',
-			vim.log.levels.INFO,
-			{
+		notif_data.notification = pcall(function()
+			vim.notify(val.message and format_message(val.message) or 'Complete', vim.log.levels.INFO, {
 				icon = '',
 				replace = notif_data.notification,
 				timeout = 1000,
-			}
-		)
+			})
+		end)
 		notif_data.spinner = nil
 	end
 end
