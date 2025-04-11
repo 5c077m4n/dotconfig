@@ -4,6 +4,7 @@ local utils = require("vimrc.utils")
 
 local keymap = utils.keymapping
 local is_git_repo = utils.misc.is_git_repo
+local get_visual_selection = utils.misc.get_visual_selection
 
 keymap.nnoremap("<leader>fls", function()
 	if is_git_repo() then
@@ -46,6 +47,10 @@ keymap.nnoremap(
 	telescope_builtin.current_buffer_fuzzy_find,
 	{ desc = "Current file fuzzy finder" }
 )
+keymap.vnoremap("<leader>ffs", function()
+	local selected_text = get_visual_selection()
+	telescope_builtin.current_buffer_fuzzy_find({ default_text = selected_text })
+end, { desc = "Current selection file fuzzy finder" })
 keymap.nnoremap(
 	"<leader>ffy",
 	telescope_builtin.lsp_document_symbols,
