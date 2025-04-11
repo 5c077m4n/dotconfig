@@ -1,7 +1,3 @@
-# Autocompletion
-autoload -Uz compinit
-compinit
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 typeset -UT PATH path
@@ -10,7 +6,7 @@ path=($path "${HOME}/.local/bin")
 typeset -UT FPATH fpath
 # Like `PATH` but for the `cd` command (the first empty string is required)
 typeset -UT CDPATH cdpath
-cdpath=("" "${HOME}/.local/share" "${HOME}/repos")
+cdpath=("" "${HOME}/repos")
 # Like `PATH` but for the `man` command
 typeset -UT MANPATH manpath
 manpath=("/usr/local/man" $manpath)
@@ -140,3 +136,7 @@ eval "$(starship init zsh)"
 
 [[ -f "${ZDOTDIR}/aliases.zsh" ]] && source "${ZDOTDIR}/aliases.zsh"
 [[ -f "${ZDOTDIR}/fzf-functions.zsh" ]] && source "${ZDOTDIR}/fzf-functions.zsh"
+
+# Autocompletion
+autoload -Uz compinit
+compinit
