@@ -25,6 +25,7 @@ function supdate --description 'Run a full system update'
     if type --query apt
         sudo apt update
         sudo apt upgrade --yes
+        sudo apt autoremove --yes
     end
 
     nvim --headless +"Lazy! sync" +qa
