@@ -9,3 +9,6 @@ dotfiles/zsh/**
 
 dotfiles/karabiner/**
 !dotfiles/karabiner/karabiner.json
+
+dotfiles/iterm2/**
+!dotfiles/iterm2/com.googlecode.iterm2.plist
