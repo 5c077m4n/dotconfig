@@ -4,6 +4,7 @@ local create_augroup = vim.api.nvim_create_augroup
 local create_autocmd = vim.api.nvim_create_autocmd
 local vim_log_levels = vim.log.levels
 
+---@type number[]
 local LOG_LEVELS = {
 	vim_log_levels.ERROR,
 	vim_log_levels.WARN,
