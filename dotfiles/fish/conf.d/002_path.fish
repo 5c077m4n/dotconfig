@@ -1,5 +1,5 @@
-# Add the repos dir into the quick cd lookup path
-set --append CDPATH ~/repos/
+# Add the `workspace` dir into the quick cd lookup path
+set --append CDPATH ~/workspace/
 
 fish_add_path $HOME/.local/bin/
 if test -d $HOME/.cargo/bin/

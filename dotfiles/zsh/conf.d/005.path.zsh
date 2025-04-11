@@ -6,4 +6,4 @@
 
 path+=("${ZDOTDIR}/functions")
 path+=("${HOME}/.local/bin")
-cdpath+=("${HOME}/repos")
+cdpath+=("${HOME}/workspace")
