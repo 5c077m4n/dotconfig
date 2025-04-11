@@ -2,6 +2,7 @@
 
 local lualine = require("lualine")
 local navic = require("nvim-navic")
+local lsp_progress = require("lsp-progress")
 
 ---@description Fish shell style path (`~/a/.b/c/filename.lua`)
 ---@param path string
@@ -50,11 +51,9 @@ lualine.setup({
 			},
 		},
 		lualine_x = {
-			{
-				"fileformat",
-				icons_enabled = true,
-				symbols = { unix = "LF", dos = "CRLF", mac = "CR" },
-			},
+			function()
+				return lsp_progress.progress({})
+			end,
 		},
 	},
 	winbar = {
@@ -106,4 +105,10 @@ lualine.setup({
 			},
 		},
 	},
+})
+
+vim.api.nvim_create_autocmd("User", {
+	group = vim.api.nvim_create_augroup("update_lualine_on_lsp_progress", { clear = true }),
+	pattern = "LspProgressStatusUpdated",
+	callback = lualine.refresh,
 })
