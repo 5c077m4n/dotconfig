@@ -1,7 +1,7 @@
 brew_bin_arm64="/opt/homebrew/bin/brew"
 brew_bin_x86="/usr/local/Homebrew/bin/brew"
 
-if [[ -x "$brew_bin_x86" && "$(uname -m)" != arm64 ]]; then
+if [[ -x "$brew_bin_x86" && "$(uname -m)" != arm64 && "$(arch)" != arm64 ]]; then
 	brew_bin="$brew_bin_x86"
 elif [[ -x "$brew_bin_arm64" ]]; then
 	brew_bin="$brew_bin_arm64"
