@@ -66,8 +66,19 @@ local function on_attach(_client, buffer_num)
 	end, { buffer = buffer_num, desc = 'Go to next diagnostic' })
 	keymap.nnoremap('<leader>ca', lsp.buf.code_action, { buffer = buffer_num, desc = 'Code action' })
 	keymap.vnoremap('<leader>ca', lsp.buf.range_code_action, { buffer = buffer_num, desc = 'Code action for range' })
-	-- TODO: upgrade to the nvim 0.8 `vim.lsp.buf.format` function
-	keymap.nnoremap('<leader>l', lsp.buf.formatting, { buffer = buffer_num, desc = 'Format page' })
+	-- TODO: remove legacy `if` when 0.8 is out
+	keymap.nnoremap('<leader>l', function()
+		if type(lsp.buf.format) == 'function' then
+			vim.lsp.buf.format({
+				filter = function(client)
+					return client.name == 'null-ls'
+				end,
+				bufnr = buffer_num,
+			})
+		else
+			lsp.buf.formatting({})
+		end
+	end, { buffer = buffer_num, desc = 'Format page' })
 	keymap.vnoremap('<leader>l', lsp.buf.range_formatting, { buffer = buffer_num, desc = 'Format page' })
 
 	create_command('Format', lsp.buf.formatting, { desc = 'Format page' })
