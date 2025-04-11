@@ -17,10 +17,6 @@ keymap.nnoremap('<C-u>', '<C-u>zz')
 keymap.nnoremap('<C-d>', '<C-d>zz')
 
 -- Splits
-keymap.nnoremap('<C-h>', '<C-w>h', { desc = 'Move one split left' })
-keymap.nnoremap('<C-j>', '<C-w>j', { desc = 'Move one split down' })
-keymap.nnoremap('<C-k>', '<C-w>k', { desc = 'Move one split up' })
-keymap.nnoremap('<C-l>', '<C-w>l', { desc = 'Move one split right' })
 keymap.nnoremap('<leader>wq', '<C-w>q', { desc = 'Close split' })
 keymap.nnoremap('<leader>wv', vim.cmd.vsplit, { desc = 'New vertical split' })
 keymap.nnoremap('<leader>wh', vim.cmd.split, { desc = 'New horizontal split' })
