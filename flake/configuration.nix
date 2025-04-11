@@ -76,6 +76,7 @@ in
           enable = true;
           noDesktop = true;
           enableXfwm = false;
+          enableScreensaver = false;
         };
       };
       windowManager.i3 = {
