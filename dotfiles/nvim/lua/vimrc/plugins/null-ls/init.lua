@@ -17,9 +17,10 @@ local sources = {
 		end,
 	}),
 	-- Python
-	null_ls.builtins.formatting.isort,
-	null_ls.builtins.formatting.black,
-	null_ls.builtins.diagnostics.mypy,
+	null_ls.builtins.formatting.isort.with({ prefer_local = ".venv/bin" }),
+	null_ls.builtins.formatting.black.with({ prefer_local = ".venv/bin" }),
+	null_ls.builtins.diagnostics.pylint.with({ prefer_local = ".venv/bin" }),
+	null_ls.builtins.diagnostics.mypy.with({ prefer_local = ".venv/bin" }),
 	-- Typescript
 	null_ls.builtins.formatting.prettierd,
 	-- CSS
