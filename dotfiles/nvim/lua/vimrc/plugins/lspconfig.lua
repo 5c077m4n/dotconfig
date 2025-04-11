@@ -29,6 +29,9 @@ local SERVER_CONFIG_MAP = {
 	rust_analyzer = function() end,
 	gopls = function() end,
 	jdtls = function() end,
+	eslint = function()
+		return make_config()
+	end,
 	denols = function()
 		local lspconfig = require("lspconfig")
 
