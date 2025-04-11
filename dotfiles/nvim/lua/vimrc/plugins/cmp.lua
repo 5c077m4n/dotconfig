@@ -19,8 +19,8 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 	mapping = cmp.mapping.preset.insert({
-		['<A-d>'] = cmp.mapping.scroll_docs(-4),
-		['<A-u>'] = cmp.mapping.scroll_docs(4),
+		['<C-d>'] = cmp.mapping.scroll_docs(4),
+		['<C-u>'] = cmp.mapping.scroll_docs(-4),
 		['<A-Space>'] = cmp.mapping.complete({}),
 		['<C-['] = cmp.mapping.abort(),
 		['<ESC>'] = cmp.mapping.abort(),
