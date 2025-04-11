@@ -128,6 +128,9 @@ in
         ## Podman
         pkgs-unstable.podman
         pkgs-unstable.podman-compose
+        ### Deps
+        pkgs-unstable.qemu
+        pkgs-unstable.virtiofsd
         # DBs
         ## TUIs
         pkgs.pgcli
