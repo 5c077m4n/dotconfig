@@ -35,9 +35,9 @@ keymap.nnoremap('<leader>tn', function()
 end, { desc = 'New tab in cwd' })
 keymap.nnoremap('<leader>tq', vim.cmd.tabclose, { desc = 'Close current tab' })
 keymap.nnoremap('<leader>tQ', vim.cmd.tabonly, { desc = 'Close all other tabs' })
-keymap.nnoremap('<leader>t]', vim.cmd.tabnext, { desc = 'Next tab' })
-keymap.nnoremap('<leader>t[', vim.cmd.tabprevious, { desc = 'Previous tab' })
 keymap.nnoremap('<leader>tl', vim.cmd.tabs, { desc = 'List tabs' })
+keymap.nnoremap(']t', vim.cmd.tabnext, { desc = 'Next tab' })
+keymap.nnoremap('[t', vim.cmd.tabprevious, { desc = 'Previous tab' })
 
 keymap.tnoremap('<C-]>', [[<C-\><C-n>]], { desc = 'Goto insert mode in terminal' })
 

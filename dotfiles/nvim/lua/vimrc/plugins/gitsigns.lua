@@ -47,10 +47,10 @@ gitsigns.setup({
 		keymap.nnoremap('<leader>hs', gitsigns.stage_hunk, { buffer = buffer_num, desc = 'Git add current hunk' })
 		keymap.nnoremap('<leader>hS', gitsigns.stage_buffer, { buffer = buffer_num, desc = 'Git add entire buffer' })
 		keymap.nnoremap('<leader>hp', gitsigns.preview_hunk, { buffer = buffer_num, desc = 'Preview hunk' })
-		keymap.nnoremap('<leader>h[', gitsigns_actions.prev_hunk, { buffer = buffer_num, desc = 'Go to previous hunk' })
-		keymap.nnoremap('<leader>h]', gitsigns_actions.next_hunk, { buffer = buffer_num, desc = 'Go to next hunk' })
 		keymap.nnoremap('<leader>hb', function()
 			gitsigns.blame_line({ full = true })
 		end, { buffer = buffer_num, desc = 'Git blame current hunk' })
+		keymap.nnoremap('[h', gitsigns_actions.prev_hunk, { buffer = buffer_num, desc = 'Go to previous hunk' })
+		keymap.nnoremap(']h', gitsigns_actions.next_hunk, { buffer = buffer_num, desc = 'Go to next hunk' })
 	end,
 })
