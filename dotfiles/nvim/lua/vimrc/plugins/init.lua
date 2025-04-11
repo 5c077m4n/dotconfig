@@ -52,6 +52,7 @@ local function init_packer()
 								['.prettierrc'] = 'json',
 								['.babelrc'] = 'json',
 								['.swcrc'] = 'json',
+								['tmux.conf'] = 'tmux',
 							},
 							function_extensions = {
 								conf = function()
@@ -189,6 +190,7 @@ local function init_packer()
 				end,
 			})
 			use({ 'fladson/vim-kitty', ft = { 'kitty' } })
+			use({ 'tmux-plugins/vim-tmux', ft = { 'tmux' } })
 			-- File tree
 			use({
 				'nvim-neo-tree/neo-tree.nvim',
