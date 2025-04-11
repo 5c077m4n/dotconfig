@@ -235,20 +235,6 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-# Easily access your usable applications
-mode "programs" {
-	# custom applications
-	bindsym t exec --no-startup-id "kitty"
-	bindsym d exec --no-startup-id "dmenu"
-	bindsym f exec --no-startup-id "firefox"
-	bindsym c exec --no-startup-id "google-chrome"
-	# back to normal: Enter or Escape or $mod+p
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-	bindsym $mod+p mode "default"
-}
-bindsym $mod+p mode "programs"
-
 # floating windows
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
