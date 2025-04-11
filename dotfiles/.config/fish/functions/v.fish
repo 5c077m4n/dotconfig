@@ -1,3 +1,3 @@
-function v --description 'Open Neovim'
+function v --wraps nvim --description 'Open Neovim'
     nvim $argv
 end

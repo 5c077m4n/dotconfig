@@ -1,3 +1,3 @@
-function gd --description 'Show git diff'
+function gd --wraps "git diff" --description 'Show git diff'
     git diff $argv
 end

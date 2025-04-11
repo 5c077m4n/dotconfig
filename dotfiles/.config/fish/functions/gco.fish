@@ -1,3 +1,3 @@
-function gco --description 'Git checkout'
+function gco --wraps "git checkout" --description 'Git checkout'
     git checkout $argv
 end
