@@ -166,6 +166,12 @@ create_autocmd({ "LspAttach" }, {
 			})
 		end, { buffer = buffer_num, desc = "Format selected page/range" })
 
+		vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, ctx)
+			local ns = vim.lsp.diagnostic.get_namespace(ctx.client_id)
+			pcall(vim.diagnostic.reset, ns)
+			return true
+		end
+
 		vim.notify(
 			(client and client.name or "Some")
 				.. " Connected successfully (buffer #"
