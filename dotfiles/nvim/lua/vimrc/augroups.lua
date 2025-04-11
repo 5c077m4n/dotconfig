@@ -15,7 +15,7 @@ local autoread_on_buffer_change_id = create_augroup("autoread_on_buffer_change",
 create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
 	group = autoread_on_buffer_change_id,
 	command = "checktime",
-	desc = "Re-read file when re-entering it and when idle",
+	desc = "Re-read file when re-entering and idle",
 })
 
 local last_read_point_on_file_open_id =
