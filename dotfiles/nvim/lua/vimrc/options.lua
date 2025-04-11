@@ -11,9 +11,10 @@ o.backspace = { 'eol', 'start', 'indent' }
 o.mouse = nil
 
 -- Fold config
+o.foldenable = true
 o.foldmethod = 'indent'
-o.foldlevelstart = 2
-o.foldnestmax = 3
+o.foldlevel = 99
+o.foldlevelstart = 4
 
 o.updatetime = 200
 o.timeoutlen = 500
