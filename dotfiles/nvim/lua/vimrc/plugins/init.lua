@@ -139,14 +139,14 @@ function M.setup()
 			})
 			use({
 				'williamboman/mason-lspconfig.nvim',
+				requires = { 'neovim/nvim-lspconfig' },
+				after = 'mason.nvim',
 				config = function()
 					require('mason-lspconfig').setup({
 						ensure_installed = require('vimrc.plugins.lspconfig').SERVER_LIST,
 						automatic_installation = true,
 					})
 				end,
-				requires = 'neovim/nvim-lspconfig',
-				after = 'mason.nvim',
 			})
 			use({
 				'neovim/nvim-lspconfig',
@@ -154,6 +154,25 @@ function M.setup()
 					require('vimrc.plugins.lspconfig').setup()
 				end,
 				after = { 'mason.nvim', 'mason-lspconfig.nvim' },
+			})
+			use({
+				'jose-elias-alvarez/typescript.nvim',
+				requires = { 'neovim/nvim-lspconfig' },
+				after = 'nvim-lspconfig',
+				config = function()
+					require('typescript').setup({
+						go_to_source_definition = { fallback = true },
+						server = {
+							on_attach = require('vimrc.plugins.lspconfig').on_attach,
+							root_dir = require('lspconfig').util.root_pattern(
+								'package.json',
+								'package-lock.json',
+								'tsconfig.json'
+							),
+							single_file_support = false,
+						},
+					})
+				end,
 			})
 			use({
 				'folke/trouble.nvim',
