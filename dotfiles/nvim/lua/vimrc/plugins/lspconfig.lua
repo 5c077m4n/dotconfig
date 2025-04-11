@@ -127,7 +127,20 @@ local SERVER_CONFIG_MAP = {
 			},
 		})
 	end,
-	rust_analyzer = function() end,
+	rust_analyzer = function()
+		return make_config({
+			["rust-analyzer"] = {
+				imports = {
+					granularity = { group = "module" },
+					prefix = "self",
+				},
+				cargo = {
+					buildScripts = { enable = true },
+				},
+				procMacro = { enable = true },
+			},
+		})
+	end,
 	gopls = function()
 		return make_config({
 			settings = {
