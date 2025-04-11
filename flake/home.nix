@@ -173,11 +173,6 @@ in
                 # Bluetooth
                 pkgs.blueutil
               ];
-
-            sessionVariables = {
-              # To fix python's pandas package from erroring on `libstdc++.os.6` file not being found
-              LD_LIBRARY_PATH = "${stdenv.cc.cc.lib}/lib/";
-            };
           };
 
         programs = {

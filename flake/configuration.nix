@@ -184,14 +184,11 @@ in
       gnumake
     ];
     pathsToLink = [ "/libexec" ]; # links `/libexec` from derivations to `/run/current-system/sw`
-    variables = {
-      # To fix python's pandas package from erroring on `libstdc++.os.6` file not being found
-      LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib/";
-    };
   };
 
   programs = {
     fish.enable = true;
+    nix-ld.enable = true;
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
