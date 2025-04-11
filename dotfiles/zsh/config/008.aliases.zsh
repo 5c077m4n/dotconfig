@@ -19,6 +19,9 @@ elif (( $+commands[pacman] )); then
 	alias pkgupy='sudo pacman -Syu --noconfirm'
 	alias pkgclean='sudo pacman -Scc'
 	alias pkgdblock='rm /var/lib/pacman/db.lock'
+elif (( $+commands[pkg] )); then
+	alias pkgup='pkg update && pkg upgrade'
+	alias pkgupy='pkg update && pkg upgrade --yes'
 elif (( $+commands[apk] )); then
 	alias pkgup='sudo apk update && sudo apk upgrade'
 	alias pkgupy='sudo apk update && sudo apk upgrade --yes'

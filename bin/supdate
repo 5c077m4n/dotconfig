@@ -6,6 +6,9 @@ if (( $+commands[brew] )); then
 	brew upgrade --cask
 elif (( $+commands[pacman] )); then
 	sudo pacman -Syu
+elif (( $+commands[pkg] )); then
+	pkg update
+	pkg upgrade
 elif (( $+commands[apk] )); then
 	sudo apk update
 	sudo apk upgrade
