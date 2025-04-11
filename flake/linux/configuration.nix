@@ -11,13 +11,14 @@ in
     ./hardware-configuration.nix
   ];
 
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    initrd.luks.devices."luks-6094072e-94b1-45a4-88f3-548832c8ffc3".device =
+      "/dev/disk/by-uuid/6094072e-94b1-45a4-88f3-548832c8ffc3";
   };
-
-  boot.initrd.luks.devices."luks-6094072e-94b1-45a4-88f3-548832c8ffc3".device =
-    "/dev/disk/by-uuid/6094072e-94b1-45a4-88f3-548832c8ffc3";
 
   networking = {
     hostName = "nixos"; # Define your hostname.
