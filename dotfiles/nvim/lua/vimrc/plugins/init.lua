@@ -246,7 +246,7 @@ local function setup()
 						"tsconfig.json",
 						"package-lock.json",
 						"yarn.lock",
-						"pnpm.lock"
+						"pnpm-lock.yaml"
 					),
 					handlers = {
 						["textDocument/publishDiagnostics"] = ts_tools_api.filter_diagnostics({
