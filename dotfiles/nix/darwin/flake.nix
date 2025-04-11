@@ -16,11 +16,13 @@
       ...
     }:
     let
-      hostname = "tickle";
-      platform = "aarch64-darwin";
-      configuration =
+      configName = "tickle";
+      config =
         { pkgs, ... }:
         {
+          # The platform the configuration will be used on.
+          nixpkgs.hostPlatform = "aarch64-darwin";
+
           environment = {
             variables = {
               EDITOR = "nvim";
@@ -57,9 +59,11 @@
               # LLMs
               ollama
               # Shells
+              ## ZSH
               zsh
-              fish
               beautysh
+              ## Fish
+              fish
               # JavaScript
               nodejs_22
               deno
@@ -119,9 +123,6 @@
               extra-platforms = x86_64-darwin aarch64-darwin
             '';
           };
-
-          # The platform the configuration will be used on.
-          nixpkgs.hostPlatform = platform;
 
           services = {
             # Auto upgrade nix package and the daemon service.
@@ -201,11 +202,10 @@
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake ~/.config/nix/darwin#tickle
-      darwinConfigurations.${hostname} = nix-darwin.lib.darwinSystem {
-        modules = [ configuration ];
+      darwinConfigurations.${configName} = nix-darwin.lib.darwinSystem {
+        modules = [ config ];
       };
-
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations.${hostname}.pkgs;
+      darwinPackages = self.darwinConfigurations.${configName}.pkgs;
     };
 }
