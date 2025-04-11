@@ -220,49 +220,6 @@ local function setup()
 				require("vimrc.plugins.lspconfig").setup()
 			end,
 		},
-		{
-			"pmizio/typescript-tools.nvim",
-			dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-			ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
-			event = { "BufEnter" },
-			config = function()
-				local lspconfig = require("lspconfig")
-				local ts_tools = require("typescript-tools")
-				local ts_tools_api = require("typescript-tools.api")
-
-				if vim.fn.executable("node") ~= 1 then
-					vim.notify(
-						"The `node` executable is not installed",
-						vim.log.levels.ERROR,
-						{ title = "typescript-tools.nvim" }
-					)
-				end
-
-				ts_tools.setup({
-					settings = {
-						jsx_close_tag = { enable = false },
-						tsserver_file_preferences = {
-							includeInlayParameterNameHints = "all",
-							includeCompletionsForModuleExports = true,
-							quotePreference = "auto",
-						},
-					},
-					single_file_support = false,
-					root_dir = lspconfig.util.root_pattern(
-						"package.json",
-						"tsconfig.json",
-						"package-lock.json",
-						"yarn.lock",
-						"pnpm-lock.yaml"
-					),
-					handlers = {
-						["textDocument/publishDiagnostics"] = ts_tools_api.filter_diagnostics({
-							80001, -- Ignore the 'File is a CommonJS module; it may be converted to an ES module.' diagnostic.
-						}),
-					},
-				})
-			end,
-		},
 		{ "b0o/schemastore.nvim", ft = { "json", "jsonc", "yaml" }, event = { "VeryLazy" } },
 		{
 			"mrcjkb/rustaceanvim",

@@ -25,7 +25,9 @@ end
 
 ---@type table<string, fun(): table | nil>
 local SERVER_CONFIG_MAP = {
-	tsserver = function() end,
+	tsserver = function()
+		return make_config()
+	end,
 	rust_analyzer = function() end,
 	gopls = function() end,
 	eslint = function()
