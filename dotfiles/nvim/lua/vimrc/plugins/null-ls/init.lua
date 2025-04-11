@@ -34,7 +34,6 @@ local sources = {
 	null_ls.builtins.formatting.sqlfluff,
 	null_ls.builtins.diagnostics.sqlfluff,
 	-- Go
-	null_ls.builtins.diagnostics.golangci_lint,
 	null_ls.builtins.formatting.gofumpt,
 	null_ls.builtins.formatting.goimports,
 	null_ls.builtins.formatting.goimports_reviser,
