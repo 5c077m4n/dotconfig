@@ -14,6 +14,7 @@ end
 return {
 	nnoremap = create_keymap_fn("n"),
 	nvnoremap = create_keymap_fn({ "n", "v" }),
+	nvcinoremap = create_keymap_fn({ "n", "v", "c", "i" }),
 	vnoremap = create_keymap_fn("v"),
 	inoremap = create_keymap_fn("i"),
 	tnoremap = create_keymap_fn("t"),
