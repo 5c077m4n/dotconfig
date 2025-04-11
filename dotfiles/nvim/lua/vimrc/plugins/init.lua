@@ -355,7 +355,13 @@ function M.setup()
 				keymap.nnoremap('<leader>rr', vim.cmd.Ranger, { desc = 'Open ranger file browser' })
 			end,
 		},
-		{ 'folke/which-key.nvim', event = 'VeryLazy', opts = {} },
+		{
+			'folke/which-key.nvim',
+			event = 'VeryLazy',
+			opts = {
+				plugins = { marks = false, registers = false },
+			},
+		},
 		{ 'kylechui/nvim-surround', event = 'VeryLazy', version = '*', opts = {} },
 		{
 			'windwp/nvim-autopairs',
