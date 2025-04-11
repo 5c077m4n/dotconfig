@@ -59,8 +59,8 @@ keymap.inoremap('<C-k>', [[<C-o>k]])
 keymap.inoremap('<C-l>', [[<C-o>l]])
 
 -- Special paste
-keymap.vnoremap('<leader>p', [["_dp]], { desc = "Paste after without overriding the current register's content" })
-keymap.vnoremap('<leader>P', [["_dP]], { desc = "Paste before without overriding the current register's content" })
+keymap.vnoremap('p', [["_dp]], { desc = "Paste after without overriding the current register's content" })
+keymap.vnoremap('P', [["_dP]], { desc = "Paste before without overriding the current register's content" })
 
 keymap.nnoremap('<leader>cd', [[:cd %:p:h<CR>:pwd<CR>]], { desc = 'Switch CWD to the directory of the open buffer' })
 
