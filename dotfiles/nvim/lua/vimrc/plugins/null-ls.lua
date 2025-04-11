@@ -5,6 +5,7 @@ local eslint_config = {
 	condition = function(utils)
 		return utils.root_has_file({ 'package.json' })
 	end,
+	extra_args = { '--cache' },
 }
 
 null_ls.setup({
