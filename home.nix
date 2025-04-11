@@ -246,7 +246,7 @@ in
                   extraConfig =
                     let
                       flavor = "macchiato"; # `latte`, `frappe`, `macchiato` or `mocha`
-                      zoomIconQuery = "#{?window_zoomed_flag, [],}";
+                      zoomIconQuery = "#{?window_zoomed_flag,[],}";
                     in
                     ''
                       set -ogq status-right "#{E:@catppuccin_status_application}"
@@ -255,6 +255,7 @@ in
                       set -ogq @catppuccin_flavor "${flavor}"
                       set -ogq @catppuccin_window_status_style "rounded"
                       set -ogq @catppuccin_window_text " #W${zoomIconQuery}"
+                      set -ogq @catppuccin_window_default_text " #W${zoomIconQuery}" # deprecated(?)
                       set -ogq @catppuccin_window_current_text " #W${zoomIconQuery}"
                     '';
                 }
