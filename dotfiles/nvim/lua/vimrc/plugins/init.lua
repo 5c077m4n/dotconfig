@@ -221,6 +221,9 @@ local function setup()
 			event = { "BufEnter" },
 			lazy = true,
 			config = function()
+				local ts_tools = require("typescript-tools")
+				local ts_tools_api = require("typescript-tools.api")
+
 				if vim.fn.executable("node") ~= 1 then
 					vim.notify(
 						"The `node` executable is not installed",
@@ -229,8 +232,15 @@ local function setup()
 					)
 				end
 
-				require("typescript-tools").setup({
-					settings = { jsx_close_tag = { enable = false } },
+				ts_tools.setup({
+					settings = {
+						jsx_close_tag = { enable = false },
+					},
+					handlers = {
+						["textDocument/publishDiagnostics"] = ts_tools_api.filter_diagnostics({
+							80001, -- Ignore the 'File is a CommonJS module; it may be converted to an ES module.' diagnostic.
+						}),
+					},
 				})
 			end,
 		},
