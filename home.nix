@@ -97,6 +97,7 @@ in
             pkgs-unstable.wasmtime
             # Gleam
             pkgs-unstable.gleam
+            pkgs-unstable.erlang
             # YAML
             pkgs.yamllint
             # K8s
