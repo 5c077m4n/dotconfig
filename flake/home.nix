@@ -59,13 +59,19 @@ in
                 # LLMs
                 pkgs.ollama
                 # Shells
+                ## Bash
+                pkgs.bash
                 ## ZSH
                 pkgs.zsh
-                pkgs.beautysh
                 ## Fish
                 pkgs.fish
                 pkgs.fishPlugins.fzf-fish
                 pkgs.fishPlugins.autopair
+                ## Misc
+                ### Formatters
+                pkgs.beautysh
+                pkgs.shfmt
+                pkgs.shellharden
                 # JavaScript
                 pkgs.nodejs_22
                 pkgs.eslint_d
