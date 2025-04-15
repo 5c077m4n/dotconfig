@@ -46,6 +46,7 @@ in
         pkgs.lazygit
         pkgs.delta
         pkgs.git-absorb
+        pkgs.gitleaks
         # TUI
         pkgs.tmux
         pkgs.starship

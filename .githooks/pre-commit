@@ -42,4 +42,6 @@
 				;;
 		esac
 	done
+
+	gitleaks git --verbose
 }
