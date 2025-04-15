@@ -54,6 +54,13 @@ local SERVER_CONFIG_MAP = {
 			root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deno.lock"),
 		})
 	end,
+	biome = function()
+		local lspconfig = require("lspconfig")
+
+		return make_config({
+			root_dir = lspconfig.util.root_pattern("biome.json", "biome.jsonc"),
+		})
+	end,
 	bashls = function()
 		return make_config()
 	end,

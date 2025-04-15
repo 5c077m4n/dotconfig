@@ -37,6 +37,7 @@ in
         pkgs.gcc
         pkgs.gnupg
         pkgs.stow
+        pkgs.inotify-tools
         # VCS
         ## Git
         pkgs.git
@@ -76,7 +77,7 @@ in
         pkgs.beautysh
         pkgs.shfmt
         pkgs.shellharden
-        # JavaScript
+        # TypeScript/JavaScript
         ## Runtimes
         pkgs.nodejs_22
         pkgs-unstable.deno
@@ -87,6 +88,7 @@ in
         pkgs.eslint_d
         pkgs.prettierd
         pkgs.stylelint
+        pkgs-unstable.biome
         # Python
         pkgs-unstable.python310
         pkgs-unstable.poetry
