@@ -29,15 +29,29 @@ in
         pkgs.coreutils
         pkgs.openssh
         pkgs.less
-        pkgs.gzip
-        pkgs.unzip
         pkgs.ps
-        pkgs.busybox
         pkgs.gnumake
         pkgs.gcc
         pkgs.gnupg
         pkgs.stow
         pkgs.inotify-tools
+        pkgs.gnugrep
+        pkgs.gnupg
+        pkgs.gnused
+        pkgs.gnutar
+        pkgs.bzip2
+        pkgs.gzip
+        pkgs.xz
+        pkgs.zip
+        pkgs.unzip
+        pkgs.procps
+        pkgs.killall
+        pkgs.diffutils
+        pkgs.findutils
+        pkgs.utillinux
+        pkgs.tzdata
+        pkgs.hostname
+        pkgs.man
         # VCS
         ## Git
         pkgs.git
