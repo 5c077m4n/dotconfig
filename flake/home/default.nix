@@ -181,11 +181,12 @@ in
         pkgs.android-tools # ADB
       ]
       ++ lib.optionals isLinux [
+        # Audio
+        pkgs.pulseaudio
+        pkgs.pipewire
         # CLI utils
         ## Clipboard
         pkgs.xclip
-        ## Audio control
-        pkgs.pulseaudio
         ## Screen brightness control
         pkgs.brightnessctl
         ## Battery data
