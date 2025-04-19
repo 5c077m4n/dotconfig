@@ -36,14 +36,22 @@
       darwinConfigName = "${username}@macos";
       nixosConfigName = "${username}@nixos-vivo";
       ubuntuConfigName = "${username}@ubuntu-vivo";
-      allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "google-chrome" ];
+      allowUnfreePredicate =
+        pkg:
+        builtins.elem (nixpkgs.lib.getName pkg) [
+          "google-chrome"
+          "claude-code"
+        ];
     in
     rec {
       darwinConfigurations.${darwinConfigName} =
         let
           system = "aarch64-darwin";
           pkgs = import nixpkgs-darwin { inherit system; };
-          pkgs-unstable = import nixpkgs-unstable { inherit system; };
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config = { inherit allowUnfreePredicate; };
+          };
           home-manager-modules = [
             home-manager.nixosModules.home-manager
             {
@@ -81,7 +89,10 @@
             inherit system;
             config = { inherit allowUnfreePredicate; };
           };
-          pkgs-unstable = import nixpkgs-unstable { inherit system; };
+          pkgs-unstable = import nixpkgs-unstable {
+            inherit system;
+            config = { inherit allowUnfreePredicate; };
+          };
           specialArgs = {
             inherit
               self
@@ -131,7 +142,10 @@
               inherit system;
               config = { inherit allowUnfreePredicate; };
             };
-            pkgs-unstable = import nixpkgs-unstable { inherit system; };
+            pkgs-unstable = import nixpkgs-unstable {
+              inherit system;
+              config = { inherit allowUnfreePredicate; };
+            };
           in
           home-manager.lib.homeManagerConfiguration {
             inherit pkgs;

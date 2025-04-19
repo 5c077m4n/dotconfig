@@ -52,6 +52,8 @@ in
         pkgs.tzdata
         pkgs.hostname
         pkgs.man
+        ### AI
+        pkgs-unstable.claude-code
         # VCS
         ## Git
         pkgs.git
