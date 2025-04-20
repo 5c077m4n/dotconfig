@@ -1,5 +1,6 @@
 local schemastore = require("schemastore")
 
+---@type vim.lsp.ClientConfig
 return {
 	settings = {
 		yaml = {

@@ -218,20 +218,18 @@ local function setup()
 			},
 			event = { "VeryLazy" },
 			config = function()
+				local original_server_list = require("vimrc.plugins.lspconfig").SERVER_LIST
+				local server_list = vim.tbl_filter(function(server)
+					return server ~= "gleam"
+				end, original_server_list)
+
 				require("mason-lspconfig").setup({
-					ensure_installed = require("vimrc.plugins.lspconfig").SERVER_LIST,
+					ensure_installed = server_list,
 					automatic_installation = true,
 				})
 			end,
 		},
-		{
-			"neovim/nvim-lspconfig",
-			version = "v2.*",
-			dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
-			config = function()
-				require("vimrc.plugins.lspconfig").setup()
-			end,
-		},
+		{ "neovim/nvim-lspconfig", lazy = true },
 		{ "b0o/schemastore.nvim", ft = { "json", "jsonc", "yaml" } },
 		{ "ziglang/zig.vim", ft = { "zig" } },
 		{
@@ -240,8 +238,6 @@ local function setup()
 			event = { "VeryLazy" },
 			config = function()
 				require("trouble").setup({
-					fold_open = "v",
-					fold_closed = ">",
 					indent_lines = true,
 					signs = { error = "E", warning = "W", hint = "H", information = "I" },
 				})
@@ -315,51 +311,50 @@ local function setup()
 			"saghen/blink.cmp",
 			dependencies = { "rafamadriz/friendly-snippets" },
 			version = "v1.*",
-			---@module 'blink.cmp'
-			---@type blink.cmp.Config
-			opts = {
-				appearance = {
-					use_nvim_cmp_as_default = true,
-					nerd_font_variant = "mono",
-				},
-				completion = {
-					menu = {
-						enabled = true,
-						border = "single",
+			config = function()
+				local blink_cmp = require("blink.cmp")
+
+				vim.lsp.config("*", { capabilities = blink_cmp.get_lsp_capabilities() })
+				blink_cmp.setup({
+					appearance = {
+						use_nvim_cmp_as_default = true,
+						nerd_font_variant = "mono",
 					},
-					documentation = {
-						auto_show = true,
-						window = {
+					completion = {
+						menu = {
+							enabled = true,
 							border = "single",
 						},
-					},
-				},
-				sources = {
-					default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-					providers = {
-						lazydev = {
-							name = "LazyDev",
-							module = "lazydev.integrations.blink",
-							score_offset = 100,
+						documentation = {
+							auto_show = true,
+							window = { border = "single" },
 						},
 					},
-					per_filetype = {
-						codecompanion = { "codecompanion" },
+					sources = {
+						default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+						providers = {
+							lazydev = {
+								name = "LazyDev",
+								module = "lazydev.integrations.blink",
+								score_offset = 100,
+							},
+						},
+						per_filetype = {
+							codecompanion = { "codecompanion" },
+						},
 					},
-				},
-				signature = {
-					enabled = false,
-					window = { border = "single" },
-				},
-				cmdline = {
-					completion = {
-						menu = { auto_show = true },
+					signature = {
+						enabled = false,
+						window = { border = "single" },
 					},
-				},
-				fuzzy = {
-					implementation = "prefer_rust",
-				},
-			},
+					cmdline = {
+						completion = {
+							menu = { auto_show = true },
+						},
+					},
+					fuzzy = { implementation = "prefer_rust" },
+				})
+			end,
 			opts_extend = { "sources.default" },
 		},
 		{

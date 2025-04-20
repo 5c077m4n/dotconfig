@@ -63,7 +63,7 @@ create_autocmd({ "LspAttach" }, {
 		local lsp = vim.lsp
 		local diagnostic = vim.diagnostic
 
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		local client = lsp.get_client_by_id(args.data.client_id)
 		local buffer_num = args.buf
 
 		lsp.handlers["window/showMessage"] = function(err, result)

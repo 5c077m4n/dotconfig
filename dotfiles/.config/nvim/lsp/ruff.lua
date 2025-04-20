@@ -1,3 +1,4 @@
+---@type vim.lsp.ClientConfig
 return {
 	on_init = function()
 		vim.api.nvim_create_autocmd("LspAttach", {
