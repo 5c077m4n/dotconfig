@@ -113,6 +113,8 @@ in
         pkgs-unstable.pylint
         pkgs-unstable.black
         pkgs-unstable.isort
+        pkgs-unstable.ruff
+        pkgs-unstable.pyright
         # Golang
         pkgs-unstable.go
         ## Tools

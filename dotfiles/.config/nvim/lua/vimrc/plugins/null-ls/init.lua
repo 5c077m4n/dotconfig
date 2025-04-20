@@ -14,16 +14,6 @@ local sources = {
 			return utils.root_has_file({ "selene.toml" })
 		end,
 	}),
-	-- Python
-	null_ls.builtins.formatting.isort.with({ prefer_local = ".venv/bin" }),
-	null_ls.builtins.formatting.black.with({ prefer_local = ".venv/bin" }),
-	null_ls.builtins.diagnostics.pylint.with({
-		prefer_local = ".venv/bin",
-		condition = function(utils)
-			return utils.root_has_file({ ".pylintrc" })
-		end,
-	}),
-	null_ls.builtins.diagnostics.mypy.with({ prefer_local = ".venv/bin" }),
 	-- Typescript/Javascript
 	null_ls.builtins.formatting.prettierd.with({ extra_filetypes = { "toml" } }),
 	null_ls_builtins.diagnostics.eslint_d.with({

@@ -86,60 +86,44 @@ local SERVER_CONFIG_MAP = {
 			},
 		})
 	end,
-	jedi_language_server = function()
+	ruff = function()
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
+			callback = function(args)
+				local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+				if client and client.name == "ruff" then
+					-- Disable hover in favor of Pyright
+					client.server_capabilities.hoverProvider = false
+				end
+			end,
+			desc = "LSP: Disable hover capability from Ruff",
+		})
+
+		return make_config()
+	end,
+	pyright = function()
 		return make_config({
-			init_options = {
-				codeAction = {
-					nameExtractVariable = "jls_extract_var",
-					nameExtractFunction = "jls_extract_def",
-				},
-				completion = {
-					disableSnippets = false,
-					resolveEagerly = false,
-					ignorePatterns = {},
-				},
-				diagnostics = { enable = true, didOpen = true, didChange = true, didSave = true },
-				hover = {
-					enable = true,
-					disable = {
-						class = { all = false, names = {}, fullNames = {} },
-						["function"] = { all = false, names = {}, fullNames = {} },
-						instance = { all = false, names = {}, fullNames = {} },
-						keyword = { all = false, names = {}, fullNames = {} },
-						module = { all = false, names = {}, fullNames = {} },
-						param = { all = false, names = {}, fullNames = {} },
-						path = { all = false, names = {}, fullNames = {} },
-						property = { all = false, names = {}, fullNames = {} },
-						statement = { all = false, names = {}, fullNames = {} },
-					},
-				},
-				jediSettings = {
-					autoImportModules = {},
-					caseInsensitiveCompletion = true,
-					debug = false,
-				},
-				markupKindPreferred = "markdown",
-				workspace = {
-					extraPaths = {},
-					symbols = {
-						ignoreFolders = { ".nox", ".tox", ".venv", "__pycache__", "venv" },
-						maxSymbols = 20,
-					},
+			settings = {
+				python = {
+					analysis = { ignore = { "*" } },
 				},
 			},
 		})
 	end,
 	rust_analyzer = function()
 		return make_config({
-			["rust-analyzer"] = {
-				imports = {
-					granularity = { group = "module" },
-					prefix = "self",
+			settings = {
+				["rust-analyzer"] = {
+					imports = {
+						granularity = { group = "module" },
+						prefix = "self",
+					},
+					cargo = {
+						buildScripts = { enable = true },
+					},
+					procMacro = { enable = true },
 				},
-				cargo = {
-					buildScripts = { enable = true },
-				},
-				procMacro = { enable = true },
 			},
 		})
 	end,
