@@ -28,6 +28,8 @@ local sources = {
 	}),
 	-- CSS
 	null_ls.builtins.formatting.stylelint,
+	-- Python
+	null_ls_builtins.formatting.ruff,
 	-- Rust
 	null_ls_builtins.formatting.rustfmt,
 	-- Shell
