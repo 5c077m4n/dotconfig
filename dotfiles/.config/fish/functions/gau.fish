@@ -1,3 +1,3 @@
-function gau
+function gau --wraps 'git add'
     git add --update
 end

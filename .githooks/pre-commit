@@ -6,11 +6,7 @@
 	local stylua_config="${root_dir}/.stylua.toml"
 
 	local file
-	for file in $(git diff --name-only --staged); do
-		if [[ ! -f "$file" ]]; then
-			continue
-		fi
-
+	for file in $(git diff --name-only --staged --diff-filter=ACM); do
 		case "${file##*.}" in
 			lua)
 				selene --config "$selene_config" "$file" || exit 1
