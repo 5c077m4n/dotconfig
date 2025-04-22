@@ -330,12 +330,6 @@ local function setup()
 			},
 		},
 		{
-			"zeioth/garbage-day.nvim",
-			dependencies = { "neovim/nvim-lspconfig" },
-			event = "VeryLazy",
-			opts = { aggressive_mode = true, wakeup_delay = 250 },
-		},
-		{
 			"saghen/blink.cmp",
 			dependencies = { "rafamadriz/friendly-snippets" },
 			version = "v1.*",
