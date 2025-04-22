@@ -144,6 +144,7 @@ in
         pkgs.statix
         pkgs.deadnix
         pkgs.nil
+        pkgs.nixd
         # WASM
         pkgs-unstable.wasmtime
         # Gleam

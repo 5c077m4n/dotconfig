@@ -165,13 +165,7 @@ create_autocmd({ "LspAttach" }, {
 			{ buffer = buffer_num, desc = "Code action" }
 		)
 		keymap.nvnoremap("<leader>l", function()
-			vim.lsp.buf.format({
-				filter = function(formatter)
-					return formatter.name == "null-ls"
-				end,
-				bufnr = buffer_num,
-				async = true,
-			})
+			vim.lsp.buf.format({ bufnr = buffer_num, async = true })
 		end, { buffer = buffer_num, desc = "Format selected page/range" })
 
 		vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, ctx)

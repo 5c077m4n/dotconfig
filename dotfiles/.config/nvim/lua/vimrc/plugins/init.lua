@@ -25,6 +25,7 @@ local function setup()
 
 	require("lazy").setup({
 		{ "nvim-lua/plenary.nvim", lazy = true },
+		{ "neovim/nvim-lspconfig", lazy = true },
 		{
 			"aserowy/tmux.nvim",
 			event = { "VeryLazy" },
@@ -229,7 +230,42 @@ local function setup()
 				})
 			end,
 		},
-		{ "neovim/nvim-lspconfig", lazy = true },
+		{
+			"stevearc/conform.nvim",
+			event = { "BufWritePre" },
+			init = function()
+				vim.o.formatexpr = "v:lua.require('conform').formatexpr()"
+			end,
+			config = function()
+				local js_linters = { "biome", "biome-check", "biome-organize-imports" }
+
+				require("conform").setup({
+					formatters_by_ft = {
+						lua = { "stylua" },
+						rust = { "rustfmt" },
+						typescript = js_linters,
+						javascript = js_linters,
+						typescriptreact = js_linters,
+						javascriptreact = js_linters,
+						python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
+						go = { "golangci-lint", "golines" },
+						toml = { "prettierd" },
+						yaml = { "prettierd" },
+						json = { "prettierd" },
+						html = { "prettierd" },
+						css = { "stylelint" },
+						markdown = { "deno_fmt" },
+						sh = { "shellharden", "shfmt" },
+						bash = { "shellharden", "shfmt" },
+						zsh = { "shellharden", "shfmt" },
+						fish = { "fish_indent" },
+						nix = { "nixfmt" },
+						gleam = { "gleam" },
+						sql = { "sqlfluff" },
+					},
+				})
+			end,
+		},
 		{ "b0o/schemastore.nvim", ft = { "json", "jsonc", "yaml" } },
 		{ "ziglang/zig.vim", ft = { "zig" } },
 		{
@@ -298,14 +334,6 @@ local function setup()
 			dependencies = { "neovim/nvim-lspconfig" },
 			event = "VeryLazy",
 			opts = { aggressive_mode = true, wakeup_delay = 250 },
-		},
-		{
-			"nvimtools/none-ls.nvim",
-			dependencies = { "nvim-lua/plenary.nvim" },
-			event = { "InsertEnter" },
-			config = function()
-				require("vimrc.plugins.null-ls")
-			end,
 		},
 		{
 			"saghen/blink.cmp",
