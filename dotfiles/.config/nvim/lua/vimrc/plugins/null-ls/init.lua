@@ -15,7 +15,12 @@ local sources = {
 		end,
 	}),
 	-- Typescript/Javascript
-	null_ls.builtins.formatting.prettierd.with({ extra_filetypes = { "toml" } }),
+	null_ls.builtins.formatting.prettierd.with({
+		extra_filetypes = { "toml" },
+		condition = function(utils)
+			return utils.root_has_file({ ".prettierrc", ".prettierrc.json", ".prettierrc.yml" })
+		end,
+	}),
 	null_ls_builtins.diagnostics.eslint_d.with({
 		condition = function(utils)
 			return utils.root_has_file({ ".eslintrc.js", ".eslintrc.json" })
