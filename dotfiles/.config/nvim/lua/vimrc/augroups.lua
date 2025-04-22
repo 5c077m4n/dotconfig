@@ -174,14 +174,13 @@ create_autocmd({ "LspAttach" }, {
 			return true
 		end
 
-		vim.notify(
-			(client and client.name or "Some")
-				.. " Connected successfully (buffer #"
-				.. buffer_num
-				.. ")",
-			vim.log.levels.TRACE,
-			{ timeout = 400, title = "LSP server connected" }
-		)
+		local msg = vim.fn.join({
+			client and client.name or "Some",
+			" Connected successfully (buffer #",
+			buffer_num,
+			")",
+		}, "")
+		vim.notify(msg, vim.log.levels.TRACE, { timeout = 400, title = "LSP server connected" })
 	end,
 	desc = "Setup LSP config on attach",
 })
