@@ -1,8 +1,4 @@
 ---@type vim.lsp.ClientConfig
 return {
-	settings = {
-		python = {
-			analysis = { ignore = { "*" } },
-		},
-	},
+	root_marker = { "pyrightconfig.json" },
 }
