@@ -7,13 +7,9 @@ local create_command = vim.api.nvim_create_user_command
 
 ---@param cmd string
 local function norBang(cmd)
-	return function()
-		-- selene: allow(mixed_table)
-		vim.cmd.normal({ cmd, bang = true })
-	end
+	return function() vim.cmd.normal({ cmd, bang = true }) end
 end
 
-keymap.nnoremap("<leader>0", module_utils.update_vimrc, { desc = "Git pull latest vimrc" })
 keymap.nnoremap("<leader>1", function() require("lazy").sync() end, { desc = "Update all plugins" })
 keymap.nnoremap("<leader>2", module_utils.reload_vimrc, { desc = "Reload vimrc" })
 keymap.nnoremap("<leader>3", signals.send_usr1_to_all_nvim, { desc = "Reload all NVIM instances" })
