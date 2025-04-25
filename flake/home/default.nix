@@ -137,8 +137,8 @@ in
         pkgs.luajit
         pkgs.luajitPackages.luacheck
         pkgs.luarocks
-        pkgs.stylua
-        pkgs.selene
+        pkgs-unstable.stylua
+        pkgs-unstable.selene
         # Nix
         pkgs.nixfmt-rfc-style
         pkgs.statix
