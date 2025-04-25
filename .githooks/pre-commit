@@ -10,7 +10,7 @@
 		case "${file##*.}" in
 			lua)
 				selene --config "$selene_config" "$file" || exit 1
-				stylua --check --config-path="$stylua_config" "$file" || exit 1
+				stylua --check --verify --config-path="$stylua_config" "$file" || exit 1
 				;;
 			py)
 				black --check "$file" || exit 1
