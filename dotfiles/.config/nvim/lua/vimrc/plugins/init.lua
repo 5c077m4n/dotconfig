@@ -262,6 +262,23 @@ local function setup()
 						sql = { "sqlfluff" },
 					},
 				})
+
+				vim.api.nvim_create_autocmd({ "LspAttach" }, {
+					group = vim.api.nvim_create_augroup(
+						"setup_conform_formatters",
+						{ clear = true }
+					),
+					callback = function(args)
+						keymap.nvnoremap(
+							"<leader>l",
+							function() require("conform").format({ bufnr = args.buf }) end,
+							{
+								buffer = args.buf,
+								desc = "[conform.nvim] Format selected buffer/range",
+							}
+						)
+					end,
+				})
 			end,
 		},
 		{ "b0o/schemastore.nvim", ft = { "json", "jsonc", "yaml" } },

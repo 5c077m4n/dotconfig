@@ -186,15 +186,11 @@ create_autocmd({ "LspAttach" }, {
 			lsp.buf.code_action,
 			{ buffer = buffer_num, desc = "Code action" }
 		)
-		keymap.nvnoremap("<leader>l", function()
-			local ok, conform = pcall(require, "conform")
-
-			if ok and conform then
-				conform.format({ bufnr = buffer_num })
-			else
-				vim.lsp.buf.format({ bufnr = buffer_num, async = true })
-			end
-		end, { buffer = buffer_num, desc = "Format selected buffer/range" })
+		keymap.nvnoremap(
+			"<leader>l",
+			function() vim.lsp.buf.format({ bufnr = buffer_num, async = true }) end,
+			{ buffer = buffer_num, desc = "Format selected buffer/range" }
+		)
 
 		vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, ctx)
 			local ns = vim.lsp.diagnostic.get_namespace(ctx.client_id)
