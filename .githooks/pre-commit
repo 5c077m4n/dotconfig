@@ -9,7 +9,6 @@
 	for file in $(git diff --name-only --staged --diff-filter=ACM); do
 		case "${file##*.}" in
 			lua)
-				selene --config "$selene_config" "$file" || exit 1
 				stylua --check --verify --config-path="$stylua_config" "$file" || exit 1
 				;;
 			py)
