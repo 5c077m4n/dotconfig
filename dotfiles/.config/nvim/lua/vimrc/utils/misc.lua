@@ -1,15 +1,11 @@
 local M = {}
 
-function M.clean_extra_spaces()
-	vim.cmd([[silent! %s/\s\+$//]])
-end
+function M.clean_extra_spaces() vim.cmd([[silent! %s/\s\+$//]]) end
 
 function M.jump_to_last_visited()
 	local line = vim.fn.line
 
-	if line([['"]]) > 1 and line([['"]]) < line("$") then
-		vim.cmd([[normal! g'"]])
-	end
+	if line([['"]]) > 1 and line([['"]]) < line("$") then vim.cmd([[normal! g'"]]) end
 end
 
 ---@return boolean

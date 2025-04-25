@@ -13,15 +13,21 @@ keymap.nnoremap("<leader>fls", function()
 		telescope_builtin.find_files()
 	end
 end, { desc = "Find project files" })
-keymap.nnoremap("<C-p>", function()
-	telescope_builtin.find_files({ cwd = vim.fn.getcwd() })
-end, { desc = "Find project files (from current work directory)" })
-keymap.nnoremap("<leader>fs", function()
-	telescope_builtin.live_grep({ cwd = vim.fn.getcwd() })
-end, { desc = "Search project for a string (from current work directory)" })
-keymap.vnoremap("<leader>fs", function()
-	telescope_builtin.grep_string({ cwd = vim.fn.getcwd() })
-end, { desc = "Search project for the current selection (from current work directory)" })
+keymap.nnoremap(
+	"<C-p>",
+	function() telescope_builtin.find_files({ cwd = vim.fn.getcwd() }) end,
+	{ desc = "Find project files (from current work directory)" }
+)
+keymap.nnoremap(
+	"<leader>fs",
+	function() telescope_builtin.live_grep({ cwd = vim.fn.getcwd() }) end,
+	{ desc = "Search project for a string (from current work directory)" }
+)
+keymap.vnoremap(
+	"<leader>fs",
+	function() telescope_builtin.grep_string({ cwd = vim.fn.getcwd() }) end,
+	{ desc = "Search project for the current selection (from current work directory)" }
+)
 keymap.nnoremap("<leader>f:", telescope_builtin.commands, { desc = "Search commands" })
 keymap.nnoremap("<leader>fr", telescope_builtin.registers, { desc = "Search registers" })
 keymap.inoremap("<C-r>", telescope_builtin.registers, { desc = "Search registers" })
@@ -29,9 +35,11 @@ keymap.nnoremap("<leader>fb", telescope_builtin.buffers, { desc = "Search buffer
 keymap.nnoremap("<leader>fm", telescope_builtin.marks, { desc = "Search bookmarks" })
 keymap.nnoremap("<leader>fh", telescope_builtin.help_tags, { desc = "Search vim helpdocs" })
 keymap.nnoremap("<leader>fd", telescope_builtin.diagnostics, { desc = "Search diagnostics" })
-keymap.nnoremap("<leader>fo", function()
-	telescope_builtin.oldfiles({ only_cwd = true })
-end, { desc = "Search recently opened files" })
+keymap.nnoremap(
+	"<leader>fo",
+	function() telescope_builtin.oldfiles({ only_cwd = true }) end,
+	{ desc = "Search recently opened files" }
+)
 keymap.nnoremap(
 	"<leader>fc",
 	telescope_builtin.git_commits,

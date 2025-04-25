@@ -1,5 +1,6 @@
 --# selene: allow(mixed_table)
 
+local os = require("os")
 local utils = require("vimrc.utils")
 
 local keymap = utils.keymapping
@@ -7,15 +8,25 @@ local keymap = utils.keymapping
 local function bootstrap()
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-	if not vim.loop.fs_stat(lazypath) then
-		vim.fn.system({
+	if not (vim.uv or vim.loop).fs_stat(lazypath) then
+		local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+		local out = vim.fn.system({
 			"git",
 			"clone",
 			"--filter=blob:none",
-			"https://github.com/folke/lazy.nvim.git",
 			"--branch=stable",
+			lazyrepo,
 			lazypath,
 		})
+		if vim.v.shell_error ~= 0 then
+			vim.api.nvim_echo({
+				{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+				{ out, "WarningMsg" },
+				{ "\nPress any key to exit..." },
+			}, true, {})
+			vim.fn.getchar()
+			os.exit(1)
+		end
 	end
 	vim.opt.rtp:prepend(lazypath)
 end
@@ -83,9 +94,7 @@ local function setup()
 		},
 		{
 			"projekt0n/github-nvim-theme",
-			init = function()
-				vim.cmd.colorscheme("github_dark_colorblind")
-			end,
+			init = function() vim.cmd.colorscheme("github_dark_colorblind") end,
 			config = function()
 				require("github-theme").setup({ options = { dim_inactive = true } })
 			end,
@@ -100,37 +109,27 @@ local function setup()
 				"SmiteshP/nvim-navic",
 				"linrongbin16/lsp-progress.nvim",
 			},
-			config = function()
-				require("vimrc.plugins.lualine")
-			end,
+			config = function() require("vimrc.plugins.lualine") end,
 		},
 		{
 			"norcalli/nvim-colorizer.lua",
 			event = { "VeryLazy" },
-			config = function()
-				require("colorizer").setup()
-			end,
+			config = function() require("colorizer").setup() end,
 		},
 		{
 			"folke/todo-comments.nvim",
 			event = { "VeryLazy" },
-			config = function()
-				require("todo-comments").setup()
-			end,
+			config = function() require("todo-comments").setup() end,
 		},
 		{
 			"onsails/lspkind-nvim",
 			event = { "VeryLazy" },
-			config = function()
-				require("lspkind").init({ mode = "text" })
-			end,
+			config = function() require("lspkind").init({ mode = "text" }) end,
 		},
 		{
 			"linrongbin16/lsp-progress.nvim",
 			event = { "VeryLazy" },
-			config = function()
-				require("lsp-progress").setup()
-			end,
+			config = function() require("lsp-progress").setup() end,
 		},
 		{ "fladson/vim-kitty", ft = { "kitty" } },
 		{ "tmux-plugins/vim-tmux", ft = { "tmux" } },
@@ -142,9 +141,7 @@ local function setup()
 				"nvim-tree/nvim-web-devicons",
 				"MunifTanjim/nui.nvim",
 			},
-			config = function()
-				require("vimrc.plugins.neotree")
-			end,
+			config = function() require("vimrc.plugins.neotree") end,
 		},
 		{
 			"nvim-treesitter/nvim-treesitter",
@@ -210,20 +207,17 @@ local function setup()
 				{
 					"williamboman/mason.nvim",
 					event = { "VeryLazy" },
-					build = function()
-						vim.cmd.MasonUpdate()
-					end,
-					config = function()
-						require("mason").setup({ ui = { border = "single" } })
-					end,
+					build = function() vim.cmd.MasonUpdate() end,
+					config = function() require("mason").setup({ ui = { border = "single" } }) end,
 				},
 			},
 			event = { "VeryLazy" },
 			config = function()
 				local original_server_list = require("vimrc.plugins.lspconfig").SERVER_LIST
-				local server_list = vim.tbl_filter(function(server)
-					return server ~= "gleam"
-				end, original_server_list)
+				local server_list = vim.tbl_filter(
+					function(server) return server ~= "gleam" end,
+					original_server_list
+				)
 
 				require("mason-lspconfig").setup({
 					ensure_installed = server_list,
@@ -233,14 +227,17 @@ local function setup()
 		},
 		{
 			"stevearc/conform.nvim",
-			event = { "BufWritePre" },
-			init = function()
-				vim.o.formatexpr = "v:lua.require('conform').formatexpr()"
-			end,
+			event = { "VeryLazy" },
+			init = function() vim.o.formatexpr = "v:lua.require('conform').formatexpr()" end,
 			config = function()
 				local js_linters = { "biome", "biome-check", "biome-organize-imports" }
 
 				require("conform").setup({
+					formatters = {
+						stylua = {
+							prepend_args = { "--verify" },
+						},
+					},
 					formatters_by_ft = {
 						lua = { "stylua" },
 						rust = { "rustfmt" },
@@ -279,15 +276,21 @@ local function setup()
 					signs = { error = "E", warning = "W", hint = "H", information = "I" },
 				})
 
-				keymap.nnoremap("<leader>xx", function()
-					vim.cmd.Trouble("diagnostics toggle")
-				end, { desc = "Toggle trouble diagnostics" })
-				keymap.nnoremap("<leader>xd", function()
-					vim.cmd.Trouble("diagnostics toggle filter.buf=0")
-				end, { desc = "Toggle trouble diagnostics for current buffer" })
-				keymap.nnoremap("<leader>xl", function()
-					vim.cmd.Trouble("lsp toggle")
-				end, { desc = "Toggle LSP definitions & refernces" })
+				keymap.nnoremap(
+					"<leader>xx",
+					function() vim.cmd.Trouble("diagnostics toggle") end,
+					{ desc = "Toggle trouble diagnostics" }
+				)
+				keymap.nnoremap(
+					"<leader>xd",
+					function() vim.cmd.Trouble("diagnostics toggle filter.buf=0") end,
+					{ desc = "Toggle trouble diagnostics for current buffer" }
+				)
+				keymap.nnoremap(
+					"<leader>xl",
+					function() vim.cmd.Trouble("lsp toggle") end,
+					{ desc = "Toggle LSP definitions & refernces" }
+				)
 			end,
 		},
 		{
@@ -297,21 +300,19 @@ local function setup()
 				local persist = require("persistence")
 
 				persist.setup({
-					pre_save = function()
-						vim.cmd.Neotree("close")
-					end,
-					pre_load = function()
-						vim.cmd.Neotree("close")
-					end,
+					pre_save = function() vim.cmd.Neotree("close") end,
+					pre_load = function() vim.cmd.Neotree("close") end,
 				})
 				keymap.nnoremap(
 					"<leader>pr",
 					persist.load,
 					{ desc = "Restore the session for the current directory" }
 				)
-				keymap.nnoremap("<leader>pl", function()
-					persist.load({ last = true })
-				end, { desc = "Restore the last session" })
+				keymap.nnoremap(
+					"<leader>pl",
+					function() persist.load({ last = true }) end,
+					{ desc = "Restore the last session" }
+				)
 				keymap.nnoremap("<leader>pd", function()
 					persist.stop()
 					vim.notify("Auto session save disabled")
@@ -435,9 +436,7 @@ local function setup()
 		{
 			"tpope/vim-fugitive",
 			event = { "VeryLazy" },
-			config = function()
-				require("vimrc.plugins.git-fugitive")
-			end,
+			config = function() require("vimrc.plugins.git-fugitive") end,
 		},
 		{
 			"sindrets/diffview.nvim",
@@ -446,18 +445,14 @@ local function setup()
 				"nvim-lua/plenary.nvim",
 				"nvim-tree/nvim-web-devicons",
 			},
-			config = function()
-				require("vimrc.plugins.diffview")
-			end,
+			config = function() require("vimrc.plugins.diffview") end,
 			enabled = false,
 		},
 		{
 			"lewis6991/gitsigns.nvim",
 			event = { "BufReadPre", "BufNewFile" },
 			dependencies = { "nvim-lua/plenary.nvim" },
-			config = function()
-				require("vimrc.plugins.gitsigns")
-			end,
+			config = function() require("vimrc.plugins.gitsigns") end,
 		},
 		{
 			"nvim-telescope/telescope.nvim",
@@ -469,9 +464,7 @@ local function setup()
 				"BurntSushi/ripgrep",
 				{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			},
-			config = function()
-				require("vimrc.plugins.telescope")
-			end,
+			config = function() require("vimrc.plugins.telescope") end,
 		},
 		-- AI
 		{

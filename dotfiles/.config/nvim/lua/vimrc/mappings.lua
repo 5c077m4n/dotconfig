@@ -14,9 +14,7 @@ local function norBang(cmd)
 end
 
 keymap.nnoremap("<leader>0", module_utils.update_vimrc, { desc = "Git pull latest vimrc" })
-keymap.nnoremap("<leader>1", function()
-	require("lazy").sync()
-end, { desc = "Update all plugins" })
+keymap.nnoremap("<leader>1", function() require("lazy").sync() end, { desc = "Update all plugins" })
 keymap.nnoremap("<leader>2", module_utils.reload_vimrc, { desc = "Reload vimrc" })
 keymap.nnoremap("<leader>3", signals.send_usr1_to_all_nvim, { desc = "Reload all NVIM instances" })
 
@@ -33,9 +31,7 @@ keymap.nnoremap("<leader>wv", vim.cmd.vsplit, { desc = "New vertical split" })
 keymap.nnoremap("<leader>wh", vim.cmd.split, { desc = "New horizontal split" })
 
 -- Tabs
-keymap.nnoremap("<leader>tn", function()
-	vim.cmd.tabnew("%")
-end, { desc = "New tab in cwd" })
+keymap.nnoremap("<leader>tn", function() vim.cmd.tabnew("%") end, { desc = "New tab in cwd" })
 keymap.nnoremap("<leader>tq", vim.cmd.tabclose, { desc = "Close current tab" })
 keymap.nnoremap("<leader>tQ", vim.cmd.tabonly, { desc = "Close all other tabs" })
 keymap.nnoremap("<leader>tl", vim.cmd.tabs, { desc = "List tabs" })
@@ -87,9 +83,11 @@ keymap.nnoremap("<leader>cd", function()
 	vim.notify(cwd, vim.log.levels.INFO, { title = "New CWD" })
 end, { desc = "Switch CWD to the directory of the open buffer" })
 
-keymap.nnoremap("<leader>rl", function()
-	vim.wo.rightleft = not vim.wo.rightleft
-end, { desc = "Toggle window's right-to-left mode" })
+keymap.nnoremap(
+	"<leader>rl",
+	function() vim.wo.rightleft = not vim.wo.rightleft end,
+	{ desc = "Toggle window's right-to-left mode" }
+)
 
 -- Undo
 keymap.nnoremap("U", vim.cmd.redo, { desc = "Redo last change" })
@@ -108,18 +106,26 @@ create_command("CopyCursorLocation", function()
 end, { desc = "Copy the current cursor location" })
 
 -- Diagnostics toggles
-keymap.nnoremap("<leader>dy", function()
-	vim.diagnostic.enable(true, { bufnr = 0 })
-end, { desc = "Enable diagnostics for current buffer" })
-keymap.nnoremap("<leader>dn", function()
-	vim.diagnostic.enable(false, { bufnr = 0 })
-end, { desc = "Disable diagnostics for current buffer" })
-keymap.nnoremap("<leader>dY", function()
-	vim.diagnostic.enable(true, { bufnr = nil })
-end, { desc = "Enable diagnostics for all buffers" })
-keymap.nnoremap("<leader>dN", function()
-	vim.diagnostic.enable(true, { bufnr = nil })
-end, { desc = "Disable diagnostics for all buffers" })
+keymap.nnoremap(
+	"<leader>dy",
+	function() vim.diagnostic.enable(true, { bufnr = 0 }) end,
+	{ desc = "Enable diagnostics for current buffer" }
+)
+keymap.nnoremap(
+	"<leader>dn",
+	function() vim.diagnostic.enable(false, { bufnr = 0 }) end,
+	{ desc = "Disable diagnostics for current buffer" }
+)
+keymap.nnoremap(
+	"<leader>dY",
+	function() vim.diagnostic.enable(true, { bufnr = nil }) end,
+	{ desc = "Enable diagnostics for all buffers" }
+)
+keymap.nnoremap(
+	"<leader>dN",
+	function() vim.diagnostic.enable(true, { bufnr = nil }) end,
+	{ desc = "Disable diagnostics for all buffers" }
+)
 
 if vim.g.neovide then
 	keymap.nvcinoremap("<D-v>", function()

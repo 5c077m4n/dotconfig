@@ -1,5 +1,5 @@
-local telescope = require("telescope")
 local actions = require("telescope.actions")
+local telescope = require("telescope")
 local telescope_config = require("telescope.config")
 local trouble = require("trouble.sources.telescope")
 

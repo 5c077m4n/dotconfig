@@ -1,8 +1,8 @@
 --# selene: allow(mixed_table)
 
+local lsp_progress = require("lsp-progress")
 local lualine = require("lualine")
 local navic = require("nvim-navic")
-local lsp_progress = require("lsp-progress")
 
 ---@description Fish shell style path (`~/a/.b/c/filename.lua`)
 ---@param path string
@@ -18,9 +18,7 @@ local function fish_style_path(path)
 
 	local fish_path = ""
 	for index, segment in pairs(segments) do
-		if index ~= 1 then
-			fish_path = fish_path .. sep
-		end
+		if index ~= 1 then fish_path = fish_path .. sep end
 
 		if index == #segments then
 			fish_path = fish_path .. segment
@@ -42,42 +40,26 @@ lualine.setup({
 				file_status = true,
 				newfile_status = true,
 				path = 1,
-				cond = function()
-					return vim.bo.filetype ~= "TelescopePrompt"
-				end,
-				fmt = function(filepath)
-					return fish_style_path(filepath)
-				end,
+				cond = function() return vim.bo.filetype ~= "TelescopePrompt" end,
+				fmt = function(filepath) return fish_style_path(filepath) end,
 			},
 		},
 		lualine_x = {
-			function()
-				return lsp_progress.progress({})
-			end,
+			function() return lsp_progress.progress({}) end,
 		},
 	},
 	winbar = {
 		lualine_c = {
 			{
-				function()
-					return navic.get_location()
-				end,
-				cond = function()
-					return vim.bo.filetype ~= "neo-tree" and navic.is_available()
-				end,
-				fmt = function(location)
-					return location or " "
-				end,
+				function() return navic.get_location() end,
+				cond = function() return vim.bo.filetype ~= "neo-tree" and navic.is_available() end,
+				fmt = function(location) return location or " " end,
 			},
 		},
 		lualine_x = {
 			{
-				function()
-					return (vim.bo.modified and " 💾" or " ")
-				end,
-				cond = function()
-					return vim.bo.filetype ~= "neo-tree" and navic.is_available()
-				end,
+				function() return (vim.bo.modified and " 💾" or " ") end,
+				cond = function() return vim.bo.filetype ~= "neo-tree" and navic.is_available() end,
 			},
 		},
 	},

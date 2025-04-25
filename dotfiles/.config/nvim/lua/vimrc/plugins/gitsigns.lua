@@ -12,9 +12,11 @@ gitsigns.setup({
 			gitsigns.reset_hunk,
 			{ buffer = buffer_num, desc = "Reset current hunk" }
 		)
-		keymap.vnoremap("<leader>hr", function()
-			gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-		end, { buffer = buffer_num, desc = "Reset selected hunk" })
+		keymap.vnoremap(
+			"<leader>hr",
+			function() gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end,
+			{ buffer = buffer_num, desc = "Reset selected hunk" }
+		)
 		keymap.nnoremap(
 			"<leader>hR",
 			gitsigns.reset_buffer,
@@ -35,9 +37,11 @@ gitsigns.setup({
 			gitsigns.preview_hunk,
 			{ buffer = buffer_num, desc = "Preview hunk" }
 		)
-		keymap.nnoremap("<leader>hb", function()
-			gitsigns.blame_line({ full = true })
-		end, { buffer = buffer_num, desc = "Git blame current hunk" })
+		keymap.nnoremap(
+			"<leader>hb",
+			function() gitsigns.blame_line({ full = true }) end,
+			{ buffer = buffer_num, desc = "Git blame current hunk" }
+		)
 		keymap.nnoremap(
 			"[h",
 			gitsigns_actions.prev_hunk,

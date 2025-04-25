@@ -26,9 +26,7 @@ create_autocmd({ "BufReadPost" }, {
 
 create_autocmd({ "TextYankPost" }, {
 	group = create_augroup("highlight_yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank({ higroup = "IncSearch", timeout = 500 })
-	end,
+	callback = function() vim.highlight.on_yank({ higroup = "IncSearch", timeout = 500 }) end,
 	desc = "Highlight copied text",
 })
 
@@ -41,21 +39,17 @@ create_autocmd({ "BufWritePre" }, {
 local highlight_cursor_line_id = create_augroup("highlight_cursor_line", { clear = true })
 create_autocmd({ "VimEnter", "WinEnter", "BufWinEnter" }, {
 	group = highlight_cursor_line_id,
-	callback = function()
-		vim.opt.cursorline = true
-	end,
+	callback = function() vim.opt.cursorline = true end,
 	desc = "Highlight cursor line in buffer",
 })
 create_autocmd({ "WinLeave" }, {
 	group = highlight_cursor_line_id,
-	callback = function()
-		vim.opt.cursorline = false
-	end,
+	callback = function() vim.opt.cursorline = false end,
 	desc = "Remove highlight cursor line when exiting buffer",
 })
 
 create_autocmd({ "LspAttach" }, {
-	group = create_augroup("lsp_attach", { clear = true }),
+	group = create_augroup("setup_lsp_handlers", { clear = true }),
 	callback = function(args)
 		local telescope_builtin = require("telescope.builtin")
 		local keymap = utils.keymapping
@@ -97,16 +91,22 @@ create_autocmd({ "LspAttach" }, {
 			telescope_builtin.lsp_workspace_symbols,
 			{ buffer = buffer_num, desc = "Show workspace symbols" }
 		)
-		keymap.nnoremap("K", function()
-			lsp.buf.hover({ border = "rounded" })
-		end, { buffer = buffer_num, desc = "Show docs in hover" })
+		keymap.nnoremap(
+			"K",
+			function() lsp.buf.hover({ border = "rounded" }) end,
+			{ buffer = buffer_num, desc = "Show docs in hover" }
+		)
 
-		keymap.nnoremap("<C-s>", function()
-			lsp.buf.signature_help({ border = "rounded" })
-		end, { buffer = buffer_num, desc = "Show function signature" })
-		keymap.inoremap("<C-s>", function()
-			lsp.buf.signature_help({ border = "rounded" })
-		end, { buffer = buffer_num, desc = "Show function signature" })
+		keymap.nnoremap(
+			"<C-s>",
+			function() lsp.buf.signature_help({ border = "rounded" }) end,
+			{ buffer = buffer_num, desc = "Show function signature" }
+		)
+		keymap.inoremap(
+			"<C-s>",
+			function() lsp.buf.signature_help({ border = "rounded" }) end,
+			{ buffer = buffer_num, desc = "Show function signature" }
+		)
 
 		keymap.nnoremap(
 			"gi",
@@ -124,40 +124,62 @@ create_autocmd({ "LspAttach" }, {
 			telescope_builtin.lsp_references,
 			{ buffer = buffer_num, desc = "Find references" }
 		)
-		keymap.nnoremap("gh", function()
-			lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled({ bufnr = nil }))
-		end, { buffer = buffer_num, desc = "Toggle inlay hints" })
-		keymap.nnoremap("g?", function()
-			diagnostic.open_float({ bufnr = buffer_num, scope = "line", border = "single" })
-		end, { buffer = buffer_num, desc = "Open diagnostics floating window" })
+		keymap.nnoremap(
+			"gh",
+			function() lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled({ bufnr = nil })) end,
+			{ buffer = buffer_num, desc = "Toggle inlay hints" }
+		)
+		keymap.nnoremap(
+			"g?",
+			function()
+				diagnostic.open_float({ bufnr = buffer_num, scope = "line", border = "single" })
+			end,
+			{ buffer = buffer_num, desc = "Open diagnostics floating window" }
+		)
 
-		keymap.nnoremap("]d", function()
-			diagnostic.jump({
-				count = 1,
-				float = { border = "rounded" },
-			})
-		end, { buffer = buffer_num, desc = "Go to next diagnostic in current buffer" })
-		keymap.nnoremap("[d", function()
-			diagnostic.jump({
-				count = -1,
-				float = { border = "rounded" },
-			})
-		end, { buffer = buffer_num, desc = "Go to previous diagnostic in current buffer" })
+		keymap.nnoremap(
+			"]d",
+			function()
+				diagnostic.jump({
+					count = 1,
+					float = { border = "rounded" },
+				})
+			end,
+			{ buffer = buffer_num, desc = "Go to next diagnostic in current buffer" }
+		)
+		keymap.nnoremap(
+			"[d",
+			function()
+				diagnostic.jump({
+					count = -1,
+					float = { border = "rounded" },
+				})
+			end,
+			{ buffer = buffer_num, desc = "Go to previous diagnostic in current buffer" }
+		)
 
-		keymap.nnoremap("]e", function()
-			diagnostic.jump({
-				count = 1,
-				severity = vim.diagnostic.severity.ERROR,
-				float = { border = "rounded" },
-			})
-		end, { buffer = buffer_num, desc = "Go to next diagnostic error in current buffer" })
-		keymap.nnoremap("[e", function()
-			diagnostic.jump({
-				count = -1,
-				severity = vim.diagnostic.severity.ERROR,
-				float = { border = "rounded" },
-			})
-		end, { buffer = buffer_num, desc = "Go to previous diagnostic error in current buffer" })
+		keymap.nnoremap(
+			"]e",
+			function()
+				diagnostic.jump({
+					count = 1,
+					severity = vim.diagnostic.severity.ERROR,
+					float = { border = "rounded" },
+				})
+			end,
+			{ buffer = buffer_num, desc = "Go to next diagnostic error in current buffer" }
+		)
+		keymap.nnoremap(
+			"[e",
+			function()
+				diagnostic.jump({
+					count = -1,
+					severity = vim.diagnostic.severity.ERROR,
+					float = { border = "rounded" },
+				})
+			end,
+			{ buffer = buffer_num, desc = "Go to previous diagnostic error in current buffer" }
+		)
 
 		keymap.nvnoremap(
 			"<leader>ca",
@@ -165,8 +187,14 @@ create_autocmd({ "LspAttach" }, {
 			{ buffer = buffer_num, desc = "Code action" }
 		)
 		keymap.nvnoremap("<leader>l", function()
-			vim.lsp.buf.format({ bufnr = buffer_num, async = true })
-		end, { buffer = buffer_num, desc = "Format selected page/range" })
+			local ok, conform = pcall(require, "conform")
+
+			if ok and conform then
+				conform.format({ bufnr = buffer_num })
+			else
+				vim.lsp.buf.format({ bufnr = buffer_num, async = true })
+			end
+		end, { buffer = buffer_num, desc = "Format selected buffer/range" })
 
 		vim.lsp.handlers["workspace/diagnostic/refresh"] = function(_, _, ctx)
 			local ns = vim.lsp.diagnostic.get_namespace(ctx.client_id)
@@ -188,9 +216,7 @@ create_autocmd({ "LspAttach" }, {
 create_autocmd({ "BufReadCmd" }, {
 	pattern = { "*.whl" },
 	group = create_augroup("open_python_wheel", { clear = true }),
-	callback = function()
-		vim.fn["zip#Browse"](vim.fn.expand("<amatch>"))
-	end,
+	callback = function() vim.fn["zip#Browse"](vim.fn.expand("<amatch>")) end,
 	desc = "View python `*.whl` files",
 })
 
