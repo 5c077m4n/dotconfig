@@ -1,7 +1,7 @@
 ---
 name: Lint neovim lua config
 
-on:  # yamllint disable-line rule:truthy
+on: # yamllint disable-line rule:truthy
   push:
     paths:
       - "**/*.lua"
@@ -22,10 +22,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install Selene
-        run: |
-          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs >/tmp/rustup-init.sh
-          sh /tmp/rustup-init.sh -y
-          cargo install selene
-      - name: Run selene
-        run: selene dotfiles/.config/nvim/ dotfiles/.config/nvim_vscode/
+      - name: Lint
+        uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check .
