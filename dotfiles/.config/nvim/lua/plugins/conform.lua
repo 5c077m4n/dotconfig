@@ -14,6 +14,11 @@ return {
 				stylua = {
 					prepend_args = { "--verify" },
 				},
+				sqlfluff = {
+					inherit = false,
+					command = "sqlfluff",
+					args = { "fix", "--dialect=postgres" },
+				},
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
