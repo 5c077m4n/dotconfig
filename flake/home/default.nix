@@ -119,7 +119,7 @@ in
         pkgs-unstable.go
         ## Tools
         pkgs-unstable.air # Live reloader
-        #pkgs-unstable.tinygo
+        pkgs-unstable.tinygo
         ## Formatters/Linters
         pkgs-unstable.golangci-lint
         pkgs-unstable.gofumpt
@@ -128,6 +128,7 @@ in
         # Rust
         pkgs-unstable.rustup
         pkgs-unstable.cargo-insta # Snapshot testing
+        pkgs-unstable.cargo-nextest # Rust testing CLI
         pkgs-unstable.pkg-config
         pkgs-unstable.openssl
         # Zig
