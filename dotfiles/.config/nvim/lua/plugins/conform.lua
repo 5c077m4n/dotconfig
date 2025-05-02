@@ -17,6 +17,9 @@ return {
 				sqlfluff = {
 					args = { "fix", "--dialect=postgres", "-" },
 				},
+				rustfmt = {
+					prepend_args = { "+nightly" },
+				},
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
