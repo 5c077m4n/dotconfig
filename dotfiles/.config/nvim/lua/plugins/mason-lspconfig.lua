@@ -1,8 +1,8 @@
 return {
-	"williamboman/mason-lspconfig.nvim",
+	"mason-org/mason-lspconfig.nvim",
 	dependencies = {
 		{
-			"williamboman/mason.nvim",
+			"mason-org/mason.nvim",
 			event = { "VeryLazy" },
 			build = function() vim.cmd.MasonUpdate() end,
 			config = function() require("mason").setup({ ui = { border = "single" } }) end,
@@ -17,8 +17,9 @@ return {
 		)
 
 		require("mason-lspconfig").setup({
-			ensure_installed = mason_supported_servers,
 			automatic_installation = true,
+			automatic_enable = false,
+			ensure_installed = mason_supported_servers,
 		})
 	end,
 }
