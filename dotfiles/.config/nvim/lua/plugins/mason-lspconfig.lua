@@ -10,14 +10,14 @@ return {
 	},
 	event = { "VeryLazy" },
 	config = function()
-		local original_server_list = require("vimrc.lsp-servers").SERVER_LIST
-		local server_list = vim.tbl_filter(
+		local full_server_list = require("vimrc.lsp").SERVER_LIST
+		local mason_supported_servers = vim.tbl_filter(
 			function(server) return server ~= "gleam" end,
-			original_server_list
+			full_server_list
 		)
 
 		require("mason-lspconfig").setup({
-			ensure_installed = server_list,
+			ensure_installed = mason_supported_servers,
 			automatic_installation = true,
 		})
 	end,
