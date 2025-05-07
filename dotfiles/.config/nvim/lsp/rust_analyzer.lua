@@ -1,4 +1,3 @@
----@type vim.lsp.ClientConfig
 return {
 	root_markers = { "Cargo.toml", "Cargo.lock" },
 	settings = {

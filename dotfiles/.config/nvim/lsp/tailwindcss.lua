@@ -1,4 +1,3 @@
----@type vim.lsp.ClientConfig
 return {
 	cmd = { "tailwindcss-language-server" },
 	filetypes = { "javascriptreact", "typescriptreact", "html" },
