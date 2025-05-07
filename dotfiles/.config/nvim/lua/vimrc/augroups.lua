@@ -68,7 +68,8 @@ create_autocmd({ "LspAttach" }, {
 			)
 		end
 		if client and client.server_capabilities.documentSymbolProvider then
-			require("nvim-navic").attach(client, buffer_num)
+			local ok, navic = pcall(require, "nvim-navic")
+			if ok then navic.attach(client, buffer_num) end
 		end
 
 		keymap.nnoremap(
