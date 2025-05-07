@@ -38,10 +38,9 @@ local function setup()
 		},
 	})
 	vim.lsp.enable(SERVER_LIST)
-	vim.lsp.enable({ "denols", "jedi_language_server" }, false)
 end
 
 return {
-	setup = setup,
+	setup = vim.schedule_wrap(setup),
 	SERVER_LIST = SERVER_LIST,
 }
