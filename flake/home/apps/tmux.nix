@@ -1,6 +1,10 @@
-{ config, pkgs }:
+{
+  config,
+  pkgs,
+  pkgs-unstable,
+}:
 let
-  shell = "${pkgs.fish}/bin/fish";
+  shell = "${pkgs-unstable.fish}/bin/fish";
 in
 {
   enable = true;
