@@ -7,6 +7,7 @@ return {
 		"sharkdp/fd",
 		"BurntSushi/ripgrep",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		"folke/trouble.nvim",
 	},
 	config = function()
 		local telescope = require("telescope")
