@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazyPluginSpec
 return {
 	"phaazon/hop.nvim",
 	event = { "FocusGained", "BufEnter" },

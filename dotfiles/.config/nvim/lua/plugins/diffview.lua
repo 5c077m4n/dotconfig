@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazyPluginSpec
 return {
 	"sindrets/diffview.nvim",
 	event = { "VeryLazy" },

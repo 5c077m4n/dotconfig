@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazyPluginSpec
 return {
 	"nvim-telescope/telescope.nvim",
 	event = { "VeryLazy" },

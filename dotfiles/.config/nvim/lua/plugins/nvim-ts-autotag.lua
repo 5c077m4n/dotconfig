@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazyPluginSpec
 return {
 	"windwp/nvim-ts-autotag",
 	event = { "VeryLazy", "InsertEnter" },

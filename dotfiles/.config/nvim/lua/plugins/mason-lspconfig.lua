@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazyPluginSpec
 return {
 	"mason-org/mason-lspconfig.nvim",
 	dependencies = {

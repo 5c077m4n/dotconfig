@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazyPluginSpec
 return {
 	"projekt0n/github-nvim-theme",
 	init = function() vim.cmd.colorscheme("github_dark_colorblind") end,

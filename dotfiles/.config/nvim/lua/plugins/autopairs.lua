@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazyPluginSpec
 return {
 	"windwp/nvim-autopairs",
 	event = { "VeryLazy", "InsertEnter" },

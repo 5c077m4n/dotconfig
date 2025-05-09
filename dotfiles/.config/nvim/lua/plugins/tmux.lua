@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazyPluginSpec
 return {
 	"aserowy/tmux.nvim",
 	event = { "VeryLazy" },

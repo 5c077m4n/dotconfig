@@ -1,3 +1,4 @@
+---@module 'lazy'
 ---@description Fish shell style path (`~/a/.b/c/filename.lua`)
 ---@param path string
 ---@return string
@@ -25,6 +26,7 @@ local function fish_style_path(path)
 	return fish_path
 end
 
+---@type LazyPluginSpec
 return {
 	"nvim-lualine/lualine.nvim",
 	event = { "VeryLazy" },

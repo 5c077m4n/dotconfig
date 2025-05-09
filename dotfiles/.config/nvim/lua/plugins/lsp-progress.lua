@@ -1,3 +1,5 @@
+---@module 'lazy'
+---@type LazyPluginSpec
 return {
 	"linrongbin16/lsp-progress.nvim",
 	event = { "VeryLazy" },
