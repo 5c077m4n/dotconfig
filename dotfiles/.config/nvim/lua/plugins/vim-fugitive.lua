@@ -2,11 +2,8 @@ return {
 	"tpope/vim-fugitive",
 	event = { "VeryLazy" },
 	config = function()
-		local utils = require("vimrc.utils")
+		local keymap = require("vimrc.utils").keymapping
 
-		local keymap = utils.keymapping
-
-		-- Git mergetool
 		keymap.nnoremap(
 			"<leader>gm",
 			function() vim.cmd.Git("mergetool") end,

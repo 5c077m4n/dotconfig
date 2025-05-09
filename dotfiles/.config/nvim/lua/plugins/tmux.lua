@@ -1,12 +1,9 @@
-local utils = require("vimrc.utils")
-
-local keymap = utils.keymapping
-
 return {
 	"aserowy/tmux.nvim",
 	event = { "VeryLazy" },
 	config = function()
 		local tmux = require("tmux")
+		local keymap = require("vimrc.utils").keymapping
 
 		tmux.setup({
 			resize = { enable_default_keybindings = false },

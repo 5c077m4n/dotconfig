@@ -90,7 +90,6 @@ o.showmatch = true
 -- How many tenths of a second to blink when matching brackets
 o.mat = 2
 
----@diagnostic disable-next-line: assign-type-mismatch
 o.undodir = vim.fn.stdpath("state") .. "/undo_dir/"
 o.undofile = true
 
@@ -98,12 +97,10 @@ o.swapfile = false
 o.title = true
 
 -- Ranger config
-
 g.ranger_map_keys = 0
 g.ranger_command_override = [[ranger --cmd "set show_hidden=true"]]
 
 -- Netrw
-
 --- Hide main banner
 g.netrw_banner = 0
 --- Show directories first (sorting)

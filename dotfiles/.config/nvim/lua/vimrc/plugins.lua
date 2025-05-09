@@ -20,6 +20,7 @@ local function bootstrap()
 				{ "\nPress any key to exit..." },
 			}, true, {})
 			vim.fn.getchar()
+
 			os.exit(1)
 		end
 	end
@@ -33,6 +34,7 @@ local function setup()
 		spec = {
 			{ import = "plugins" },
 		},
+		install = { colorscheme = { "github_dark_colorblind" } }, -- colorscheme that will be used when installing plugins.
 		checker = { enabled = true }, -- automatically check for plugin updates
 		ui = { border = "rounded" },
 	})

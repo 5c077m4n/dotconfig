@@ -1,7 +1,3 @@
-local utils = require("vimrc.utils")
-
-local keymap = utils.keymapping
-
 return {
 	"stevearc/conform.nvim",
 	event = { "VeryLazy" },
@@ -49,6 +45,8 @@ return {
 		vim.api.nvim_create_autocmd({ "LspAttach" }, {
 			group = vim.api.nvim_create_augroup("setup_conform_formatters", { clear = true }),
 			callback = function(args)
+				local keymap = require("vimrc.utils").keymapping
+
 				keymap.nvnoremap(
 					"<leader>l",
 					function() require("conform").format({ bufnr = args.buf }) end,

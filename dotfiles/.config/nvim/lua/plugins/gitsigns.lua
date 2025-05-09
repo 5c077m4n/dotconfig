@@ -48,14 +48,24 @@ return {
 					{ buffer = buffer_num, desc = "Git blame current hunk" }
 				)
 				keymap.nnoremap(
+					"]h",
+					function() gitsigns_actions.nav_hunk("prev") end,
+					{ buffer = buffer_num, desc = "Go to next hunk" }
+				)
+				keymap.nnoremap(
 					"[h",
-					gitsigns_actions.prev_hunk,
+					function() gitsigns_actions.nav_hunk("next") end,
 					{ buffer = buffer_num, desc = "Go to previous hunk" }
 				)
 				keymap.nnoremap(
-					"]h",
-					gitsigns_actions.next_hunk,
-					{ buffer = buffer_num, desc = "Go to next hunk" }
+					"]H",
+					function() gitsigns_actions.nav_hunk("last") end,
+					{ buffer = buffer_num, desc = "Go to last hunk" }
+				)
+				keymap.nnoremap(
+					"[H",
+					function() gitsigns_actions.nav_hunk("first") end,
+					{ buffer = buffer_num, desc = "Go to first hunk" }
 				)
 			end,
 		})

@@ -1,12 +1,9 @@
-local utils = require("vimrc.utils")
-
-local keymap = utils.keymapping
-
 return {
 	"folke/persistence.nvim",
 	event = { "VeryLazy" },
 	config = function()
 		local persist = require("persistence")
+		local keymap = require("vimrc.utils").keymapping
 
 		persist.setup({
 			pre_save = function() vim.cmd.Neotree("close") end,

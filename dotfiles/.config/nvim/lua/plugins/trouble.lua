@@ -1,13 +1,12 @@
-local utils = require("vimrc.utils")
-
-local keymap = utils.keymapping
-
 return {
 	"folke/trouble.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	event = { "VeryLazy" },
 	config = function()
-		require("trouble").setup({
+		local trouble = require("trouble")
+		local keymap = require("vimrc.utils").keymapping
+
+		trouble.setup({
 			indent_lines = true,
 			signs = { error = "E", warning = "W", hint = "H", information = "I" },
 		})

@@ -105,7 +105,7 @@ return {
 		vim.api.nvim_create_autocmd("User", {
 			group = vim.api.nvim_create_augroup("update_lualine_on_lsp_progress", { clear = true }),
 			pattern = "LspProgressStatusUpdated",
-			callback = lualine.refresh,
+			callback = function() lualine.refresh({}) end,
 		})
 	end,
 }
