@@ -23,8 +23,11 @@ function supdate --description 'Run a full system update'
     end
 
     if type --query apt
-        sudo apt update
-        sudo apt upgrade --yes
+        if type --query nala
+            sudo nala upgrade --update
+        else
+            sudo apt upgrade --update
+        end
     end
 
     nvim --headless +"Lazy! sync" +qa
