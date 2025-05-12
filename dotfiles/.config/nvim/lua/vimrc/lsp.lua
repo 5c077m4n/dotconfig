@@ -37,10 +37,11 @@ local function setup()
 			},
 		},
 	})
-	vim.lsp.enable(SERVER_LIST)
+
+	vim.schedule(function() vim.lsp.enable(SERVER_LIST) end)
 end
 
 return {
-	setup = vim.schedule_wrap(setup),
+	setup = setup,
 	SERVER_LIST = SERVER_LIST,
 }
