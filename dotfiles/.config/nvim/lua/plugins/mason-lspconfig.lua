@@ -15,7 +15,7 @@ return {
 		local full_server_list = require("vimrc.lsp").SERVER_LIST
 
 		local mason_supported_servers = vim.tbl_filter(
-			function(server) return server ~= "gleam" end,
+			function(server) return server ~= "gleam" and server ~= "fish_lsp" end,
 			full_server_list
 		)
 		require("mason-lspconfig").setup({

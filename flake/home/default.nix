@@ -87,6 +87,7 @@ in
         pkgs.zsh
         ## Fish
         pkgs-unstable.fish
+        pkgs-unstable.fish-lsp
         pkgs-unstable.fishPlugins.fzf-fish
         pkgs-unstable.fishPlugins.autopair
         ## Misc

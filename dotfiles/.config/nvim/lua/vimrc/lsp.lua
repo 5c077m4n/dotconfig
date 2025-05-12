@@ -21,6 +21,7 @@ local SERVER_LIST = {
 	"zls",
 	"gleam",
 	"svelte",
+	"fish_lsp",
 }
 
 local function setup()
