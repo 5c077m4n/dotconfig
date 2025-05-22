@@ -3,6 +3,10 @@ function v. --wraps nvim --description "Open Neovim in the current directory and
         . (poetry env info --path)/bin/activate.fish
         nvim . $argv
         deactivate
+    else if test -f ./.venv/bin/activate.fish
+        . ./.venv/bin/activate.fish
+        nvim . $argv
+        deactivate
     else
         nvim . $argv
     end
