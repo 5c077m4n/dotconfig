@@ -121,6 +121,8 @@ in
         ## Tools
         pkgs-unstable.air # Live reloader
         pkgs-unstable.tinygo
+        ## LSP
+        pkgs-unstable.gopls
         ## Formatters/Linters
         pkgs-unstable.golangci-lint
         pkgs-unstable.gofumpt
