@@ -79,7 +79,7 @@ in
         pkgs.fzf
         pkgs.ripgrep
         # LLMs
-        pkgs.ollama
+        pkgs-unstable.ollama
         # Shells
         ## Bash
         pkgs.bash
