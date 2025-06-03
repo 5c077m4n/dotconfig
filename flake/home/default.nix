@@ -185,6 +185,7 @@ in
         })
         # Cloud
         pkgs.awscli2
+        pkgs.awslogs
         # Misc
         pkgs.gopass
         pkgs.android-tools # ADB
