@@ -70,6 +70,7 @@ return {
 					{ buffer = buffer_num, desc = "Go to last hunk" }
 				)
 			end,
+			preview_config = { border = "rounded" },
 		})
 	end,
 }
