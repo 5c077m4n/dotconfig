@@ -35,7 +35,6 @@ local function setup()
 			{ import = "plugins" },
 		},
 		install = { colorscheme = { "github_dark_colorblind" } }, -- colorscheme that will be used when installing plugins.
-		checker = { enabled = true }, -- automatically check for plugin updates
 		ui = { border = "rounded" },
 	})
 end
