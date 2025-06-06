@@ -5,23 +5,30 @@ return {
 	dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
 	event = { "VeryLazy" },
 	config = function()
-		require("codecompanion").setup({
+		local cc = require("codecompanion")
+		local cc_adapters = require("codecompanion.adapters")
+
+		cc.setup({
 			adapters = {
 				deepseek_r1_small = function()
-					return require("codecompanion.adapters").extend("ollama", {
-						name = "deepseek-r1:1.5b",
+					local name = "deepseek-r1:1.5b"
+
+					return cc_adapters.extend("ollama", {
+						name = name,
 						schema = {
-							model = { default = "deepseek-r1:1.5b" },
+							model = { default = name },
 							num_ctx = { default = 16384 },
 							num_predict = { default = -1 },
 						},
 					})
 				end,
 				qwen_coder_small = function()
-					return require("codecompanion.adapters").extend("ollama", {
-						name = "qwen2.5-coder:1.5b",
+					local name = "qwen2.5-coder:1.5b"
+
+					return cc_adapters.extend("ollama", {
+						name = name,
 						schema = {
-							model = { default = "qwen2.5-coder:1.5b" },
+							model = { default = name },
 							num_ctx = { default = 16384 },
 							num_predict = { default = -1 },
 						},
@@ -29,9 +36,9 @@ return {
 				end,
 			},
 			strategies = {
-				chat = { adapter = "anthropic" },
-				inline = { adapter = "anthropic" },
-				cmd = { adapter = "anthropic" },
+				chat = { adapter = "deepseek_r1_small" },
+				inline = { adapter = "deepseek_r1_small" },
+				cmd = { adapter = "deepseek_r1_small" },
 			},
 			display = {
 				chat = { show_settings = true },
