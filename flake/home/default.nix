@@ -177,12 +177,8 @@ in
         ### Formatters
         pkgs.sqlfluff
         # Fonts
-        (pkgs.nerdfonts.override {
-          fonts = [
-            "FiraMono"
-            "Hack"
-          ];
-        })
+        pkgs.nerd-fonts.fira-mono
+        pkgs.nerd-fonts.hack
         # Cloud
         pkgs.awscli2
         pkgs.awslogs

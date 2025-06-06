@@ -70,6 +70,7 @@ in
     displayManager.defaultSession = "xfce+i3";
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
+    pulseaudio.enable = false;
 
     xserver = {
       enable = true;
@@ -120,7 +121,6 @@ in
         pkgs.vpl-gpu-rt # intel graphics driver
       ];
     };
-    pulseaudio.enable = false;
   };
   security.rtkit.enable = true;
 
