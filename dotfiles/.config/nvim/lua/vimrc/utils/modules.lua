@@ -15,7 +15,6 @@ end
 function M.reload_vimrc()
 	vim.cmd.source(vim.env.MYVIMRC)
 	vim.loader.reset()
-	vim.cmd.LspRestart()
 
 	unload_background_buffers()
 

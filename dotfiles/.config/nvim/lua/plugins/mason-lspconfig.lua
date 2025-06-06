@@ -19,8 +19,9 @@ return {
 			full_server_list
 		)
 		require("mason-lspconfig").setup({
+			PATH = "append",
 			automatic_installation = true,
-			automatic_enable = false,
+			automatic_enable = mason_supported_servers,
 			ensure_installed = mason_supported_servers,
 		})
 	end,
