@@ -7,7 +7,7 @@
   ...
 }:
 let
-  stateVersion = "24.11";
+  stateVersion = "25.05";
   isNixOS = builtins.pathExists "/etc/nixos/";
   inherit (pkgs) lib;
 in
