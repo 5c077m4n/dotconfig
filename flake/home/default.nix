@@ -167,6 +167,7 @@ in
         pkgs.podman-compose
         ### deps
         pkgs.virtiofsd
+        pkgs.aardvark-dns
         ## Linter
         pkgs.hadolint
         # DBs
