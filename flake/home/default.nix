@@ -162,13 +162,11 @@ in
         pkgs-unstable.kubectx
         pkgs-unstable.k9s
         # Containers
-        ## Podman
-        pkgs.podman
-        pkgs.podman-compose
-        ### deps
-        pkgs.virtiofsd
-        pkgs.aardvark-dns
-        ## Linter
+        ## Docker
+        pkgs-unstable.docker
+        pkgs-unstable.docker-compose
+        ## Utils
+        ### Linter
         pkgs.hadolint
         # DBs
         ## TUIs
@@ -247,10 +245,6 @@ in
 
     fish = import ./apps/fish.nix { inherit pkgs-unstable; };
     tmux = import ./apps/tmux.nix { inherit config pkgs pkgs-unstable; };
-  };
-
-  services = {
-    podman.enable = true;
   };
 
   fonts.fontconfig.enable = true;
