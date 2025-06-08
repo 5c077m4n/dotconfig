@@ -163,8 +163,8 @@ in
         pkgs-unstable.k9s
         # Containers
         ## Docker
-        pkgs-unstable.docker
-        pkgs-unstable.docker-compose
+        #pkgs-unstable.docker
+        #pkgs-unstable.docker-compose
         ## Utils
         ### Linter
         pkgs.hadolint
