@@ -11,9 +11,9 @@ vim.filetype.add({
 		[".sqlfluff"] = "toml",
 		["tmux.conf"] = "tmux",
 		[".env"] = "env",
-		[".env.local"] = "env",
 	},
 	pattern = {
+		[".env.*$"] = "env",
 		[".*/kitty/.*%.conf$"] = "kitty",
 		[".*/git/config"] = "gitconfig",
 	},
