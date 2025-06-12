@@ -53,7 +53,7 @@ in
         pkgs.hostname
         pkgs.man
         ### AI
-        pkgs-unstable.claude-code
+        pkgs-unstable.opencode
         # VCS
         ## Git
         pkgs.git
