@@ -104,7 +104,7 @@ g.netrw_sort_sequence = [[[\/]$,*]]
 --- 3: tree style listing
 g.netrw_liststyle = 3
 --- Setup file operations commands
-if vim.loop.os_uname().sysname ~= "Windows" then
+if vim.uv.os_uname().sysname ~= "Windows" then
 	g.netrw_localcopydircmd = "cp -r"
 	g.netrw_localmkdir = "mkdir -p"
 	-- NOTE: 'rm' is used instead of 'rmdir' (default) to be able to remove non-empty directories
