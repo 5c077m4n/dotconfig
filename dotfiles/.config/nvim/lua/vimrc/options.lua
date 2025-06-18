@@ -8,13 +8,7 @@ g.python3_host_prog = vim.trim(vim.fn.system("which python3"))
 -- Configure backspace so it acts as it should
 o.backspace = { "eol", "start", "indent" }
 
--- Fold config
-o.foldenable = true
-o.foldmethod = "expr"
-o.foldexpr = "nvim_treesitter#foldexpr()"
-o.foldlevel = 99
-o.foldlevelstart = 10
-
+-- Session config
 o.sessionoptions = { "buffers", "tabpages", "curdir", "winsize" }
 
 o.timeout = true
