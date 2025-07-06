@@ -44,7 +44,7 @@ local function setup()
 		once = true,
 		group = vim.api.nvim_create_augroup("enable_lsp_on_vim_enter_once", { clear = true }),
 		callback = function()
-			vim.defer_fn(function() vim.lsp.enable(SERVER_LIST) end, 0)
+			vim.defer_fn(function() vim.lsp.enable(SERVER_LIST) end, 50)
 		end,
 	})
 end
