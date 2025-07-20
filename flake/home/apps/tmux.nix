@@ -47,14 +47,14 @@ in
             zoomIconQuery = "#{?window_zoomed_flag,[],}";
           in
           ''
-            set -ogq status-right "#{E:@catppuccin_status_application}"
-            set -ag status-right "#{E:@catppuccin_status_session}"
+            set -ogq status-right " #{E:@catppuccin_status_application} "
+            set -ag status-right " #{E:@catppuccin_status_session} "
 
             set -ogq @catppuccin_flavor "${flavor}"
             set -ogq @catppuccin_window_status_style "rounded"
-            set -ogq @catppuccin_window_text "#W ${zoomIconQuery}"
-            set -ogq @catppuccin_window_default_text "#W ${zoomIconQuery}" # deprecated(?)
-            set -ogq @catppuccin_window_current_text "#W ${zoomIconQuery}"
+            set -ogq @catppuccin_window_text " #W ${zoomIconQuery}"
+            set -ogq @catppuccin_window_default_text " #W ${zoomIconQuery}" # deprecated(?)
+            set -ogq @catppuccin_window_current_text " #W ${zoomIconQuery}"
           '';
       }
       {
