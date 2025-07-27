@@ -154,6 +154,9 @@ in
         # Gleam
         pkgs-unstable.gleam
         pkgs-unstable.erlang
+        # Jsonnet
+        pkgs-unstable.go-jsonnet
+        pkgs-unstable.jsonnet-language-server
         # YAML
         pkgs.yamllint
         # Markdown
