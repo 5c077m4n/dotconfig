@@ -41,6 +41,8 @@ return {
 				nix = { "nixfmt" },
 				gleam = { "gleam" },
 				sql = { "sqlfluff" },
+				jsonnet = { "jsonnetfmt" },
+				libsonnet = { "jsonnetfmt" },
 			},
 		})
 

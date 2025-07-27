@@ -22,6 +22,7 @@ local SERVER_LIST = {
 	"gleam",
 	"svelte",
 	"fish_lsp",
+	"jsonnet_ls",
 }
 
 local function setup()
