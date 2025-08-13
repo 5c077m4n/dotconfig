@@ -62,6 +62,7 @@ in
         pkgs.lazygit
         pkgs.delta
         pkgs.git-absorb
+        pkgs.git-who
         pkgs.gitleaks
         # TUI
         pkgs.tmux
