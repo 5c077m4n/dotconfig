@@ -1,4 +1,14 @@
+function __supdate_commit_if_needed --argument-names file_to_commit
+    if ! git diff --exit-code $file_to_commit &>/dev/null
+        git add $file_to_commit
+        git commit --message "Bump $(basename $file_to_commit)" $file_to_commit
+    end
+end
+
 function supdate --description 'Run a full system update'
+    nvim --headless +"Lazy! sync" +qa
+    __supdate_commit_if_needed ~/workspace/dotconfig/dotfiles/.config/nvim/lazy-lock.json
+
     if type --query nix && test -f ~/workspace/dotconfig/flake.nix
         nix flake update --flake ~/workspace/dotconfig/
 
@@ -10,10 +20,7 @@ function supdate --description 'Run a full system update'
             home-manager switch --flake ~/workspace/dotconfig/#roee@ubuntu-vivo
         end
 
-        if ! git diff --exit-code ~/workspace/dotconfig/flake.lock &>/dev/null
-            git add ~/workspace/dotconfig/flake.lock
-            git commit --message "Bump nix flake" ~/workspace/dotconfig/flake.lock
-        end
+        __supdate_commit_if_needed ~/workspace/dotconfig/flake.lock
     else if type --query brew
         brew update
         brew bundle install
@@ -34,9 +41,8 @@ function supdate --description 'Run a full system update'
             sudo apt upgrade --update
         end
     end
+
     if type --query fisher
         fisher update
     end
-
-    nvim --headless +"Lazy! sync" +qa
 end

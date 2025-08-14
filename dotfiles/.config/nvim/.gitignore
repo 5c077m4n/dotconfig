@@ -23,6 +23,3 @@ lua_modules/
 
 # Spelling
 spell/
-
-# Lazy lock file
-lazy-lock.json
