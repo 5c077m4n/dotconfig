@@ -180,4 +180,4 @@ Comment[zh_CN]=管理剪切和粘贴历史的工具
 Comment[zh_TW]=剪貼紀錄公用程式
 Exec="env QT_QPA_PLATFORM=xcb /usr/bin/copyq"
 Hidden=false
-X-GNOME-Autostart-enabled=true
+X-GNOME-Autostart-enabled=false
