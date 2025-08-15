@@ -66,6 +66,7 @@ in
         pkgs.gitleaks
         # TUI
         pkgs.tmux
+        pkgs.tmuxinator
         pkgs.starship
         pkgs.btop
         pkgs.htop

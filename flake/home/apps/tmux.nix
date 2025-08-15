@@ -57,23 +57,6 @@ in
             set -ogq @catppuccin_window_current_text " #W ${zoomIconQuery}"
           '';
       }
-      {
-        plugin = tmuxPlugins.resurrect;
-        extraConfig = ''
-          set -g @resurrect-strategy-vim "session"
-          set -g @resurrect-strategy-nvim "session"
-          set -g @resurrect-capture-pane-contents "on"
-        '';
-      }
-      {
-        # Must be the last plugin to be cofigured https://github.com/tmux-plugins/tmux-continuum#known-issues
-        plugin = tmuxPlugins.continuum;
-        extraConfig = ''
-          set -g @continuum-restore "on"
-          set -g @continuum-boot "on"
-          set -g @continuum-save-interval "10"
-        '';
-      }
     ];
   extraConfig =
     let
