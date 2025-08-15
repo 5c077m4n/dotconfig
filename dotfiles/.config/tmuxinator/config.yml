@@ -1,0 +1,10 @@
+---
+name: config
+project_root: "~/workspace/dotconfig"
+
+windows:
+  - config:
+      layout: 5055,274x64,0,0[274x50,0,0,5,274x13,0,51,6]
+      panes:
+        - editor: nvim .
+        - git:
