@@ -84,6 +84,12 @@ return {
 			{ desc = "Search project for the current selection (from current work directory)" }
 		)
 		keymap.nnoremap("<leader>f:", telescope_builtin.commands, { desc = "Search commands" })
+		keymap.nnoremap(
+			"<leader>f;",
+			telescope_builtin.command_history,
+			{ desc = "Search command history" }
+		)
+		keymap.nnoremap("<leader>f/", telescope_builtin.search_history, { desc = "Search history" })
 		keymap.nnoremap("<leader>fr", telescope_builtin.registers, { desc = "Search registers" })
 		keymap.inoremap("<C-r>", telescope_builtin.registers, { desc = "Search registers" })
 		keymap.nnoremap("<leader>fb", telescope_builtin.buffers, { desc = "Search buffers" })
