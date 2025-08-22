@@ -122,7 +122,8 @@ in
         pkgs-unstable.go
         ## Tools
         pkgs-unstable.air # Live reloader
-        pkgs-unstable.tinygo
+        pkgs-unstable.tinygo # Compiler for tiny places
+        pkgs-unstable.go-blueprint # Project init
         ## LSP
         pkgs-unstable.gopls
         ## Formatters/Linters
