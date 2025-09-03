@@ -28,6 +28,8 @@ return {
 				javascriptreact = js_linters,
 				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 				go = { "golangci-lint", "golines" },
+				gotexttmpl = { "golangci-lint" },
+				gohtmltmpl = { "prettier", "golangci-lint" },
 				toml = { "taplo" },
 				yaml = { "prettierd" },
 				json = { "biome" },

@@ -3,6 +3,8 @@ vim.filetype.add({
 		tsx = "typescriptreact",
 		jsx = "javascriptreact",
 		toml = "toml",
+		["html.tmpl"] = "gohtmltmpl",
+		tmpl = "gotexttmpl",
 	},
 	filename = {
 		[".prettierrc"] = "json",
