@@ -23,6 +23,7 @@ local SERVER_LIST = {
 	"svelte",
 	"fish_lsp",
 	"jsonnet_ls",
+	"templ",
 }
 
 local function setup()
