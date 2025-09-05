@@ -14,10 +14,6 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-1.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -28,7 +24,6 @@
       nixpkgs,
       nixpkgs-darwin,
       nixpkgs-unstable,
-      lix-module,
       ...
     }:
     let
@@ -117,10 +112,10 @@
           ${nixosConfigName} = nixpkgs.lib.nixosSystem {
             inherit pkgs specialArgs;
             modules = [
-              lix-module.nixosModules.default
               ./flake/linux/nixos/configuration.nix
               ./flake/linux/nixos/hardware-configuration.nix
-            ] ++ home-manager-modules;
+            ]
+            ++ home-manager-modules;
           };
         };
 
