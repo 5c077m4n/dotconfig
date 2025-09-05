@@ -5,6 +5,7 @@ vim.filetype.add({
 		toml = "toml",
 		["html.tmpl"] = "gohtmltmpl",
 		tmpl = "gotexttmpl",
+		templ = "templ",
 	},
 	filename = {
 		[".prettierrc"] = "json",

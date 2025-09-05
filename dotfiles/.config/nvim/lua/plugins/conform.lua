@@ -30,6 +30,7 @@ return {
 				go = { "golangci-lint", "golines" },
 				gotexttmpl = { "golangci-lint" },
 				gohtmltmpl = { "prettier", "golangci-lint" },
+				templ = { "templ" },
 				toml = { "taplo" },
 				yaml = { "prettierd" },
 				json = { "biome" },

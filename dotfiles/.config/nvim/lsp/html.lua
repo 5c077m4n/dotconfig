@@ -1,1 +1,3 @@
-return {}
+return {
+	filtetypes = { "html", "templ" },
+}
