@@ -24,6 +24,7 @@ local SERVER_LIST = {
 	"fish_lsp",
 	"jsonnet_ls",
 	"templ",
+	"astro",
 }
 
 local function setup()

@@ -26,6 +26,8 @@ return {
 				javascript = js_linters,
 				typescriptreact = js_linters,
 				javascriptreact = js_linters,
+				astro = { "prettierd" },
+				svelte = { "prettierd" },
 				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 				go = { "golangci-lint", "golines" },
 				gotexttmpl = { "golangci-lint" },

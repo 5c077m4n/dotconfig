@@ -1,4 +1,5 @@
 ---@module 'lazy'
+
 local MAX_FILE_SIZE = 100 * 1024 -- 100KB
 
 ---@type LazyPluginSpec
@@ -34,6 +35,7 @@ return {
 				"git_config",
 				"ssh_config",
 				"gleam",
+				"astro",
 			},
 			highlight = {
 				enable = true,
