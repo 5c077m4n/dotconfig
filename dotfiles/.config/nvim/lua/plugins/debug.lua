@@ -47,6 +47,7 @@ return {
 			{
 				"leoluz/nvim-dap-go",
 				dependencies = { "mfussenegger/nvim-dap" },
+				lazy = true,
 				config = function()
 					local keymap = require("vimrc.utils").keymapping
 					keymap.nnoremap(
@@ -62,12 +63,7 @@ return {
 				lazy = true,
 				config = function() require("dap-python").setup("python3") end,
 			},
-			{ "nvim-neotest/nvim-nio" },
-			{
-				"theHamsta/nvim-dap-virtual-text",
-				config = true,
-				dependencies = { "mfussenegger/nvim-dap" },
-			},
+			{ "nvim-neotest/nvim-nio", lazy = true },
 		},
 	},
 }
