@@ -106,7 +106,8 @@ in
         pkgs.yarn-berry # `yarn` >=4.5
         ## Linters
         pkgs.eslint_d
-        pkgs.prettierd
+        pkgs-unstable.prettier
+        pkgs-unstable.prettierd
         pkgs.stylelint
         pkgs-unstable.biome
         # Python
