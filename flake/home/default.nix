@@ -52,6 +52,7 @@ in
         pkgs.tzdata
         pkgs.hostname
         pkgs.man
+        pkgs.mosh
         ### AI
         pkgs-unstable.opencode
         # VCS
