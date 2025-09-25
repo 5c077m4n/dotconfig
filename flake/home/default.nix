@@ -65,6 +65,7 @@ in
         pkgs.git-absorb
         pkgs.git-who
         pkgs.gitleaks
+        pkgs.gh # GitHub CLI tool
         # TUI
         pkgs.tmux
         pkgs.tmuxinator
