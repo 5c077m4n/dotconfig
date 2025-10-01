@@ -53,6 +53,7 @@ in
         pkgs.hostname
         pkgs.man
         pkgs.mosh
+        pkgs.nix-search-cli
         ### AI
         pkgs-unstable.opencode
         # VCS
