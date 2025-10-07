@@ -8,7 +8,6 @@
 }:
 let
   stateVersion = "25.05";
-  isNixOS = builtins.pathExists "/etc/nixos/";
   inherit (pkgs) lib;
 in
 {
@@ -18,6 +17,7 @@ in
     packages =
       let
         inherit (pkgs.stdenv) isLinux isDarwin;
+        isNixOS = isLinux && builtins.pathExists "/etc/nixos/";
       in
       [
         # General
@@ -27,14 +27,12 @@ in
         pkgs.curl
         pkgs.wget
         pkgs.coreutils
-        pkgs.openssh
         pkgs.less
         pkgs.ps
         pkgs.gnumake
         pkgs.gcc
         pkgs.gnupg
         pkgs.stow
-        pkgs.inotify-tools
         pkgs.gnugrep
         pkgs.gnupg
         pkgs.gnused
@@ -90,11 +88,6 @@ in
         pkgs.bash
         ## ZSH
         pkgs.zsh
-        ## Fish
-        pkgs-unstable.fish
-        pkgs-unstable.fish-lsp
-        pkgs-unstable.fishPlugins.fzf-fish
-        pkgs-unstable.fishPlugins.autopair
         ## Misc
         ### Formatters
         pkgs.beautysh
@@ -114,14 +107,14 @@ in
         pkgs.stylelint
         pkgs-unstable.biome
         # Python
-        pkgs-unstable.python310
-        pkgs-unstable.poetry
-        pkgs-unstable.mypy
-        pkgs-unstable.pylint
-        pkgs-unstable.black
-        pkgs-unstable.isort
-        pkgs-unstable.ruff
-        pkgs-unstable.pyright
+        pkgs.python310
+        pkgs.poetry
+        pkgs.mypy
+        pkgs.pylint
+        pkgs.black
+        pkgs.isort
+        pkgs.ruff
+        pkgs.pyright
         # Golang
         pkgs-unstable.go
         ## Tools
@@ -200,6 +193,8 @@ in
         pkgs.android-tools # ADB
       ]
       ++ lib.optionals isLinux [
+        pkgs.inotify-tools
+        pkgs.openssh
         # Audio
         pkgs.pulseaudio
         pkgs.pipewire
@@ -211,7 +206,7 @@ in
         ## Battery data
         pkgs.acpi
       ]
-      ++ lib.optionals (isLinux && isNixOS) [
+      ++ lib.optionals isNixOS [
         # GUIs
         ## Browsers
         pkgs.floorp # Firefox alternative
@@ -258,7 +253,7 @@ in
     home-manager.enable = true;
     java.enable = true;
 
-    fish = import ./apps/fish.nix { inherit pkgs-unstable; };
+    fish = import ./apps/fish.nix { inherit pkgs; };
     tmux = import ./apps/tmux.nix { inherit config pkgs pkgs-unstable; };
   };
 

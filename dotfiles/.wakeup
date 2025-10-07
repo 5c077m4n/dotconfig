@@ -1,1 +1,4 @@
 #!/bin/sh
+
+blueutil --power 1
+networksetup -setairportpower en0 on

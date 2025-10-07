@@ -1,3 +1,4 @@
 #!/bin/sh
 
-/opt/homebrew/bin/blueutil -p 0
+blueutil --power 0
+networksetup -setairportpower en0 off

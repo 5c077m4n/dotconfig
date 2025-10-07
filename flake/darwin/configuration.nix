@@ -10,32 +10,30 @@
   nixpkgs = { inherit hostPlatform; };
 
   nix = {
-    package = pkgs.nix;
+    enable = false;
 
-    optimise.automatic = true;
-    settings.experimental-features = "nix-command flakes";
-    # Garbage collect the Nix store
-    gc = {
-      automatic = true;
-      interval = {
-        Hour = 0;
-        Minute = 0;
-      };
-      options = "--delete-older-than 7d";
-    };
-    extraOptions = ''
-      extra-platforms = x86_64-darwin aarch64-darwin
-    '';
+    # package = pkgs.lixPackageSets.stable.lix;
+    # optimise.automatic = true;
+    # settings.experimental-features = "nix-command flakes";
+    # # Garbage collect the Nix store
+    # gc = {
+    #   automatic = true;
+    #   interval = {
+    #     Hour = 0;
+    #     Minute = 0;
+    #   };
+    #   options = "--delete-older-than 7d";
+    # };
+    # extraOptions = ''
+    #   extra-platforms = x86_64-darwin aarch64-darwin
+    # '';
   };
 
-  services = {
-    # Auto upgrade nix package and the daemon service.
-    nix-daemon.enable = true;
-  };
-
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   system = {
+    primaryUser = username;
+
     # Set Git commit hash for darwin-version.
     configurationRevision = self.rev or self.dirtyRev or null;
 
@@ -96,11 +94,11 @@
       "lulu"
       "karabiner-elements"
       "libreoffice"
-      "zen-browser"
+      "zen"
       "arc"
       "kitty"
       "iterm2"
-      "neovide"
+      "neovide-app"
       "vscodium"
       "inkscape"
       "nikitabobko/tap/aerospace"

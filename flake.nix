@@ -7,7 +7,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     nix-darwin = {
-      url = "github:lnl7/nix-darwin/nix-darwin-25.05";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -43,7 +43,7 @@
             config = { inherit allowUnfreePredicate; };
           };
           home-manager-modules = [
-            home-manager.nixosModules.home-manager
+            home-manager.darwinModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -52,7 +52,7 @@
 
                 extraSpecialArgs = {
                   inherit username pkgs-unstable;
-                  homeDirectory = "/home/${username}";
+                  homeDirectory = "/Users/${username}";
                 };
                 users.${username} = ./flake/home;
               };
