@@ -85,10 +85,8 @@
     enable = true;
     onActivation.cleanup = "zap";
 
-    taps = [
-      "nikitabobko/tap"
-    ];
-    brews = [ ];
+    taps = [ "nikitabobko/tap" ];
+    brews = [ "sleepwatcher" ];
     casks = [
       "displaylink"
       "lulu"
