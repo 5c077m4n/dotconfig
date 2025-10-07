@@ -148,8 +148,10 @@ in
         pkgs.zls
         # Lua
         pkgs.luajit
-        pkgs.luajitPackages.luacheck
+        ## Package manager
         pkgs.luarocks
+        ## Linters
+        pkgs.luajitPackages.luacheck
         pkgs-unstable.stylua
         pkgs-unstable.selene
         # Nix
