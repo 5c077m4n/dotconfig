@@ -1,6 +1,6 @@
 {
   self,
-  pkgs-unstable,
+  pkgs,
   username,
   hostPlatform,
   ...
@@ -69,7 +69,7 @@
   programs = {
     fish = {
       enable = true;
-      package = pkgs-unstable.fish;
+      package = pkgs.fish;
     };
   };
 
@@ -77,7 +77,7 @@
     name = username;
     home = "/Users/${username}";
 
-    shell = pkgs-unstable.fish;
+    shell = pkgs.fish;
   };
 
   homebrew = {
@@ -93,11 +93,9 @@
     ];
     casks = [
       "displaylink"
-      "lulu"
       "karabiner-elements"
       "libreoffice"
       "zen"
-      "arc"
       "kitty"
       "iterm2"
       "neovide-app"
@@ -106,7 +104,7 @@
       "nikitabobko/tap/aerospace"
       "maccy"
       "keepassxc"
-	  "mongodb-compass"
+      "mongodb-compass"
     ];
   };
 }
