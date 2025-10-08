@@ -116,7 +116,6 @@ in
         pkgs.ruff
         pkgs.pyright
         # Golang
-        pkgs-unstable.go
         ## Tools
         pkgs-unstable.air # Live reloader
         pkgs-unstable.tinygo # Compiler for tiny places
@@ -195,6 +194,7 @@ in
         pkgs.android-tools # ADB
       ]
       ++ lib.optionals isLinux [
+        pkgs-unstable.go
         pkgs.inotify-tools
         pkgs.openssh
         # Audio

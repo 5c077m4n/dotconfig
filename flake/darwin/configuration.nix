@@ -1,6 +1,5 @@
 {
   self,
-  pkgs,
   pkgs-unstable,
   username,
   hostPlatform,
@@ -107,6 +106,7 @@
       "nikitabobko/tap/aerospace"
       "maccy"
       "keepassxc"
+	  "mongodb-compass"
     ];
   };
 }
