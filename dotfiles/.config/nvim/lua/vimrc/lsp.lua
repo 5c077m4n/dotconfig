@@ -25,6 +25,7 @@ local SERVER_LIST = {
 	"jsonnet_ls",
 	"templ",
 	"astro",
+	"swift",
 }
 
 local function setup()

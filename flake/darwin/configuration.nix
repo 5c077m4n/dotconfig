@@ -86,7 +86,12 @@
     onActivation.cleanup = "zap";
 
     taps = [ "nikitabobko/tap" ];
-    brews = [ "sleepwatcher" ];
+    brews = [
+      "sleepwatcher"
+      "go"
+      "swift-format"
+      "docker-compose"
+    ];
     casks = [
       "displaylink"
       "lulu"

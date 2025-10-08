@@ -158,6 +158,8 @@ in
         # Gleam
         pkgs-unstable.gleam
         pkgs-unstable.erlang
+        ## LSP
+        pkgs.sourcekit-lsp
         # Jsonnet
         pkgs-unstable.go-jsonnet
         pkgs-unstable.jsonnet-language-server

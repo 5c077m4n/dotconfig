@@ -5,9 +5,10 @@ return {
 	event = { "VeryLazy" },
 	init = function() vim.o.formatexpr = "v:lua.require('conform').formatexpr()" end,
 	config = function()
-		local js_linters = { "biome", "biome-check", "biome-organize-imports" }
+		local conform = require("conform")
 
-		require("conform").setup({
+		local js_linters = { "biome", "biome-check", "biome-organize-imports" }
+		conform.setup({
 			formatters = {
 				stylua = {
 					prepend_args = { "--verify" },
@@ -48,6 +49,7 @@ return {
 				sql = { "sqlfluff" },
 				jsonnet = { "jsonnetfmt" },
 				libsonnet = { "jsonnetfmt" },
+				swift = { "swift" },
 			},
 		})
 
@@ -56,14 +58,10 @@ return {
 			callback = function(args)
 				local keymap = require("vimrc.utils").keymapping
 
-				keymap.nvnoremap(
-					"<leader>l",
-					function() require("conform").format({ bufnr = args.buf }) end,
-					{
-						buffer = args.buf,
-						desc = "[conform.nvim] Format selected buffer/range",
-					}
-				)
+				keymap.nvnoremap("<leader>l", function() conform.format({ bufnr = args.buf }) end, {
+					buffer = args.buf,
+					desc = "[conform.nvim] Format selected buffer/range",
+				})
 			end,
 		})
 	end,
