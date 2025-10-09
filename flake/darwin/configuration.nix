@@ -92,6 +92,7 @@
       "docker-compose"
     ];
     casks = [
+      "docker"
       "displaylink"
       "karabiner-elements"
       "libreoffice"
