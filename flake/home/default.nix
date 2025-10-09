@@ -170,9 +170,6 @@ in
         pkgs-unstable.kubectx
         pkgs-unstable.k9s
         # Containers
-        ## Docker
-        #pkgs-unstable.docker
-        #pkgs-unstable.docker-compose
         ## Utils
         ### Linter
         pkgs.hadolint
@@ -209,6 +206,10 @@ in
         pkgs.acpi
       ]
       ++ lib.optionals isNixOS [
+        # Containers
+        ## Docker
+        pkgs-unstable.docker
+        pkgs-unstable.docker-compose
         # GUIs
         ## Browsers
         pkgs.floorp # Firefox alternative
