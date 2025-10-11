@@ -5,8 +5,8 @@ function supdate --description 'Run a full system update'
     if type --query nix && test -f ~/workspace/dotconfig/flake.nix
         nix flake update --flake ~/workspace/dotconfig/
 
-        if type --query nix-darwin
-            sudo nix-darwin switch --flake ~/workspace/dotconfig/#roee@macos
+        if type --query darwin-rebuild
+            sudo darwin-rebuild switch --flake ~/workspace/dotconfig#roee@macos
         else if type --query nixos-rebuild
             sudo nixos-rebuild switch --flake ~/workspace/dotconfig/#roee@nixos-vivo
         else if type --query home-manager
