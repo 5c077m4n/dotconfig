@@ -106,6 +106,7 @@
       "maccy"
       "keepassxc"
       "mongodb-compass"
+      "android-studio"
     ];
   };
 }
