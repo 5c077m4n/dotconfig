@@ -10,30 +10,32 @@ return {
 
 		cc.setup({
 			adapters = {
-				deepseek_r1_small = function()
-					local name = "deepseek-r1:1.5b"
+				http = {
+					deepseek_r1_small = function()
+						local name = "deepseek-r1:1.5b"
 
-					return cc_adapters.extend("ollama", {
-						name = name,
-						schema = {
-							model = { default = name },
-							num_ctx = { default = 16384 },
-							num_predict = { default = -1 },
-						},
-					})
-				end,
-				qwen_coder_small = function()
-					local name = "qwen2.5-coder:1.5b"
+						return cc_adapters.extend("ollama", {
+							name = name,
+							schema = {
+								model = { default = name },
+								num_ctx = { default = 16384 },
+								num_predict = { default = -1 },
+							},
+						})
+					end,
+					qwen_coder_small = function()
+						local name = "qwen2.5-coder:1.5b"
 
-					return cc_adapters.extend("ollama", {
-						name = name,
-						schema = {
-							model = { default = name },
-							num_ctx = { default = 16384 },
-							num_predict = { default = -1 },
-						},
-					})
-				end,
+						return cc_adapters.extend("ollama", {
+							name = name,
+							schema = {
+								model = { default = name },
+								num_ctx = { default = 16384 },
+								num_predict = { default = -1 },
+							},
+						})
+					end,
+				},
 			},
 			strategies = {
 				chat = { adapter = "deepseek_r1_small" },
