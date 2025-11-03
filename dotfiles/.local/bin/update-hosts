@@ -1,28 +1,24 @@
-#!/usr/bin/env node
-
-import { copyFile, readFile, writeFile } from "node:fs/promises";
+#!/usr/bin/env -S deno run --allow-net --allow-read --allow-write
 
 const HOSTS_PATH = "/etc/hosts";
 const NUMBER_FORMATTER = new Intl.NumberFormat();
 
-/** @return {string[]} */
-function filterComments(/** @type {string} */ lines) {
+function filterComments(lines: string): string[] {
 	return lines
 		.split("\n")
 		.map((l) => l.trim())
 		.filter((l) => !l.startsWith("#"));
 }
 
-/** @return {Promise<string[]>} */
-async function getHosts(/** @type {string} */ url) {
+async function getHosts(url: string | URL): Promise<string[]> {
 	const hostsFileResponse = await fetch(url);
 	const text = await hostsFileResponse.text();
 
 	return filterComments(text);
 }
 
-async function main() {
-	const localHostsFile = await readFile(HOSTS_PATH, { encoding: "utf8" });
+async function main(): Promise<void> {
+	const localHostsFile = await Deno.readTextFile(HOSTS_PATH);
 	const localHostsLines = filterComments(localHostsFile);
 
 	console.log("fetching anti malware hosts...");
@@ -34,22 +30,19 @@ async function main() {
 		"https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts",
 	);
 
-	const allHosts = new Set([
+	const allHosts = new Set<string>([
 		...localHostsLines,
 		...antiMalwareHosts,
 		...fakeNewsGamblingHosts,
 	]);
 	const allHostsText = Array.from(allHosts).join("\n");
 
-	await copyFile(HOSTS_PATH, `${HOSTS_PATH}.${Date.now()}`);
-	await writeFile(HOSTS_PATH, allHostsText);
+	await Deno.copyFile(HOSTS_PATH, `${HOSTS_PATH}.${Date.now()}`);
+	await Deno.writeTextFile(HOSTS_PATH, allHostsText);
 
 	console.log(
 		`All done! (added ${NUMBER_FORMATTER.format(allHosts.size)} hosts)`,
 	);
 }
 
-main().catch((e) => {
-	console.error(e);
-	process.exit(1);
-});
+await main();
