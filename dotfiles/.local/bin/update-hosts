@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { copyFile, readFile, writeFile } = require("node:fs/promises");
+import { copyFile, readFile, writeFile } from "node:fs/promises";
 
 const HOSTS_PATH = "/etc/hosts";
 const NUMBER_FORMATTER = new Intl.NumberFormat();
