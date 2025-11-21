@@ -33,6 +33,13 @@ in
           set-option -g @tmux-nvim-navigation-keybinding-up "C-k"
           set-option -g @tmux-nvim-navigation-keybinding-right "C-l"
           set-option -g @tmux-nvim-resize false
+
+          if-shell "uname | grep --ignore-case --quiet darwin" {
+            set-option -g @tmux-nvim-condition "ps -o command -t '#{pane_tty}' | grep --extended-regexp --ignore-case --quiet 'n?vim'"
+
+            # MacOS clipboard integration
+            bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+          }
         '';
       }
       {
@@ -43,14 +50,14 @@ in
             zoomIconQuery = "#{?window_zoomed_flag,[],}";
           in
           ''
-            set -ogq status-right " #{E:@catppuccin_status_application} "
-            set -ag status-right " #{E:@catppuccin_status_session} "
+            set-option -ogq status-right " #{E:@catppuccin_status_application} "
+            set-option -ag status-right " #{E:@catppuccin_status_session} "
 
-            set -ogq @catppuccin_flavor "${flavor}"
-            set -ogq @catppuccin_window_status_style "rounded"
-            set -ogq @catppuccin_window_text " #W ${zoomIconQuery}"
-            set -ogq @catppuccin_window_default_text " #W ${zoomIconQuery}" # deprecated(?)
-            set -ogq @catppuccin_window_current_text " #W ${zoomIconQuery}"
+            set-option -ogq @catppuccin_flavor "${flavor}"
+            set-option -ogq @catppuccin_window_status_style "rounded"
+            set-option -ogq @catppuccin_window_text " #W ${zoomIconQuery}"
+            set-option -ogq @catppuccin_window_default_text " #W ${zoomIconQuery}" # deprecated(?)
+            set-option -ogq @catppuccin_window_current_text " #W ${zoomIconQuery}"
           '';
       }
     ];
