@@ -1,10 +1,7 @@
-{
-  config,
-  pkgs,
-  pkgs-unstable,
-}:
+{ config, pkgs }:
 let
-  shell = "${pkgs-unstable.fish}/bin/fish";
+  inherit (pkgs) fish tmuxPlugins fetchFromGitHub;
+  shell = "${fish}/bin/fish";
 in
 {
   enable = true;
@@ -13,7 +10,6 @@ in
 
   plugins =
     let
-      inherit (pkgs) tmuxPlugins fetchFromGitHub;
       tmux-nvim = tmuxPlugins.mkTmuxPlugin {
         pluginName = "tmux.nvim";
         version = "unstable-2024-12-01";
