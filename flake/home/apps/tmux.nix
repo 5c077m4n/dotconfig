@@ -33,6 +33,7 @@ in
           set-option -g @tmux-nvim-navigation-keybinding-up "C-k"
           set-option -g @tmux-nvim-navigation-keybinding-right "C-l"
           set-option -g @tmux-nvim-resize false
+          set-option -g @tmux-nvim-condition "ps -o command -t '#{pane_tty}' | grep --extended-regexp --ignore-case --quiet 'n?vim'"
         '';
       }
       {
