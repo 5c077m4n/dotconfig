@@ -95,7 +95,7 @@ in
         pkgs.shellharden
         # TypeScript/JavaScript
         ## Runtimes
-        pkgs.nodejs_22
+        pkgs.nodejs_24
         pkgs-unstable.deno
         ## Package managers
         pkgs.pnpm
