@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name="Restart sound service"
-Type=Application
-StartupNotify=false
-Terminal=false
-Exec="systemctl --user restart pipewire{,-pulse} wireplumber"
-Hidden=false
-X-GNOME-Autostart-enabled=true

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=systemctl --user restart pulseaudio.service
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Audio start
+Name=Audio start
+Comment[en_US]=Restart the PulseAudio service
+Comment=Restart the PulseAudio service
