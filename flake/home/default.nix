@@ -46,7 +46,7 @@ in
         pkgs.killall
         pkgs.diffutils
         pkgs.findutils
-        pkgs.utillinux
+        pkgs.util-linux
         pkgs.tzdata
         pkgs.hostname
         pkgs.man
