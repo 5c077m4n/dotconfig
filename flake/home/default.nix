@@ -121,7 +121,6 @@ in
         pkgs-unstable.tinygo # Compiler for tiny places
         pkgs-unstable.go-blueprint # Project init
         pkgs.go-task # Makefile alt
-        pkgs.sqlc # SQL compiler
         pkgs-unstable.templ # HTML template engine
         ## LSP
         pkgs-unstable.gopls
@@ -176,8 +175,7 @@ in
         pkgs.hadolint
         # DBs
         ## TUIs
-        pkgs.pgcli
-        pkgs.mycli
+        pkgs.lazysql
         ## SQL
         ### Formatters
         pkgs.sqlfluff
