@@ -107,7 +107,7 @@ in
         pkgs.stylelint
         pkgs-unstable.biome
         # Python
-        pkgs.python310
+        pkgs.python314
         pkgs.poetry
         pkgs.mypy
         pkgs.pylint
