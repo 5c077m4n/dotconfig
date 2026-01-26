@@ -10,10 +10,10 @@
 
   nix = {
     enable = false;
+    settings.experimental-features = "nix-command flakes";
 
     # package = pkgs.lixPackageSets.stable.lix;
     # optimise.automatic = true;
-    # settings.experimental-features = "nix-command flakes";
     # # Garbage collect the Nix store
     # gc = {
     #   automatic = true;
@@ -93,7 +93,6 @@
     ];
     casks = [
       "docker-desktop"
-      "displaylink"
       "karabiner-elements"
       "libreoffice"
       "zen"
