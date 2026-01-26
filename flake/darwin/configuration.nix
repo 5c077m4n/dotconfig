@@ -44,6 +44,8 @@
       dock = {
         autohide = true;
         mru-spaces = false;
+        magnification = true;
+        minimize-to-application = true;
       };
 
       finder = {
@@ -90,6 +92,7 @@
       "go"
       "swift-format"
       "docker-compose"
+      "dockutil"
     ];
     casks = [
       "docker-desktop"
