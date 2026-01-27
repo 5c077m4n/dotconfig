@@ -1,24 +1,21 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 { pkgs, pkgs-unstable, ... }:
 let
   stateVersion = "24.11";
 in
 {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
+  imports = [ ./hardware-configuration.nix ];
 
-  boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+  boot =
+    let
+      device-luks-id = "6094072e-94b1-45a4-88f3-548832c8ffc3";
+    in
+    {
+      loader = {
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+      };
+      initrd.luks.devices."luks-${device-luks-id}".device = "/dev/disk/by-uuid/${device-luks-id}";
     };
-    initrd.luks.devices."luks-6094072e-94b1-45a4-88f3-548832c8ffc3".device =
-      "/dev/disk/by-uuid/6094072e-94b1-45a4-88f3-548832c8ffc3";
-  };
 
   networking = {
     hostName = "nixos"; # Define your hostname.
@@ -30,9 +27,7 @@ in
     #  noProxy = "127.0.0.1,localhost,internal.domain";
     #};
 
-    # Enable networking
     networkmanager.enable = true;
-
     firewall = {
       enable = true;
 
@@ -154,8 +149,8 @@ in
   # $ nix search wget
   environment = {
     systemPackages = [
-      pkgs-unstable.fish
-      pkgs-unstable.neovim
+      pkgs.fish
+      pkgs.neovim
       pkgs.curl
       pkgs.wget
       pkgs.python3

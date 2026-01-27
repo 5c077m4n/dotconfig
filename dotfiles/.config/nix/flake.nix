@@ -54,7 +54,7 @@
                   inherit username pkgs-unstable;
                   homeDirectory = "/Users/${username}";
                 };
-                users.${username} = ./flake/home;
+                users.${username} = ./home;
               };
             }
           ];
@@ -69,7 +69,7 @@
               ;
             hostPlatform = system;
           };
-          modules = [ ./flake/darwin/configuration.nix ] ++ home-manager-modules;
+          modules = [ ./darwin/configuration.nix ] ++ home-manager-modules;
         };
 
       nixosConfigurations =
@@ -103,7 +103,7 @@
                   inherit username pkgs-unstable;
                   homeDirectory = "/home/${username}";
                 };
-                users.${username} = ./flake/home;
+                users.${username} = ./home;
               };
             }
           ];
@@ -112,8 +112,8 @@
           ${nixosConfigName} = nixpkgs.lib.nixosSystem {
             inherit pkgs specialArgs;
             modules = [
-              ./flake/linux/nixos/configuration.nix
-              ./flake/linux/nixos/hardware-configuration.nix
+              ./nixos/configuration.nix
+              ./nixos/hardware-configuration.nix
             ]
             ++ home-manager-modules;
           };
@@ -142,7 +142,7 @@
               inherit username pkgs-unstable;
               homeDirectory = "/home/${username}";
             };
-            modules = [ ./flake/home ];
+            modules = [ ./home ];
           };
       };
     };
