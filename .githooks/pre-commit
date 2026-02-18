@@ -20,7 +20,7 @@
 				;;
 			fish)
 				fish --no-execute "$file" || exit 1
-				fish_indent --check "$file" || exit 1
+				fish_indent --check "$file" || { echo "${file} is not formatted by `fish_indent`"; exit 1 }
 				;;
 			nix)
 				deadnix "$file" || exit 1
