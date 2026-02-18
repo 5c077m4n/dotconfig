@@ -31,8 +31,8 @@
     let
       username = "roee";
       darwinConfigName = "${username}@macos";
-      nixosConfigName = "${username}@nixos-vivo";
-      ubuntuConfigName = "${username}@ubuntu-vivo";
+      nixosConfigName = "${username}@nixos";
+      ubuntuConfigName = "${username}@ubuntu";
       allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "google-chrome" ];
     in
     rec {

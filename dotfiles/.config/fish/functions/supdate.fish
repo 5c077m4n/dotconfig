@@ -8,9 +8,9 @@ function supdate --description 'Run a full system update'
         if type --query darwin-rebuild
             sudo darwin-rebuild switch --flake ~/.config/nix#roee@macos
         else if type --query nixos-rebuild
-            sudo nixos-rebuild switch --flake ~/.config/nix#roee@nixos-vivo
+            sudo nixos-rebuild switch --flake ~/.config/nix#roee@nixos
         else if type --query home-manager
-            home-manager switch --flake ~/.config/nix#roee@ubuntu-vivo
+            home-manager switch --flake ~/.config/nix#roee@ubuntu
         end
 
         __commit_if_needed ~/workspace/dotconfig/dotfiles/.config/nix/flake.lock
