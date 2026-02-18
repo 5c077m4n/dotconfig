@@ -1,0 +1,10 @@
+.git/
+.githooks/
+.github/
+assets/
+.editorconfig
+.gitignore
+.luarc.json
+.prettierrc.json
+.stylua.toml
+README.md
