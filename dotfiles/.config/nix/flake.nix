@@ -5,6 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
@@ -24,6 +25,7 @@
       nixpkgs,
       nixpkgs-darwin,
       nixpkgs-unstable,
+      determinate,
       ...
     }:
     let
@@ -114,6 +116,7 @@
             modules = [
               ./nixos/configuration.nix
               ./nixos/hardware-configuration.nix
+              determinate.nixosModules.default
             ]
             ++ home-manager-modules;
           };
