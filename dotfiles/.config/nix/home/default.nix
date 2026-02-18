@@ -211,8 +211,7 @@ in
         pkgs-unstable.docker-compose
         # GUIs
         ## Browsers
-        pkgs.floorp # Firefox alternative
-        pkgs.google-chrome
+        pkgs.zen # Firefox alternative
         ## Terminal
         pkgs.kitty
         ## Clipboard manager
