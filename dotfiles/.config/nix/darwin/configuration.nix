@@ -109,6 +109,7 @@
       "keepassxc"
       "mongodb-compass"
       "android-studio"
+      "unnaturalscrollwheels"
     ];
   };
 }
