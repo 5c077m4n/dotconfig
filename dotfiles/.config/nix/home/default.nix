@@ -108,13 +108,17 @@ in
         pkgs-unstable.biome
         # Python
         pkgs.python314
-        pkgs.poetry
+        ## LSPs
         pkgs.mypy
+        pkgs.pyright
+        ## Linters
         pkgs.pylint
         pkgs.black
         pkgs.isort
         pkgs.ruff
-        pkgs.pyright
+        ## Package managers
+        pkgs.poetry
+        pkgs-unstable.uv # Alt
         # Golang
         ## Tools
         pkgs-unstable.air # Live reloader
