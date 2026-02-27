@@ -62,6 +62,7 @@
       NSGlobalDomain = {
         AppleShowAllFiles = true;
         KeyRepeat = 1;
+        InitialKeyRepeat = 9;
         NSWindowShouldDragOnGesture = true;
         NSAutomaticWindowAnimationsEnabled = false;
       };
