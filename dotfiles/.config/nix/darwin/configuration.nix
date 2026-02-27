@@ -85,7 +85,11 @@
 
   homebrew = {
     enable = true;
-    onActivation.cleanup = "zap";
+    onActivation = {
+      cleanup = "zap";
+      autoUpdate = true;
+      upgrade = true;
+    };
 
     taps = [ "nikitabobko/tap" ];
     brews = [
