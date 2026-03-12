@@ -78,7 +78,6 @@
 
     taps = [ "nikitabobko/tap" ];
     brews = [
-      "sleepwatcher"
       "go"
       "swift-format"
       "docker-compose"
