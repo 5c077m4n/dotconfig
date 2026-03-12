@@ -71,7 +71,11 @@
               ;
             hostPlatform = system;
           };
-          modules = [ ./darwin/configuration.nix ] ++ home-manager-modules;
+          modules = [
+            determinate.darwinModules.default
+            ./darwin/configuration.nix
+          ]
+          ++ home-manager-modules;
         };
 
       nixosConfigurations =
