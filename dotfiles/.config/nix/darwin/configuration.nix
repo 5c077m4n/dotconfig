@@ -9,23 +9,8 @@
   nixpkgs = { inherit hostPlatform; };
 
   nix = {
-    enable = false;
+    enable = false; # This disables `nix-darwin` from managing nix itself, Determinate nix does this already
     settings.experimental-features = "nix-command flakes";
-
-    # package = pkgs.lixPackageSets.stable.lix;
-    # optimise.automatic = true;
-    # # Garbage collect the Nix store
-    # gc = {
-    #   automatic = true;
-    #   interval = {
-    #     Hour = 0;
-    #     Minute = 0;
-    #   };
-    #   options = "--delete-older-than 7d";
-    # };
-    # extraOptions = ''
-    #   extra-platforms = x86_64-darwin aarch64-darwin
-    # '';
   };
 
   security.pam.services.sudo_local.touchIdAuth = true;
