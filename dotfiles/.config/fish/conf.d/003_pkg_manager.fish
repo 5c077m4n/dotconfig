@@ -13,9 +13,7 @@ if test -x $brew_bin
     set --export --global HOMEBREW_NO_ANALYTICS 1
     set --export --global HOMEBREW_BUNDLE_FILE "$XDG_CONFIG_HOME/homebrew/Brewfile"
 
-    if ! type --query nix
-        $brew_bin shellenv | source
-    end
+    $brew_bin shellenv | source
 
     if test -d "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
         fish_add_path "$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin"
