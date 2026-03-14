@@ -187,8 +187,11 @@ in
         pkgs.nerd-fonts.fira-mono
         pkgs.nerd-fonts.hack
         # Cloud
+        ## AWS
         pkgs.awscli2
         pkgs.awslogs
+        ## GCP
+        pkgs-unstable.google-cloud-sdk
         # Misc
         pkgs.gopass
         pkgs.android-tools # ADB
