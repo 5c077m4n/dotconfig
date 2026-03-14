@@ -26,6 +26,7 @@ local SERVER_LIST = {
 	"templ",
 	"astro",
 	"swift",
+	"terraform_ls",
 }
 
 local function setup()

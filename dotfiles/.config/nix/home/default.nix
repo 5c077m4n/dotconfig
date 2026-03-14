@@ -192,6 +192,10 @@ in
         pkgs.awslogs
         ## GCP
         pkgs-unstable.google-cloud-sdk
+        ## Setup
+        pkgs-unstable.opentofu
+        ### Utils
+        pkgs-unstable.terraform-ls # Terraform LSP
         # Misc
         pkgs.gopass
         pkgs.android-tools # ADB

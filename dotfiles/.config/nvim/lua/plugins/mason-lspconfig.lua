@@ -20,6 +20,7 @@ return {
 					and server ~= "fish_lsp"
 					and server ~= "swift"
 					and server ~= "nil_ls"
+					and server ~= "terraform_ls"
 			end,
 			full_server_list
 		)

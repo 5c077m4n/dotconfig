@@ -10,15 +10,10 @@ return {
 		local js_linters = { "biome", "biome-check", "biome-organize-imports" }
 		conform.setup({
 			formatters = {
-				stylua = {
-					prepend_args = { "--verify" },
-				},
-				sqlfluff = {
-					args = { "fix", "--dialect=postgres", "-" },
-				},
-				rustfmt = {
-					prepend_args = { "+nightly" },
-				},
+				stylua = { prepend_args = { "--verify" } },
+				sqlfluff = { args = { "fix", "--dialect=postgres", "-" } },
+				rustfmt = { prepend_args = { "+nightly" } },
+				tofu_lint = { command = "tofu", args = { "fmt", "-" }, stdin = true },
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
@@ -50,6 +45,8 @@ return {
 				jsonnet = { "jsonnetfmt" },
 				libsonnet = { "jsonnetfmt" },
 				swift = { "swift" },
+				tf = { "tofu_lint" },
+				terraform = { "tofu_lint" },
 			},
 		})
 
