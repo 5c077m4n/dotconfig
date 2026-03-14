@@ -15,6 +15,7 @@ return {
 		local keymap = require("vimrc.utils").keymapping
 
 		neo_tree.setup({
+			log_level = "warn",
 			close_if_last_window = true,
 			enable_git_status = true,
 			enable_diagnostics = true,
