@@ -53,7 +53,7 @@ function __git_worktree_add
 
     set --local branch
     for branch in $argv
-        set --local worktree_path ../"$project_name"__"$branch"
+        set --local worktree_path "../$(echo "$project_name"__"$branch" | string escape --style='var')"
 
         echo "Creating worktree: $worktree_path for branch: $branch"
         if git rev-parse --verify $branch >/dev/null 2>&1
