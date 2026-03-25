@@ -1,0 +1,7 @@
+# Font
+font-thicken = true
+
+# Misc
+## Mouse
+macos-option-as-alt = true
+mouse-hide-while-typing = true

@@ -88,7 +88,7 @@
       "karabiner-elements"
       "libreoffice"
       "zen"
-      "kitty"
+      "ghostty"
       "iterm2"
       "neovide-app"
       "vscodium"
