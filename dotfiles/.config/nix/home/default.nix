@@ -122,10 +122,7 @@ in
         # Golang
         ## Tools
         pkgs-unstable.air # Live reloader
-        pkgs-unstable.tinygo # Compiler for tiny places
-        pkgs-unstable.go-blueprint # Project init
         pkgs.go-task # Makefile alt
-        pkgs-unstable.templ # HTML template engine
         ## LSP
         pkgs-unstable.gopls
         ## Formatters/Linters
