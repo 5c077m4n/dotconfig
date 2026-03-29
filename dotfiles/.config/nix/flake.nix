@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
@@ -23,7 +22,6 @@
       nix-darwin,
       home-manager,
       nixpkgs,
-      nixpkgs-darwin,
       nixpkgs-unstable,
       determinate,
       ...
@@ -39,7 +37,7 @@
       darwinConfigurations.${darwinConfigName} =
         let
           system = "aarch64-darwin";
-          pkgs = import nixpkgs-darwin { inherit system; };
+          pkgs = import nixpkgs { inherit system; };
           pkgs-unstable = import nixpkgs-unstable {
             inherit system;
             config = { inherit allowUnfreePredicate; };
