@@ -70,7 +70,7 @@ in
       set-option -g prefix C-a # Change prefix command
       bind-key C-a send-prefix
 
-      set-option -g mouse off # Disable mouse
+      bind-key x kill-pane # skip "kill-pane 1? (y/n)" prompt
       set-option -g detach-on-destroy off # Switch to another active session instead of quitting
 
       set-option -g base-index 1 # Fix window numbering
