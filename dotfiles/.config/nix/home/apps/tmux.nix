@@ -51,6 +51,7 @@ in
             set-option -ag status-right " #{E:@catppuccin_status_session} "
 
             set-option -ogq @catppuccin_flavor "${flavor}"
+            set-option -ogq @catppuccin_status_background "default"
             set-option -ogq @catppuccin_window_status_style "rounded"
             set-option -ogq @catppuccin_window_text " #W ${zoomIconQuery}"
             set-option -ogq @catppuccin_window_default_text " #W ${zoomIconQuery}" # deprecated(?)
@@ -80,6 +81,7 @@ in
       set-option -g status-left-length 100
       set-option -g status-right-length 100
       set-option -g status-left ""
+      set-option -g status-style bg=default
       # Add support for nvim/vim focus events
       set-option -g focus-events on
       # Resize fix
