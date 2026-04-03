@@ -85,6 +85,8 @@
       "swift-format"
       "dockutil"
       "Arthur-Ficial/tap/apfel"
+      "docker"
+      "docker-completion"
     ];
     casks = [
       "docker-desktop"
