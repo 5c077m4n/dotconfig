@@ -76,12 +76,15 @@
       upgrade = true;
     };
 
-    taps = [ "nikitabobko/tap" ];
+    taps = [
+      "nikitabobko/tap"
+      "Arthur-Ficial/tap"
+    ];
     brews = [
       "go"
       "swift-format"
-      "docker-compose"
       "dockutil"
+      "Arthur-Ficial/tap/apfel"
     ];
     casks = [
       "docker-desktop"
