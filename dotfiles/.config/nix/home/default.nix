@@ -84,6 +84,9 @@ in
         # LLMs
         pkgs-unstable.ollama
         # Shells
+        ## Fish
+        pkgs-unstable.fish
+        pkgs-unstable.fish-lsp
         ## Bash
         pkgs.bash
         ## ZSH
@@ -262,7 +265,7 @@ in
     home-manager.enable = true;
     java.enable = true;
 
-    fish = import ./apps/fish.nix { inherit pkgs; };
+    fish = import ./apps/fish.nix { inherit pkgs-unstable; };
     tmux = import ./apps/tmux.nix { inherit config pkgs; };
   };
 

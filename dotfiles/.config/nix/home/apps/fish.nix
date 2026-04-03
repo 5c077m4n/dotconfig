@@ -1,6 +1,6 @@
-{ pkgs }:
+{ pkgs-unstable }:
 let
-  inherit (pkgs) fish fishPlugins;
+  inherit (pkgs-unstable) fish fishPlugins;
 in
 {
   enable = true;
