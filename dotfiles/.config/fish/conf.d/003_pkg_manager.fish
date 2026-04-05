@@ -1,6 +1,6 @@
 set --local nixd_init /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
 if test -e $nixd_init
-    . $nixd_init
+    source $nixd_init
 
     set --local per_user_pkgs "/etc/profiles/per-user/$USER/bin/"
     if test -d $per_user_pkgs
