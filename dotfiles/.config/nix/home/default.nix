@@ -192,6 +192,8 @@ in
         pkgs.awslogs
         ## GCP
         pkgs-unstable.google-cloud-sdk
+        ## Digital Ocean
+        pkgs-unstable.doctl
         ## Setup
         pkgs-unstable.opentofu
         ### Utils
