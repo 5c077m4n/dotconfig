@@ -95,7 +95,6 @@
       "zen"
       "ghostty"
       "iterm2"
-      "neovide-app"
       "vscodium"
       "inkscape"
       "nikitabobko/tap/aerospace"
