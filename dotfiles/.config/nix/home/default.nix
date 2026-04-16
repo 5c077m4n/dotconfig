@@ -268,7 +268,7 @@ in
     java.enable = true;
 
     fish = import ./apps/fish.nix { inherit pkgs-unstable; };
-    tmux = import ./apps/tmux.nix { inherit config pkgs; };
+    tmux = import ./apps/tmux.nix { inherit config pkgs-unstable; };
   };
 
   fonts.fontconfig.enable = true;

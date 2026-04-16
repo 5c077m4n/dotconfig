@@ -1,6 +1,6 @@
-{ config, pkgs }:
+{ config, pkgs-unstable }:
 let
-  inherit (pkgs) fish tmuxPlugins fetchFromGitHub;
+  inherit (pkgs-unstable) fish tmuxPlugins fetchFromGitHub;
   shell = "${fish}/bin/fish";
 in
 {
