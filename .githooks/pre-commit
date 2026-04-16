@@ -27,7 +27,7 @@
 				statix check "$file" || exit 1
 				nixfmt --check "$file" || exit 1
 
-				nix flake check "$root_dir"
+				nix flake check "${root_dir}/dotfiles/.config/nix"
 				;;
 			yaml)
 				yamllint "$file" || exit 1
