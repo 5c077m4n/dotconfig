@@ -1,3 +1,4 @@
+---@type vim.lsp.Config
 return {
 	on_init = function(client)
 		if client.workspace_folders then

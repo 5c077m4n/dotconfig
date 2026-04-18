@@ -8,6 +8,7 @@ local inlay_hints = {
 	includeInlayVariableTypeHints = false,
 }
 
+---@type vim.lsp.Config
 return {
 	settings = {
 		javascript = { inlayHints = inlay_hints },

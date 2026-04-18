@@ -5,6 +5,7 @@ local jsonnet_common_paths = function(root_dir)
 	return table.concat(paths, ":")
 end
 
+---@type vim.lsp.Config
 return {
 	default_config = {
 		cmd = { "jsonnet-language-server" },
