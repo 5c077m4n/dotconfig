@@ -8,6 +8,7 @@ local SERVER_LIST = {
 	"lua_ls",
 	"ruff",
 	"pyright",
+	"ty",
 	"rust_analyzer",
 	"gopls",
 	"golangci_lint_ls",
@@ -49,7 +50,16 @@ local function setup()
 		once = true,
 		group = vim.api.nvim_create_augroup("enable_lsp_on_vim_enter_once", { clear = true }),
 		callback = function()
-			vim.defer_fn(function() vim.lsp.enable(SERVER_LIST) end, 50)
+			local enabled_servers = vim.iter(SERVER_LIST)
+				:filter(
+					function(server)
+						return not (
+							server == "pyright" and vim.fn.filereadable("pyproject.toml") == 1
+						)
+					end
+				)
+				:totable()
+			vim.defer_fn(function() vim.lsp.enable(enabled_servers) end, 50)
 		end,
 	})
 end
