@@ -87,6 +87,7 @@
       "Arthur-Ficial/tap/apfel"
       "docker"
       "docker-completion"
+      "tree-sitter-cli"
     ];
     casks = [
       "docker-desktop"
