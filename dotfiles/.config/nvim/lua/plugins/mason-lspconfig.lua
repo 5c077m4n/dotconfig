@@ -12,18 +12,20 @@ return {
 	},
 	event = { "VeryLazy" },
 	config = function()
-		local full_server_list = require("vimrc.lsp").SERVER_LIST
+		local lsp_config = require("vimrc.lsp")
 
-		local mason_supported_servers = vim.tbl_filter(
-			function(server)
-				return server ~= "gleam"
-					and server ~= "fish_lsp"
-					and server ~= "swift"
-					and server ~= "nil_ls"
-					and server ~= "terraform_ls"
-			end,
-			full_server_list
-		)
+		---@type string[]
+		local mason_supported_servers = vim.iter(lsp_config.SERVER_LIST)
+			:filter(
+				function(server)
+					return server ~= "gleam"
+						and server ~= "fish_lsp"
+						and server ~= "swift"
+						and server ~= "nil_ls"
+						and server ~= "terraform_ls"
+				end
+			)
+			:totable()
 		require("mason-lspconfig").setup({
 			PATH = "append",
 			automatic_installation = true,
