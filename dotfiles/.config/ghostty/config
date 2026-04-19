@@ -1,7 +1,4 @@
-# Font
 font-thicken = true
-
-# Misc
-## Mouse
+notify-on-command-finish = "unfocused"
 macos-option-as-alt = true
 mouse-hide-while-typing = true
