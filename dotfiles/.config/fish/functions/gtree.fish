@@ -59,7 +59,7 @@ function __git_worktree_add
         if git rev-parse --verify $branch >/dev/null 2>&1
             git worktree add $worktree_path $branch
         else
-            git worktree add -b $branch $worktree_path
+            git worktree add -b $branch $worktree_path (gbdefault)
         end
 
         if test $status -eq 0
