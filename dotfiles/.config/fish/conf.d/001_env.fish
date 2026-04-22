@@ -10,5 +10,7 @@ set --global fish_greeting ""
 ## Disables Apple's shell session storage
 set --export --global SHELL_SESSIONS_DISABLE 1
 
-# NextJS
+# Telemetry
+set --export --global DO_NOT_TRACK true
+set --export --global GH_TELEMETRY false
 set --export --global NEXT_TELEMETRY_DISABLED 1
