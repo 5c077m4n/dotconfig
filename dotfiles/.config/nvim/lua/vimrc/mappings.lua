@@ -87,6 +87,11 @@ keymap.nnoremap(
 
 -- Undo
 keymap.nnoremap("U", vim.cmd.redo, { desc = "Redo last change" })
+--- Tree
+keymap.nnoremap("<leader>u", function()
+	vim.cmd.packadd("nvim.undotree")
+	vim.cmd.Undotree()
+end, { desc = "Toggle the undo tree" })
 
 create_command("CopyCursorLocation", function()
 	local file_path = vim.fn.expand("%:.")
