@@ -58,7 +58,6 @@ in
         ## Git
         pkgs.git
         ### Tooling
-        pkgs.hub
         pkgs.lazygit
         pkgs.delta
         pkgs.git-absorb
