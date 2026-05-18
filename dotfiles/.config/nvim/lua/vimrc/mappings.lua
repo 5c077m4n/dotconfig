@@ -73,6 +73,22 @@ keymap.vnoremap(
 	{ desc = "Paste before without overriding the current register's content" }
 )
 
+-- Selection
+keymap.nnoremap("]v", function()
+	vim.cmd("normal! v")
+	require("vim.treesitter._select").select_parent(vim.v.count1)
+end, { desc = "Start selection" })
+keymap.xnoremap(
+	"]v",
+	function() require("vim.treesitter._select").select_parent(vim.v.count1) end,
+	{ desc = "Increase selection" }
+)
+keymap.xnoremap(
+	"[v",
+	function() require("vim.treesitter._select").select_child(vim.v.count1) end,
+	{ desc = "Decrease selection" }
+)
+
 keymap.nnoremap("<leader>cd", function()
 	local cwd = vim.fn.expand("%:p:h")
 	vim.cmd.cd(cwd)
