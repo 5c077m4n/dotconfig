@@ -1,5 +1,6 @@
 local SERVER_LIST = {
 	"ts_ls",
+	"denols",
 	"cssls",
 	"html",
 	"tailwindcss",
