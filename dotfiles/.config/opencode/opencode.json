@@ -8,6 +8,7 @@
 			"git reflog *": "allow",
 			"git add *": "allow",
 			"git commit *": "ask",
+			"git reset *": "ask",
 			"git push *": "deny",
 			"grep *": "allow",
 			"rg *": "allow",
@@ -20,5 +21,6 @@
 		},
 		"read": { "./*": "allow", "./**/.env": "deny", "./**/.env.*": "deny" },
 		"edit": { "./*": "allow", "./**/.env": "deny", "./**/.env.*": "deny" }
-	}
+	},
+	"plugin": ["opencode-mem"]
 }
