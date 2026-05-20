@@ -200,6 +200,7 @@ in
         # Misc
         pkgs.gopass
         pkgs.android-tools # ADB
+        pkgs.exiftool # Edit file metadata
       ]
       ++ lib.optionals isLinux [
         pkgs-unstable.go
