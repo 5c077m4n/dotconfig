@@ -84,6 +84,7 @@
       "go"
       "swift-format"
       "dockutil"
+      "blueutil"
       "Arthur-Ficial/tap/apfel"
       "docker"
       "docker-completion"

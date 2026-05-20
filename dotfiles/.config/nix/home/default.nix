@@ -16,7 +16,7 @@ in
 
     packages =
       let
-        inherit (pkgs.stdenv) isLinux isDarwin;
+        inherit (pkgs.stdenv) isLinux;
         isNixOS = isLinux && builtins.pathExists "/etc/nixos/";
       in
       [
@@ -237,10 +237,6 @@ in
         pkgs-unstable.dbeaver-bin
         ## Office
         pkgs.libreoffice
-      ]
-      ++ lib.optionals isDarwin [
-        # Bluetooth
-        pkgs.blueutil
       ];
 
     sessionVariables = {
