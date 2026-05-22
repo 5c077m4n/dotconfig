@@ -18,7 +18,19 @@
 			"xxd *": "allow",
 			"hexdump *": "allow"
 		},
-		"read": { "./*": "allow", "./**/.env": "deny", "./**/.env.*": "deny" },
-		"edit": { "./*": "allow", "./**/.env": "deny", "./**/.env.*": "deny" }
-	}
+		"read": {
+			"./*": "allow",
+			"./**/.env": "deny",
+			"./**/.env.*": "deny",
+			"./**/.ssh/": "deny"
+		},
+		"edit": {
+			"./*": "allow",
+			"./**/.env": "deny",
+			"./**/.env.*": "deny",
+			"./**/.ssh/": "deny"
+		}
+	},
+	"model": "deepseek/deepseek-v4-pro",
+	"lsp": true
 }
