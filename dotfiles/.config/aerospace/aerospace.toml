@@ -31,8 +31,8 @@ preset = 'qwerty'
 
 [mode.main.binding]
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-alt-shift-period = 'layout tiles horizontal vertical'
-alt-shift-comma = 'layout accordion horizontal vertical'
+alt-shift-ctrl-period = 'layout tiles horizontal vertical'
+alt-shift-ctrl-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 alt-shift-h = 'focus left'
@@ -79,8 +79,14 @@ alt-shift-ctrl-9 = 'move-node-to-workspace 9'
 alt-shift-n = 'focus-monitor --wrap-around next'
 alt-shift-p = 'focus-monitor --wrap-around prev'
 
-alt-shift-ctrl-n = ['move-node-to-monitor --wrap-around next', 'focus-monitor --wrap-around next']
-alt-shift-ctrl-p = ['move-node-to-monitor --wrap-around prev', 'focus-monitor --wrap-around prev']
+alt-shift-ctrl-n = [
+  'move-node-to-monitor --wrap-around next',
+  'focus-monitor --wrap-around next',
+]
+alt-shift-ctrl-p = [
+  'move-node-to-monitor --wrap-around prev',
+  'focus-monitor --wrap-around prev',
+]
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
