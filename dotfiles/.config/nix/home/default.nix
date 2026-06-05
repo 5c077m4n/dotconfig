@@ -150,7 +150,7 @@ in
         pkgs-unstable.stylua
         pkgs-unstable.selene
         # Nix
-        pkgs.nixfmt-rfc-style
+        pkgs.nixfmt
         pkgs.statix
         pkgs.deadnix
         pkgs.nil
