@@ -81,7 +81,7 @@ in
         pkgs.fzf
         pkgs.ripgrep
         # LLMs
-        pkgs-unstable.ollama
+        pkgs-unstable.llama-cpp
         # Shells
         ## Fish
         pkgs-unstable.fish
