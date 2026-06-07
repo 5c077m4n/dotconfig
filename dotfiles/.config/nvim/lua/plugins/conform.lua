@@ -47,6 +47,7 @@ return {
 				swift = { "swift" },
 				tf = { "tofu_lint" },
 				terraform = { "tofu_lint" },
+				zig = { "zigfmt" },
 			},
 		})
 
