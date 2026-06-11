@@ -38,6 +38,11 @@ keymap.tnoremap("<C-]>", [[<C-\><C-n>]], { desc = "Goto insert mode in terminal"
 
 create_command("SelectAll", [[normal! gg0VG$]], { desc = "Select all buffer content" })
 create_command("CopyAll", [[normal! gg0VG$"+y]], { desc = "Copy all buffer content" })
+create_command(
+	"LspInfo",
+	function() vim.print(vim.lsp.get_clients({ bufnr = 0 })[1].config.settings) end,
+	{ desc = "Copy all buffer content" }
+)
 
 keymap.vnoremap("<C-y>", [["+y]], { desc = "Copy selection to clipboard" })
 keymap.nnoremap("V", "v$", { desc = "Select to line end" })
