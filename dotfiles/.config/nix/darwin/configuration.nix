@@ -76,16 +76,12 @@
       upgrade = true;
     };
 
-    taps = [
-      "nikitabobko/tap"
-      "Arthur-Ficial/tap"
-    ];
+    taps = [ "nikitabobko/tap" ];
     brews = [
       "go"
       "swift-format"
       "dockutil"
       "blueutil"
-      "Arthur-Ficial/tap/apfel"
       "docker"
       "docker-completion"
       "tree-sitter-cli"
