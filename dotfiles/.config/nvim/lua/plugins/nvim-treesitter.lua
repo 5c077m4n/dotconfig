@@ -18,6 +18,7 @@ return {
 			"markdown",
 			"javascript",
 			"typescript",
+			"vue",
 			"python",
 			"rust",
 			"go",

@@ -7,6 +7,7 @@ local SERVER_LIST = {
 	"biome",
 	"bashls",
 	"lua_ls",
+	"vue_ls",
 	"ruff",
 	"ty",
 	"rust_analyzer",
