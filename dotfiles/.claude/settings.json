@@ -1,0 +1,26 @@
+{
+	"enabledPlugins": {
+		"typescript-lsp@claude-plugins-official": true,
+		"claude-mem@thedotmack": true,
+		"caveman@caveman": true
+	},
+	"extraKnownMarketplaces": {
+		"thedotmack": {
+			"source": {
+				"source": "github",
+				"repo": "thedotmack/claude-mem"
+			}
+		},
+		"caveman": {
+			"source": {
+				"source": "github",
+				"repo": "JuliusBrussee/caveman"
+			}
+		}
+	},
+	"theme": "dark-daltonized",
+	"sandbox": {
+		"enabled": true,
+		"autoAllowBashIfSandboxed": true
+	}
+}
