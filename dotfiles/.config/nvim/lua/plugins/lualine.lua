@@ -55,7 +55,7 @@ return {
 					},
 				},
 				lualine_x = {
-					function() return lsp_progress.progress({}) end,
+					function() return lsp_progress.progress() end,
 				},
 			},
 			winbar = {
