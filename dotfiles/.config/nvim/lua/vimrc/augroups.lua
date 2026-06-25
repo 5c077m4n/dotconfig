@@ -52,13 +52,10 @@ create_autocmd({ "LspAttach" }, {
 	group = create_augroup("setup_lsp_handlers", { clear = true }),
 	callback = function(args)
 		local telescope_builtin = require("telescope.builtin")
-		local keymap = utils.keymapping
 
+		local keymap = utils.keymapping
 		local lsp = vim.lsp
 		local diagnostic = vim.diagnostic
-
-		local client = lsp.get_client_by_id(args.data.client_id)
-		local buffer_num = args.buf
 
 		lsp.handlers["window/showMessage"] = function(err, result)
 			vim.notify(
@@ -67,6 +64,10 @@ create_autocmd({ "LspAttach" }, {
 				{ title = "LSP Message" }
 			)
 		end
+
+		local client = lsp.get_client_by_id(args.data.client_id)
+		local buffer_num = args.buf
+
 		if client and client.server_capabilities.documentSymbolProvider then
 			local ok, navic = pcall(require, "nvim-navic")
 			if ok then navic.attach(client, buffer_num) end
