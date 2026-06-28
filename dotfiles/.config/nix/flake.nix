@@ -29,15 +29,23 @@
     let
       username = "roee";
       darwinConfigName = "${username}@macos";
+      allowUnfreePredicate =
+        pkg:
+        builtins.elem (nixpkgs.lib.getName pkg) [
+          "google-chrome"
+          "claude-code"
+        ];
       nixosConfigName = "${username}@nixos";
       ubuntuConfigName = "${username}@ubuntu";
-      allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [ "google-chrome" ];
     in
     rec {
       darwinConfigurations.${darwinConfigName} =
         let
           system = "aarch64-darwin";
-          pkgs = import nixpkgs { inherit system; };
+          pkgs = import nixpkgs {
+            inherit system;
+            config = { inherit allowUnfreePredicate; };
+          };
           pkgs-unstable = import nixpkgs-unstable {
             inherit system;
             config = { inherit allowUnfreePredicate; };
