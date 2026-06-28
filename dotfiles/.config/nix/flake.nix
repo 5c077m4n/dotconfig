@@ -35,10 +35,8 @@
           "google-chrome"
           "claude-code"
         ];
-      nixosConfigName = "${username}@nixos";
-      ubuntuConfigName = "${username}@ubuntu";
     in
-    rec {
+    {
       darwinConfigurations.${darwinConfigName} =
         let
           system = "aarch64-darwin";
@@ -83,80 +81,5 @@
           ]
           ++ home-manager-modules;
         };
-
-      nixosConfigurations =
-        let
-          system = "x86_64-linux";
-          pkgs = import nixpkgs {
-            inherit system;
-            config = { inherit allowUnfreePredicate; };
-          };
-          pkgs-unstable = import nixpkgs-unstable {
-            inherit system;
-            config = { inherit allowUnfreePredicate; };
-          };
-          specialArgs = {
-            inherit
-              self
-              username
-              system
-              pkgs-unstable
-              ;
-          };
-          home-manager-modules = [
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                backupFileExtension = "backup";
-
-                extraSpecialArgs = {
-                  inherit username pkgs-unstable;
-                  homeDirectory = "/home/${username}";
-                };
-                users.${username} = ./home;
-              };
-            }
-          ];
-        in
-        {
-          ${nixosConfigName} = nixpkgs.lib.nixosSystem {
-            inherit pkgs specialArgs;
-            modules = [
-              ./nixos/configuration.nix
-              ./nixos/hardware-configuration.nix
-              determinate.nixosModules.default
-            ]
-            ++ home-manager-modules;
-          };
-        };
-
-      homeConfigurations = {
-        ${darwinConfigName} =
-          darwinConfigName.${darwinConfigName}.config.home-manager.users.${username}.home;
-        ${nixosConfigName} =
-          nixosConfigurations.${nixosConfigName}.config.home-manager.users.${username}.home;
-        ${ubuntuConfigName} =
-          let
-            system = "x86_64-linux";
-            pkgs = import nixpkgs {
-              inherit system;
-              config = { inherit allowUnfreePredicate; };
-            };
-            pkgs-unstable = import nixpkgs-unstable {
-              inherit system;
-              config = { inherit allowUnfreePredicate; };
-            };
-          in
-          home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            extraSpecialArgs = {
-              inherit username pkgs-unstable;
-              homeDirectory = "/home/${username}";
-            };
-            modules = [ ./home ];
-          };
-      };
     };
 }
