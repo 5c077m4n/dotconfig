@@ -35,6 +35,23 @@
           "google-chrome"
           "claude-code"
         ];
+      claude-code-overlay = final: prev: {
+        claude-code = final.symlinkJoin {
+          name = "claude-code";
+          paths = [ prev.claude-code ];
+          buildInputs = [ final.makeWrapper ];
+
+          postBuild = ''
+            wrapProgram $out/bin/claude --prefix PATH : "${
+              final.lib.makeBinPath [
+                final.typescript-language-server
+                final.vue-language-server
+                final.pyright
+              ]
+            }"
+          '';
+        };
+      };
     in
     {
       darwinConfigurations.${darwinConfigName} =
@@ -43,10 +60,12 @@
           pkgs = import nixpkgs {
             inherit system;
             config = { inherit allowUnfreePredicate; };
+            overlays = [ claude-code-overlay ];
           };
           pkgs-unstable = import nixpkgs-unstable {
             inherit system;
             config = { inherit allowUnfreePredicate; };
+            overlays = [ claude-code-overlay ];
           };
           home-manager-modules = [
             home-manager.darwinModules.home-manager

@@ -265,7 +265,11 @@ in
 
     fish = import ./apps/fish.nix { inherit pkgs-unstable; };
     tmux = import ./apps/tmux.nix { inherit config pkgs-unstable; };
-    claude-code = import ./apps/claude-code.nix { inherit pkgs-unstable; };
+
+    claude-code = {
+      enable = true;
+      package = pkgs-unstable.claude-code;
+    };
   };
 
   fonts.fontconfig.enable = true;
