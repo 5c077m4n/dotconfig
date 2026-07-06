@@ -1,4 +1,5 @@
 {
+	"$schema": "https://www.schemastore.org/claude-code-settings.json",
 	"enabledPlugins": {
 		"typescript-lsp@claude-plugins-official": true,
 		"claude-mem@thedotmack": true,
@@ -18,9 +19,22 @@
 			}
 		}
 	},
-	"theme": "dark-daltonized",
 	"sandbox": {
 		"enabled": true,
 		"autoAllowBashIfSandboxed": true
+	},
+	"effortLevel": "xhigh",
+	"theme": "auto",
+	"hooks": {
+		"Stop": [
+			{
+				"hooks": [
+					{
+						"type": "command",
+						"command": "afplay /System/Library/Sounds/Funk.aiff"
+					}
+				]
+			}
+		]
 	}
 }
