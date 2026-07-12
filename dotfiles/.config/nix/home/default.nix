@@ -2,7 +2,6 @@
   pkgs,
   pkgs-unstable,
   username,
-  config,
   homeDirectory,
   ...
 }:
@@ -149,6 +148,8 @@ in
         pkgs.luajitPackages.luacheck
         pkgs-unstable.stylua
         pkgs-unstable.selene
+        ## LSP
+        pkgs-unstable.lua-language-server
         # Nix
         pkgs.nixfmt
         pkgs.statix
@@ -261,10 +262,8 @@ in
 
   programs = {
     home-manager.enable = true;
-
+    tmux.enable = true;
     fish = import ./apps/fish.nix { inherit pkgs-unstable; };
-    tmux = import ./apps/tmux.nix { inherit config pkgs-unstable; };
-
     claude-code = {
       enable = true;
       package = pkgs-unstable.claude-code;

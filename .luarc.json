@@ -1,3 +1,5 @@
 {
-    "workspace.maxPreload": 10000
+	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+	"runtime.version": "LuaJIT",
+	"workspace.ignoreDir": ["dotfiles/.local"]
 }
