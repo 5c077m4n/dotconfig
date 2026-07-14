@@ -17,6 +17,19 @@ local function normalize_command(cmd)
 	return cmd
 end
 
+---@param cmd string
+---@return string?
+local function run_sh(cmd)
+	local output --[[@type string?]] = nil
+
+	local handle = io.popen(cmd)
+	if handle then
+		output = tostring(handle:read("*l"))
+		handle:close()
+	end
+	return output
+end
+
 ---@class tmux
 local TMUX = {}
 TMUX.__index = TMUX
@@ -133,12 +146,7 @@ function TMUX:plugin(spec)
 	end
 
 	if spec.commit then
-		local current_commit --[[@type string?]] = nil
-		local head_handle = io.popen("cd " .. plugin_dir .. " && git rev-parse HEAD 2>/dev/null")
-		if head_handle then
-			current_commit = tostring(head_handle:read("*l"))
-			head_handle:close()
-		end
+		local current_commit = run_sh("cd " .. plugin_dir .. " && git rev-parse HEAD 2>/dev/null")
 
 		if current_commit ~= spec.commit then
 			local ok = os.execute(
@@ -176,14 +184,7 @@ function TMUX:plugin(spec)
 			break
 		end
 	end
-
-	if not run_script then
-		local handle = io.popen("ls " .. plugin_dir .. "/*.tmux 2>/dev/null")
-		if handle then
-			run_script = tostring(handle:read("*l"))
-			handle:close()
-		end
-	end
+	if not run_script then run_script = run_sh("ls " .. plugin_dir .. "/*.tmux 2>/dev/null") end
 
 	if not run_script then
 		self:display("Warning: no .tmux script found for plugin '" .. plugin_name .. "'")

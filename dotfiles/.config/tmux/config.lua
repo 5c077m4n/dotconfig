@@ -43,7 +43,7 @@ tmux:bind_r("h", "resize-pane -L 10")
 tmux:unbind("Enter")
 tmux:bind("Enter", "resize-pane -Z")
 
-tmux:bind_n("M-k", "send-keys -R ; send-keys C-l ; clear-history")
+tmux:bind_n("M-k", { "send-keys -R", "send-keys C-l", "clear-history" })
 
 tmux:unbind("c")
 tmux:unbind("n")
@@ -61,9 +61,11 @@ tmux:bind("C-a", "choose-tree -wZ")
 tmux:unbind("Escape")
 tmux:bind_rn("M-[", "previous-window")
 tmux:bind_rn("M-]", "next-window")
-tmux:bind_rn("M-{", "swap-window -t -1 ; select-window -t -1")
-tmux:bind_rn("M-}", "swap-window -t +1 ; select-window -t +1")
+tmux:bind_rn("M-{", { "swap-window -t -1", "select-window -t -1" })
+tmux:bind_rn("M-}", { "swap-window -t +1", "select-window -t +1" })
 
+tmux:bind_table("copy-mode-vi", "Escape", "send-keys -X cancel")
+tmux:bind_table("copy-mode-vi", "C-[", "send-keys -X cancel")
 tmux:bind_table("copy-mode-vi", "v", "send-keys -X begin-selection")
 tmux:bind_table("copy-mode-vi", "V", { "send-keys -X begin-selection", "send-keys -X end-of-line" })
 tmux:bind_table("copy-mode-vi", "C-v", "send-keys -X rectangle-toggle")
@@ -127,13 +129,9 @@ end
 tmux:unbind("r")
 local tmux_conf_path = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config")
 	.. "/tmux/tmux.conf"
-tmux:bind(
-	"r",
-	"source-file "
-		.. tmux_conf_path
-		.. " ; display 'Refreshed config file @ "
-		.. tmux_conf_path
-		.. "'"
-)
+tmux:bind("r", {
+	"source-file " .. tmux_conf_path,
+	"display 'Refreshed config file @ " .. tmux_conf_path .. "'",
+})
 
 tmux:flush()
