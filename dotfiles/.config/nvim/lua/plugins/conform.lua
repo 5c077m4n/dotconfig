@@ -1,3 +1,12 @@
+---@return string[]
+local function get_js_linters()
+	local eslint_config_matches =
+		vim.fn.globpath(vim.fn.getcwd(), "eslint.config.{js,mjs,ts,mts}", false, true)
+	if #eslint_config_matches > 0 then return { "biome", "biome-check", "eslint_d" } end
+
+	return { "biome", "biome-check", "biome-organize-imports" }
+end
+
 ---@module 'lazy'
 ---@type LazyPluginSpec
 return {
@@ -7,7 +16,8 @@ return {
 	config = function()
 		local conform = require("conform")
 
-		local js_linters = { "biome", "biome-check", "biome-organize-imports" }
+		local js_linters = get_js_linters()
+
 		conform.setup({
 			formatters = {
 				stylua = { prepend_args = { "--verify" } },
@@ -33,6 +43,7 @@ return {
 				yaml = { "prettierd" },
 				json = { "biome" },
 				html = { "prettierd" },
+				vue = { "prettierd" },
 				css = { "stylelint" },
 				markdown = { "deno_fmt" },
 				sh = { "shellharden", "shfmt" },
