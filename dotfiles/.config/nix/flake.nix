@@ -79,7 +79,7 @@
                   inherit username pkgs-unstable;
                   homeDirectory = "/Users/${username}";
                 };
-                users.${username} = ./home;
+                users.${username} = ./home/configuration.nix;
               };
             }
           ];
