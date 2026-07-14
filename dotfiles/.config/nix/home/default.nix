@@ -262,8 +262,25 @@ in
 
   programs = {
     home-manager.enable = true;
-    tmux.enable = true;
-    fish = import ./apps/fish.nix { inherit pkgs-unstable; };
+    fish =
+      let
+        inherit (pkgs-unstable) fish fishPlugins;
+      in
+      {
+        enable = true;
+        package = fish;
+
+        plugins = [
+          {
+            name = "fzf-fish";
+            inherit (fishPlugins.fzf-fish) src;
+          }
+          {
+            name = "autopair";
+            inherit (fishPlugins.autopair) src;
+          }
+        ];
+      };
     claude-code = {
       enable = true;
       package = pkgs-unstable.claude-code;
