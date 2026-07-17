@@ -158,14 +158,8 @@ in
         pkgs.nixd
         # WASM
         pkgs-unstable.wasmtime
-        # Gleam
-        pkgs-unstable.gleam
-        pkgs-unstable.erlang
         ## LSP
         pkgs.sourcekit-lsp
-        # Jsonnet
-        pkgs-unstable.go-jsonnet
-        pkgs-unstable.jsonnet-language-server
         # YAML
         pkgs.yamllint
         # Markdown
