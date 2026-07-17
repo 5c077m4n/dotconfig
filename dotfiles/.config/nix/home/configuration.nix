@@ -263,6 +263,7 @@ in
       {
         enable = true;
         package = fish;
+        generateCompletions = false;
 
         plugins = [
           {
