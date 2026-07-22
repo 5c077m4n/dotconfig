@@ -116,6 +116,14 @@ tmux:plugin({
 		t:set("@catppuccin_window_current_text", " #W " .. zoom_icon_query)
 	end,
 })
+tmux:plugin({
+	url = "https://github.com/sainnhe/tmux-fzf",
+	commit = "05af76daa2487575b93a4f604693b00969f19c2f",
+	config = function(t, plugin_dir)
+		t:set_env("TMUX_FZF_LAUNCH_KEY", "C-f")
+		t:bind("C-l", 'run-shell -b "' .. plugin_dir .. '/scripts/session.sh attach"')
+	end,
+})
 
 --- MacOS clipboard integration
 if tmux:is_darwin() then

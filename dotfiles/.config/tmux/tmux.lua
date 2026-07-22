@@ -67,6 +67,10 @@ end
 ---@param value string|integer
 function TMUX:set_window(option, value) self:cmd("set-window-option", "-g", option, tostring(value)) end
 
+---@param name string
+---@param value string|integer
+function TMUX:set_env(name, value) self:cmd("set-environment", "-g", name, tostring(value)) end
+
 ---@param key string
 function TMUX:unbind(key) self:cmd("unbind-key", key) end
 
@@ -171,6 +175,7 @@ function TMUX:plugin(spec)
 			self:display("Plugin updated: " .. plugin_name)
 		end
 	end
+	if type(spec.config) == "function" then spec.config(self, plugin_dir) end
 
 	local run_script --[[@type string?]] = nil
 	local candidates --[[@type string[] ]] = {
@@ -191,7 +196,6 @@ function TMUX:plugin(spec)
 		return
 	end
 
-	if type(spec.config) == "function" then spec.config(self) end
 	self:run_plugin(run_script)
 end
 
