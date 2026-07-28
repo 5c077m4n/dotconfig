@@ -30,6 +30,11 @@ tmux:set("escape-time", 10)
 tmux:set("clock-mode-style", 24)
 tmux:set("default-command", os.getenv("SHELL") or "/bin/bash")
 
+tmux:set_window("automatic-rename", "on")
+tmux:set("automatic-rename-format", "#{pane_current_command}")
+tmux:set("set-titles", "on")
+tmux:set("set-titles-string", "#{pane_current_command}")
+
 tmux:unbind("%")
 tmux:bind("\\", "split-window -h -l 40% -c '#{pane_current_path}'")
 tmux:unbind('"')
