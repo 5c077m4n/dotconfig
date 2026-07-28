@@ -50,6 +50,7 @@
         InitialKeyRepeat = 9;
         NSWindowShouldDragOnGesture = true;
         NSAutomaticWindowAnimationsEnabled = false;
+        "com.apple.keyboard.fnState" = true;
       };
     };
   };
