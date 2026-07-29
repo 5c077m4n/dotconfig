@@ -63,6 +63,7 @@ in
         pkgs.git-who
         pkgs.gitleaks
         pkgs.gh # GitHub CLI tool
+        pkgs.worktrunk
         # TUI
         pkgs.tmux
         pkgs-unstable.tmuxinator
