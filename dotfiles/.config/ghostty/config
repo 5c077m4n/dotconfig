@@ -2,3 +2,5 @@ font-thicken = true
 notify-on-command-finish = "unfocused"
 macos-option-as-alt = true
 mouse-hide-while-typing = true
+
+background-blur = macos-glass-regular
