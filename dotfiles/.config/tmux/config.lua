@@ -35,6 +35,7 @@ tmux:set("automatic-rename-format", "#{pane_current_command}")
 tmux:set("set-titles", "on")
 tmux:set("set-titles-string", "#{pane_current_command}")
 
+tmux:unbind("m")
 tmux:unbind("%")
 tmux:bind("\\", "split-window -h -l 40% -c '#{pane_current_path}'")
 tmux:unbind('"')
