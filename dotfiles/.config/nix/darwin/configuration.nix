@@ -15,6 +15,16 @@
 
   security.pam.services.sudo_local.touchIdAuth = true;
 
+  networking.applicationFirewall = {
+    enable = true;
+    enableStealthMode = true;
+    blockAllIncoming = true;
+    allowSigned = false;
+    allowSignedApp = false;
+  };
+
+  services.openssh.enable = false;
+
   system = {
     primaryUser = username;
 
@@ -31,8 +41,8 @@
         mru-spaces = false;
         magnification = true;
         minimize-to-application = true;
+        show-process-indicators = true;
       };
-
       finder = {
         AppleShowAllExtensions = true;
         AppleShowAllFiles = true;
@@ -40,19 +50,43 @@
         FXPreferredViewStyle = "clmv";
         QuitMenuItem = true;
       };
-
+      loginwindow = {
+        GuestEnabled = false;
+        DisableConsoleAccess = true;
+      };
       screencapture.location = "~/Pictures/screenshots";
-      screensaver.askForPasswordDelay = 10;
-
+      screensaver = {
+        askForPassword = true;
+        askForPasswordDelay = 5;
+      };
       NSGlobalDomain = {
-        AppleShowAllFiles = true;
         KeyRepeat = 1;
         InitialKeyRepeat = 9;
         NSWindowShouldDragOnGesture = true;
         NSAutomaticWindowAnimationsEnabled = false;
         "com.apple.keyboard.fnState" = true;
       };
+      CustomSystemPreferences = {
+        "com.apple.SubmitDiagInfo" = {
+          AutoSubmit = false;
+          AutoSubmitThirdParty = false;
+        };
+        "com.apple.assistant.support" = {
+          "Siri Data Sharing Opt-In Status" = 2; # 1 = Opted In, 2 = Declined/Opted Out
+          "AppleIntelligenceReportDuration" = 0; # 0 = Off, 1 = 15 Mins, 2 = 7 Days
+        };
+        "com.apple.Siri" = {
+          AppleIntelligenceEnabled = false;
+          LLMEnable = false;
+        };
+      };
     };
+
+    activationScripts.extraActivation.text = ''
+      if ! fdesetup status | grep -q "FileVault is On."; then
+        sudo fdesetup enable
+      fi
+    '';
   };
 
   programs = {
@@ -83,7 +117,6 @@
       "swift-format"
       "dockutil"
       "blueutil"
-      "docker"
       "docker-completion"
       "tree-sitter-cli"
     ];
