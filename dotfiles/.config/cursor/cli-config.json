@@ -1,0 +1,43 @@
+{
+	"version": 1,
+	"permissions": {
+		"allow": [
+			"Shell(ls)",
+			"Shell(cd)",
+			"Shell(git log)",
+			"Shell(echo)",
+			"Shell(git show)"
+		],
+		"deny": []
+	},
+	"editor": {
+		"vimMode": true
+	},
+	"display": {
+		"showLineNumbers": true,
+		"showThinkingBlocks": true,
+		"showStatusIndicators": true,
+		"showStatusLineRunningTime": true,
+		"mode": "zen"
+	},
+	"notifications": true,
+	"hints": true,
+	"modelSlashCommands": true,
+	"rewind": true,
+	"statusLine": {
+		"type": "command",
+		"command": "~/.config/cursor/statusline.lua",
+		"padding": 1,
+		"updateIntervalMs": 500,
+		"timeoutMs": 2000
+	},
+	"network": {
+		"useHttp1ForAgent": false
+	},
+	"approvalMode": "allowlist",
+	"autoAcceptWebSearch": false,
+	"sandbox": {
+		"mode": "enabled",
+		"networkAccess": "allow_all"
+	}
+}
