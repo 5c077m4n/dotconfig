@@ -26,7 +26,7 @@
 	"rewind": true,
 	"statusLine": {
 		"type": "command",
-		"command": "~/.config/cursor/statusline.lua",
+		"command": "~/.local/share/go/bin/cursor-agent-statusline",
 		"padding": 1,
 		"updateIntervalMs": 500,
 		"timeoutMs": 2000
