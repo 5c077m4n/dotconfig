@@ -23,8 +23,7 @@
 		"enabled": true,
 		"autoAllowBashIfSandboxed": true
 	},
-	"effortLevel": "xhigh",
-	"theme": "auto",
+	"effortLevel": "high",
 	"hooks": {
 		"Stop": [
 			{
@@ -36,5 +35,11 @@
 				]
 			}
 		]
-	}
+	},
+	"theme": "auto",
+	"statusLine": {
+		"type": "command",
+		"command": "~/.local/share/go/bin/cursor-agent-statusline"
+	},
+	"tui": "fullscreen"
 }
