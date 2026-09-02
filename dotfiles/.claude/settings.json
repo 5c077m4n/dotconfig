@@ -39,7 +39,7 @@
 	"theme": "auto",
 	"statusLine": {
 		"type": "command",
-		"command": "~/.local/share/go/bin/cursor-agent-statusline"
+		"command": "~/.local/share/go/bin/cli-harness-statusline"
 	},
 	"tui": "fullscreen"
 }
