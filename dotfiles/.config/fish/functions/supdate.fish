@@ -3,6 +3,8 @@ function supdate --description 'Run a full system update'
     __commit_if_needed ~/workspace/dotconfig/dotfiles/.config/nvim/lazy-lock.json
 
     if type --query nix && test -f ~/.config/nix/flake.nix
+        set --local default_soft_ulimit (ulimit -Sn)
+        ulimit -Sn 8192
         nix flake update --flake ~/.config/nix/
 
         if type --query darwin-rebuild
@@ -13,6 +15,7 @@ function supdate --description 'Run a full system update'
             home-manager switch --flake ~/.config/nix#roee@ubuntu
         end
 
+        ulimit -Sn $default_soft_ulimit
         __commit_if_needed ~/workspace/dotconfig/dotfiles/.config/nix/flake.lock
     else if type --query brew
         brew update
