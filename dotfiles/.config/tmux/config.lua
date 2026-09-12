@@ -1,4 +1,6 @@
-package.path = package.path .. ";./dotfiles/.config/tmux/?.lua"
+local config_dir = debug.getinfo(1, "S").source:sub(2):match("^(.*)/")
+package.path = package.path .. ";" .. config_dir .. "/?.lua"
+
 local TMUX --[[@type tmux]] = require("tmux")
 
 local tmux = TMUX:new()
