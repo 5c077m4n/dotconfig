@@ -83,7 +83,7 @@
     };
 
     activationScripts.extraActivation.text = ''
-      if ! fdesetup status | grep -q "FileVault is On."; then
+      if ! fdesetup isactive >/dev/null; then
         sudo fdesetup enable
       fi
     '';
