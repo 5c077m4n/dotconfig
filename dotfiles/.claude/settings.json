@@ -2,8 +2,20 @@
 	"$schema": "https://www.schemastore.org/claude-code-settings.json",
 	"enabledPlugins": {
 		"typescript-lsp@claude-plugins-official": true,
+		"pyright-lsp@claude-plugins-official": false,
+		"lua-lsp@claude-plugins-official": false,
 		"claude-mem@thedotmack": true,
-		"caveman@caveman": true
+		"caveman@caveman": true,
+		"figma@claude-plugins-official": true,
+		"frontend-design@claude-plugins-official": true,
+		"superpowers@claude-plugins-official": true,
+		"code-review@claude-plugins-official": true,
+		"code-simplifier@claude-plugins-official": true,
+		"claude-md-management@claude-plugins-official": true,
+		"security-guidance@claude-plugins-official": true,
+		"playwright@claude-plugins-official": true,
+		"slack@claude-plugins-official": false,
+		"context7@claude-plugins-official": false
 	},
 	"extraKnownMarketplaces": {
 		"thedotmack": {
@@ -21,16 +33,40 @@
 	},
 	"sandbox": {
 		"enabled": true,
-		"autoAllowBashIfSandboxed": true
+		"autoAllowBashIfSandboxed": true,
+		"filesystem": {
+			"allowRead": ["~/.config/gh", "./"]
+		},
+		"excludedCommands": ["docker *"]
 	},
 	"effortLevel": "high",
 	"hooks": {
+		"Notification": [
+			{
+				"matcher": "permission_prompt",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "osascript -e 'display notification \"Claude Code is waiting for input\" with title \"Claude Code\" subtitle \"Action Required\"' && afplay /System/Library/Sounds/Glass.aiff"
+					}
+				]
+			},
+			{
+				"matcher": "idle_prompt",
+				"hooks": [
+					{
+						"type": "command",
+						"command": "osascript -e 'display notification \"Claude Code has finished working and is idle.\" with title \"Claude Code\" subtitle \"Task Complete\"' && afplay /System/Library/Sounds/Submarine.aiff"
+					}
+				]
+			}
+		],
 		"Stop": [
 			{
 				"hooks": [
 					{
 						"type": "command",
-						"command": "afplay /System/Library/Sounds/Funk.aiff"
+						"command": "jq -e '(.background_tasks // []) | length == 0' >/dev/null && osascript -e 'display notification \"Claude Code has stopped.\" with title \"Claude Code\" subtitle \"Stopped\"' && afplay /System/Library/Sounds/Hero.aiff"
 					}
 				]
 			}
