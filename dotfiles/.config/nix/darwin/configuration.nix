@@ -89,6 +89,21 @@
     '';
   };
 
+  launchd.daemons.limit-maxfiles = {
+    serviceConfig = {
+      Label = "limit.maxfiles";
+      ProgramArguments = [
+        "/bin/launchctl"
+        "limit"
+        "maxfiles"
+        "8192"
+        "65536"
+      ];
+      RunAtLoad = true;
+      ServiceIPC = false;
+    };
+  };
+
   programs = {
     fish = {
       enable = true;
