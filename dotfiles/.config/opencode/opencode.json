@@ -1,5 +1,6 @@
 {
 	"$schema": "https://opencode.ai/config.json",
+	"autoupdate": false,
 	"permission": {
 		"external_directory": "deny",
 		"bash": {
@@ -22,13 +23,15 @@
 			"./*": "allow",
 			"./**/.env": "deny",
 			"./**/.env.*": "deny",
-			"./**/.ssh/": "deny"
+			"./**/.ssh/": "deny",
+			"./**/.aws/": "deny"
 		},
 		"edit": {
 			"./*": "allow",
 			"./**/.env": "deny",
 			"./**/.env.*": "deny",
-			"./**/.ssh/": "deny"
+			"./**/.ssh/": "deny",
+			"./**/.aws/": "deny"
 		}
 	},
 	"model": "deepseek/deepseek-v4-flash",
