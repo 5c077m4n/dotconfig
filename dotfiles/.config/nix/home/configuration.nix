@@ -185,6 +185,7 @@ in
         ## AWS
         pkgs.awscli2
         pkgs.awslogs
+        pkgs.ssm-session-manager-plugin
         ## GCP
         pkgs-unstable.google-cloud-sdk
         ## Digital Ocean
