@@ -38,4 +38,8 @@ function supdate --description 'Run a full system update'
     if type --query fisher
         fisher update
     end
+
+    if type --query gh
+        gh extension upgrade --all
+    end
 end
