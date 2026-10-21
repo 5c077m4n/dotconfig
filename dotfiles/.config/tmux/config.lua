@@ -13,6 +13,8 @@ tmux:bind("x", "kill-pane")
 tmux:set("detach-on-destroy", "off")
 
 tmux:set("base-index", 1)
+tmux:set("extended-keys", "on")
+tmux:set("extended-keys-format", "csi-u")
 tmux:set_window("pane-base-index", 1)
 tmux:set("renumber-windows", "on")
 

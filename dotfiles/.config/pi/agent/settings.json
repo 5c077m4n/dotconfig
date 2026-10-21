@@ -1,0 +1,14 @@
+{
+	"$schema": "https://pi.dev/schemas/settings.schema.json",
+	"lastChangelogVersion": "1.3.0",
+	"defaultProvider": "openrouter",
+	"defaultModel": "z-ai/glm-5.3-flash",
+	"defaultThinkingLevel": "medium",
+	"packages": [
+		"npm:pi-hermes-memory",
+		"npm:pi-web-access",
+		"npm:@juicesharp/rpiv-ask-user-question",
+		"npm:pi-powerline-footer",
+		"npm:@gotgenes/pi-permission-system"
+	]
+}
