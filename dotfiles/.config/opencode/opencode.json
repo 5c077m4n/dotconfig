@@ -1,41 +1,34 @@
 {
 	"$schema": "https://opencode.ai/config.json",
-	"autoupdate": false,
-	"permission": {
-		"external_directory": "deny",
-		"bash": {
-			"*": "ask",
-			"git log *": "allow",
-			"git reflog *": "allow",
-			"git add *": "allow",
-			"git commit *": "ask",
-			"git push *": "deny",
-			"grep *": "allow",
-			"rg *": "allow",
-			"find *": "allow",
-			"fd *": "allow",
-			"ls *": "allow",
-			"cat *": "allow",
-			"xxd *": "allow",
-			"hexdump *": "allow"
-		},
-		"read": {
-			"./*": "allow",
-			".env": "deny",
-			"./**/.env": "deny",
-			"./**/.env.*": "deny",
-			"./**/.ssh/": "deny",
-			"./**/.aws/": "deny"
-		},
-		"edit": {
-			"./*": "allow",
-			".env": "deny",
-			"./**/.env": "deny",
-			"./**/.env.*": "deny",
-			"./**/.ssh/": "deny",
-			"./**/.aws/": "deny"
-		}
-	},
-	"model": "deepseek/deepseek-v4-flash",
-	"lsp": true
+	"update": "disable",
+	"permissions": [
+		{ "action": "external_directory", "resource": "*", "effect": "deny" },
+		{ "action": "shell", "resource": "*", "effect": "ask" },
+		{ "action": "shell", "resource": "git log *", "effect": "allow" },
+		{ "action": "shell", "resource": "git reflog *", "effect": "allow" },
+		{ "action": "shell", "resource": "git add *", "effect": "allow" },
+		{ "action": "shell", "resource": "git commit *", "effect": "ask" },
+		{ "action": "shell", "resource": "git push *", "effect": "deny" },
+		{ "action": "shell", "resource": "grep *", "effect": "allow" },
+		{ "action": "shell", "resource": "rg *", "effect": "allow" },
+		{ "action": "shell", "resource": "find *", "effect": "allow" },
+		{ "action": "shell", "resource": "fd *", "effect": "allow" },
+		{ "action": "shell", "resource": "ls *", "effect": "allow" },
+		{ "action": "shell", "resource": "cat *", "effect": "allow" },
+		{ "action": "shell", "resource": "xxd *", "effect": "allow" },
+		{ "action": "shell", "resource": "hexdump *", "effect": "allow" },
+		{ "action": "read", "resource": "./*", "effect": "allow" },
+		{ "action": "read", "resource": ".env", "effect": "deny" },
+		{ "action": "read", "resource": "./**/.env", "effect": "deny" },
+		{ "action": "read", "resource": "./**/.env.*", "effect": "deny" },
+		{ "action": "read", "resource": "./**/.ssh/", "effect": "deny" },
+		{ "action": "read", "resource": "./**/.aws/", "effect": "deny" },
+		{ "action": "edit", "resource": "./*", "effect": "allow" },
+		{ "action": "edit", "resource": ".env", "effect": "deny" },
+		{ "action": "edit", "resource": "./**/.env", "effect": "deny" },
+		{ "action": "edit", "resource": "./**/.env.*", "effect": "deny" },
+		{ "action": "edit", "resource": "./**/.ssh/", "effect": "deny" },
+		{ "action": "edit", "resource": "./**/.aws/", "effect": "deny" }
+	],
+	"model": "z-ai/glm-5.3-flash"
 }
