@@ -1,0 +1,5 @@
+*
+
+!/.gitignore
+!/settings.json
+!/extensions/pi-permission-system/config.json

@@ -52,7 +52,7 @@ in
         pkgs.mosh
         pkgs.nix-search-cli
         ### AI
-        pkgs-unstable.opencode
+        pkgs-unstable.pi-coding-agent
         # VCS
         ## Git
         pkgs.git
