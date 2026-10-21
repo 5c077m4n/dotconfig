@@ -21,6 +21,7 @@
 		},
 		"read": {
 			"./*": "allow",
+			".env": "deny",
 			"./**/.env": "deny",
 			"./**/.env.*": "deny",
 			"./**/.ssh/": "deny",
@@ -28,6 +29,7 @@
 		},
 		"edit": {
 			"./*": "allow",
+			".env": "deny",
 			"./**/.env": "deny",
 			"./**/.env.*": "deny",
 			"./**/.ssh/": "deny",
