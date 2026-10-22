@@ -10,6 +10,8 @@
 		"npm:pi-web-access",
 		"npm:@juicesharp/rpiv-ask-user-question",
 		"npm:pi-powerline-footer",
-		"npm:@gotgenes/pi-permission-system"
+		"npm:@gotgenes/pi-permission-system",
+		"npm:@pi-unipi/notify",
+		"git:github.com/5c077m4n/pi-auto-mode"
 	]
 }

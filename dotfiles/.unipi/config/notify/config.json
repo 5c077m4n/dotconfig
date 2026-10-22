@@ -1,0 +1,31 @@
+{
+	"defaultPlatforms": ["native"],
+	"events": {
+		"workflow_end": { "enabled": true, "platforms": [] },
+		"ralph_loop_end": { "enabled": true, "platforms": [] },
+		"mcp_server_error": { "enabled": true, "platforms": [] },
+		"agent_end": { "enabled": false, "platforms": [] },
+		"agent_settled": { "enabled": false, "platforms": [] },
+		"memory_consolidated": { "enabled": false, "platforms": [] },
+		"session_shutdown": { "enabled": false, "platforms": [] },
+		"ask_user_prompt": { "enabled": true, "platforms": [] },
+		"permission_request": { "enabled": true, "platforms": [] }
+	},
+	"native": {
+		"enabled": true,
+		"suppressWhenFocused": false
+	},
+	"gotify": { "enabled": false, "priority": 5 },
+	"telegram": { "enabled": false },
+	"recap": {
+		"enabled": false,
+		"model": "openrouter/openai/gpt-oss-20b",
+		"disableThinking": false
+	},
+	"silenceAfterInput": {
+		"enabled": false,
+		"windowMs": 10000,
+		"platforms": ["native"]
+	},
+	"renotify": { "enabled": true, "intervalMs": 120000, "maxRepeats": 3 }
+}
