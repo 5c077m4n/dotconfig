@@ -1,0 +1,89 @@
+# TUIOS config — mirrors ~/.config/tmux/tmux.conf (the tmux.lua one).
+#
+# Terminology: a tmux *window* is a tuios workspace; a tmux *pane* is a tuios
+# window. Inspect the effective bindings with `tuios keybinds list` and check
+# this file with `tuios keybinds doctor`.
+
+# Keys go straight to the shell, as in tmux (no window-management mode first).
+[startup]
+start_in_terminal_mode = true
+
+# tmux aggressive-resize: size the session by the clients actually viewing it.
+[daemon]
+window_size = "smallest"
+
+[appearance]
+# catppuccin/tmux with flavor = "macchiato"
+theme = "catppuccin_macchiato"
+
+# aserowy/tmux.nvim equivalent: pane navigation walks nvim splits first, then
+# tuios panes. Needs the tuios-nvim-navigator plugin in nvim (see notes below)
+# and the same four keys as terminal_focus_* here.
+nvim_navigation = true
+
+[keybindings]
+# set -g prefix C-a
+leader_key = "ctrl+a"
+# C-a C-a is bound to choose-tree below; a prefix binding on the leader key
+# wins over leader_twice, so nothing needs to be set here.
+
+[keybindings.prefix_mode]
+# x -> kill-pane
+prefix_close_window = ["x"]
+# unbind c: n opens windows instead
+prefix_new_window = []
+# n -> new-window (opens in the focused pane's folder, like -c '#{pane_current_path}')
+new_workspace = ["n"]
+# next/prev window moved to M-[ / M-] below
+next_workspace = []
+prev_workspace = []
+# w -> kill-window
+close_workspace = ["w"]
+# \ -> split-window -h -l 40% (left | right)
+prefix_split_vertical = ["\\"]
+# - -> split-window -v -l 40% (top / bottom)
+prefix_split_horizontal = ["-"]
+# C-a C-a -> choose-tree -wZ
+choose_tree = ["ctrl+a"]
+# q -> kill-server
+prefix_quit = ["q"]
+# r -> source-file ~/.config/tuios/config.toml
+reload_config = ["r"]
+# Enter -> resize-pane -Z (zoom the pane)
+prefix_fullscreen = ["enter"]
+# bind -r h/j/k/l -> resize-pane (these repeat after the prefix by default)
+resize_pane_left_5 = ["h"]
+resize_pane_down_5 = ["j"]
+resize_pane_up_5 = ["k"]
+resize_pane_right_5 = ["l"]
+# tmux-fzf C-f menu -> the go-to picker (sessions, workspaces, panes, agents).
+# The session-only picker stays on the default prefix S.
+goto_picker = ["G", "C-f"]
+
+[keybindings.terminal_mode]
+# bind -rn M-[ / M-] -> previous/next window (repeatable by default)
+terminal_prev_window = ["alt+["]
+terminal_next_window = ["alt+]"]
+# bind -rn M-{ / M-} -> swap-window -t -1 / +1
+swap_left = ["alt+{"]
+swap_right = ["alt+}"]
+# tmux.nvim C-hjkl pane navigation (was @tmux-nvim-navigation in tmux).
+# alt+arrows kept alongside as the tuios-native fallback.
+terminal_focus_left = ["ctrl+h", "alt+left"]
+terminal_focus_down = ["ctrl+j", "alt+down"]
+terminal_focus_up = ["ctrl+k", "alt+up"]
+terminal_focus_right = ["ctrl+l", "alt+right"]
+
+# Not portable from tmux:
+# - M-k (clear screen + history): tuios has no clear-scrollback action; use
+#   the shell's ctrl+l or clear inside the pane.
+# - detach-on-destroy off, base-index/pane-base-index 1, renumber-windows,
+#   focus-events, escape-time, vi mode-keys, automatic-rename, set-titles,
+#   visual-bell: built into tuios or not applicable.
+# - tmux-sensible: tuios defaults already cover it.
+# - catppuccin status modules (application/session): the tuios dock/rail
+#   replaces the status line.
+# - tmux-fzf C-l session attach: use the session switcher (prefix S) or
+#   C-a C-f (go-to picker).
+# - macOS pbcopy copy-pipe: copy mode yanks go to the system clipboard
+#   natively, no reattach-to-user-namespace needed.
