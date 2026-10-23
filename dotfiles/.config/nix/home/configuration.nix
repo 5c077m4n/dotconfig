@@ -65,8 +65,7 @@ in
         pkgs.gh # GitHub CLI tool
         pkgs.worktrunk
         # TUI
-        pkgs.tmux
-        pkgs-unstable.tmuxinator
+        pkgs-unstable.tuios
         pkgs.starship
         pkgs.btop
         pkgs.htop

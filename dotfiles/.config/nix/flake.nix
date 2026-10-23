@@ -14,6 +14,10 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tuios = {
+      url = "github:Gaurav-Gosain/tuios";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -24,6 +28,7 @@
       nixpkgs,
       nixpkgs-unstable,
       determinate,
+      tuios,
       ...
     }:
     let
@@ -52,6 +57,9 @@
           '';
         };
       };
+      tuios-overlay = _final: prev: {
+        tuios = tuios.packages.${prev.system}.tuios;
+      };
     in
     {
       darwinConfigurations.${darwinConfigName} =
@@ -60,12 +68,18 @@
           pkgs = import nixpkgs {
             inherit system;
             config = { inherit allowUnfreePredicate; };
-            overlays = [ claude-code-overlay ];
+            overlays = [
+              claude-code-overlay
+              tuios-overlay
+            ];
           };
           pkgs-unstable = import nixpkgs-unstable {
             inherit system;
             config = { inherit allowUnfreePredicate; };
-            overlays = [ claude-code-overlay ];
+            overlays = [
+              claude-code-overlay
+              tuios-overlay
+            ];
           };
           home-manager-modules = [
             home-manager.darwinModules.home-manager

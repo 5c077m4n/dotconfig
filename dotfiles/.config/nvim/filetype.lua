@@ -12,7 +12,6 @@ vim.filetype.add({
 		[".babelrc"] = "json",
 		[".swcrc"] = "json",
 		[".sqlfluff"] = "toml",
-		["tmux.conf"] = "tmux",
 		[".env"] = "env",
 	},
 	pattern = {

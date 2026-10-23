@@ -1,0 +1,67 @@
+[startup]
+tiled = true
+daemon = true
+start_in_terminal_mode = true
+
+[daemon]
+window_size = "smallest"
+
+[appearance]
+theme = "catppuccin_macchiato"
+dockbar_position = "bottom"
+
+nvim_navigation = true
+
+dim_unfocused = 30
+dim_foreground = true
+
+[keybindings]
+leader_key = "ctrl+a"
+
+[keybindings.global]
+command_palette = []
+
+[keybindings.prefix_mode]
+prefix_command_palette = [":"]
+prefix_prev_window = ["shift+tab"]
+prefix_close_window = ["x"]
+prefix_workspace = []
+prefix_next_window = []
+prefix_new_window = []
+new_workspace = ["n"]
+close_workspace = ["w"]
+prefix_split_vertical = ["\\"]
+prefix_split_horizontal = ["-"]
+choose_tree = ["ctrl+a"]
+prefix_quit = ["q"]
+reload_config = ["r"]
+prefix_fullscreen = ["enter"]
+prefix_jump_notif = []
+prefix_keybinds = []
+prefix_rename_window = [","]
+prefix_settings = []
+rename_workspace = ["$"]
+new_session = ["N"]
+prefix_last_message = []
+resize_pane_left_5 = ["h"]
+resize_pane_down_5 = ["j"]
+resize_pane_up_5 = ["k"]
+resize_pane_right_5 = ["l"]
+goto_picker = ["ctrl+g"]
+
+[keybindings.terminal_mode]
+next_workspace = ["alt+]"]
+prev_workspace = ["alt+["]
+move_workspace_left = ["alt+{"]
+move_workspace_right = ["alt+}"]
+terminal_focus_left = ["ctrl+h"]
+terminal_focus_down = ["ctrl+j"]
+terminal_focus_up = ["ctrl+k"]
+terminal_focus_right = ["ctrl+l"]
+swap_left = ["ctrl+alt+h"]
+swap_down = ["ctrl+alt+j"]
+swap_up = ["ctrl+alt+k"]
+swap_right = ["ctrl+alt+l"]
+
+[spotlight]
+enabled = false
