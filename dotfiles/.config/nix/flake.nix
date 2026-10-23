@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    tuios.url = "github:Gaurav-Gosain/tuios";
     determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
 
     nix-darwin = {
@@ -24,6 +25,7 @@
       nixpkgs,
       nixpkgs-unstable,
       determinate,
+      tuios,
       ...
     }:
     let
@@ -52,6 +54,9 @@
           '';
         };
       };
+      tuios-overlay = _final: prev: {
+        tuios = tuios.packages.${prev.system}.tuios;
+      };
     in
     {
       darwinConfigurations.${darwinConfigName} =
@@ -60,12 +65,18 @@
           pkgs = import nixpkgs {
             inherit system;
             config = { inherit allowUnfreePredicate; };
-            overlays = [ claude-code-overlay ];
+            overlays = [
+              claude-code-overlay
+              tuios-overlay
+            ];
           };
           pkgs-unstable = import nixpkgs-unstable {
             inherit system;
             config = { inherit allowUnfreePredicate; };
-            overlays = [ claude-code-overlay ];
+            overlays = [
+              claude-code-overlay
+              tuios-overlay
+            ];
           };
           home-manager-modules = [
             home-manager.darwinModules.home-manager
