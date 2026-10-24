@@ -13,8 +13,11 @@
 			"ls *": "allow",
 			"rg *": "allow",
 			"grep *": "allow",
+			"sudo *": "ask",
+			"rm *": "allow",
+			"rm -r *": "deny",
 			"rm -rf *": "deny",
-			"sudo *": "ask"
+			"rm --recursive *": "deny"
 		},
 		"external_directory": "deny"
 	}
