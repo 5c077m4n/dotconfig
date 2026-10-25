@@ -15,6 +15,13 @@ nvim_navigation = true
 dim_unfocused = 30
 dim_foreground = true
 
+hide_window_buttons = true
+
+motion = "none"
+zoom_animation = false
+
+sidebar.enabled = false
+
 [keybindings]
 leader_key = "ctrl+a"
 
@@ -38,9 +45,10 @@ reload_config = ["r"]
 prefix_fullscreen = ["enter"]
 prefix_jump_notif = []
 prefix_keybinds = []
-prefix_rename_window = [","]
+prefix_rename_window = []
 prefix_settings = []
-rename_workspace = ["$"]
+rename_workspace = [","]
+rename_session = ["$"]
 new_session = ["N"]
 prefix_last_message = []
 resize_pane_left_5 = ["h"]
