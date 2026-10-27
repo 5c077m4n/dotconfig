@@ -12,7 +12,8 @@
 		"npm:pi-powerline-footer",
 		"npm:@gotgenes/pi-permission-system",
 		"npm:@pi-unipi/notify",
-		"git:github.com/5c077m4n/pi-auto-mode"
+		"git:github.com/5c077m4n/pi-auto-mode",
+		"npm:pi-caveman"
 	],
 	"tuiMode": "regular"
 }
