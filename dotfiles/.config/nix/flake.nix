@@ -58,7 +58,7 @@
         };
       };
       tuios-overlay = _final: prev: {
-        tuios = tuios.packages.${prev.system}.tuios;
+        tuios = tuios.packages.${prev.stdenv.hostPlatform.system}.tuios;
       };
     in
     {
