@@ -36,6 +36,7 @@ local function setup()
 		},
 		install = { colorscheme = { "github_dark_colorblind" } }, -- colorscheme that will be used when installing plugins.
 		ui = { border = "rounded" },
+		rocks = { enabled = false },
 	})
 end
 
