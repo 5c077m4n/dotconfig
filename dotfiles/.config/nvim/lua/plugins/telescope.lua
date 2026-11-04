@@ -1,11 +1,3 @@
-local telescope = require("telescope")
-local telescope_actions = require("telescope.actions")
-local telescope_config = require("telescope.config")
-local telescope_builtin = require("telescope.builtin")
-local trouble_sources_telescope = require("trouble.sources.telescope")
-
-local utils = require("vimrc.utils")
-
 ---@param args string[]
 ---@return string[]|nil
 local function git(args)
@@ -59,6 +51,7 @@ local function grep_branch_changed(opts)
 	local files = branch_changed_files()
 	if not files then return end
 
+	local telescope_builtin = require("telescope.builtin")
 	telescope_builtin.live_grep(vim.tbl_extend("force", {
 		search_dirs = files,
 		prompt_title = "Live Grep (branch changes)",
@@ -71,6 +64,7 @@ local function find_branch_changed(opts)
 	local files = branch_changed_files()
 	if not files then return end
 
+	local telescope_builtin = require("telescope.builtin")
 	telescope_builtin.find_files(vim.tbl_extend("force", {
 		prompt_title = "Find Files (branch changes)",
 		find_command = vim.list_extend({ "printf", "%s\\n" }, files),
@@ -79,6 +73,14 @@ end
 
 ---@return nil
 local function config()
+	local telescope = require("telescope")
+	local telescope_actions = require("telescope.actions")
+	local telescope_config = require("telescope.config")
+	local telescope_builtin = require("telescope.builtin")
+	local trouble_sources_telescope = require("trouble.sources.telescope")
+
+	local utils = require("vimrc.utils")
+
 	local keymap = utils.keymapping
 	local is_git_repo = utils.misc.is_git_repo
 	local get_visual_selection = utils.misc.get_visual_selection
