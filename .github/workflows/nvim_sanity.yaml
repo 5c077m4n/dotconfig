@@ -1,0 +1,63 @@
+---
+name: Neovim config sanity
+
+on:  # yamllint disable-line rule:truthy
+  push:
+    paths:
+      - "dotfiles/.config/nvim/**"
+      - ".github/scripts/nvim_sanity.sh"
+      - ".github/workflows/nvim_sanity.yaml"
+  pull_request:
+    paths:
+      - "dotfiles/.config/nvim/**"
+      - ".github/scripts/nvim_sanity.sh"
+      - ".github/workflows/nvim_sanity.yaml"
+  workflow_dispatch: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sanity:
+    name: Sanity (nvim ${{ matrix.nvim }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    strategy:
+      fail-fast: false
+      matrix:
+        nvim:
+          - stable
+          - nightly
+
+    env:
+      NVIM_TIMEOUT: "600"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install neovim
+        uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: ${{ matrix.nvim }}
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends build-essential ripgrep fd-find
+          npm install -g tree-sitter-cli
+
+      - name: Startup on a clean machine (bootstraps lazy.nvim)
+        run: .github/scripts/nvim_sanity.sh install
+
+      - name: Startup with plugins installed
+        run: .github/scripts/nvim_sanity.sh startup
+
+      - name: Load all plugins
+        run: .github/scripts/nvim_sanity.sh load-all
+
+      - name: Health check
+        run: .github/scripts/nvim_sanity.sh health
