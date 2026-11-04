@@ -1,12 +1,84 @@
+local telescope = require("telescope")
+local telescope_actions = require("telescope.actions")
+local telescope_config = require("telescope.config")
+local telescope_builtin = require("telescope.builtin")
+local trouble_sources_telescope = require("trouble.sources.telescope")
+
+local utils = require("vimrc.utils")
+
+---@param args string[]
+---@return string[]|nil
+local function git(args)
+	local out = vim.fn.systemlist(vim.list_extend({ "git" }, args))
+	return vim.v.shell_error == 0 and out or nil
+end
+
+---@return string[]|nil
+local function branch_changed_files()
+	local root = (git({ "rev-parse", "--show-toplevel" }) or {})[1]
+	if not root then
+		vim.notify("Not a git repository", vim.log.levels.ERROR)
+		return nil
+	end
+
+	local base_ref = (git({ "symbolic-ref", "--short", "refs/remotes/origin/HEAD" }) or {})[1]
+	if not base_ref then
+		for _, candidate in ipairs({ "origin/main", "origin/master", "main", "master" }) do
+			if git({ "rev-parse", "--verify", "--quiet", candidate }) then
+				base_ref = candidate
+				break
+			end
+		end
+	end
+	local merge_base = base_ref and (git({ "merge-base", "HEAD", base_ref }) or {})[1] or "HEAD"
+
+	---@type string[]
+	local files = vim.iter({
+		git({ "-C", root, "diff", "--name-only", "--diff-filter=d", merge_base }) or {},
+		git({ "-C", root, "ls-files", "--others", "--exclude-standard" }) or {},
+	})
+		:flatten()
+		:filter(function(path) return path ~= "" end)
+		:map(function(path) return vim.fs.joinpath(root, path) end)
+		:filter(vim.uv.fs_stat)
+		:totable()
+
+	if #files == 0 then
+		vim.notify("No changed files in current branch", vim.log.levels.INFO)
+		return nil
+	end
+	return files
+end
+
+---@class BranchGrepOpts
+---@field default_text? string
+
+---@param opts? BranchGrepOpts
+---@return nil
+local function grep_branch_changed(opts)
+	local files = branch_changed_files()
+	if not files then return end
+
+	telescope_builtin.live_grep(vim.tbl_extend("force", {
+		search_dirs = files,
+		prompt_title = "Live Grep (branch changes)",
+	}, opts or {}))
+end
+
+---@param opts table|nil
+---@return nil
+local function find_branch_changed(opts)
+	local files = branch_changed_files()
+	if not files then return end
+
+	telescope_builtin.find_files(vim.tbl_extend("force", {
+		prompt_title = "Find Files (branch changes)",
+		find_command = vim.list_extend({ "printf", "%s\\n" }, files),
+	}, opts or {}))
+end
+
+---@return nil
 local function config()
-	local telescope = require("telescope")
-	local telescope_actions = require("telescope.actions")
-	local telescope_config = require("telescope.config")
-	local telescope_builtin = require("telescope.builtin")
-	local trouble_sources_telescope = require("trouble.sources.telescope")
-
-	local utils = require("vimrc.utils")
-
 	local keymap = utils.keymapping
 	local is_git_repo = utils.misc.is_git_repo
 	local get_visual_selection = utils.misc.get_visual_selection
@@ -103,6 +175,34 @@ local function config()
 		{ desc = "List git status changes" }
 	)
 	keymap.nnoremap("<leader>fgb", telescope_builtin.git_branches, { desc = "List git branches" })
+
+	vim.api.nvim_create_user_command(
+		"TelescopeBranchGrep",
+		---@param cmd vim.api.keyset.create_user_command.command_args
+		function(cmd) grep_branch_changed({ default_text = cmd.args ~= "" and cmd.args or nil }) end,
+		{ nargs = "?", desc = "Live grep in files changed in the current branch" }
+	)
+	vim.api.nvim_create_user_command(
+		"TelescopeBranchFiles",
+		function() find_branch_changed() end,
+		{ desc = "Find files changed in the current branch" }
+	)
+	keymap.nnoremap(
+		"<leader>fsc",
+		grep_branch_changed,
+		{ desc = "Search string in branch-changed files" }
+	)
+	keymap.vnoremap(
+		"<leader>fsc",
+		function() grep_branch_changed({ default_text = get_visual_selection() }) end,
+		{ desc = "Search selection in branch-changed files" }
+	)
+	keymap.nnoremap("<leader>fsn", find_branch_changed, { desc = "Find branch-changed files" })
+	keymap.vnoremap(
+		"<leader>fsn",
+		function() find_branch_changed({ default_text = get_visual_selection() }) end,
+		{ desc = "Find branch-changed files named like the selection" }
+	)
 	keymap.nnoremap(
 		"<leader>ffc",
 		telescope_builtin.git_bcommits,
