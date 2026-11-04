@@ -102,7 +102,7 @@ in
         pkgs.pnpm
         pkgs.yarn-berry # `yarn` >=4.5
         ## Linters
-        pkgs.eslint_d
+        pkgs.eslint
         pkgs-unstable.prettier
         pkgs-unstable.prettierd
         pkgs.stylelint

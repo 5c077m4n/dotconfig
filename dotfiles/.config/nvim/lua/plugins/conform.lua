@@ -2,7 +2,7 @@
 local function get_js_linters()
 	local eslint_config_matches =
 		vim.fn.globpath(vim.fn.getcwd(), "eslint.config.{js,mjs,ts,mts}", false, true)
-	if #eslint_config_matches > 0 then return { "biome", "biome-check", "eslint_d" } end
+	if #eslint_config_matches > 0 then return { "biome", "biome-check", "eslint" } end
 
 	return { "biome", "biome-check", "biome-organize-imports" }
 end
@@ -24,6 +24,13 @@ return {
 				sqlfluff = { args = { "fix", "--dialect=postgres", "-" } },
 				rustfmt = { prepend_args = { "+nightly" } },
 				tofu_lint = { command = "tofu", args = { "fmt", "-" }, stdin = true },
+				eslint = {
+					command = require("conform.util").from_node_modules("eslint"),
+					args = { "--fix", "$FILENAME" },
+					stdin = false,
+					exit_codes = { 0, 1 },
+					cwd = require("conform.util").root_file({ "package.json" }),
+				},
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
