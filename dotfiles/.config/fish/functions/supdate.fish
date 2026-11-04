@@ -1,6 +1,28 @@
 function supdate --description 'Run a full system update'
     nvim --headless +"Lazy! sync" +qa
     __commit_if_needed ~/workspace/dotconfig/dotfiles/.config/nvim/lazy-lock.json
+    nvim --headless +'lua
+        local registry = require("mason-registry")
+        local refreshed = false
+        registry.refresh(function() refreshed = true end)
+        vim.wait(60000, function() return refreshed end)
+
+        local pending = 0
+        for _, pkg in ipairs(registry.get_installed_packages()) do
+            local installed = pkg:get_installed_version()
+            local latest = pkg:get_latest_version()
+
+            if installed ~= latest then
+                pending = pending + 1
+                print(("Updating %s %s -> %s\n"):format(pkg.name, installed, latest))
+                pkg:install({}, function(success)
+                    if not success then print(("Failed updating %s\n"):format(pkg.name)) end
+                    pending = pending - 1
+                end)
+            end
+        end
+        vim.wait(600000, function() return pending == 0 end)
+    ' +qa
 
     if type --query nix && test -f ~/.config/nix/flake.nix
         nix flake update --flake ~/.config/nix/
