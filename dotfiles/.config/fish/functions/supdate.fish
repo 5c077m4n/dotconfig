@@ -1,6 +1,7 @@
 function supdate --description 'Run a full system update'
     nvim --headless +"Lazy! sync" +qa
     __commit_if_needed ~/workspace/dotconfig/dotfiles/.config/nvim/lazy-lock.json
+
     nvim --headless +'lua
         local registry = require("mason-registry")
         local refreshed = false
@@ -60,8 +61,10 @@ function supdate --description 'Run a full system update'
     if type --query fisher
         fisher update
     end
-
     if type --query gh
         gh extension upgrade --all
+    end
+    if type --query pi
+        pi update --extensions
     end
 end
