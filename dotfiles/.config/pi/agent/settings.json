@@ -1,6 +1,6 @@
 {
 	"$schema": "https://pi.dev/schemas/settings.schema.json",
-	"lastChangelogVersion": "1.4.0",
+	"lastChangelogVersion": "1.5.0",
 	"enableInstallTelemetry": false,
 	"defaultProvider": "openrouter",
 	"defaultModel": "z-ai/glm-5.3-flash",
@@ -15,5 +15,10 @@
 		"git:github.com/5c077m4n/pi-auto-mode",
 		"npm:pi-caveman"
 	],
-	"tuiMode": "regular"
+	"tuiMode": "regular",
+	"extensionChangelogVersions": {
+		"{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.47.0",
+		"{\"source\":\"npm:pi-powerline-footer\",\"scope\":\"user\"}": "0.22.0",
+		"{\"source\":\"npm:@gotgenes/pi-permission-system\",\"scope\":\"user\"}": "42.0.0"
+	}
 }
