@@ -1,6 +1,7 @@
 function supdate --description 'Run a full system update'
     nvim --headless +"Lazy! sync" +qa
     __commit_if_needed ~/workspace/dotconfig/dotfiles/.config/nvim/lazy-lock.json
+    nvim --headless +MasonPackagesUpdateAll +qa
 
     nvim --headless +'lua
         local registry = require("mason-registry")
