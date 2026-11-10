@@ -1,5 +1,6 @@
 local os = require("os")
 
+---@return nil
 local function bootstrap()
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -27,6 +28,7 @@ local function bootstrap()
 	vim.opt.rtp:prepend(lazypath)
 end
 
+---@return nil
 local function setup()
 	bootstrap()
 
@@ -34,6 +36,7 @@ local function setup()
 		spec = {
 			{ import = "plugins" },
 		},
+		rocks = { hererocks = false },
 		install = { colorscheme = { "github_dark_colorblind" } }, -- colorscheme that will be used when installing plugins.
 		ui = { border = "rounded" },
 	})
