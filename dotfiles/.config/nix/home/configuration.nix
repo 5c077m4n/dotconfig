@@ -62,6 +62,7 @@ in
         pkgs.git-absorb
         pkgs.git-who
         pkgs.gitleaks
+        pkgs.zizmor # GitHub Actions security auditing tool
         pkgs.gh # GitHub CLI tool
         pkgs.worktrunk
         # TUI
