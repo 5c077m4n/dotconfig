@@ -24,11 +24,11 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@v4.4.0
         with:
           persist-credentials: false
       - name: Lint
-        uses: JohnnyMorganz/stylua-action@479972f01e665acfcba96ada452c36608bdbbb5e # v4
+        uses: JohnnyMorganz/stylua-action@v4.1.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: latest
