@@ -38,4 +38,6 @@
 	done
 
 	gitleaks git --verbose
+
+	zizmor --no-online-audits . || exit 1
 }
