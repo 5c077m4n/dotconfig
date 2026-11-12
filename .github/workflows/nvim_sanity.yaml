@@ -14,6 +14,9 @@ on:  # yamllint disable-line rule:truthy
       - ".github/workflows/nvim_sanity.yaml"
   workflow_dispatch: {}
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -36,10 +39,12 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
 
       - name: Install neovim
-        uses: rhysd/action-setup-vim@v1
+        uses: rhysd/action-setup-vim@febef33995d6649302e9d88dda81e071b68f16a7 # v1
         with:
           neovim: true
           version: ${{ matrix.nvim }}
@@ -48,7 +53,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends build-essential ripgrep fd-find
-          npm install -g tree-sitter-cli
+          npm install -g tree-sitter-cli@0.27.2
 
       - name: Startup on a clean machine (bootstraps lazy.nvim)
         run: .github/scripts/nvim_sanity.sh install
