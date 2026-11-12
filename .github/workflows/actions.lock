@@ -9,7 +9,7 @@ workflows:
     '.github/workflows/nvim_sanity.yaml':
         - 'actions/checkout@v4.4.0'
         - 'rhysd/action-setup-vim@v1.6.1'
-    '.github/workflows/verify-lockfile.yml':
+    '.github/workflows/verify-action-lockfile.yml':
         - 'actions/checkout@v7.0.1'
 dependencies:
     'actions/checkout@v4.4.0':
