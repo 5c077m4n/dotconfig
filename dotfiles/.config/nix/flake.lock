@@ -402,11 +402,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1794165970,
-        "narHash": "sha256-XuAV2cUwaod3Bt4XFVqiXz3v1w2ex16W6Sv4S7EWres=",
+        "lastModified": 1794552581,
+        "narHash": "sha256-qXFIqA6FCcx7XeDzw0ZNlkDT9UiCzrNDwK8RuU8RcHM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ac588ef1c914865dad517b337ea0eb9694a4021c",
+        "rev": "f1e5c356f35d07e7b71a6b5e6c9338e0b029e0c0",
         "type": "github"
       },
       "original": {
@@ -461,11 +461,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1794547620,
-        "narHash": "sha256-8irpEaFRFKh9W8FPl3V8y70svLXWfeIkRGkUi7w0+IA=",
+        "lastModified": 1794677325,
+        "narHash": "sha256-fW1yNFFe1q7TmFp2XdiPK8LDVZMTSdOSNTPJ3+61QtM=",
         "owner": "Gaurav-Gosain",
         "repo": "tuios",
-        "rev": "c0384eb9f1d19dc5e3adbcf84740e8dd25d2243c",
+        "rev": "20ce7603b850273bea0114a56a54eac7d2e49f44",
         "type": "github"
       },
       "original": {
