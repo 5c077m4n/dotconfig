@@ -150,6 +150,7 @@
       "mongodb-compass"
       "android-studio"
       "unnaturalscrollwheels"
+      "raspberry-pi-imager"
     ];
   };
 }
