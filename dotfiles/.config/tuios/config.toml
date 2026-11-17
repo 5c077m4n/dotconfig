@@ -9,6 +9,7 @@ window_size = "smallest"
 [appearance]
 theme = "catppuccin_macchiato"
 dockbar_position = "bottom"
+border_style = "hidden"
 
 nvim_navigation = true
 
