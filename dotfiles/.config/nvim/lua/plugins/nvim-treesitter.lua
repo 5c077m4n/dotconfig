@@ -15,15 +15,22 @@ return {
 			"bash",
 			"html",
 			"css",
+			"vue",
 			"markdown",
 			"javascript",
 			"typescript",
-			"vue",
+			"tsx",
+			"sql",
 			"python",
 			"rust",
 			"go",
 			"zig",
 			"terraform",
+		})
+
+		vim.api.nvim_create_autocmd("FileType", {
+			group = vim.api.nvim_create_augroup("treesitter_start", { clear = true }),
+			callback = function(args) pcall(vim.treesitter.start, args.buf) end,
 		})
 	end,
 }
