@@ -202,7 +202,7 @@ create_autocmd({ "LspAttach" }, {
 
 		local msg = string.format(
 			"%s connected successfully (buffer #%d)",
-			client and client.name or "Some",
+			client and client.name or "unknown client",
 			buffer_num
 		)
 		vim.notify(msg, vim.log.levels.TRACE, { timeout = 400, title = "LSP server connected" })
