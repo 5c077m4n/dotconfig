@@ -201,7 +201,7 @@ create_autocmd({ "LspAttach" }, {
 		end
 
 		local msg = string.format(
-			"%s Connected successfully (buffer #%d)",
+			"%s connected successfully (buffer #%d)",
 			client and client.name or "Some",
 			buffer_num
 		)
