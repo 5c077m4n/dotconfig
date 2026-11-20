@@ -8,6 +8,10 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		require("nvim-treesitter").install({
+			"json",
+			"yaml",
+			"toml",
+			"markdown",
 			"vim",
 			"vimdoc",
 			"lua",
