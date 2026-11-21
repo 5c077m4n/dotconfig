@@ -1,7 +1,7 @@
 {
   "blink.cmp": { "branch": "main", "commit": "78336bc89ee5365633bcf754d93df01678b5c08f" },
   "conform.nvim": { "branch": "master", "commit": "016802de402556da54c36bd7359b441266b01cdd" },
-  "fd": { "branch": "master", "commit": "b80cd53e65615060a62a5ea349a0d78b65d7029e" },
+  "fd": { "branch": "master", "commit": "f8d4e0e7de6e502b80b6d77f169e5b4a20f6742d" },
   "flash.nvim": { "branch": "main", "commit": "5f0f270fdc7c5b0c21d903ee85b9cb06f2ac636a" },
   "friendly-snippets": { "branch": "main", "commit": "7a1c9f7897a4eb078b157a04c7af81e5869215b1" },
   "github-nvim-theme": { "branch": "main", "commit": "c106c9472154d6b2c74b74565616b877ae8ed31d" },
@@ -34,7 +34,7 @@
   "persistence.nvim": { "branch": "main", "commit": "b20b2a7887bd39c1a356980b45e03250f3dce49c" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
   "popup.nvim": { "branch": "master", "commit": "b7404d35d5d3548a82149238289fa71f7f6de4ac" },
-  "ripgrep": { "branch": "master", "commit": "4d592f1cdcbcc5ff3bf814c695204ca3fb62a722" },
+  "ripgrep": { "branch": "master", "commit": "4e588dd8b27693797984a71ee62aea1a9013c23b" },
   "rustaceanvim": { "branch": "main", "commit": "b7ca983c6ec88c94cf25e5deaad96df9a68b9a98" },
   "schemastore.nvim": { "branch": "main", "commit": "abc95e13502ff3acbed151de97667174b2e4132d" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "b25b749b9db64d375d782094e2b9dce53ad53a40" },
