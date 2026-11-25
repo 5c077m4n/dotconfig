@@ -113,7 +113,7 @@ in
         pkgs.stylelint
         pkgs-unstable.biome
         # Python
-        pkgs.python314
+        pkgs.python315
         ## LSPs
         pkgs.mypy
         pkgs.pyright
