@@ -52,6 +52,8 @@ in
         pkgs.mosh
         pkgs.nix-search-cli
         pkgs.nmap
+        pkgs.sops
+        pkgs.age
         ### AI
         pkgs-unstable.pi-coding-agent
         # VCS
