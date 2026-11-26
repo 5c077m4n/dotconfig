@@ -67,5 +67,6 @@ function supdate --description 'Run a full system update'
     end
     if type --query pi
         pi update --extensions
+        __commit_if_needed ~/workspace/dotconfig/dotfiles/.config/pi/agent/settings.json
     end
 end
