@@ -5,6 +5,11 @@ start_in_terminal_mode = true
 
 [daemon]
 window_size = "smallest"
+agent_autodetect = false
+agent_detect_seconds = -1
+agent_stall_seconds = -1
+resume_agents = "off"
+persist_scrollback = false
 
 [appearance]
 theme = "catppuccin_macchiato"
@@ -22,12 +27,40 @@ motion = "none"
 zoom_animation = false
 
 sidebar.enabled = false
+calm = false
+
+animations_enabled = false
+alt_drag = false
+paste_preview = false
+whichkey_enabled = false
+dock_workspace_tooltip = false
+global_session = false
+
+[agents]
+enabled = false
+
+[notifications]
+agent.enabled = false
+mail.enabled = false
+
+[motion]
+confetti = "off"
+
+[shell]
+integration = "off"
+
+[tape]
+autorun = "off"
+
+[tasks]
+auto_stage = false
 
 [keybindings]
 leader_key = "ctrl+a"
 
 [keybindings.global]
 command_palette = []
+launcher = []
 
 [keybindings.prefix_mode]
 prefix_command_palette = [":"]
@@ -57,6 +90,59 @@ resize_pane_down_5 = ["k"]
 resize_pane_up_5 = ["j"]
 resize_pane_right_5 = ["l"]
 goto_picker = ["ctrl+g"]
+edit_scrollback = []
+hints = []
+launcher = []
+new_worktree = []
+next_agent = []
+prev_agent = []
+paste_image = []
+pick_path = []
+prefix_agents_settings = []
+prefix_debug = []
+prefix_explore = []
+prefix_file_search = []
+prefix_inbox = []
+prefix_mail = []
+prefix_minimize = []
+prefix_new_task = []
+prefix_next_attention = []
+prefix_next_finished = []
+prefix_review = []
+prefix_screenshot = []
+prefix_tape = []
+prefix_toggle_other_rail = []
+prefix_toggle_sidebar = []
+prefix_toggle_tiling = []
+prefix_transfers = []
+set_note = []
+toggle_calm = []
+toggle_spotlight = []
+
+[keybindings.window_prefix]
+window_prefix_tiling = []
+window_prefix_float = []
+
+[keybindings.window_management]
+focus_rail_pane = []
+focus_sidebar = []
+minimize_window = []
+next_agent = []
+prev_agent = []
+restore_all = []
+start_screensaver = []
+toggle_pip = []
+
+[keybindings.layout]
+snap_fullscreen = []
+toggle_tiling = []
+unsnap = []
+
+[keybindings.mode_control]
+open_keybind_presets = []
+
+[keybindings.system]
+toggle_spotlight = []
 
 [keybindings.terminal_mode]
 next_workspace = ["alt+]"]
@@ -71,6 +157,7 @@ swap_left = ["ctrl+alt+h"]
 swap_down = ["ctrl+alt+j"]
 swap_up = ["ctrl+alt+k"]
 swap_right = ["ctrl+alt+l"]
+pick_path = []
 
 [spotlight]
 enabled = false
